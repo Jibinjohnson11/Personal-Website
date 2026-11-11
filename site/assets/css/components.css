@@ -1,0 +1,12 @@
+/* ==========================================================================
+   components.css — Reusable building blocks used on many pages
+
+   Will contain (BEM-like names, e.g. .work-card__title):
+   - Header + navigation, mobile menu, footer
+   - Buttons (primary wine pill, ghost), text links with underline draw
+   - Section label ("02 — Selected work"), cards, tags
+   - FAQ (<details>/<summary>), breadcrumbs, form fields
+   - CTA block and the floating WhatsApp button
+
+   Styles that belong to only one page go in css/pages/<page>.css instead.
+   ========================================================================== */

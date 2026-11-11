@@ -1,0 +1,12 @@
+/* ==========================================================================
+   base.css — Foundations for every page
+
+   Will contain:
+   - @font-face rules for the self-hosted Boska and Switzer .woff2 files
+     (font-display: swap + metric-matched fallbacks so there is no layout shift)
+   - A small, modern CSS reset
+   - Default styles for html, body, headings, paragraphs, links, images
+   - The 12-column layout grid and the standard section spacing
+   - Accessibility helpers: skip link, visible focus ring, .visually-hidden
+   - @view-transition { navigation: auto; } for smooth page changes
+   ========================================================================== */

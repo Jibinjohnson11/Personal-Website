@@ -1,0 +1,13 @@
+/* ==========================================================================
+   tokens.css — Design tokens (the single source of truth for raw values)
+
+   Will contain CSS custom properties on :root for:
+   - Colours: --ink, --ink-2, --line, --paper, --white, --mute, --silver,
+     --wine, --wine-2, --rose (see docs/design-system.md, section 1)
+   - Fonts: Boska (display serif) + Switzer (body/UI), and the type scale
+     (--fs-hero, --fs-h1, --fs-h2, --fs-h3, --fs-lead, --fs-body, --fs-label)
+   - Spacing scale (8px base), section padding, grid width and gutters
+   - Motion: easing curves and durations (--ease-out, --ease-in-out, ...)
+
+   Every other CSS file uses these variables — never raw hex values or sizes.
+   ========================================================================== */

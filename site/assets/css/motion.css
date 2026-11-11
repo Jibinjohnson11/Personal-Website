@@ -1,0 +1,10 @@
+/* ==========================================================================
+   motion.css — CSS side of animation
+
+   Will contain:
+   - "Before reveal" hidden states, ONLY under html.js (so with no JavaScript
+     everything stays visible)
+   - Styles for the burgundy scroll "thread" SVG and the custom cursor
+   - Hover transitions (transform/opacity only — never width, top, margin)
+   - @media (prefers-reduced-motion: reduce) overrides that switch motion off
+   ========================================================================== */
