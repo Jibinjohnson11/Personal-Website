@@ -79,9 +79,7 @@ In `site/blog/index.html`:
 - [ ] Read it once more out loud. Check every link.
 - [ ] Set the **real publish date** in: the meta line `<time>`, `article:published_time`, `article:modified_time`, BlogPosting `datePublished` / `dateModified`, and the blog card.
 - [ ] Change robots to `index, follow, max-image-preview:large`.
-- [ ] **First post only:**
-  - [ ] change robots on `site/blog/index.html` to `index, follow, max-image-preview:large` too;
-  - [ ] re-enable the Blog section on the home page (`site/index.html`, between `BLOG START` and `BLOG END`): label `08 — Writing`, Final CTA label becomes `09 — Next step`, and point the cards at real posts only (delete cards for posts that don't exist).
+- [ ] **First post only:** do everything in [Launching the blog](#launching-the-blog) below, in the same deploy.
 - [ ] Later posts: update the home page Blog section to show the 3 latest posts.
 
 ## 8. Deploy
@@ -94,3 +92,26 @@ In `site/blog/index.html`:
 
 - [ ] Change the "Updated" `<time>`, `article:modified_time` and `dateModified` to today.
 - [ ] If the FAQ changed, update the FAQPage JSON-LD to match exactly.
+
+
+## Launching the blog
+
+The blog is hidden until the first post is published: `/blog/` and the draft post exist but are `noindex`, nothing indexable links to them, and they are not in the sitemap or `llms.txt`. Do ALL of this in the same deploy as the first post (search the project for `BLOG` to find every spot).
+
+- [ ] **Header, desktop nav** (`partials/header.html`): replace the `<!-- BLOG: re-add when the first post is published -->` comment with
+  `<li><a class="site-header__link" href="/blog/">Blog</a></li>` (between About and Contact).
+- [ ] **Header, mobile menu** (same file): replace the comment above Contact with a Blog item, then renumber:
+  - Blog: `style="--i: 3"`, number `04`
+  - Contact: `style="--i: 4"`, number `05`
+  - the `menu__footer` block: `style="--i: 5"`
+  - the comment above the menu: "The 01–05 numbers…"
+- [ ] **Footer** (`partials/footer.html`, column "More"): replace the comment with
+  `<li><a class="site-footer__link" href="/blog/">Blog</a></li>` (between About and Resume).
+- [ ] **Home page Blog section** (`site/index.html`): delete the `BLOG START` and `BLOG END` comment lines, point the cards at real published posts only (delete the rest), label it `08 — Writing` and change the Final CTA label to `09 — Next step`.
+- [ ] **Thank-you page** (`site/thank-you/index.html`): change the third link from "See my services" → `/services/` back to "Read the blog" → `/blog/`.
+- [ ] **index/noindex:** set robots to `index, follow, max-image-preview:large` on `site/blog/index.html` and on the post itself (draft posts stay `noindex`).
+- [ ] **Sitemap and RSS:** nothing to edit. `npm run sitemap` (part of prepare-deploy) adds every page that is no longer `noindex`; RSS lists published posts.
+- [ ] **llms.txt** (`site/llms.txt`, written by hand): add a `## Blog` section with the blog index and each published post, e.g.
+  `- [Blog](https://jibinjohnson.in/blog/): notes on building and ranking websites`
+- [ ] **Content doc** (`docs/website-content.md`): put Blog back in Navigation and the Footer "More" column, and the thank-you link back to "Read the blog".
+- [ ] `npm run prepare-deploy`: 0 errors, and check the Blog link in the header, mobile menu and footer on one page.

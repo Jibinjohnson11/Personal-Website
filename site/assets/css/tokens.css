@@ -131,6 +131,7 @@
   --wine:   #6D001A; /* Burgundy: buttons, the thread, text on LIGHT only */
   --wine-2: #8F1D33; /* Deep Rose: hover state of wine */
   --rose:   #B76A79; /* Rose Ash: small accent text/links on dark, focus ring (4.9:1) */
+  --illus-blue: #8AB4F8; /* ONLY the search-result title bars in the home story illustration (never text) */
 
   /* ------------------------------------------------------------------------
      3. THEME COLOURS

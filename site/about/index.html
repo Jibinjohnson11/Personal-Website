@@ -9,8 +9,8 @@
   <script>document.documentElement.classList.replace("no-js", "js");</script>
 
   <!-- ===== SEO basics ===== -->
-  <title>About Jibin Johnson | Web Developer & SEO Specialist</title>
-  <meta name="description" content="I'm Jibin Johnson, a web developer and SEO specialist from Thiruvananthapuram, Kerala, combining frontend craft, UI/UX and search strategy.">
+  <title>About Jibin Johnson | Web Developer & SEO Expert</title>
+  <meta name="description" content="I'm Jibin Johnson, a web developer and SEO expert from Thiruvananthapuram, Kerala, combining frontend craft, UI/UX and search strategy.">
   <link rel="canonical" href="https://jibinjohnson.in/about/">
   <!-- "index, follow" for normal pages; "noindex, follow" for thank-you, 404 and drafts -->
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -19,8 +19,8 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_IN">
   <meta property="og:site_name" content="Jibin Johnson">
-  <meta property="og:title" content="About Jibin Johnson | Web Developer & SEO Specialist">
-  <meta property="og:description" content="I'm Jibin Johnson, a web developer and SEO specialist from Thiruvananthapuram, Kerala, combining frontend craft, UI/UX and search strategy.">
+  <meta property="og:title" content="About Jibin Johnson | Web Developer & SEO Expert">
+  <meta property="og:description" content="I'm Jibin Johnson, a web developer and SEO expert from Thiruvananthapuram, Kerala, combining frontend craft, UI/UX and search strategy.">
   <meta property="og:url" content="https://jibinjohnson.in/about/">
   <meta property="og:image" content="https://jibinjohnson.in/assets/img/og/about.jpg">
   <meta property="og:image:width" content="1200">
@@ -29,8 +29,8 @@
 
   <!-- ===== Twitter / X card (reuses the same text and image) ===== -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="About Jibin Johnson | Web Developer & SEO Specialist">
-  <meta name="twitter:description" content="I'm Jibin Johnson, a web developer and SEO specialist from Thiruvananthapuram, Kerala, combining frontend craft, UI/UX and search strategy.">
+  <meta name="twitter:title" content="About Jibin Johnson | Web Developer & SEO Expert">
+  <meta name="twitter:description" content="I'm Jibin Johnson, a web developer and SEO expert from Thiruvananthapuram, Kerala, combining frontend craft, UI/UX and search strategy.">
   <meta name="twitter:image" content="https://jibinjohnson.in/assets/img/og/about.jpg">
   <meta name="twitter:image:alt" content="About Jibin Johnson: design, code and search, handled by one person">
 
@@ -53,8 +53,8 @@
         imagesizes="(min-width: 1024px) 30vw, (min-width: 768px) 40vw, 80vw">
 
   <!-- ===== CSS: order matters (tokens → base → components → motion → this page) ===== -->
-  <link rel="stylesheet" href="/assets/css/tokens.css?v=325c6fdf">
-  <link rel="stylesheet" href="/assets/css/base.css?v=02e39957">
+  <link rel="stylesheet" href="/assets/css/tokens.css?v=4806e2b3">
+  <link rel="stylesheet" href="/assets/css/base.css?v=a4fdd1c5">
   <link rel="stylesheet" href="/assets/css/components.css?v=f150552e">
   <link rel="stylesheet" href="/assets/css/motion.css?v=06b1ed8f">
   <link rel="stylesheet" href="/assets/css/pages/about.css?v=654862fc">
@@ -78,7 +78,7 @@
         "@type": "Person",
         "@id": "https://jibinjohnson.in/#person",
         "name": "Jibin Johnson",
-        "jobTitle": "Web Developer & SEO Specialist",
+        "jobTitle": "Web Developer & SEO Expert",
         "url": "https://jibinjohnson.in/",
         "image": "https://jibinjohnson.in/assets/img/jibin-johnson-web-developer-trivandrum.jpg",
         "email": "mailto:jibinjohnsoninfo@gmail.com",
@@ -114,8 +114,8 @@
         "@type": "ProfilePage",
         "@id": "https://jibinjohnson.in/about/#webpage",
         "url": "https://jibinjohnson.in/about/",
-        "name": "About Jibin Johnson | Web Developer & SEO Specialist",
-        "description": "I'm Jibin Johnson, a web developer and SEO specialist from Thiruvananthapuram, Kerala, combining frontend craft, UI/UX and search strategy.",
+        "name": "About Jibin Johnson | Web Developer & SEO Expert",
+        "description": "I'm Jibin Johnson, a web developer and SEO expert from Thiruvananthapuram, Kerala, combining frontend craft, UI/UX and search strategy.",
         "inLanguage": "en-IN",
         "isPartOf": { "@id": "https://jibinjohnson.in/#website" },
         "mainEntity": { "@id": "https://jibinjohnson.in/#person" },
@@ -152,7 +152,7 @@
         <li><a class="site-header__link" href="/work/">Work</a></li>
         <li><a class="site-header__link" href="/services/">Services</a></li>
         <li><a class="site-header__link" href="/about/" aria-current="page">About</a></li>
-        <li><a class="site-header__link" href="/blog/">Blog</a></li>
+        <!-- BLOG: re-add when the first post is published -->
         <li><a class="site-header__link" href="/contact/">Contact</a></li>
       </ul>
     </nav>
@@ -174,7 +174,7 @@
 <!-- Full-screen mobile menu. Kept OUTSIDE the <header> because the header
      slides up with a transform, and a transformed parent would break this
      overlay's position: fixed. --i sets each link's stagger delay.
-     The 01–05 numbers are decorative (aria-hidden): screen readers read only the link name. -->
+     The 01–04 numbers are decorative (aria-hidden): screen readers read only the link name. -->
 <div class="menu" id="site-menu" data-menu>
   <nav class="menu__nav container" aria-label="Main">
     <ul class="menu__list">
@@ -190,16 +190,13 @@
         <span class="menu__num" aria-hidden="true">03</span>
         <a class="menu__link" href="/about/" aria-current="page">About</a>
       </li>
+      <!-- BLOG: re-add when the first post is published -->
       <li class="menu__item" style="--i: 3">
         <span class="menu__num" aria-hidden="true">04</span>
-        <a class="menu__link" href="/blog/">Blog</a>
-      </li>
-      <li class="menu__item" style="--i: 4">
-        <span class="menu__num" aria-hidden="true">05</span>
         <a class="menu__link" href="/contact/">Contact</a>
       </li>
     </ul>
-    <div class="menu__item menu__footer" style="--i: 5">
+    <div class="menu__item menu__footer" style="--i: 4">
       <a class="btn btn--primary" href="/contact/">Start a project</a>
       <a class="link" href="mailto:jibinjohnsoninfo@gmail.com">jibinjohnsoninfo@gmail.com</a>
       <a class="link" href="https://wa.me/917736208172">WhatsApp: +91 77362 08172</a>
@@ -234,7 +231,7 @@
       <div class="container page-intro__inner about-intro__inner">
         <p class="label">About</p>
         <h1 class="page-intro__title about-intro__title" id="page-title">Design, code and search, handled by <em>one person</em></h1>
-        <p class="lead page-intro__lead about-intro__lead">I'm Jibin Johnson, a web developer and SEO specialist based in Thiruvananthapuram, Kerala. I build websites that look refined, feel smooth to use, and are set up to be found on Google from day one.</p>
+        <p class="lead page-intro__lead about-intro__lead">I'm Jibin Johnson, a web developer and SEO expert based in Thiruvananthapuram, Kerala. I build websites that look refined, feel smooth to use, and are set up to be found on Google from day one.</p>
         <figure class="about-intro__portrait">
           <picture>
             <source type="image/avif" srcset="/assets/img/jibin-johnson-web-developer-trivandrum-480.avif?v=54b7c834 480w, /assets/img/jibin-johnson-web-developer-trivandrum-960.avif?v=4b4ca82d 960w" sizes="(min-width: 1024px) 30vw, (min-width: 768px) 40vw, 80vw">
@@ -460,10 +457,10 @@
     <nav class="site-footer__col site-footer__col--services" aria-labelledby="footer-services">
       <p class="site-footer__heading" id="footer-services">Services</p>
       <ul class="site-footer__list">
-        <li><a class="site-footer__link" href="/services/web-development/">Web development in Kerala</a></li>
+        <li><a class="site-footer__link" href="/services/web-development/">Website development services in Kerala</a></li>
         <li><a class="site-footer__link" href="/services/seo/">SEO services in Kerala</a></li>
         <li><a class="site-footer__link" href="/web-developer-trivandrum/">Web developer in Trivandrum</a></li>
-        <li><a class="site-footer__link" href="/seo-specialist-trivandrum/">SEO specialist in Trivandrum</a></li>
+        <li><a class="site-footer__link" href="/seo-expert-trivandrum/">SEO expert in Trivandrum</a></li>
       </ul>
     </nav>
 
@@ -472,7 +469,7 @@
       <ul class="site-footer__list">
         <li><a class="site-footer__link" href="/work/">Work</a></li>
         <li><a class="site-footer__link" href="/about/">About</a></li>
-        <li><a class="site-footer__link" href="/blog/">Blog</a></li>
+        <!-- BLOG: re-add when the first post is published -->
         <li><a class="site-footer__link" href="/resume/">Resume</a></li>
         <li><a class="site-footer__link" href="/privacy/">Privacy</a></li>
       </ul>

@@ -465,10 +465,10 @@ if (!existsSync(sitemapFile)) {
 // Reported once, on the page the keyword belongs to.
 //
 // ALLOW: pages whose <title> may share a keyword with another page.
-//   "/" — the home page intentionally targets the combined phrase
-//         "web developer and SEO specialist in Kerala", so its title naturally
-//         contains "SEO specialist in Kerala" too. That's on purpose.
-const KEYWORD_TITLE_ALLOW = ["/"];
+//   Empty: since the hubs moved to "website development services in Kerala"
+//   and "SEO services in Kerala", no page needs an exception any more
+//   (the home page owns "web developer in Kerala" + "SEO expert in Kerala").
+const KEYWORD_TITLE_ALLOW = [];
 
 for (const { url, keyword } of primaryKeywords()) {
   const using = pageTitles

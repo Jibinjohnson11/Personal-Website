@@ -21,7 +21,8 @@
 ### Navigation
 
 - Wordmark: **Jibin Johnson** → `/`
-- Links: **Work** `/work/` · **Services** `/services/` · **About** `/about/` · **Blog** `/blog/` · **Contact** `/contact/`
+- Links: **Work** `/work/` · **Services** `/services/` · **About** `/about/` · **Contact** `/contact/`
+- Blog link hidden until the first post is published (then: **Blog** `/blog/` between About and Contact; mobile menu numbers 01–05). See "Launching the blog" in docs/new-post-checklist.md.
 - Button: **Start a project** → `/contact/`
 
 ### Footer
@@ -31,8 +32,8 @@
 - Email: jibinjohnsoninfo@gmail.com
 - WhatsApp: +91 77362 08172
 - Social: LinkedIn · GitHub · Instagram
-- Column "Services": Web development in Kerala → `/services/web-development/` · SEO services in Kerala → `/services/seo/` · Web developer in Trivandrum → `/web-developer-trivandrum/` · SEO specialist in Trivandrum → `/seo-specialist-trivandrum/`
-- Column "More": Work · About · Blog · Resume · Privacy
+- Column "Services": Website development services in Kerala → `/services/web-development/` · SEO services in Kerala → `/services/seo/` · Web developer in Trivandrum → `/web-developer-trivandrum/` · SEO expert in Trivandrum → `/seo-expert-trivandrum/`
+- Column "More": Work · About · Resume · Privacy (Blog goes back between About and Resume when the first post is published)
 - Bottom line: "Based in Thiruvananthapuram, Kerala — working with clients worldwide." · "© [year] Jibin Johnson"
 
 ### Floating WhatsApp button
@@ -53,62 +54,111 @@
 # PAGE: Home
 
 - **URL:** `/`
-- **Primary keyword:** web developer and SEO specialist in Kerala (+ brand: Jibin Johnson)
-- **Title:** Jibin Johnson | Web Developer & SEO Specialist in Kerala
-- **Meta description:** Freelance web developer and SEO specialist in Trivandrum, Kerala. I build fast, premium websites with technical SEO built in, so customers find you.
+- **Primary keyword:** web developer in Kerala / SEO expert in Kerala (H1 + hero H2; + brand: Jibin Johnson)
+- **Title:** Jibin Johnson | Web Developer & SEO Expert in Kerala
+- **Meta description:** Freelance web developer in Kerala and SEO expert in Kerala, based in Trivandrum. Fast, premium websites with technical SEO built in, so customers find you.
 - **Schema:** WebSite, Person, ProfessionalService, FAQPage
 
 ### Section 01 — Hero
 
-Label: `WEB DEVELOPER & SEO SPECIALIST · TRIVANDRUM, KERALA` (one line on desktop)
+Fully typographic and full-width: no portrait, no giant name. The H1 is the LCP element.
 
-**H1:**
-Jibin Johnson
-*Web Developer & SEO Specialist in Kerala*
+Label: `JIBIN JOHNSON · TRIVANDRUM, KERALA` (one line on desktop; the name lives here and in the lead, not as display text)
+
+**H1:** Web Developer in Kerala
+(Giant hero size, two lines: "Web Developer" upright Boska, then "*in Kerala*" italic Boska stepped right. One H1, read as one phrase.)
+
+**H2:** *SEO Expert in Kerala*
+(Smaller italic role line under the H1. A decorative "&" — `aria-hidden`, outside the H2 — sits before it so it reads "& SEO Expert in Kerala". The H2 text is exactly "SEO Expert in Kerala". Heading order: hero H1 → hero H2 → section H2s.)
+(The Services card links use the hub keywords — "Website development services in Kerala" and "SEO services in Kerala" — so the home page and the hubs don't compete.)
 
 Lead:
-I design and build fast, cinematic websites, and make sure the right people find them on Google. Based in Trivandrum, working with clients across Kerala and around the world.
+I'm Jibin Johnson. I design and build fast, cinematic websites, and make sure the right people find them on Google. Based in Trivandrum, working with clients across Kerala and around the world.
 
 Buttons: **Start a project** → `/contact/` · **WhatsApp me**
 
 Status line: Available for freelance projects (small pulsing rose dot before it)
 
-Portrait alt text: "Jibin Johnson, web developer and SEO specialist in Trivandrum, Kerala"
+Scroll cue (label style, links to the story, arrow bobs gently; no bob with reduced motion):
+Scroll to see how ↓
 
-### Section 02 — Manifesto
+### Section 01b — Story (directly after the hero, no label)
 
-Label: `01 — Approach`
+Pinned on desktop (≥1024px), simple stacked steps on phones / reduced motion / no JS. Three beats linked by the burgundy thread; each is a Boska italic caption + a small HTML/SVG illustration (aria-hidden).
+
+Section name (aria-label): From sketch to found
+
+1. It starts as a sketch. *(a wireframe drawing itself)*
+2. Then it becomes a fast, beautiful website. *(the wireframe filled into a finished page — ink, paper, wine; illustration heading "Your business")*
+3. Then it gets found. *(a generic search-result card: URL "yourbusiness.in", blue-ish title bars, grey snippet bars, rose tag "Found ✓")*
+
+Visually hidden summary (screen readers):
+Illustration: a wireframe sketch turns into a finished website, which then appears as a result in a Google search.
+
+### Section 01c — Bridge quote (no label)
+
+Beautiful and *findable*.
+("findable" italic rose; huge Boska, two lines, second stepped right)
+
+Credit (label style): — Jibin
+
+### Section 02 — About (after the bridge quote)
+
+Label: `01 — About`
+
+Eyebrow: Trivandrum, Kerala · SEO team lead at Prception Medialab
+
+**H2: Jibin Johnson, web developer in Kerala**
+
+I'm a web developer and SEO expert based in Thiruvananthapuram, Kerala. I build websites that look refined, feel smooth to use, and are set up to be found on Google from day one.
+
+Most businesses hire a designer for the look, a developer for the build, and an agency for SEO, and something always gets lost between them. I bring the three together.
+
+(Both paragraphs from the About page copy.)
+
+Facts (short Boska italic phrases, rose dot before each):
+- Based in Trivandrum
+- SEO team lead
+- Design + code + SEO
+
+Buttons: **Explore my resume** → `/jibin-johnson-resume.pdf` · **More about me →** → `/about/`
+
+Portrait alt text: "Jibin Johnson, web developer and SEO expert in Trivandrum, Kerala" (portrait bleeds off the left edge, gentle parallax, lazy-loaded)
+
+### Section 03 — Manifesto
+
+Label: `02 — Approach`
 
 Most websites are either beautiful or findable. I build ones that are both. Design, interaction and technical SEO are planned together from the first line of code, not bolted on at the end.
 
-### Section 03 — Services
+### Section 04 — Services
 
-Label: `02 — What I do`
+Label: `03 — What I do`
 
 **H2: Web development and SEO, under one roof**
 
 Line under the H2 (links use the Trivandrum pages' keywords as anchor text):
-In Trivandrum? Meet your [web developer in Trivandrum](/web-developer-trivandrum/) or [SEO specialist in Trivandrum](/seo-specialist-trivandrum/) in person.
+In Trivandrum? Meet your [web developer in Trivandrum](/web-developer-trivandrum/) or [SEO expert in Trivandrum](/seo-expert-trivandrum/) in person.
 
 **H3: Web development**
 Custom websites and landing pages built with clean, semantic code. Responsive, accessible, and fast enough to pass Core Web Vitals on a phone.
-Link: Web developer in Kerala → `/services/web-development/`
+Link: Website development services in Kerala → `/services/web-development/`
 
 **H3: Search engine optimisation**
 Technical audits, keyword research, on-page optimisation, local SEO and link building. Reported in plain language through Search Console and Google Analytics.
-Link: SEO specialist in Kerala → `/services/seo/`
+Link: SEO services in Kerala → `/services/seo/`
 
 **H3: UI/UX and interaction**
 Scroll-driven storytelling, motion and layouts that make a brand feel premium, without slowing the site down.
-Link: Explore web development services → `/services/web-development/`
+Link: Explore website development services in Kerala → `/services/web-development/`
 
 **H3: Audits and performance**
 Already have a website? I find what's slowing it down or holding its rankings back, and fix it.
 Link: Explore SEO services in Kerala → `/services/seo/`
 
-### Section 04 — Selected work
+### Section 05 — Selected work
 
-Label: `03 — Selected work`
+Label: `04 — Selected work`
 
 **H2: Recent projects**
 
@@ -130,9 +180,9 @@ Tags: Python · Django · In progress → `/work/seo-dashboard/`
 
 Link: See all work → `/work/`
 
-### Section 05 — Process
+### Section 06 — Process
 
-Label: `04 — Process`
+Label: `05 — Process`
 
 **H2: How a project runs**
 
@@ -141,9 +191,9 @@ Label: `04 — Process`
 3. **Build.** Clean, fast code with SEO built into every page: headings, metadata, schema, images and internal links.
 4. **Launch and grow.** Search Console and analytics set up on day one, then monthly reports and improvements.
 
-### Section 06 — Why work with me
+### Section 07 — Why work with me
 
-Label: `05 — Why me`
+Label: `06 — Why me`
 
 **H2: One person from design to ranking**
 
@@ -152,15 +202,15 @@ Label: `05 — Why me`
 - **Real SEO experience.** I've led SEO campaigns for healthcare and education brands and ranked their target keywords.
 - **Plain-language reporting.** You'll always know what was done, why, and what changed.
 
-### Section 07 — Clients
+### Section 08 — Clients
 
-Label: `06 — Worked with`
+Label: `07 — Worked with`
 
 Serene Derma · BlackBox Learning · [add others with permission]
 
-### Section 08 — FAQ
+### Section 09 — FAQ
 
-Label: `07 — Questions`
+Label: `08 — Questions`
 
 **H2: Questions people ask**
 
@@ -179,19 +229,19 @@ Yes. I work remotely with clients across India and abroad. Calls, shared files a
 **Can I update the website myself?**
 Yes. I'll show you how to edit text and add blog posts, and I'm available for changes when you need them.
 
-### Section 09 — Blog (hidden until the first post is published)
+### Section 10 — Blog (hidden until the first post is published)
 
-Commented out in site/index.html. When re-enabled, it takes label `08 — Writing` and the Final CTA label becomes `09 — Next step`.
+Commented out in site/index.html. When re-enabled, it takes label `09 — Writing` and the Final CTA label becomes `10 — Next step`.
 
-Label: `08 — Writing`
+Label: `09 — Writing`
 
 **H2: Notes on building and ranking websites**
 
 [3 latest post cards] · Link: Read the blog → `/blog/`
 
-### Section 10 — Final CTA
+### Section 11 — Final CTA
 
-Label: `08 — Next step` (`09 — Next step` once the Blog section is back)
+Label: `09 — Next step` (`10 — Next step` once the Blog section is back)
 
 **H2: Have a project in mind?**
 
@@ -206,8 +256,8 @@ Small link: Download my resume (PDF)
 
 - **URL:** `/about/`
 - **Primary keyword:** Jibin Johnson (brand) / about web developer Trivandrum
-- **Title:** About Jibin Johnson | Web Developer & SEO Specialist
-- **Meta description:** I'm Jibin Johnson, a web developer and SEO specialist from Thiruvananthapuram, Kerala, combining frontend craft, UI/UX and search strategy.
+- **Title:** About Jibin Johnson | Web Developer & SEO Expert
+- **Meta description:** I'm Jibin Johnson, a web developer and SEO expert from Thiruvananthapuram, Kerala, combining frontend craft, UI/UX and search strategy.
 - **Schema:** ProfilePage (mainEntity: Person), BreadcrumbList
 
 Label: `About`
@@ -215,7 +265,7 @@ Label: `About`
 **H1: Design, code and search, handled by one person**
 
 Lead:
-I'm Jibin Johnson, a web developer and SEO specialist based in Thiruvananthapuram, Kerala. I build websites that look refined, feel smooth to use, and are set up to be found on Google from day one.
+I'm Jibin Johnson, a web developer and SEO expert based in Thiruvananthapuram, Kerala. I build websites that look refined, feel smooth to use, and are set up to be found on Google from day one.
 
 Portrait alt text: "Portrait of Jibin Johnson in Thiruvananthapuram"
 
@@ -282,7 +332,7 @@ Custom websites, landing pages and redesigns built with clean, fast code. Every 
 - Landing pages for campaigns and launches
 - Redesigns of slow or outdated sites
 - Scroll animation and interactive storytelling
-Link: Web development services in Kerala → `/services/web-development/`
+Link: Website development services in Kerala → `/services/web-development/`
 
 **H2: Search engine optimisation**
 
@@ -298,7 +348,7 @@ Link: SEO services in Kerala → `/services/seo/`
 
 Based in the city? We can meet in person.
 - Web developer in Trivandrum → `/web-developer-trivandrum/`
-- SEO specialist in Trivandrum → `/seo-specialist-trivandrum/`
+- SEO expert in Trivandrum → `/seo-expert-trivandrum/`
 
 **H2: Industry focus**
 
@@ -311,20 +361,20 @@ Based in the city? We can meet in person.
 # PAGE: Web development (Kerala hub)
 
 - **URL:** `/services/web-development/`
-- **Primary keyword:** web developer in Kerala
-- **Secondary:** website development services in Kerala, freelance web developer Kerala, freelance website developer Kerala
-- **Title:** Web Developer in Kerala | Website Development Services
-- **Meta description:** Custom, fast, SEO-ready websites for businesses across Kerala. Freelance web developer building with Astro, GSAP and clean code. Get a free quote.
+- **Primary keyword:** website development services in Kerala
+- **Secondary:** web development in Kerala, freelance website developer Kerala
+- **Title:** Website Development Services in Kerala | Jibin Johnson
+- **Meta description:** Website development services in Kerala: custom, fast, SEO-ready websites built with Astro, GSAP and clean code. Get a free quote from Jibin Johnson.
 - **Schema:** Service (serviceType: Website development, areaServed: Kerala, India), FAQPage, BreadcrumbList
 
 Breadcrumb: Home › Services › Web development
 
 Label: `Web development`
 
-**H1: Web developer in Kerala for websites that look premium and load fast**
+**H1: Website development services in Kerala, built to look premium and load fast**
 
 Lead:
-I'm a freelance web developer in Kerala building custom websites for businesses, startups and professionals. Each one is designed to impress, built to load in under two seconds, and set up for Google from the first page.
+I'm a freelance web developer offering website development services in Kerala: custom websites for businesses, startups and professionals. Each one is designed to impress, built to load in under two seconds, and set up for Google from the first page.
 
 Buttons: **Get a free quote** · **See my work**
 
@@ -414,20 +464,20 @@ Yes. I offer ongoing updates and monthly SEO care, or you can manage simple edit
 # PAGE: SEO (Kerala hub)
 
 - **URL:** `/services/seo/`
-- **Primary keyword:** SEO specialist in Kerala
-- **Secondary:** SEO services in Kerala, freelance SEO specialist Kerala
-- **Title:** SEO Specialist in Kerala | Freelance SEO Services
-- **Meta description:** Freelance SEO specialist in Kerala: technical SEO, on-page, local SEO and link building that moves rankings. Get a free SEO audit of your website.
+- **Primary keyword:** SEO services in Kerala
+- **Secondary:** freelance SEO Kerala, SEO audit Kerala
+- **Title:** SEO Services in Kerala | Freelance SEO Expert
+- **Meta description:** SEO services in Kerala: technical SEO, on-page, local SEO and link building that moves rankings, from a freelance SEO expert. Get a free SEO audit.
 - **Schema:** Service (serviceType: Search engine optimization, areaServed: Kerala, India), FAQPage, BreadcrumbList
 
 Breadcrumb: Home › Services › SEO
 
 Label: `SEO services`
 
-**H1: SEO specialist in Kerala, focused on rankings that bring enquiries**
+**H1: SEO services in Kerala that bring real enquiries**
 
 Lead:
-I'm a freelance SEO specialist helping businesses in Kerala rank for the searches their customers actually make. Technical fixes, better pages and real authority, explained in plain language every month.
+I'm a freelance SEO expert helping businesses in Kerala rank for the searches their customers actually make. Technical fixes, better pages and real authority, explained in plain language every month.
 
 Buttons: **Get a free SEO audit** · **See case studies**
 
@@ -483,11 +533,11 @@ Because I'm also a web developer, I don't just send you a list of problems and l
 
 **H2: SEO for businesses across Kerala**
 
-I work with clinics, training institutes, local service businesses and startups throughout Kerala, and with clients across India and overseas. If your business is in the capital, see my **SEO specialist in Trivandrum** page for local SEO → `/seo-specialist-trivandrum/`.
+I work with clinics, training institutes, local service businesses and startups throughout Kerala, and with clients across India and overseas. If your business is in the capital, see my **SEO expert in Trivandrum** page for local SEO → `/seo-expert-trivandrum/`.
 
 I also specialise in **SEO for clinics and healthcare** → `/seo-for-healthcare-clinics/` and **SEO for training institutes** → `/seo-for-education-institutes/`.
 
-If your current website is holding you back, I can rebuild it with SEO built in. See **web development services** → `/services/web-development/`.
+If your current website is holding you back, I can rebuild it with SEO built in. See **website development services in Kerala** → `/services/web-development/`.
 
 **H2: Frequently asked questions**
 
@@ -498,7 +548,7 @@ It depends on your website, your competition and your goals. After a free audit,
 Technical and on-page fixes can show movement within weeks. Local keywords usually improve within a few months. Competitive, state-wide keywords take longer and need consistent content and links.
 
 **Can you guarantee first position on Google?**
-No honest SEO specialist can, because Google decides rankings. What I guarantee is clear work, transparent reporting, and only white-hat methods that won't put your site at risk.
+No honest SEO expert can, because Google decides rankings. What I guarantee is clear work, transparent reporting, and only white-hat methods that won't put your site at risk.
 
 **Do I need SEO if I run Google Ads?**
 Ads stop the moment you stop paying. SEO builds traffic that keeps coming. Many businesses use both: ads for quick leads, SEO for long-term growth at a lower cost per lead.
@@ -578,7 +628,7 @@ Label: `05 — Local search`
 
 A local website needs local signals. I make sure your site clearly shows your location, service areas, opening hours and contact details, connects to your Google Business Profile, and uses the words your customers type, such as "Trivandrum" and "Thiruvananthapuram". That's how you start appearing in local results instead of only for your business name.
 
-Want to rank higher in local search too? See my **SEO specialist in Trivandrum** service → `/seo-specialist-trivandrum/`.
+Want to rank higher in local search too? See my **SEO expert in Trivandrum** service → `/seo-expert-trivandrum/`.
 
 Label: `06 — Selected work`
 
@@ -593,7 +643,7 @@ Healthcare SEO campaign.
 Cover: SEO case study · Healthcare (alt: "Serene Derma — healthcare SEO project cover")
 Tags: SEO · Healthcare → `/work/serene-derma-seo/`
 
-For clients elsewhere in the state, see **web development in Kerala** → `/services/web-development/`.
+For clients elsewhere in the state, see **website development services in Kerala** → `/services/web-development/`.
 
 Label: `07 — Questions`
 
@@ -618,24 +668,24 @@ Yes. I set up or optimise it and connect it to your website. It's one of the big
 
 ---
 
-# PAGE: SEO specialist in Trivandrum (location)
+# PAGE: SEO expert in Trivandrum (location)
 
-- **URL:** `/seo-specialist-trivandrum/`
-- **Primary keyword:** SEO specialist in Trivandrum
-- **Secondary:** SEO services in Trivandrum, freelance SEO specialist Trivandrum, SEO Thiruvananthapuram
-- **Title:** SEO Specialist in Trivandrum | Local SEO Services
-- **Meta description:** Local SEO specialist in Trivandrum. Rank on Google Maps and search for the keywords your customers use. Free SEO audit for Trivandrum businesses.
+- **URL:** `/seo-expert-trivandrum/`
+- **Primary keyword:** SEO expert in Trivandrum
+- **Secondary:** SEO services in Trivandrum, freelance SEO expert Trivandrum, SEO expert in Thiruvananthapuram, SEO Thiruvananthapuram
+- **Title:** SEO Expert in Trivandrum | Local SEO Services
+- **Meta description:** Local SEO expert in Trivandrum. Rank on Google Maps and search for the keywords your customers use. Free SEO audit for Trivandrum businesses.
 - **Schema:** ProfessionalService (areaServed: Thiruvananthapuram), Service, FAQPage, BreadcrumbList
-- **Share image:** label "Local SEO · Thiruvananthapuram" · title "SEO specialist in Trivandrum" · subtitle "Rank on Google Maps and local search" · alt "Jibin Johnson, SEO specialist in Trivandrum: rank on Google Maps and local search"
+- **Share image:** label "Local SEO · Thiruvananthapuram" · title "SEO expert in Trivandrum" · subtitle "Rank on Google Maps and local search" · alt "Jibin Johnson, SEO expert in Trivandrum: rank on Google Maps and local search"
 
-Breadcrumb: Home › SEO specialist in Trivandrum
+Breadcrumb: Home › SEO expert in Trivandrum
 
 Label: `Local SEO · Thiruvananthapuram`
 
-**H1: SEO specialist in Trivandrum for local businesses**
+**H1: SEO expert in Trivandrum for local businesses**
 
 Lead:
-When someone in Thiruvananthapuram searches for what you offer, your business should be one of the first they see, on Google Maps and in the results below it. I'm a local SEO specialist who makes that happen.
+When someone in Thiruvananthapuram searches for what you offer, your business should be one of the first they see, on Google Maps and in the results below it. I'm a local SEO expert who makes that happen.
 
 Buttons: **Get a free local SEO audit** · **WhatsApp me**
 
@@ -681,7 +731,7 @@ Label: `03 — Who I help`
 
 Label: `04 — Why local`
 
-**H2: Why a Trivandrum-based SEO specialist**
+**H2: Why a Trivandrum-based SEO expert**
 
 I know the city's areas, landmarks and how local customers search. I can visit your business to take proper photos for your profile, and meet you to review results. Your SEO is handled by someone who understands your market, not an anonymous team in another state.
 
@@ -737,22 +787,22 @@ Genuine reviews can't be removed. Fake or policy-breaking reviews can be reporte
 - **URL:** `/seo-for-healthcare-clinics/`
 - **Primary keyword:** SEO for clinics in Kerala
 - **Secondary:** healthcare SEO Kerala, dermatology clinic SEO, medical SEO
-- **Title:** SEO for Clinics & Healthcare in Kerala | Jibin Johnson
-- **Meta description:** Healthcare SEO for clinics and dermatology centres in Kerala. Rank for treatment and location searches and turn visitors into appointments.
+- **Title:** SEO for Clinics in Kerala | Healthcare SEO
+- **Meta description:** SEO for clinics in Kerala, including dermatology centres. Rank for treatment and location searches and turn visitors into appointments.
 - **Schema:** Service (serviceType: Healthcare SEO, areaServed: Kerala), FAQPage, BreadcrumbList
 
 Breadcrumb: Home › Services › SEO for clinics
 
 Label: `Healthcare SEO`
 
-**H1: SEO for clinics and healthcare brands in Kerala**
+**H1: SEO for clinics in Kerala that patients can trust**
 
 Lead:
 Patients search before they book. I help clinics in Kerala appear for the treatments and locations patients search for, with content that builds trust and follows medical advertising standards.
 
 Buttons: **Get a free clinic SEO audit** → `/contact/` · **See the Serene Derma case study** → `/work/serene-derma-seo/`
 
-Share image: label "Healthcare SEO" · title "SEO for clinics in Kerala" · subtitle "Rank for the treatments patients search" (alt: "Jibin Johnson, SEO for clinics and healthcare in Kerala: rank for the treatments patients search")
+Share image: label "Healthcare SEO" · title "SEO for clinics in Kerala" · subtitle "Rank for the treatments patients search" (alt: "Jibin Johnson, SEO for clinics in Kerala: rank for the treatments patients search")
 
 Label: `01 — The patient journey`
 
@@ -807,7 +857,7 @@ Label: `04 — Who I help`
 
 Dermatology and skin clinics, dental clinics, hair transplant centres, physiotherapy and rehabilitation, Ayurveda centres, diagnostic labs, eye clinics, and multi-speciality hospitals across Kerala.
 
-For general SEO see **SEO services in Kerala** → `/services/seo/`. For clinics in the capital, see **SEO specialist in Trivandrum** → `/seo-specialist-trivandrum/`.
+For general SEO see **SEO services in Kerala** → `/services/seo/`. For clinics in the capital, see **SEO expert in Trivandrum** → `/seo-expert-trivandrum/`.
 
 Label: `05 — Questions`
 
@@ -832,24 +882,24 @@ Yes, or I can rebuild it if speed and structure are holding it back.
 # PAGE: SEO for education institutes (niche landing page)
 
 - **URL:** `/seo-for-education-institutes/`
-- **Primary keyword:** SEO for training institutes Kerala
+- **Primary keyword:** SEO for training institutes in Kerala
 - **Secondary:** education SEO, course website SEO, coaching centre SEO
-- **Title:** SEO for Training Institutes & Education in Kerala
-- **Meta description:** SEO for training institutes and course providers in Kerala. Rank for the course searches students make and fill more seats from organic traffic.
+- **Title:** SEO for Training Institutes in Kerala | Jibin Johnson
+- **Meta description:** SEO for training institutes in Kerala and other course providers. Rank for the course searches students make and fill more seats from organic traffic.
 - **Schema:** Service (serviceType: Education SEO, areaServed: Kerala), FAQPage, BreadcrumbList
 
 Breadcrumb: Home › Services › SEO for institutes
 
 Label: `Education SEO`
 
-**H1: SEO for training institutes and course providers**
+**H1: SEO for training institutes in Kerala**
 
 Lead:
 Students compare courses on Google before they ever call. I help training institutes, coaching centres and academies in Kerala rank for the course searches that turn into admissions.
 
 Buttons: **Get a free institute SEO audit** → `/contact/` · **See the BlackBox Learning case study** → `/work/blackbox-learning-seo/`
 
-Share image: label "Education SEO" · title "SEO for training institutes" · subtitle "Rank for the course searches students make" (alt: "Jibin Johnson, SEO for training institutes in Kerala: rank for the course searches students make")
+Share image: label "Education SEO" · title "SEO for training institutes in Kerala" · subtitle "Rank for the course searches students make" (alt: "Jibin Johnson, SEO for training institutes in Kerala: rank for the course searches students make")
 
 Label: `01 — Course searches`
 
@@ -930,24 +980,24 @@ Yes, for every branch you have.
 # PAGE: Websites for startups (niche landing page)
 
 - **URL:** `/web-design-for-startups/`
-- **Primary keyword:** website for startups Kerala
+- **Primary keyword:** website development for startups in Kerala
 - **Secondary:** startup website development, landing page development, Technopark startup website
 - **Title:** Website Development for Startups in Kerala | Jibin Johnson
-- **Meta description:** Launch-ready websites and landing pages for startups: premium design, smooth animation and SEO foundations, built fast with clean, modern code.
+- **Meta description:** Website development for startups in Kerala: launch-ready sites and landing pages with premium design, smooth animation and SEO foundations.
 - **Schema:** Service (serviceType: Startup website development, areaServed: Kerala, India), FAQPage, BreadcrumbList
 
 Breadcrumb: Home › Services › Websites for startups
 
 Label: `For startups`
 
-**H1: Websites for startups that need to look serious from day one**
+**H1: Website development for startups in Kerala: sites that look serious from day one**
 
 Lead:
 Your website is often the first thing investors, early customers and new hires see. I build launch-ready startup websites that look premium, explain your product clearly, and are ready to grow with search.
 
 Buttons: **Plan my launch site** → `/contact/` · **See AQ Air** → `/work/aq-air/`
 
-Share image: label "For startups" · title "Websites for startups" · subtitle "Launch-ready, premium, built to grow" (alt: "Jibin Johnson, websites for startups in Kerala: launch-ready, premium, built to grow")
+Share image: label "For startups" · title "Website development for startups in Kerala" · subtitle "Launch-ready, premium, built to grow" (alt: "Jibin Johnson, website development for startups in Kerala: launch-ready, premium, built to grow")
 
 Label: `01 — What matters`
 
@@ -1007,7 +1057,7 @@ Label: `05 — How I build`
 
 I build with Astro or hand-written HTML, CSS and JavaScript, so there's no page builder lock-in and no monthly plugin bills. Your site is fast and secure, and you can host it free or cheaply on modern platforms. Startups at Technopark can meet me in person; others work with me remotely.
 
-See also **web development in Kerala** → `/services/web-development/` and **web developer in Trivandrum** → `/web-developer-trivandrum/`.
+See also **website development services in Kerala** → `/services/web-development/` and **web developer in Trivandrum** → `/web-developer-trivandrum/`.
 
 Label: `06 — Questions`
 
@@ -1105,7 +1155,7 @@ Caption: "Google PageSpeed Insights (mobile), November 2026"
 
 Image alt examples: "AQ Air website hero section on desktop", "Animated live air-quality panel on the AQ Air website", "AQ Air website on mobile"
 
-Related: **Websites for startups** → `/web-design-for-startups/` · **Web development services** → `/services/web-development/`
+Related: **Websites for startups** → `/web-design-for-startups/` · **Website development services in Kerala** → `/services/web-development/`
 Next project: Serene Derma →
 
 ---
@@ -1220,8 +1270,8 @@ Next project: AQ Air →
 # PAGE: Resume
 
 - **URL:** `/resume/`
-- **Title:** Resume | Jibin Johnson, Web Developer & SEO Specialist
-- **Meta description:** Experience, skills and education of Jibin Johnson, web developer and SEO specialist in Thiruvananthapuram. View online or download the PDF.
+- **Title:** Resume | Jibin Johnson, Web Developer & SEO Expert
+- **Meta description:** Experience, skills and education of Jibin Johnson, web developer and SEO expert in Thiruvananthapuram. View online or download the PDF.
 - **Schema:** ProfilePage, BreadcrumbList
 
 **H1: Resume**
@@ -1261,7 +1311,7 @@ Web Developer and SEO Specialist building responsive, search-optimised websites 
 - Contact row: jibinjohnsoninfo@gmail.com · +91 77362 08172 · jibinjohnson.in · linkedin.com/in/jibinjohnson · github.com/Jibinjohnson11
 - Section labels: `01 — Profile` · `02 — Work history` · `03 — Highlights` · `04 — Study` · `05 — Toolkit`
 - Closing buttons (not printed): **Download PDF** · **Start a project** → `/contact/`
-- Share image (og/resume.jpg): label "Resume" · title "Jibin Johnson" · subtitle "Web Developer & SEO Specialist" · alt "Resume of Jibin Johnson, web developer and SEO specialist in Thiruvananthapuram"
+- Share image (og/resume.jpg): label "Resume" · title "Jibin Johnson" · subtitle "Web Developer & SEO Expert" · alt "Resume of Jibin Johnson, web developer and SEO expert in Thiruvananthapuram"
 
 ---
 
@@ -1311,14 +1361,14 @@ Tell me about your website, your rankings or your idea. I reply within one worki
 
 **H1: Thanks. Your message is on its way.**
 I'll reply within one working day. If it's urgent, message me on WhatsApp.
-Links: Back to home · See my work · Read the blog
+Links: Back to home · See my work · See my services
 
 
 **Added during build**
 - Meta description: Thanks for getting in touch. Your message is on its way, and I'll reply within one working day.
 - Label: `Message sent`
 - "message me on WhatsApp" is a link to the WhatsApp chat
-- Links: Back to home · See my work · Read the blog (restored now that /blog/ exists)
+- Links: Back to home · See my work · See my services → `/services/` (while the blog is hidden; switch back to "Read the blog" → `/blog/` when the first post is published)
 
 ---
 
@@ -1368,14 +1418,14 @@ Outline:
 **Added during build (every post, from templates/post.html)**
 - Meta line: "By Jibin Johnson · Published [date] · Updated [date] · [n] min read" (words ÷ 200, rounded up)
 - Table of contents heading: "On this page"
-- Author box: label "Written by" · "Jibin Johnson" · "I'm a web developer and SEO specialist in Thiruvananthapuram, Kerala. I build fast, hand-coded websites with SEO built in, and I write here about what I learn from real projects." · link "More about me →" `/about/`
+- Author box: label "Written by" · "Jibin Johnson" · "I'm a web developer and SEO expert in Thiruvananthapuram, Kerala. I build fast, hand-coded websites with SEO built in, and I write here about what I learn from real projects." · link "More about me →" `/about/`
 - Closing CTA: label "Next step" · buttons **Start a project** → `/contact/` · **WhatsApp me** (prefilled message)
 
 **Added during build (first post: website cost in Kerala)**
 - Status: written and built, **noindex** for review. 1,505 words, 8 min read. Full text lives in `site/blog/website-cost-in-kerala/index.html`.
 - H2s: The quick answer · What affects the price · Freelancer vs agency vs DIY builders · Costs people forget · Cheap websites that cost more later · How to get an accurate quote · FAQ
 - FAQ questions: Why don't you list website prices on your site? · How long does it take to build a business website? · Is WordPress cheaper than a hand-coded website? · Will I have to pay again every year? · Should I choose a fixed quote or an hourly rate?
-- Internal links: "web developer in Trivandrum" → `/web-developer-trivandrum/` · "web developer in Kerala" → `/services/web-development/` · CTA "website development services" → `/services/web-development/`
+- Internal links: "web developer in Trivandrum" → `/web-developer-trivandrum/` · "website development services in Kerala" → `/services/web-development/` (in "here's how my … work") · CTA "website development services in Kerala" → `/services/web-development/`
 - CTA: **H2: Want a clear quote for your website?** "Tell me what you're building. I'll reply within a day with honest advice and a fixed quote that lists exactly what's included. Or read about my website development services first."
 - Share image (og/website-cost-in-kerala.jpg): label "Blog · Web development" · title "How much does a website cost in Kerala?" · subtitle "What decides the price in 2026" · alt "How much does a website cost in Kerala in 2026? A blog post by Jibin Johnson"
 

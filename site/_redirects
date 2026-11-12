@@ -5,3 +5,6 @@
 
 https://www.jibinjohnson.in/*  https://jibinjohnson.in/:splat  301!
 http://www.jibinjohnson.in/*   https://jibinjohnson.in/:splat  301!
+
+# Old keyword URL → new one (keyword changed to "SEO expert")
+/seo-specialist-trivandrum/  /seo-expert-trivandrum/  301

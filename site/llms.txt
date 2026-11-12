@@ -1,6 +1,6 @@
 # Jibin Johnson
 
-> Jibin Johnson is a freelance web developer and SEO specialist based in Thiruvananthapuram (Trivandrum), Kerala, India. He builds fast, hand-coded websites with technical SEO built in, and runs SEO for businesses that want more enquiries from search. He works in person in Thiruvananthapuram and remotely with clients across India and abroad.
+> Jibin Johnson is a freelance web developer and SEO expert based in Thiruvananthapuram (Trivandrum), Kerala, India. He builds fast, hand-coded websites with technical SEO built in, and runs SEO for businesses that want more enquiries from search. He works in person in Thiruvananthapuram and remotely with clients across India and abroad.
 
 - Location: Thiruvananthapuram, Kerala, India
 - Languages: English
@@ -12,9 +12,9 @@
 
 - [Web development and SEO services](https://jibinjohnson.in/services/): overview of both services and how they work together
 - [Web developer in Kerala](https://jibinjohnson.in/services/web-development/): custom, fast, SEO-ready websites for businesses across Kerala
-- [SEO specialist in Kerala](https://jibinjohnson.in/services/seo/): technical SEO, content and local SEO focused on enquiries, not just rankings
+- [SEO expert in Kerala](https://jibinjohnson.in/services/seo/): technical SEO, content and local SEO focused on enquiries, not just rankings
 - [Web developer in Trivandrum](https://jibinjohnson.in/web-developer-trivandrum/): website development with in-person meetings in Thiruvananthapuram
-- [SEO specialist in Trivandrum](https://jibinjohnson.in/seo-specialist-trivandrum/): local SEO and Google Business Profile work for Thiruvananthapuram businesses
+- [SEO expert in Trivandrum](https://jibinjohnson.in/seo-expert-trivandrum/): local SEO and Google Business Profile work for Thiruvananthapuram businesses
 - [SEO for clinics in Kerala](https://jibinjohnson.in/seo-for-healthcare-clinics/): SEO for dermatology and healthcare clinics
 - [SEO for training institutes in Kerala](https://jibinjohnson.in/seo-for-education-institutes/): SEO for course and education websites
 - [Websites for startups in Kerala](https://jibinjohnson.in/web-design-for-startups/): launch-ready websites and landing pages for startups

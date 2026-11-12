@@ -120,11 +120,11 @@ The background crossfades between ink and paper as you scroll from one section t
 
 # PART 2 — SEO strategy
 
-**Each keyword group gets exactly one page, so your own pages never compete with each other.** Kerala keywords go on the two service hubs, Trivandrum keywords on two location pages, and your real healthcare and education experience becomes niche landing pages.
+**Each keyword group gets exactly one page, so your own pages never compete with each other.** The two broad Kerala role keywords ("web developer in Kerala", "SEO expert in Kerala") go on the home page, the Kerala service keywords on the two service hubs, Trivandrum keywords on two location pages, and your real healthcare and education experience becomes niche landing pages.
 
 ## 6. What the competition looks like
 
-Searches like "freelance web developer Kerala" and "freelance SEO specialist Trivandrum" mostly show three kinds of result:
+Searches like "freelance web developer Kerala" and "freelance SEO expert Trivandrum" mostly show three kinds of result:
 
 - **Marketplace listings:** Twine, Contra, Truelancer, IndiaMART
 - **Agency pages:** e.g. IRPR Agency, Turquoic
@@ -138,15 +138,15 @@ Searches like "freelance web developer Kerala" and "freelance SEO specialist Tri
 
 | Page | URL | Primary keyword | Secondary keywords |
 | --- | --- | --- | --- |
-| Home | `/` | web developer and SEO specialist in Kerala | Jibin Johnson (brand), freelance web developer Kerala |
+| Home | `/` | web developer in Kerala (H1) + SEO expert in Kerala (H2) | Jibin Johnson (brand), freelance web developer Kerala |
 | Services overview | `/services/` | web development and SEO services | — |
-| Web development hub | `/services/web-development/` | web developer in Kerala | website development services in Kerala, freelance website developer Kerala |
-| SEO hub | `/services/seo/` | SEO specialist in Kerala | SEO services in Kerala, freelance SEO specialist Kerala |
+| Web development hub | `/services/web-development/` | website development services in Kerala | web development in Kerala, freelance website developer Kerala |
+| SEO hub | `/services/seo/` | SEO services in Kerala | freelance SEO Kerala, SEO audit Kerala |
 | Trivandrum web page | `/web-developer-trivandrum/` | web developer in Trivandrum | freelance web developer Trivandrum, website development services Trivandrum, Thiruvananthapuram |
-| Trivandrum SEO page | `/seo-specialist-trivandrum/` | SEO specialist in Trivandrum | SEO services in Trivandrum, freelance SEO specialist Trivandrum |
+| Trivandrum SEO page | `/seo-expert-trivandrum/` | SEO expert in Trivandrum | SEO services in Trivandrum, freelance SEO expert Trivandrum, SEO expert in Thiruvananthapuram |
 | Healthcare niche | `/seo-for-healthcare-clinics/` | SEO for clinics in Kerala | dermatology clinic SEO, healthcare SEO Kerala |
-| Education niche | `/seo-for-education-institutes/` | SEO for training institutes Kerala | course website SEO, education SEO |
-| Startups niche | `/web-design-for-startups/` | website for startups Kerala | landing page development, startup website development |
+| Education niche | `/seo-for-education-institutes/` | SEO for training institutes in Kerala | course website SEO, education SEO |
+| Startups niche | `/web-design-for-startups/` | website development for startups in Kerala | landing page development, startup website development |
 | Work | `/work/` + `/work/<project>/` | project names + "case study" | AQ Air website, healthcare SEO case study |
 | Blog | `/blog/<slug>/` | long-tail questions | e.g. "how much does a website cost in Kerala" |
 
@@ -179,7 +179,7 @@ jibinjohnson.in/
 │  ├─ /services/web-development/  Kerala hub
 │  └─ /services/seo/              Kerala hub
 ├─ /web-developer-trivandrum/     Location page
-├─ /seo-specialist-trivandrum/    Location page
+├─ /seo-expert-trivandrum/    Location page
 ├─ /seo-for-healthcare-clinics/   Niche landing page
 ├─ /seo-for-education-institutes/ Niche landing page
 ├─ /web-design-for-startups/      Niche landing page
@@ -252,7 +252,7 @@ Use one `Person` entity with `@id: https://jibinjohnson.in/#person` and referenc
 - Request indexing for Home, both hubs and both Trivandrum pages.
 - **Google Business Profile** as a service-area business: category "Website designer", secondary "Internet marketing service", service areas Thiruvananthapuram + Kerala, address hidden.
 - Use the same name, phone and website everywhere.
-- Update LinkedIn (headline "Web Developer & SEO Specialist in Kerala"), GitHub and Instagram with the site link.
+- Update LinkedIn (headline "Web Developer & SEO Expert in Kerala"), GitHub and Instagram with the site link.
 
 **Months 1–3**
 

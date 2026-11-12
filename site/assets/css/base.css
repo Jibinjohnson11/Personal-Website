@@ -153,7 +153,8 @@ h2 em {
   font-style: italic;
 }
 
-/* The big hero name on the home page */
+/* The giant home hero text (a wrapper around the H1
+   and the H2 role line — see pages/home.css) */
 .hero-title {
   font-family: var(--font-display);
   font-size: var(--fs-hero);

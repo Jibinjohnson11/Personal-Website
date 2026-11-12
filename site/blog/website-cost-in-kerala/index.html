@@ -66,8 +66,8 @@
   <link rel="preload" href="/assets/fonts/Switzer-Variable.woff2?v=d1bf801f" as="font" type="font/woff2" crossorigin>
 
   <!-- ===== CSS: tokens → base → components → motion → page type ===== -->
-  <link rel="stylesheet" href="/assets/css/tokens.css?v=325c6fdf">
-  <link rel="stylesheet" href="/assets/css/base.css?v=02e39957">
+  <link rel="stylesheet" href="/assets/css/tokens.css?v=4806e2b3">
+  <link rel="stylesheet" href="/assets/css/base.css?v=a4fdd1c5">
   <link rel="stylesheet" href="/assets/css/components.css?v=f150552e">
   <link rel="stylesheet" href="/assets/css/motion.css?v=06b1ed8f">
   <link rel="stylesheet" href="/assets/css/pages/post.css?v=4d912cf2">
@@ -92,7 +92,7 @@
         "@type": "Person",
         "@id": "https://jibinjohnson.in/#person",
         "name": "Jibin Johnson",
-        "jobTitle": "Web Developer & SEO Specialist",
+        "jobTitle": "Web Developer & SEO Expert",
         "url": "https://jibinjohnson.in/",
         "image": "https://jibinjohnson.in/assets/img/jibin-johnson-web-developer-trivandrum.jpg",
         "email": "mailto:jibinjohnsoninfo@gmail.com",
@@ -201,7 +201,7 @@
         <li><a class="site-header__link" href="/work/">Work</a></li>
         <li><a class="site-header__link" href="/services/">Services</a></li>
         <li><a class="site-header__link" href="/about/">About</a></li>
-        <li><a class="site-header__link" href="/blog/" aria-current="true">Blog</a></li>
+        <!-- BLOG: re-add when the first post is published -->
         <li><a class="site-header__link" href="/contact/">Contact</a></li>
       </ul>
     </nav>
@@ -223,7 +223,7 @@
 <!-- Full-screen mobile menu. Kept OUTSIDE the <header> because the header
      slides up with a transform, and a transformed parent would break this
      overlay's position: fixed. --i sets each link's stagger delay.
-     The 01–05 numbers are decorative (aria-hidden): screen readers read only the link name. -->
+     The 01–04 numbers are decorative (aria-hidden): screen readers read only the link name. -->
 <div class="menu" id="site-menu" data-menu>
   <nav class="menu__nav container" aria-label="Main">
     <ul class="menu__list">
@@ -239,16 +239,13 @@
         <span class="menu__num" aria-hidden="true">03</span>
         <a class="menu__link" href="/about/">About</a>
       </li>
+      <!-- BLOG: re-add when the first post is published -->
       <li class="menu__item" style="--i: 3">
         <span class="menu__num" aria-hidden="true">04</span>
-        <a class="menu__link" href="/blog/" aria-current="true">Blog</a>
-      </li>
-      <li class="menu__item" style="--i: 4">
-        <span class="menu__num" aria-hidden="true">05</span>
         <a class="menu__link" href="/contact/">Contact</a>
       </li>
     </ul>
-    <div class="menu__item menu__footer" style="--i: 5">
+    <div class="menu__item menu__footer" style="--i: 4">
       <a class="btn btn--primary" href="/contact/">Start a project</a>
       <a class="link" href="mailto:jibinjohnsoninfo@gmail.com">jibinjohnsoninfo@gmail.com</a>
       <a class="link" href="https://wa.me/917736208172">WhatsApp: +91 77362 08172</a>
@@ -417,7 +414,7 @@
                 <li><strong>Your timeline.</strong> Including any date the site must be live for, like a launch or an event.</li>
               </ol>
               <p>Then ask every developer the same questions: what's included, what isn't, who owns the domain and the code, what happens after launch, and how changes are charged. A good developer will ask you questions too. If someone quotes without asking anything, they're quoting for a site they haven't understood.</p>
-              <p>If you're in Thiruvananthapuram and would rather talk it through face to face, I work as a <a href="/web-developer-trivandrum/">web developer in Trivandrum</a> and can meet you in person. Anywhere else in the state, here's how I work as a <a href="/services/web-development/">web developer in Kerala</a>, from the first call to launch.</p>
+              <p>If you're in Thiruvananthapuram and would rather talk it through face to face, I work as a <a href="/web-developer-trivandrum/">web developer in Trivandrum</a> and can meet you in person. Anywhere else in the state, here's how my <a href="/services/web-development/">website development services in Kerala</a> work, from the first call to launch.</p>
 
               <!-- 7. FAQ: the FAQPage JSON-LD above matches it word for word -->
               <h2 id="faq">FAQ</h2>
@@ -479,7 +476,7 @@
                 <div>
                   <p class="label">Written by</p>
                   <p class="author__name">Jibin Johnson</p>
-                  <p class="author__bio">I'm a web developer and SEO specialist in Thiruvananthapuram, Kerala. I build fast, hand-coded websites with SEO built in, and I write here about what I learn from real projects.</p>
+                  <p class="author__bio">I'm a web developer and SEO expert in Thiruvananthapuram, Kerala. I build fast, hand-coded websites with SEO built in, and I write here about what I learn from real projects.</p>
                   <a class="link author__link" href="/about/">More about me <span aria-hidden="true">→</span></a>
                 </div>
               </aside>
@@ -501,7 +498,7 @@
       <div class="container">
         <p class="label" data-reveal>Next step</p>
         <h2 class="cta__title" id="cta-title" data-reveal="lines">Want a clear quote for your website?</h2>
-        <p class="lead cta__lead" data-reveal>Tell me what you're building. I'll reply within a day with honest advice and a fixed quote that lists exactly what's included. Or read about my <a href="/services/web-development/">website development services</a> first.</p>
+        <p class="lead cta__lead" data-reveal>Tell me what you're building. I'll reply within a day with honest advice and a fixed quote that lists exactly what's included. Or read about my <a href="/services/web-development/">website development services in Kerala</a> first.</p>
         <div class="btn-group cta__actions" data-reveal>
           <a class="btn btn--primary" href="/contact/" data-magnetic>Start a project</a>
           <a class="btn btn--ghost" href="https://wa.me/917736208172?text=Hi%20Jibin%2C%20I%20found%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20project." data-magnetic>WhatsApp me</a>
@@ -546,10 +543,10 @@
     <nav class="site-footer__col site-footer__col--services" aria-labelledby="footer-services">
       <p class="site-footer__heading" id="footer-services">Services</p>
       <ul class="site-footer__list">
-        <li><a class="site-footer__link" href="/services/web-development/">Web development in Kerala</a></li>
+        <li><a class="site-footer__link" href="/services/web-development/">Website development services in Kerala</a></li>
         <li><a class="site-footer__link" href="/services/seo/">SEO services in Kerala</a></li>
         <li><a class="site-footer__link" href="/web-developer-trivandrum/">Web developer in Trivandrum</a></li>
-        <li><a class="site-footer__link" href="/seo-specialist-trivandrum/">SEO specialist in Trivandrum</a></li>
+        <li><a class="site-footer__link" href="/seo-expert-trivandrum/">SEO expert in Trivandrum</a></li>
       </ul>
     </nav>
 
@@ -558,7 +555,7 @@
       <ul class="site-footer__list">
         <li><a class="site-footer__link" href="/work/">Work</a></li>
         <li><a class="site-footer__link" href="/about/">About</a></li>
-        <li><a class="site-footer__link" href="/blog/">Blog</a></li>
+        <!-- BLOG: re-add when the first post is published -->
         <li><a class="site-footer__link" href="/resume/">Resume</a></li>
         <li><a class="site-footer__link" href="/privacy/">Privacy</a></li>
       </ul>

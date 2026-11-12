@@ -3,8 +3,8 @@
   ==========================================================================
   site/index.html — HOME PAGE  (https://jibinjohnson.in/)
   Copied from templates/page.html. All copy comes from "PAGE: Home" in
-  docs/website-content.md. Page styles: /assets/css/pages/home.css?v=da78e89b.
-  Page script: /assets/js/pages/home.js?v=a006fa99 (pinned work gallery only).
+  docs/website-content.md. Page styles: /assets/css/pages/home.css?v=daa21dcd.
+  Page script: /assets/js/pages/home.js?v=3493ae18 (pinned work gallery only).
 
   Never edit between the PARTIAL markers; edit the files in partials/ instead.
   ==========================================================================
@@ -19,8 +19,8 @@
   <script>document.documentElement.classList.replace("no-js", "js");</script>
 
   <!-- ===== SEO basics ===== -->
-  <title>Jibin Johnson | Web Developer & SEO Specialist in Kerala</title>
-  <meta name="description" content="Freelance web developer and SEO specialist in Trivandrum, Kerala. I build fast, premium websites with technical SEO built in, so customers find you.">
+  <title>Jibin Johnson | Web Developer & SEO Expert in Kerala</title>
+  <meta name="description" content="Freelance web developer in Kerala and SEO expert in Kerala, based in Trivandrum. Fast, premium websites with technical SEO built in, so customers find you.">
   <link rel="canonical" href="https://jibinjohnson.in/">
   <meta name="robots" content="index, follow, max-image-preview:large">
 
@@ -28,20 +28,20 @@
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_IN">
   <meta property="og:site_name" content="Jibin Johnson">
-  <meta property="og:title" content="Jibin Johnson | Web Developer & SEO Specialist in Kerala">
-  <meta property="og:description" content="Freelance web developer and SEO specialist in Trivandrum, Kerala. I build fast, premium websites with technical SEO built in, so customers find you.">
+  <meta property="og:title" content="Jibin Johnson | Web Developer & SEO Expert in Kerala">
+  <meta property="og:description" content="Freelance web developer in Kerala and SEO expert in Kerala, based in Trivandrum. Fast, premium websites with technical SEO built in, so customers find you.">
   <meta property="og:url" content="https://jibinjohnson.in/">
   <meta property="og:image" content="https://jibinjohnson.in/assets/img/og/home.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Jibin Johnson, web developer and SEO specialist in Kerala">
+  <meta property="og:image:alt" content="Jibin Johnson, web developer and SEO expert in Kerala">
 
   <!-- ===== Twitter / X card (reuses the same text and image) ===== -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Jibin Johnson | Web Developer & SEO Specialist in Kerala">
-  <meta name="twitter:description" content="Freelance web developer and SEO specialist in Trivandrum, Kerala. I build fast, premium websites with technical SEO built in, so customers find you.">
+  <meta name="twitter:title" content="Jibin Johnson | Web Developer & SEO Expert in Kerala">
+  <meta name="twitter:description" content="Freelance web developer in Kerala and SEO expert in Kerala, based in Trivandrum. Fast, premium websites with technical SEO built in, so customers find you.">
   <meta name="twitter:image" content="https://jibinjohnson.in/assets/img/og/home.jpg">
-  <meta name="twitter:image:alt" content="Jibin Johnson, web developer and SEO specialist in Kerala">
+  <meta name="twitter:image:alt" content="Jibin Johnson, web developer and SEO expert in Kerala">
 
   <!-- ===== Browser look, icons and app manifest ===== -->
   <meta name="theme-color" content="#0E0E0E">
@@ -54,23 +54,12 @@
   <link rel="preload" href="/assets/fonts/Boska-Medium.woff2?v=a9e390c3" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/Switzer-Variable.woff2?v=d1bf801f" as="font" type="font/woff2" crossorigin>
 
-  <!-- ===== Hero portrait: preload the AVIF so it downloads straight away.
-       imagesrcset/imagesizes MUST match the AVIF <source> in the hero, or the
-       browser downloads the image twice. type="image/avif": browsers without
-       AVIF skip this preload and use the WebP from the <picture>.
-       media: tablets and desktops only. On phones the portrait sits below
-       the fold, so it shouldn't compete with the fonts; the <img> still
-       loads eagerly there, just without the head start. ===== -->
-  <link rel="preload" as="image" type="image/avif" fetchpriority="high" media="(min-width: 768px)"
-        imagesrcset="/assets/img/jibin-johnson-web-developer-trivandrum-480.avif?v=54b7c834 480w, /assets/img/jibin-johnson-web-developer-trivandrum-960.avif?v=4b4ca82d 960w"
-        imagesizes="(min-width: 768px) 42vw, 80vw">
-
   <!-- ===== CSS: order matters (tokens → base → components → motion → this page) ===== -->
-  <link rel="stylesheet" href="/assets/css/tokens.css?v=325c6fdf">
-  <link rel="stylesheet" href="/assets/css/base.css?v=02e39957">
+  <link rel="stylesheet" href="/assets/css/tokens.css?v=4806e2b3">
+  <link rel="stylesheet" href="/assets/css/base.css?v=a4fdd1c5">
   <link rel="stylesheet" href="/assets/css/components.css?v=f150552e">
   <link rel="stylesheet" href="/assets/css/motion.css?v=06b1ed8f">
-  <link rel="stylesheet" href="/assets/css/pages/home.css?v=da78e89b">
+  <link rel="stylesheet" href="/assets/css/pages/home.css?v=daa21dcd">
 
   <!-- ===== Structured data (JSON-LD) =====
        WebSite and Person are the same on every page: don't change them.
@@ -92,7 +81,7 @@
         "@type": "Person",
         "@id": "https://jibinjohnson.in/#person",
         "name": "Jibin Johnson",
-        "jobTitle": "Web Developer & SEO Specialist",
+        "jobTitle": "Web Developer & SEO Expert",
         "url": "https://jibinjohnson.in/",
         "image": "https://jibinjohnson.in/assets/img/jibin-johnson-web-developer-trivandrum.jpg",
         "email": "mailto:jibinjohnsoninfo@gmail.com",
@@ -127,8 +116,8 @@
       {
         "@type": "ProfessionalService",
         "@id": "https://jibinjohnson.in/#business",
-        "name": "Jibin Johnson — Web Developer & SEO Specialist",
-        "description": "Freelance web developer and SEO specialist in Trivandrum, Kerala. I build fast, premium websites with technical SEO built in, so customers find you.",
+        "name": "Jibin Johnson — Web Developer & SEO Expert",
+        "description": "Freelance web developer in Kerala and SEO expert in Kerala, based in Trivandrum. Fast, premium websites with technical SEO built in, so customers find you.",
         "url": "https://jibinjohnson.in/",
         "image": "https://jibinjohnson.in/assets/img/jibin-johnson-web-developer-trivandrum.jpg",
         "email": "mailto:jibinjohnsoninfo@gmail.com",
@@ -201,7 +190,7 @@
         <li><a class="site-header__link" href="/work/">Work</a></li>
         <li><a class="site-header__link" href="/services/">Services</a></li>
         <li><a class="site-header__link" href="/about/">About</a></li>
-        <li><a class="site-header__link" href="/blog/">Blog</a></li>
+        <!-- BLOG: re-add when the first post is published -->
         <li><a class="site-header__link" href="/contact/">Contact</a></li>
       </ul>
     </nav>
@@ -223,7 +212,7 @@
 <!-- Full-screen mobile menu. Kept OUTSIDE the <header> because the header
      slides up with a transform, and a transformed parent would break this
      overlay's position: fixed. --i sets each link's stagger delay.
-     The 01–05 numbers are decorative (aria-hidden): screen readers read only the link name. -->
+     The 01–04 numbers are decorative (aria-hidden): screen readers read only the link name. -->
 <div class="menu" id="site-menu" data-menu>
   <nav class="menu__nav container" aria-label="Main">
     <ul class="menu__list">
@@ -239,16 +228,13 @@
         <span class="menu__num" aria-hidden="true">03</span>
         <a class="menu__link" href="/about/">About</a>
       </li>
+      <!-- BLOG: re-add when the first post is published -->
       <li class="menu__item" style="--i: 3">
         <span class="menu__num" aria-hidden="true">04</span>
-        <a class="menu__link" href="/blog/">Blog</a>
-      </li>
-      <li class="menu__item" style="--i: 4">
-        <span class="menu__num" aria-hidden="true">05</span>
         <a class="menu__link" href="/contact/">Contact</a>
       </li>
     </ul>
-    <div class="menu__item menu__footer" style="--i: 5">
+    <div class="menu__item menu__footer" style="--i: 4">
       <a class="btn btn--primary" href="/contact/">Start a project</a>
       <a class="link" href="mailto:jibinjohnsoninfo@gmail.com">jibinjohnsoninfo@gmail.com</a>
       <a class="link" href="https://wa.me/917736208172">WhatsApp: +91 77362 08172</a>
@@ -265,24 +251,38 @@
   <main id="main">
 
     <!-- ====================================================================
-         HERO — the H1 is the LCP element. Its three lines slide up from
+         HERO — the H1 is the LCP element. The hero lines slide up from
          their masks with a pure CSS animation (home.css), so it does not
          wait for JavaScript and is readable within ~0.6s.
-         The portrait sits on the right and bleeds off the screen edge;
-         "Johnson" overlaps its dark background on purpose.
+         Fully typographic and full-width: no image here, so nothing
+         competes with the H1 for the first paint. The portrait lives in
+         the About section below.
          ==================================================================== -->
     <section class="hero" aria-labelledby="page-title">
       <div class="hero__inner container">
-        <p class="label hero__label" data-reveal>Web Developer &amp; SEO Specialist · Trivandrum, Kerala</p>
+        <p class="label hero__label" data-reveal>Jibin Johnson · Trivandrum, Kerala</p>
 
-        <h1 class="hero-title hero__title" id="page-title">
-          <span class="hero__line" style="--i: 0"><span class="hero__line-inner">Jibin</span></span>
-          <span class="hero__line hero__line--indent" style="--i: 1"><span class="hero__line-inner">Johnson</span></span>
-          <span class="hero__line hero__line--role" style="--i: 2"><span class="hero__line-inner">Web Developer &amp; SEO Specialist in Kerala</span></span>
-        </h1>
+        <!-- The keyword is the hero:
+             - H1 "Web Developer in Kerala" at the giant hero size, on two
+               lines: "Web Developer" upright, "in Kerala" italic and stepped
+               right. The space between the two spans keeps the H1 text as
+               one phrase for Google and screen readers.
+             - H2 "SEO Expert in Kerala" on the smaller italic role line. The
+               "&" before it is decorative (aria-hidden) and sits OUTSIDE the
+               H2, so the heading text is exactly the keyword. That line is a
+               <div> because a heading can't sit inside a <span>. -->
+        <div class="hero-title hero__title">
+          <h1 class="hero__h1" id="page-title">
+            <span class="hero__line" style="--i: 0"><span class="hero__line-inner">Web Developer</span></span>
+            <span class="hero__line hero__line--indent" style="--i: 1"><span class="hero__line-inner">in Kerala</span></span>
+          </h1>
+          <div class="hero__line hero__line--role" style="--i: 2">
+            <div class="hero__line-inner"><span class="hero__amp" aria-hidden="true">&amp; </span><h2 class="hero__role">SEO Expert in Kerala</h2></div>
+          </div>
+        </div>
 
         <div class="hero__intro">
-          <p class="lead hero__lead" data-reveal>I design and build fast, cinematic websites, and make sure the right people find them on Google. Based in Trivandrum, working with clients across Kerala and around the world.</p>
+          <p class="lead hero__lead">I'm Jibin Johnson. I design and build fast, cinematic websites, and make sure the right people find them on Google. Based in Trivandrum, working with clients across Kerala and around the world.</p>
           <div class="btn-group hero__actions" data-reveal>
             <a class="btn btn--primary" href="/contact/" data-magnetic>Start a project</a>
             <a class="btn btn--ghost" href="https://wa.me/917736208172?text=Hi%20Jibin%2C%20I%20found%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20project." data-magnetic>WhatsApp me</a>
@@ -290,33 +290,177 @@
           <p class="hero__status" data-reveal><span class="hero__status-dot" aria-hidden="true"></span>Available for freelance projects</p>
         </div>
 
-        <!-- Above the fold (and likely the LCP element on desktop): NEVER lazy.
-             eager + fetchpriority="high", and preloaded in the <head>.
-             width/height reserve its space (no layout shift). -->
-        <div class="hero__portrait" data-parallax="6">
+        <!-- Scroll cue: a plain link to the story below. Desktop: bottom of
+             the empty left column (home.css), so it adds no height. The
+             arrow bobs gently in CSS (off with reduced motion). -->
+        <a class="label hero__cue" href="#story" data-thread-skip>Scroll to see how <span class="hero__cue-arrow" aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         STORY — "sketch → website → found" in three beats.
+         The HTML is a plain ordered list: caption + a small illustration
+         per beat. That is the version phones, reduced motion and no-JS see.
+         Desktop (≥1024px, motion allowed): home.js adds .story--pinned,
+         pins the section, keeps the three captions on the left (linked by
+         a burgundy thread that fills as you scroll) and swaps the
+         illustrations on the right, one beat at a time.
+         Illustrations are decorative (aria-hidden); the visually hidden
+         sentence describes them once for screen readers.
+         ==================================================================== -->
+    <section class="section story" id="story" aria-label="From sketch to found" data-story>
+      <div class="container story__inner">
+        <p class="visually-hidden">Illustration: a wireframe sketch turns into a finished website, which then appears as a result in a Google search.</p>
+
+        <!-- The stage holds the steps and the thread; in the pinned layout
+             the illustrations are positioned against it (home.css). -->
+        <div class="story__stage">
+        <ol class="story__steps">
+          <!-- Beat 1: a wireframe that draws itself (each stroke has
+               pathLength="1", so home.js can draw it from 1 → 0) -->
+          <li class="story__step" data-story-step>
+            <p class="story__caption" data-reveal><span class="story__caption-text">It starts as a sketch.</span></p>
+            <div class="story__art" aria-hidden="true">
+              <svg class="story__svg story__wire" data-reveal viewBox="0 0 320 220" width="320" height="220" focusable="false">
+                <rect pathLength="1" x="1" y="1" width="318" height="218" rx="8"/>
+                <path pathLength="1" d="M1 28 H319"/>
+                <circle pathLength="1" cx="16" cy="14.5" r="3"/>
+                <circle pathLength="1" cx="28" cy="14.5" r="3"/>
+                <circle pathLength="1" cx="40" cy="14.5" r="3"/>
+                <path pathLength="1" d="M24 62 H170"/>
+                <path pathLength="1" d="M24 86 H140"/>
+                <path pathLength="1" d="M24 112 H164"/>
+                <path pathLength="1" d="M24 124 H146"/>
+                <rect pathLength="1" x="24" y="142" width="68" height="22" rx="11"/>
+                <rect pathLength="1" x="192" y="48" width="104" height="122" rx="4"/>
+                <path pathLength="1" d="M192 48 L296 170 M296 48 L192 170"/>
+                <path pathLength="1" d="M24 194 H296"/>
+              </svg>
+            </div>
+          </li>
+
+          <!-- Beat 2: the same layout, finished (same viewBox and positions
+               as the wireframe, so it reads as the sketch filling in) -->
+          <li class="story__step" data-story-step>
+            <p class="story__caption" data-reveal><span class="story__caption-text">Then it becomes a fast, beautiful website.</span></p>
+            <div class="story__art" aria-hidden="true">
+              <svg class="story__svg story__page" data-reveal viewBox="0 0 320 220" width="320" height="220" focusable="false">
+                <rect class="story__page-bg" x="1" y="1" width="318" height="218" rx="8"/>
+                <path class="story__page-rule" d="M1 28 H319"/>
+                <circle class="story__page-ink" cx="16" cy="14.5" r="3"/>
+                <circle class="story__page-ink" cx="28" cy="14.5" r="3"/>
+                <circle class="story__page-wine" cx="40" cy="14.5" r="3"/>
+                <text class="story__page-title" x="24" y="70">Your</text>
+                <text class="story__page-title story__page-title--italic" x="24" y="94">business</text>
+                <rect class="story__page-text" x="24" y="110" width="140" height="4" rx="2"/>
+                <rect class="story__page-text" x="24" y="122" width="122" height="4" rx="2"/>
+                <rect class="story__page-wine" x="24" y="142" width="68" height="22" rx="11"/>
+                <rect class="story__page-ink" x="192" y="48" width="104" height="122" rx="4"/>
+                <circle class="story__page-wine" cx="262" cy="84" r="14"/>
+                <path class="story__page-hill" d="M192 170 L226 128 L250 150 L272 124 L296 152 V170 Z"/>
+                <rect class="story__page-text" x="24" y="192" width="272" height="4" rx="2"/>
+              </svg>
+            </div>
+          </li>
+
+          <!-- Beat 3: a generic search result card, with a "Found ✓" tag -->
+          <li class="story__step" data-story-step>
+            <p class="story__caption" data-reveal><span class="story__caption-text">Then it gets found.</span></p>
+            <div class="story__art" aria-hidden="true">
+              <div class="search" data-reveal>
+              <!-- A plain search field above the result: icon + a query bar -->
+              <span class="search__bar"><span class="search__icon"></span><span class="search__query"></span></span>
+              <div class="search-card">
+                <span class="search-card__tag" data-story-tag>Found ✓</span>
+                <span class="search-card__site">
+                  <span class="search-card__icon"></span>
+                  <span class="search-card__url">yourbusiness.in</span>
+                </span>
+                <span class="search-card__title"></span>
+                <span class="search-card__title search-card__title--short"></span>
+                <span class="search-card__line"></span>
+                <span class="search-card__line"></span>
+                <span class="search-card__line search-card__line--short"></span>
+              </div>
+              </div>
+            </div>
+          </li>
+        </ol>
+
+        <!-- The burgundy thread linking the three captions (desktop pin
+             only; on phones the list's own left border plays that role).
+             Its fill grows with scaleY as the story plays. -->
+        <span class="story__thread" aria-hidden="true"><span class="story__thread-fill" data-story-fill></span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         BRIDGE — one huge serif line between the story and About.
+         A <figure> with a quote and its credit (label style, no wine line,
+         and not a .label, so the thread doesn't hook into it).
+         ==================================================================== -->
+    <figure class="bridge container">
+      <blockquote class="bridge__quote">
+        <!-- Two spans = two lines; the second steps right, like the hero H1 -->
+        <p data-reveal><span class="bridge__line">Beautiful and</span> <span class="bridge__line bridge__line--indent"><em>findable</em>.</span></p>
+      </blockquote>
+      <figcaption class="bridge__credit" data-reveal>— Jibin</figcaption>
+    </figure>
+
+    <!-- ====================================================================
+         01 ABOUT — desktop: portrait on the left, bleeding off the screen
+         edge; eyebrow, bio, three facts and two buttons on the right. Phones: text
+         first (label → H2 → content), portrait after it.
+         Below the fold, so the image is lazy-loaded. [data-parallax]:
+         the photo drifts gently inside its frame (motion.js).
+         ==================================================================== -->
+    <section class="section about" aria-labelledby="about-title">
+      <div class="container about__inner">
+        <div class="about__content">
+          <p class="label" data-reveal>01 — About</p>
+          <p class="about__eyebrow" data-reveal>Trivandrum, Kerala · SEO team lead at Prception Medialab</p>
+          <h2 id="about-title" data-reveal="lines">Jibin Johnson, web developer in Kerala</h2>
+          <p class="about__text" data-reveal>I'm a web developer and SEO expert based in Thiruvananthapuram, Kerala. I build websites that look refined, feel smooth to use, and are set up to be found on Google from day one.</p>
+          <p class="about__text" data-reveal>Most businesses hire a designer for the look, a developer for the build, and an agency for SEO, and something always gets lost between them. I bring the three together.</p>
+
+          <!-- Three small facts: short serif phrases with a rose dot -->
+          <ul class="about__facts" data-reveal>
+            <li class="about__fact">Based in Trivandrum</li>
+            <li class="about__fact">SEO team lead</li>
+            <li class="about__fact">Design + code + SEO</li>
+          </ul>
+
+          <div class="btn-group about__actions" data-reveal>
+            <a class="btn btn--primary" href="/jibin-johnson-resume.pdf" data-magnetic>Explore my resume</a>
+            <a class="btn btn--ghost" href="/about/" data-magnetic>More about me <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <div class="about__portrait" data-parallax="6">
           <picture>
-            <source type="image/avif" srcset="/assets/img/jibin-johnson-web-developer-trivandrum-480.avif?v=54b7c834 480w, /assets/img/jibin-johnson-web-developer-trivandrum-960.avif?v=4b4ca82d 960w" sizes="(min-width: 768px) 42vw, 80vw">
-            <source type="image/webp" srcset="/assets/img/jibin-johnson-web-developer-trivandrum-480.webp?v=a2c15b03 480w, /assets/img/jibin-johnson-web-developer-trivandrum-960.webp?v=21935a2d 960w" sizes="(min-width: 768px) 42vw, 80vw">
-            <img src="/assets/img/jibin-johnson-web-developer-trivandrum-960.webp?v=21935a2d" width="960" height="1200" alt="Jibin Johnson, web developer and SEO specialist in Trivandrum, Kerala" loading="eager" fetchpriority="high" decoding="async">
+            <source type="image/avif" srcset="/assets/img/jibin-johnson-web-developer-trivandrum-480.avif?v=54b7c834 480w, /assets/img/jibin-johnson-web-developer-trivandrum-960.avif?v=4b4ca82d 960w" sizes="(min-width: 768px) 45vw, 85vw">
+            <source type="image/webp" srcset="/assets/img/jibin-johnson-web-developer-trivandrum-480.webp?v=a2c15b03 480w, /assets/img/jibin-johnson-web-developer-trivandrum-960.webp?v=21935a2d 960w" sizes="(min-width: 768px) 45vw, 85vw">
+            <img src="/assets/img/jibin-johnson-web-developer-trivandrum-960.webp?v=21935a2d" width="960" height="1200" alt="Jibin Johnson, web developer and SEO expert in Trivandrum, Kerala" loading="lazy" decoding="async">
           </picture>
         </div>
       </div>
     </section>
 
     <!-- ====================================================================
-         01 MANIFESTO — [data-words]: words brighten as you scroll.
+         02 MANIFESTO — [data-words]: words brighten as you scroll.
          The serif paragraph plays the role of the heading here (no H2 in
          the copy), so the section is named by its label.
          ==================================================================== -->
     <section class="section manifesto" aria-labelledby="approach-label">
       <div class="container manifesto__inner">
-        <p class="label" id="approach-label" data-reveal>01 — Approach</p>
+        <p class="label" id="approach-label" data-reveal>02 — Approach</p>
         <p class="display-text manifesto__text" data-words>Most websites are either beautiful or findable. I build ones that are both. Design, interaction and technical SEO are planned together from the first line of code, not bolted on at the end.</p>
       </div>
     </section>
 
     <!-- ====================================================================
-         02 SERVICES — desktop (≥1024px): the heading stays put on the left
+         03 SERVICES — desktop (≥1024px): the heading stays put on the left
          and the cards stack on top of each other on the right (CSS
          position: sticky; --i sets each card's offset). Phones/tablets and
          reduced motion: a simple stack.
@@ -324,9 +468,9 @@
     <section class="section services" aria-labelledby="services-title">
       <div class="container services__inner">
         <div class="section__head services__head">
-          <p class="label" data-reveal>02 — What I do</p>
+          <p class="label" data-reveal>03 — What I do</p>
           <h2 id="services-title" data-reveal="lines">Web development and SEO, under one roof</h2>
-          <p class="services__local" data-reveal>In Trivandrum? Meet your <a href="/web-developer-trivandrum/">web developer in Trivandrum</a> or <a href="/seo-specialist-trivandrum/">SEO specialist in Trivandrum</a> in person.</p>
+          <p class="services__local" data-reveal>In Trivandrum? Meet your <a href="/web-developer-trivandrum/">web developer in Trivandrum</a> or <a href="/seo-expert-trivandrum/">SEO expert in Trivandrum</a> in person.</p>
         </div>
 
         <ol class="services__list">
@@ -334,19 +478,19 @@
             <span class="service-card__num" aria-hidden="true">01</span>
             <h3 class="card__title card__title--display">Web development</h3>
             <p class="service-card__text">Custom websites and landing pages built with clean, semantic code. Responsive, accessible, and fast enough to pass Core Web Vitals on a phone.</p>
-            <a class="link service-card__link" href="/services/web-development/">Web developer in Kerala <span aria-hidden="true">→</span></a>
+            <a class="link service-card__link" href="/services/web-development/">Website development services in Kerala <span aria-hidden="true">→</span></a>
           </li>
           <li class="service-card" style="--i: 1">
             <span class="service-card__num" aria-hidden="true">02</span>
             <h3 class="card__title card__title--display">Search engine optimisation</h3>
             <p class="service-card__text">Technical audits, keyword research, on-page optimisation, local SEO and link building. Reported in plain language through Search Console and Google Analytics.</p>
-            <a class="link service-card__link" href="/services/seo/">SEO specialist in Kerala <span aria-hidden="true">→</span></a>
+            <a class="link service-card__link" href="/services/seo/">SEO services in Kerala <span aria-hidden="true">→</span></a>
           </li>
           <li class="service-card" style="--i: 2">
             <span class="service-card__num" aria-hidden="true">03</span>
             <h3 class="card__title card__title--display">UI/UX and interaction</h3>
             <p class="service-card__text">Scroll-driven storytelling, motion and layouts that make a brand feel premium, without slowing the site down.</p>
-            <a class="link service-card__link" href="/services/web-development/">Explore web development services <span aria-hidden="true">→</span></a>
+            <a class="link service-card__link" href="/services/web-development/">Explore website development services in Kerala <span aria-hidden="true">→</span></a>
           </li>
           <li class="service-card" style="--i: 3">
             <span class="service-card__num" aria-hidden="true">04</span>
@@ -359,7 +503,7 @@
     </section>
 
     <!-- ====================================================================
-         03 SELECTED WORK — ivory section ([data-bg="paper"]).
+         04 SELECTED WORK — ivory section ([data-bg="paper"]).
          Desktop with motion: home.js pins the section and scrolls the track
          sideways (adds .work--horizontal). Otherwise: a staggered grid.
          [data-cursor="view"] turns the cursor into a "View" disc.
@@ -367,7 +511,7 @@
     <section class="section section--paper work" data-bg="paper" aria-labelledby="work-title" data-work>
       <div class="container">
         <div class="section__head work__head">
-          <p class="label" data-reveal>03 — Selected work</p>
+          <p class="label" data-reveal>04 — Selected work</p>
           <h2 id="work-title" data-reveal="lines">Recent projects</h2>
         </div>
 
@@ -476,14 +620,14 @@
     </section>
 
     <!-- ====================================================================
-         04 PROCESS — [data-bg="ink"] fades the ivory back out.
+         05 PROCESS — [data-bg="ink"] fades the ivory back out.
          Four steps on a line: vertical on phones, a descending staircase on
          desktop (each step lower than the last, like the thread).
          ==================================================================== -->
     <section class="section process" data-bg="ink" aria-labelledby="process-title">
       <div class="container">
         <div class="section__head">
-          <p class="label" data-reveal>04 — Process</p>
+          <p class="label" data-reveal>05 — Process</p>
           <h2 id="process-title" data-reveal="lines">How a project runs</h2>
         </div>
 
@@ -513,13 +657,13 @@
     </section>
 
     <!-- ====================================================================
-         05 WHY ME — big serif statements, explanation to the right.
+         06 WHY ME — big serif statements, explanation to the right.
          The only number is the 95+ Lighthouse target from the copy.
          ==================================================================== -->
     <section class="section why" aria-labelledby="why-title">
       <div class="container">
         <div class="section__head">
-          <p class="label" data-reveal>05 — Why me</p>
+          <p class="label" data-reveal>06 — Why me</p>
           <h2 id="why-title" data-reveal="lines">One person from design to ranking</h2>
         </div>
 
@@ -557,12 +701,12 @@
     </section>
 
     <!-- ====================================================================
-         06 CLIENTS — a plain typographic list (no logos).
+         07 CLIENTS — a plain typographic list (no logos).
          TODO (Jibin): add other clients only with their permission.
          ==================================================================== -->
     <section class="section clients" aria-labelledby="clients-label">
       <div class="container">
-        <p class="label" id="clients-label" data-reveal>06 — Worked with</p>
+        <p class="label" id="clients-label" data-reveal>07 — Worked with</p>
         <ul class="clients__list">
           <li class="clients__name" data-reveal>Serene Derma</li>
           <li class="clients__name" data-reveal>BlackBox Learning</li>
@@ -571,13 +715,13 @@
     </section>
 
     <!-- ====================================================================
-         07 FAQ — <details> accordion. The FAQPage JSON-LD in the <head>
+         08 FAQ — <details> accordion. The FAQPage JSON-LD in the <head>
          repeats this text word for word: change both together.
          ==================================================================== -->
     <section class="section faq-section" aria-labelledby="faq-title">
       <div class="container faq-section__inner">
         <div class="section__head faq-section__head">
-          <p class="label" data-reveal>07 — Questions</p>
+          <p class="label" data-reveal>08 — Questions</p>
           <h2 id="faq-title" data-reveal="lines">Questions people ask</h2>
         </div>
 
@@ -628,14 +772,14 @@
          comment, so it is not on the page and the thread skips its label).
          To re-enable: delete the "BLOG START" and "BLOG END" comment lines,
          put the 3 latest posts in the cards (title, category, link), then
-         renumber the labels: Blog = "08 — Writing", Final CTA = "09 — Next step".
+         renumber the labels: Blog = "09 — Writing", Final CTA = "10 — Next step".
          Its styles are still in home.css (section 9).
          ==================================================================== -->
     <!-- BLOG START
     <section class="section blog" aria-labelledby="blog-title">
       <div class="container">
         <div class="section__head blog__head">
-          <p class="label" data-reveal>08 — Writing</p>
+          <p class="label" data-reveal>09 — Writing</p>
           <h2 id="blog-title" data-reveal="lines">Notes on building and ranking websites</h2>
           <a class="link" href="/blog/" data-reveal>Read the blog <span aria-hidden="true">→</span></a>
         </div>
@@ -674,11 +818,11 @@
     BLOG END -->
 
     <!-- ====================================================================
-         08 FINAL CTA — wine background (.cta swaps the theme colours).
+         09 FINAL CTA — wine background (.cta swaps the theme colours).
          ==================================================================== -->
     <section class="section cta" aria-labelledby="cta-title" data-whatsapp-hide>
       <div class="container">
-        <p class="label" data-reveal>08 — Next step</p>
+        <p class="label" data-reveal>09 — Next step</p>
         <h2 class="cta__title" id="cta-title" data-reveal="lines">Have a project in mind?</h2>
         <p class="lead cta__lead" data-reveal>Tell me about it. I'll reply within a day with honest advice and a clear next step.</p>
         <div class="btn-group cta__actions" data-reveal>
@@ -727,10 +871,10 @@
     <nav class="site-footer__col site-footer__col--services" aria-labelledby="footer-services">
       <p class="site-footer__heading" id="footer-services">Services</p>
       <ul class="site-footer__list">
-        <li><a class="site-footer__link" href="/services/web-development/">Web development in Kerala</a></li>
+        <li><a class="site-footer__link" href="/services/web-development/">Website development services in Kerala</a></li>
         <li><a class="site-footer__link" href="/services/seo/">SEO services in Kerala</a></li>
         <li><a class="site-footer__link" href="/web-developer-trivandrum/">Web developer in Trivandrum</a></li>
-        <li><a class="site-footer__link" href="/seo-specialist-trivandrum/">SEO specialist in Trivandrum</a></li>
+        <li><a class="site-footer__link" href="/seo-expert-trivandrum/">SEO expert in Trivandrum</a></li>
       </ul>
     </nav>
 
@@ -739,7 +883,7 @@
       <ul class="site-footer__list">
         <li><a class="site-footer__link" href="/work/">Work</a></li>
         <li><a class="site-footer__link" href="/about/">About</a></li>
-        <li><a class="site-footer__link" href="/blog/">Blog</a></li>
+        <!-- BLOG: re-add when the first post is published -->
         <li><a class="site-footer__link" href="/resume/">Resume</a></li>
         <li><a class="site-footer__link" href="/privacy/">Privacy</a></li>
       </ul>
@@ -858,7 +1002,7 @@ GA4 END -->
 <!-- /PARTIAL:scripts -->
 
   <!-- Home only: pinned horizontal work gallery (runs after the shared scripts) -->
-  <script src="/assets/js/pages/home.js?v=a006fa99" defer></script>
+  <script src="/assets/js/pages/home.js?v=3493ae18" defer></script>
 
 </body>
 </html>

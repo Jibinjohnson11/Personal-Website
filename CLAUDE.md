@@ -1,7 +1,8 @@
 # jibinjohnson.in — project rules
 
 ## Who
-Jibin Johnson — Web Developer & SEO Specialist, Thiruvananthapuram (Trivandrum), Kerala, India.
+Jibin Johnson — Web Developer & SEO Expert, Thiruvananthapuram (Trivandrum), Kerala, India.
+Positioning keyword is "SEO expert"; the real job title "Web Developer & SEO Specialist (Team Lead)" stays only on /resume/ and the About career story.
 Goals: freelance clients + personal brand. Audience: founders, local businesses, agencies, recruiters.
 Contact: WhatsApp +91 7736208172 · jibinjohnsoninfo@gmail.com
 Profiles: linkedin.com/in/jibinjohnson · github.com/Jibinjohnson11 · instagram.com/jibineyyyy
@@ -54,6 +55,11 @@ Page transitions: CSS @view-transition { navigation: auto; } (progressive enhanc
 - Person entity @id https://jibinjohnson.in/#person in all schema. No fake reviews or ratings.
 - FAQ JSON-LD must match the visible FAQ text exactly.
 - One primary keyword per page (listed in docs/website-content.md); never target it on another page.
+  Keyword map: Home = "web developer in Kerala" (H1) + "SEO expert in Kerala" (H2) ·
+  /services/web-development/ = "website development services in Kerala" · /services/seo/ = "SEO services in Kerala" ·
+  /web-developer-trivandrum/ = "web developer in Trivandrum" · /seo-expert-trivandrum/ = "SEO expert in Trivandrum" ·
+  /seo-for-healthcare-clinics/ = "SEO for clinics in Kerala" · /seo-for-education-institutes/ = "SEO for training institutes in Kerala" ·
+  /web-design-for-startups/ = "website development for startups in Kerala". Each is used exactly in that page's title and H1.
 - After adding/removing pages: run `npm run prepare-deploy`.
 - Targets: Lighthouse ≥ 95 mobile in all categories, LCP < 2.5s (Core Web Vitals 'good');
   hero content must paint on the first frame without JS, CLS < 0.05, INP < 200ms, WCAG AA.

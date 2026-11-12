@@ -25,14 +25,14 @@
   <meta property="og:image" content="https://jibinjohnson.in/assets/img/og/home.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Jibin Johnson, web developer and SEO specialist in Kerala">
+  <meta property="og:image:alt" content="Jibin Johnson, web developer and SEO expert in Kerala">
 
   <!-- ===== Twitter / X card (reuses the same text and image) ===== -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Thank You | Jibin Johnson">
   <meta name="twitter:description" content="Thanks for getting in touch. Your message is on its way, and I'll reply within one working day.">
   <meta name="twitter:image" content="https://jibinjohnson.in/assets/img/og/home.jpg">
-  <meta name="twitter:image:alt" content="Jibin Johnson, web developer and SEO specialist in Kerala">
+  <meta name="twitter:image:alt" content="Jibin Johnson, web developer and SEO expert in Kerala">
 
   <!-- ===== Browser look, icons and app manifest ===== -->
   <meta name="theme-color" content="#0E0E0E">
@@ -46,8 +46,8 @@
   <link rel="preload" href="/assets/fonts/Switzer-Variable.woff2?v=d1bf801f" as="font" type="font/woff2" crossorigin>
 
   <!-- ===== CSS: order matters (tokens → base → components → motion → this page) ===== -->
-  <link rel="stylesheet" href="/assets/css/tokens.css?v=325c6fdf">
-  <link rel="stylesheet" href="/assets/css/base.css?v=02e39957">
+  <link rel="stylesheet" href="/assets/css/tokens.css?v=4806e2b3">
+  <link rel="stylesheet" href="/assets/css/base.css?v=a4fdd1c5">
   <link rel="stylesheet" href="/assets/css/components.css?v=f150552e">
   <link rel="stylesheet" href="/assets/css/motion.css?v=06b1ed8f">
   <link rel="stylesheet" href="/assets/css/pages/simple.css?v=28491975">
@@ -71,7 +71,7 @@
         "@type": "Person",
         "@id": "https://jibinjohnson.in/#person",
         "name": "Jibin Johnson",
-        "jobTitle": "Web Developer & SEO Specialist",
+        "jobTitle": "Web Developer & SEO Expert",
         "url": "https://jibinjohnson.in/",
         "image": "https://jibinjohnson.in/assets/img/jibin-johnson-web-developer-trivandrum.jpg",
         "email": "mailto:jibinjohnsoninfo@gmail.com",
@@ -133,7 +133,7 @@
         <li><a class="site-header__link" href="/work/">Work</a></li>
         <li><a class="site-header__link" href="/services/">Services</a></li>
         <li><a class="site-header__link" href="/about/">About</a></li>
-        <li><a class="site-header__link" href="/blog/">Blog</a></li>
+        <!-- BLOG: re-add when the first post is published -->
         <li><a class="site-header__link" href="/contact/">Contact</a></li>
       </ul>
     </nav>
@@ -155,7 +155,7 @@
 <!-- Full-screen mobile menu. Kept OUTSIDE the <header> because the header
      slides up with a transform, and a transformed parent would break this
      overlay's position: fixed. --i sets each link's stagger delay.
-     The 01–05 numbers are decorative (aria-hidden): screen readers read only the link name. -->
+     The 01–04 numbers are decorative (aria-hidden): screen readers read only the link name. -->
 <div class="menu" id="site-menu" data-menu>
   <nav class="menu__nav container" aria-label="Main">
     <ul class="menu__list">
@@ -171,16 +171,13 @@
         <span class="menu__num" aria-hidden="true">03</span>
         <a class="menu__link" href="/about/">About</a>
       </li>
+      <!-- BLOG: re-add when the first post is published -->
       <li class="menu__item" style="--i: 3">
         <span class="menu__num" aria-hidden="true">04</span>
-        <a class="menu__link" href="/blog/">Blog</a>
-      </li>
-      <li class="menu__item" style="--i: 4">
-        <span class="menu__num" aria-hidden="true">05</span>
         <a class="menu__link" href="/contact/">Contact</a>
       </li>
     </ul>
-    <div class="menu__item menu__footer" style="--i: 5">
+    <div class="menu__item menu__footer" style="--i: 4">
       <a class="btn btn--primary" href="/contact/">Start a project</a>
       <a class="link" href="mailto:jibinjohnsoninfo@gmail.com">jibinjohnsoninfo@gmail.com</a>
       <a class="link" href="https://wa.me/917736208172">WhatsApp: +91 77362 08172</a>
@@ -214,7 +211,7 @@
         <ul class="simple-page__links" aria-label="Where to next">
           <li><a class="link" href="/">Back to home <span aria-hidden="true">→</span></a></li>
           <li><a class="link" href="/work/">See my work <span aria-hidden="true">→</span></a></li>
-          <li><a class="link" href="/blog/">Read the blog <span aria-hidden="true">→</span></a></li>
+          <li><a class="link" href="/services/">See my services <span aria-hidden="true">→</span></a></li>
         </ul>
       </div>
     </section>
@@ -256,10 +253,10 @@
     <nav class="site-footer__col site-footer__col--services" aria-labelledby="footer-services">
       <p class="site-footer__heading" id="footer-services">Services</p>
       <ul class="site-footer__list">
-        <li><a class="site-footer__link" href="/services/web-development/">Web development in Kerala</a></li>
+        <li><a class="site-footer__link" href="/services/web-development/">Website development services in Kerala</a></li>
         <li><a class="site-footer__link" href="/services/seo/">SEO services in Kerala</a></li>
         <li><a class="site-footer__link" href="/web-developer-trivandrum/">Web developer in Trivandrum</a></li>
-        <li><a class="site-footer__link" href="/seo-specialist-trivandrum/">SEO specialist in Trivandrum</a></li>
+        <li><a class="site-footer__link" href="/seo-expert-trivandrum/">SEO expert in Trivandrum</a></li>
       </ul>
     </nav>
 
@@ -268,7 +265,7 @@
       <ul class="site-footer__list">
         <li><a class="site-footer__link" href="/work/">Work</a></li>
         <li><a class="site-footer__link" href="/about/">About</a></li>
-        <li><a class="site-footer__link" href="/blog/">Blog</a></li>
+        <!-- BLOG: re-add when the first post is published -->
         <li><a class="site-footer__link" href="/resume/">Resume</a></li>
         <li><a class="site-footer__link" href="/privacy/">Privacy</a></li>
       </ul>

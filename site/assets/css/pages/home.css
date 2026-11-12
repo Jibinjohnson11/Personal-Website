@@ -4,11 +4,14 @@
    Mobile-first: the plain rules are for phones, then @media blocks add
    the tablet (768px) and desktop (1024px) layouts.
    Desktop layouts sit on the 12-column grid (--grid-columns), but break
-   it on purpose: the portrait bleeds off the edge, columns are offset,
-   the process steps descend like a staircase.
+   it on purpose: the H1 steps right, the About portrait bleeds off the
+   edge, columns are offset, the process steps descend like a staircase.
 
    Contents
-   1. Hero (name reveal, portrait, intro)
+   1. Hero (typographic: label, stepped H1, role line, intro, scroll cue)
+   1a. Story (sketch → website → found; pinned on desktop via home.js)
+   1a2. Bridge quote ("Beautiful and findable.")
+   1b. About (portrait + short bio)
    2. Manifesto
    3. Services (stacked sticky cards on desktop)
    4. Selected work (grid, or pinned horizontal gallery via home.js)
@@ -24,23 +27,28 @@
 
 /* --------------------------------------------------------------------------
    1. HERO
+   Fully typographic and full-width (no image): label → giant stepped H1
+   → italic role line → lead, buttons and availability. The H1 is the
+   LCP element and paints in the first frame without JavaScript.
    -------------------------------------------------------------------------- */
 
 /* The hero + the header fill at least one screen (min-height, so it can
    still grow). The header is position: sticky, so it already takes its own
    space above the hero: no --header-h in the padding here.
    No bottom padding: the gap to the next section is that section's own
-   --section-pad, like everywhere else. */
+   --section-pad, like everywhere else.
+   Tablet and up: justify-content: center (see the media query) keeps
+   generous empty space above and below the type on tall screens. */
 .hero {
   display: flex;
   flex-direction: column;
   min-height: calc(100svh - var(--header-h));
   padding-top: var(--space-48);
-  overflow-x: clip;          /* the portrait bleeds right; never scroll sideways */
+  overflow-x: clip;          /* the giant type can never cause a sideways scroll */
 }
 
 .hero__inner {
-  flex-grow: 1;              /* the grid fills the hero's full height */
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
   column-gap: var(--col-gap);
@@ -50,11 +58,32 @@
   grid-column: 1 / -1;       /* phones: everything full width, in HTML order */
 }
 
-/* The H1 sits above the portrait where they overlap */
+/* Wrapper for the H1 and the H2 role line.
+   Weight is set here because the wrapper is a <div>. */
 .hero__title {
-  position: relative;
-  z-index: 2;
+  margin-top: var(--space-32);
   color: var(--text-strong);
+  font-weight: var(--fw-medium);
+}
+
+/* The giant H1 ("Web Developer / in Kerala"): it takes the hero size from
+   the wrapper (.hero-title), not the global h1 size. */
+.hero__h1 {
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+/* The H2 inside the role line: it takes size, colour and spacing from
+   .hero__line--role, not from the global h2 styles. Inline, so it sits on
+   the same line as the decorative "&". */
+.hero__role {
+  display: inline;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
 }
 
 /* Each line is its own mask (overflow: clip). The bottom padding keeps
@@ -70,15 +99,15 @@
   display: block;
 }
 
-/* "Johnson" steps in to the right: the first break from the grid */
+/* "in Kerala" is italic Boska and steps in to the right: the first break
+   from the grid. Phones: a small step; tablet and up: see the media query. */
 .hero__line--indent {
-  padding-left: 1.2em;
+  padding-left: 0.8em;
+  font-style: italic;
 }
 
-/* The role line: same H1, smaller italic serif, kept narrow so it
-   doesn't run across the portrait's face */
+/* The role line ("& SEO Expert in Kerala"): smaller italic serif */
 .hero__line--role {
-  max-width: 12em;
   margin-top: var(--space-24);
   font-size: var(--fs-h2);
   font-style: italic;
@@ -89,7 +118,7 @@
 
 /* Line-by-line reveal, in CSS so it starts at first paint (no waiting for
    JavaScript). Expo-like easing: mostly in place after ~0.3s.
-   LCP rules for the H1 (it is the page's LCP element):
+   LCP rules for the H1 (the page's LCP element):
    - transform + the line mask (overflow: clip) only — NEVER opacity, so
      the text is painted in the very first frame
    - each line starts only 40% down its mask, so ~60% of every line is
@@ -112,6 +141,20 @@ html.js .hero__line-inner {
 
 .hero__lead {
   color: var(--text-mute);
+}
+
+/* The lead is the LARGEST text on phones, so it can be the LCP element
+   there. Like the H1 it gets a CSS-only rise (transform, NEVER opacity),
+   so it is painted in the first frame instead of waiting for motion.js.
+   That's why it has no data-reveal in the HTML. */
+@keyframes hero-lead-up {
+  from { transform: translateY(var(--space-24)); }
+  to   { transform: none; }
+}
+
+html.js .hero__lead {
+  animation: hero-lead-up var(--dur-hero) var(--ease-out) both;
+  animation-delay: calc(3 * var(--stagger) * 2);
 }
 
 .hero__actions {
@@ -142,58 +185,11 @@ html.js .hero__line-inner {
   50% { opacity: 0.45; transform: scale(0.8); }
 }
 
-/* Portrait: phones — pushed to the right, bleeding off the screen edge */
-.hero__portrait {
-  position: relative;        /* for the edge fade below */
-  width: 80%;
-  margin-top: var(--space-64);
-  margin-left: auto;
-  margin-right: calc(var(--gutter) * -1);
-  aspect-ratio: 4 / 5;
-}
-
-.hero__portrait picture,
-.hero__portrait img {
-  width: 100%;
-  height: 100%;
-}
-
-.hero__portrait img {
-  object-fit: cover;
-  object-position: 60% top;  /* keep the face in frame when cropped */
-}
-
-/* Edge fade. The photo's black backdrop is a touch darker than --ink, so
-   gradients from the page colour (--bg) to transparent hide the rectangle's
-   top, left and bottom edges. A plain overlay, NOT mask-image: Safari can
-   paint nothing when an element masks a moving (parallax) child. */
-.hero__portrait::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to right, var(--bg), transparent 25%),
-    linear-gradient(to bottom, var(--bg), transparent 20%),
-    linear-gradient(to top, var(--bg), transparent 15%);
-  pointer-events: none;
-}
-
-/* Tablet and up: the portrait fills the right ~40% from the label down to
-   the bottom of the hero, bleeding off the right edge. "Johnson" is pushed
-   right (30% of the H1's width) so it overlaps the portrait slightly. */
+/* Tablet and up: the type sits in the middle of the screen and
+   "in Kerala" steps well to the right */
 @media (min-width: 768px) {
-  .hero__inner {
-    grid-template-rows: auto auto 1fr;
-  }
-
-  .hero__label {
-    grid-column: 1 / 8;
-    grid-row: 1;
-  }
-
-  .hero__title {
-    grid-column: 1 / -1;
-    grid-row: 2;
+  .hero {
+    justify-content: center;
   }
 
   .hero__line--indent {
@@ -201,34 +197,30 @@ html.js .hero__line-inner {
   }
 
   .hero__intro {
-    grid-column: 1 / 8;
-    grid-row: 3;
-  }
-
-  /* contain: size = the portrait doesn't make the hero taller; it simply
-     stretches over rows 1–3 and the photo is cropped (object-fit) to fit.
-     margin-left MUST be reset: the phone rule's "auto" margin stops a grid
-     item from stretching, and its width would then depend on the image
-     (0 before a lazy image loads = an empty right side). */
-  .hero__portrait {
-    grid-column: 8 / -1;
-    grid-row: 1 / 4;
-    width: auto;
-    margin-top: 0;
-    margin-left: 0;
-    aspect-ratio: auto;
-    contain: size;
+    grid-column: 1 / 9;
   }
 }
 
-/* Desktop: the label stays on one line */
+/* Desktop: the label stays on one line; "in Kerala" steps further right
+   so the H1 spans the full width. The role line stays left and the intro
+   sits under "in Kerala" (columns 7–12), so the eye zig-zags down the
+   page and the empty space on the opposite side keeps it calm. */
 @media (min-width: 1024px) {
   .hero__label {
     white-space: nowrap;
   }
+
+  .hero__line--indent {
+    padding-left: 36%;
+  }
+
+  .hero__intro {
+    grid-column: 7 / -1;
+    margin-top: var(--space-48);
+  }
 }
 
-/* Short screens (laptops like 1440×800 or 1280×720): shrink the name and
+/* Short screens (laptops like 1440×800 or 1280×720): shrink the H1 and
    role a little so the H1, lead and both buttons fit without scrolling.
    min() keeps the normal size whenever it is already smaller. */
 @media (min-width: 768px) and (max-height: 900px) {
@@ -237,6 +229,7 @@ html.js .hero__line-inner {
   }
 
   .hero__title {
+    margin-top: var(--space-24);
     font-size: min(var(--fs-hero), 17svh);
   }
 
@@ -245,6 +238,533 @@ html.js .hero__line-inner {
     margin-top: var(--space-16);
   }
 }
+
+@media (min-width: 1024px) and (max-height: 900px) {
+  .hero__intro {
+    margin-top: var(--space-24);
+  }
+}
+
+
+/* Scroll cue: "Scroll to see how ↓" in the label style, without the
+   label's wine line. Fades in after the hero lines; the arrow bobs. */
+.hero__cue {
+  justify-self: start;
+  min-height: var(--tap-min);    /* comfortable tap target */
+  margin-top: var(--space-32);
+  color: var(--text-mute);
+  text-decoration: none;
+  transition: color var(--dur-micro) var(--ease-out);
+}
+
+.hero__cue::before {
+  display: none;
+}
+
+.hero__cue:hover {
+  color: var(--text);
+}
+
+.hero__cue-arrow {
+  display: inline-block;
+  animation: cue-bob 2s var(--ease-in-out) infinite;
+}
+
+/* Down 4px and back: transform only */
+@keyframes cue-bob {
+  50% { transform: translateY(var(--space-4)); }
+}
+
+@keyframes cue-in {
+  from { opacity: 0; }
+}
+
+html.js .hero__cue {
+  animation: cue-in var(--dur-reveal) var(--ease-out) both;
+  animation-delay: calc(5 * var(--stagger) * 2);
+}
+
+/* Desktop: the cue sits at the bottom of the empty left column, level
+   with the end of the intro, so it adds no height to the hero. */
+@media (min-width: 1024px) {
+  .hero__intro {
+    grid-row: 3;
+  }
+
+  .hero__cue {
+    grid-column: 1 / 6;
+    grid-row: 3;
+    align-self: end;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   1a. STORY — "It starts as a sketch." → website → "Then it gets found."
+   Default (phones, tablets, reduced motion, no JavaScript): a simple
+   stacked list. The list's left border is the burgundy thread and each
+   caption has a rose dot sitting on it.
+   Desktop with motion: home.js adds .story--pinned (rules further down).
+   -------------------------------------------------------------------------- */
+
+.story__stage {
+  position: relative;      /* the pinned layout places the illustrations here */
+}
+
+/* Two classes so the padding beats the list reset (ol[class] in base.css) */
+.story__stage .story__steps {
+  display: grid;
+  gap: var(--space-96);
+  padding-left: var(--space-32);
+  border-left: var(--border-w) solid var(--accent-line);
+}
+
+/* Caption: Boska italic, with a rose dot on the thread */
+.story__caption {
+  position: relative;
+  max-width: var(--measure-display);
+  font-family: var(--font-display);
+  font-size: var(--fs-display-text);
+  font-style: italic;
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-display-text);
+  color: var(--text-strong);
+}
+
+.story__caption::before {
+  content: "";
+  position: absolute;
+  /* centre the 9px dot on the 1px border: back by the padding + half the dot */
+  left: calc(var(--space-32) * -1 - 4.5px);
+  top: 0.55em;
+  width: 9px;
+  height: 9px;
+  border-radius: var(--radius-pill);
+  background-color: var(--rose);
+}
+
+.story__caption-text {
+  display: inline-block;   /* so the pinned timeline can fade it */
+}
+
+.story__art {
+  max-width: 480px;
+  margin-top: var(--space-32);
+}
+
+.story__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Beat 1: the wireframe. Every shape has pathLength="1", so a dash of 1
+   covers it exactly; home.js draws it by moving the offset from 1 to 0. */
+.story__wire {
+  fill: none;
+  stroke: var(--mute);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+/* Beat 2: the finished page — paper, ink and wine, Boska heading */
+.story__page-bg    { fill: var(--paper); }
+.story__page-rule  { stroke: var(--silver); stroke-width: 1; }
+.story__page-ink   { fill: var(--ink); }
+.story__page-wine  { fill: var(--wine); }
+.story__page-text  { fill: var(--silver); }
+.story__page-hill  { fill: var(--line); }
+
+.story__page-title {
+  font-family: var(--font-display);
+  font-size: 24px;          /* SVG user units (the viewBox is 320 wide) */
+  font-weight: var(--fw-medium);
+  fill: var(--ink);
+}
+
+.story__page-title--italic {
+  font-style: italic;
+  fill: var(--wine);        /* wine on paper: allowed */
+}
+
+/* Beat 3: a search field, then a generic search result under it */
+.search {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.search__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  height: var(--space-48);
+  padding: 0 var(--space-24);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius-pill);
+}
+
+/* Magnifier: a small ring (the handle isn't needed to read as "search") */
+.search__icon {
+  flex-shrink: 0;
+  width: var(--space-16);
+  height: var(--space-16);
+  border: 2px solid var(--mute);
+  border-radius: var(--radius-pill);
+}
+
+.search__query {
+  width: 45%;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--mute);
+  opacity: 0.5;
+}
+
+.search-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding: var(--space-32);
+  background-color: var(--surface);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--space-8);
+}
+
+.search-card__site {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  margin-bottom: var(--space-4);
+}
+
+.search-card__icon {
+  width: var(--space-16);
+  height: var(--space-16);
+  border-radius: var(--radius-pill);
+  background-color: var(--wine);
+  border: 3px solid var(--paper);
+}
+
+.search-card__url {
+  font-size: var(--fs-small);
+  color: var(--text-mute);
+}
+
+/* Bars, not text: the "blue-ish title line" and grey snippet lines */
+.search-card__title,
+.search-card__line {
+  display: block;
+  border-radius: var(--radius-pill);
+}
+
+.search-card__title {
+  width: 82%;
+  height: 14px;
+  background-color: var(--illus-blue);
+}
+
+.search-card__title--short {
+  width: 48%;
+  margin-bottom: var(--space-8);
+}
+
+.search-card__line {
+  width: 92%;
+  height: 8px;
+  background-color: var(--line);
+}
+
+.search-card__line--short {
+  width: 60%;
+}
+
+/* "Found ✓" — a rose tag on the card's top edge */
+.search-card__tag {
+  position: absolute;
+  top: calc(var(--space-16) * -1);
+  right: var(--space-24);
+  padding: var(--space-4) var(--space-16);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  line-height: var(--lh-label);
+  text-transform: uppercase;
+  color: var(--rose);
+  background-color: var(--bg);
+  border: var(--border-w) solid var(--rose);
+  border-radius: var(--radius-pill);
+}
+
+/* The thread fill only exists in the pinned layout */
+.story__thread {
+  display: none;
+}
+
+/* ----- Pinned layout (desktop, motion allowed; class from home.js) -----
+   The .container is pinned to the screen for a few screen-heights of
+   scrolling. Captions stay in a column on the left; the three
+   illustrations sit on top of each other on the right and the timeline
+   in home.js swaps them. */
+@media (min-width: 1024px) {
+  .story--pinned {
+    padding-block: 0;
+  }
+
+  .story--pinned .story__inner {
+    display: flex;
+    align-items: center;
+    height: 100svh;
+    padding-top: var(--header-h);   /* clear the sticky header */
+  }
+
+  .story--pinned .story__stage {
+    width: 100%;
+  }
+
+  /* The pinned story has no bottom padding, so the bridge adds the gap */
+  .story--pinned + .bridge {
+    padding-top: var(--section-pad);
+  }
+
+  .story--pinned .story__stage .story__steps {
+    gap: var(--space-48);
+    border-left-color: var(--border);   /* the dim track; the fill is wine */
+  }
+
+  .story--pinned .story__caption {
+    max-width: 48%;
+  }
+
+  /* All three illustrations in the same spot: right 42% of the stage */
+  .story--pinned .story__art {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 42%;
+    max-width: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  /* The wine fill on top of the dim track, growing downward */
+  .story--pinned .story__thread {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: var(--border-w);
+  }
+
+  .story__thread-fill {
+    display: block;
+    height: 100%;
+    background-color: var(--accent-line);
+    transform-origin: top;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   1a2. BRIDGE — "Beautiful and findable." between the story and About.
+   Hero-sized Boska on two lines; the second steps right, like the H1.
+   No padding of its own: the sections above and below give the space.
+   -------------------------------------------------------------------------- */
+
+.bridge {
+  overflow-x: clip;
+}
+
+.bridge__quote p {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
+  color: var(--text-strong);
+}
+
+.bridge__line {
+  display: block;
+}
+
+.bridge__line--indent {
+  padding-left: 0.8em;
+}
+
+/* "findable" in italic rose */
+.bridge__quote em {
+  font-style: italic;
+  color: var(--rose);
+}
+
+/* "— Jibin" in the label style (not a .label: no wine line, no thread hook) */
+.bridge__credit {
+  margin-top: var(--space-32);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+@media (min-width: 768px) {
+  .bridge__quote p {
+    font-size: var(--fs-hero);
+    line-height: var(--lh-hero);
+    letter-spacing: var(--ls-hero);
+  }
+
+  .bridge__line--indent {
+    padding-left: 30%;
+  }
+
+  .bridge__credit {
+    padding-left: 30%;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   1b. ABOUT
+   Phones: text first, then the portrait bleeding off the LEFT edge.
+   Tablet and up: portrait on the left (columns 1–5, bleeding off the
+   screen edge — a mirror of the stepped hero), text on the right.
+   -------------------------------------------------------------------------- */
+
+.about {
+  overflow-x: clip;          /* the portrait bleeds left; never scroll sideways */
+}
+
+.about__inner {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+}
+
+.about__inner > * {
+  grid-column: 1 / -1;
+}
+
+.about__text {
+  margin-top: var(--space-24);
+  color: var(--text-mute);
+}
+
+/* The first paragraph sits closer to the H2 than the global label → H2 gap */
+.about__content h2 + .about__text {
+  margin-top: var(--space-32);
+}
+
+/* Eyebrow under the label: where + role, small and mute */
+.about__eyebrow {
+  margin-top: var(--space-16);
+  font-size: var(--fs-small);
+  color: var(--text-mute);
+}
+
+.about__eyebrow + h2 {
+  margin-top: var(--space-24);
+}
+
+/* Three small facts: short serif phrases, each after a rose dot.
+   Two classes so the padding beats the list reset (ul[class] in base.css). */
+.about__content .about__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-16) var(--space-32);
+  margin-top: var(--space-48);
+  padding-top: var(--space-32);
+  border-top: var(--border-w) solid var(--border);
+}
+
+.about__fact {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-style: italic;
+  line-height: var(--lh-h3);
+  color: var(--text);
+}
+
+.about__fact::before {
+  content: "";
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background-color: var(--rose);
+}
+
+.about__actions {
+  margin-top: var(--space-48);
+}
+
+/* Portrait frame: 4:5, pushed off the left edge of the screen */
+.about__portrait {
+  position: relative;        /* for the edge fade below */
+  width: 85%;
+  margin-top: var(--space-64);
+  margin-left: calc(var(--gutter) * -1);
+  aspect-ratio: 4 / 5;
+}
+
+.about__portrait picture,
+.about__portrait img {
+  width: 100%;
+  height: 100%;
+}
+
+.about__portrait img {
+  object-fit: cover;
+  object-position: 60% top;  /* keep the face in frame when cropped */
+}
+
+/* Edge fade. The photo's black backdrop is a touch darker than --ink, so
+   gradients from the page colour (--bg) to transparent hide the rectangle's
+   top, right and bottom edges (the left edge is off-screen). A plain
+   overlay, NOT mask-image: Safari can paint nothing when an element masks
+   a moving (parallax) child. */
+.about__portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to left, var(--bg), transparent 25%),
+    linear-gradient(to bottom, var(--bg), transparent 20%),
+    linear-gradient(to top, var(--bg), transparent 15%);
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .about__inner {
+    align-items: center;
+  }
+
+  /* grid-row: 1 on both puts the portrait (second in the HTML) on the left */
+  .about__portrait {
+    grid-column: 1 / 6;
+    grid-row: 1;
+    width: auto;
+    margin-top: 0;
+  }
+
+  .about__content {
+    grid-column: 7 / -1;
+    grid-row: 1;
+  }
+}
+
 
 
 /* --------------------------------------------------------------------------
@@ -741,6 +1261,9 @@ html.js .hero__line-inner {
 
 @media (prefers-reduced-motion: reduce) {
   html.js .hero__line-inner,
+  html.js .hero__lead,
+  html.js .hero__cue,
+  .hero__cue-arrow,             /* the scroll cue stops bobbing */
   .hero__status-dot {          /* the dot stays, just without the pulse */
     animation: none;
   }
