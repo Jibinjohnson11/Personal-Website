@@ -1,0 +1,185 @@
+<!doctype html>
+<!--
+  ==========================================================================
+  templates/page.html — MASTER TEMPLATE
+
+  How to make a new page:
+  1. Copy this file to site/<page-name>/index.html  (e.g. site/about/index.html)
+  2. Fill in every TODO (search the file for "TODO"). Copy text exactly
+     from docs/website-content.md.
+  3. Run: npm run sync   (fills in header, footer, WhatsApp button, scripts)
+  4. After adding/removing pages: npm run prepare-deploy
+
+  Never edit between the PARTIAL markers; edit the files in partials/ instead.
+  ==========================================================================
+-->
+<html lang="en-IN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Swap "no-js" for "js" as early as possible. CSS hides elements before
+       their animation only under html.js, so without JavaScript all content is visible. -->
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
+
+  <!-- ===== SEO basics ===== -->
+  <!-- TODO: unique title, max 60 characters, primary keyword first -->
+  <title>TODO Page title | Jibin Johnson</title>
+  <!-- TODO: unique description, max 155 characters -->
+  <meta name="description" content="TODO Meta description.">
+  <!-- TODO: absolute URL of THIS page, https, with trailing slash -->
+  <link rel="canonical" href="https://jibinjohnson.in/TODO/">
+  <!-- "index, follow" for normal pages; "noindex, follow" for thank-you, 404 and drafts -->
+  <meta name="robots" content="index, follow, max-image-preview:large">
+
+  <!-- ===== Open Graph (link previews on LinkedIn, WhatsApp, Facebook) ===== -->
+  <meta property="og:type" content="website"> <!-- TODO: "article" for case studies and blog posts -->
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:site_name" content="Jibin Johnson">
+  <meta property="og:title" content="TODO Same as the title, or a shorter version">
+  <meta property="og:description" content="TODO Same as the meta description">
+  <meta property="og:url" content="https://jibinjohnson.in/TODO/"> <!-- TODO: same as canonical -->
+  <!-- TODO: unique 1200×630 share image for this page -->
+  <meta property="og:image" content="https://jibinjohnson.in/assets/img/og/TODO.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="TODO Describe the share image">
+
+  <!-- ===== Twitter / X card (reuses the same text and image) ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TODO Same as og:title">
+  <meta name="twitter:description" content="TODO Same as og:description">
+  <meta name="twitter:image" content="https://jibinjohnson.in/assets/img/og/TODO.jpg">
+  <meta name="twitter:image:alt" content="TODO Same as og:image:alt">
+
+  <!-- ===== Browser look, icons and app manifest ===== -->
+  <meta name="theme-color" content="#0E0E0E">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- ===== Fonts: preload only the two used above the fold ===== -->
+  <link rel="preload" href="/assets/fonts/Boska-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/Switzer-Variable.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- ===== CSS: order matters (tokens → base → components → motion → this page) ===== -->
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/motion.css">
+  <!-- TODO: page-specific CSS, or delete this line if the page has none -->
+  <link rel="stylesheet" href="/assets/css/pages/TODO.css">
+
+  <!-- ===== Structured data (JSON-LD) =====
+       WebSite and Person are the same on every page: don't change them.
+       TODO: fill in the BreadcrumbList for this page (Home is always position 1).
+       The Person "image" file must exist: site/assets/img/jibin-johnson-web-developer-trivandrum.jpg -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jibinjohnson.in/#website",
+        "url": "https://jibinjohnson.in/",
+        "name": "Jibin Johnson",
+        "inLanguage": "en-IN",
+        "publisher": { "@id": "https://jibinjohnson.in/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jibinjohnson.in/#person",
+        "name": "Jibin Johnson",
+        "jobTitle": "Web Developer & SEO Specialist",
+        "url": "https://jibinjohnson.in/",
+        "image": "https://jibinjohnson.in/assets/img/jibin-johnson-web-developer-trivandrum.jpg",
+        "email": "mailto:jibinjohnsoninfo@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Thiruvananthapuram",
+          "addressRegion": "Kerala",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/jibinjohnson",
+          "https://github.com/Jibinjohnson11",
+          "https://www.instagram.com/jibineyyyy"
+        ],
+        "knowsAbout": [
+          "Web development",
+          "Search engine optimization",
+          "Technical SEO",
+          "Local SEO",
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "GSAP",
+          "UI/UX design",
+          "Core Web Vitals"
+        ],
+        "alumniOf": [
+          { "@type": "EducationalOrganization", "name": "Edure" },
+          { "@type": "CollegeOrUniversity", "name": "University of Madras" }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jibinjohnson.in/" },
+          { "@type": "ListItem", "position": 2, "name": "TODO Page name", "item": "https://jibinjohnson.in/TODO/" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- PARTIAL:header --><!-- /PARTIAL:header -->
+
+  <main id="main">
+
+    <!-- Visible breadcrumb: must match the BreadcrumbList above (delete on Home) -->
+    <nav class="breadcrumb container" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/TODO/" aria-current="page">TODO Page name</a></li>
+      </ol>
+    </nav>
+
+    <!-- Page header: label → H1 → lead. Exactly ONE h1 per page. -->
+    <section class="section" aria-labelledby="page-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">TODO Label</p>
+          <h1 id="page-title">TODO H1 with the primary keyword</h1>
+          <p class="lead">TODO Lead paragraph (primary keyword within the first ~100 words).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TODO: page sections. Each one: label ("02 — …") → H2 → content.
+         Add class="section section--paper" for an ivory section. -->
+    <section class="section" aria-labelledby="section-2-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">02 — TODO</p>
+          <h2 id="section-2-title">TODO Section heading</h2>
+        </div>
+        <p>TODO Content.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PARTIAL:footer --><!-- /PARTIAL:footer -->
+
+  <!-- PARTIAL:whatsapp --><!-- /PARTIAL:whatsapp -->
+
+  <!-- PARTIAL:scripts --><!-- /PARTIAL:scripts -->
+
+</body>
+</html>

@@ -7,11 +7,12 @@
 ## How to use this file
 
 - Every page has: **URL**, **primary keyword**, **title tag**, **meta description**, **H1**, then the body copy in order, with H2/H3 headings exactly as they should appear in the HTML.
-- Text in `[square brackets]` is a fact only you can fill in (prices, numbers, links). Never publish a page with brackets left in.
+- Text in `[square brackets]` is a fact only you can fill in (numbers, links). Never publish a page with brackets left in.
+- **No prices anywhere on the site.** No figures, ranges or "starts from" amounts in copy, FAQs or schema (no `priceRange`). Cost questions explain what the price depends on and point to a free call or audit for a fixed quote.
 - Don't invent results. If you don't have a number yet, keep the sentence without it.
 - Each primary keyword belongs to **one page only**. Don't copy keyword-heavy paragraphs from one page to another.
 - Image file names: lowercase, hyphenated, descriptive (e.g. `jibin-johnson-web-developer-trivandrum.webp`).
-- Client names: confirm the exact spelling of **Serene Derma** (your resume says "Seren Derma") and **AQ Air** (resume says "Air AQ") before publishing, and get permission to name them.
+- Client names (verified): **Serene Derma** (never "Seren Derma"), **AQ Air** with a space (never "Air AQ" or "AQAir" in text) and **BlackBox Learning** (capital B in Box). Get permission to name clients before publishing.
 
 ---
 
@@ -44,7 +45,8 @@
 
 > **H2: Ready to start?**
 > Tell me what you're building or what isn't working. I'll reply with honest advice and a clear next step, even if that step isn't hiring me.
-> Buttons: **Start a project** · **WhatsApp me** · **Book a free 20-minute call**
+> Buttons: **Start a project** → `/contact/` · **WhatsApp me** → WhatsApp link with the prefilled message
+> (No booking link: calls happen by phone/WhatsApp after first contact.)
 
 ---
 
@@ -58,7 +60,7 @@
 
 ### Section 01 — Hero
 
-Label: `WEB DEVELOPER & SEO SPECIALIST — THIRUVANANTHAPURAM, KERALA`
+Label: `WEB DEVELOPER & SEO SPECIALIST · TRIVANDRUM, KERALA` (one line on desktop)
 
 **H1:**
 Jibin Johnson
@@ -69,7 +71,7 @@ I design and build fast, cinematic websites, and make sure the right people find
 
 Buttons: **Start a project** → `/contact/` · **WhatsApp me**
 
-Status line: Available for new projects — [Month Year]
+Status line: Available for freelance projects (small pulsing rose dot before it)
 
 Portrait alt text: "Jibin Johnson, web developer and SEO specialist in Trivandrum, Kerala"
 
@@ -85,19 +87,24 @@ Label: `02 — What I do`
 
 **H2: Web development and SEO, under one roof**
 
+Line under the H2 (links use the Trivandrum pages' keywords as anchor text):
+In Trivandrum? Meet your [web developer in Trivandrum](/web-developer-trivandrum/) or [SEO specialist in Trivandrum](/seo-specialist-trivandrum/) in person.
+
 **H3: Web development**
 Custom websites and landing pages built with clean, semantic code. Responsive, accessible, and fast enough to pass Core Web Vitals on a phone.
-Link: Explore web development services → `/services/web-development/`
+Link: Web developer in Kerala → `/services/web-development/`
 
 **H3: Search engine optimisation**
 Technical audits, keyword research, on-page optimisation, local SEO and link building. Reported in plain language through Search Console and Google Analytics.
-Link: Explore SEO services in Kerala → `/services/seo/`
+Link: SEO specialist in Kerala → `/services/seo/`
 
 **H3: UI/UX and interaction**
 Scroll-driven storytelling, motion and layouts that make a brand feel premium, without slowing the site down.
+Link: Explore web development services → `/services/web-development/`
 
 **H3: Audits and performance**
 Already have a website? I find what's slowing it down or holding its rankings back, and fix it.
+Link: Explore SEO services in Kerala → `/services/seo/`
 
 ### Section 04 — Selected work
 
@@ -107,13 +114,13 @@ Label: `03 — Selected work`
 
 **AQ Air** — Website development
 A scroll-driven product story for an AI-powered indoor air-quality monitor.
-Tags: Frontend · GSAP · Lenis → `/work/aq-air/`
+Tags: Frontend · JavaScript · Lenis → `/work/aq-air/`
 
 **Serene Derma** — Healthcare SEO
 Led the SEO team that ranked a dermatology clinic for its target treatment keywords.
 Tags: SEO · Healthcare → `/work/serene-derma-seo/`
 
-**Blackbox Learning** — Education SEO
+**BlackBox Learning** — Education SEO
 Grew organic visibility for a training institute's course keywords.
 Tags: SEO · Education → `/work/blackbox-learning-seo/`
 
@@ -149,7 +156,7 @@ Label: `05 — Why me`
 
 Label: `06 — Worked with`
 
-Serene Derma · Blackbox Learning · [add others with permission]
+Serene Derma · BlackBox Learning · [add others with permission]
 
 ### Section 08 — FAQ
 
@@ -158,10 +165,10 @@ Label: `07 — Questions`
 **H2: Questions people ask**
 
 **How much does a website cost in Kerala?**
-Most small business websites I build cost between ₹[x] and ₹[y], depending on the number of pages, features and how much content you already have. After a free call you get a fixed quote, with no surprises later.
+Every project is different — the price depends on the number of pages, design, features and content. After a free call, you get a clear fixed quote with no hidden costs.
 
 **How long does it take to build a website?**
-Usually [3–6] weeks from approved design to launch. A single landing page can be ready in [1–2] weeks.
+Usually 3–6 weeks from approved design to launch. A single landing page can be ready in 1–2 weeks.
 
 **How long does SEO take to show results?**
 Local searches, such as those in Trivandrum, often start moving within a few months. Competitive, state-wide keywords take longer. I report every month, so you can see the progress instead of waiting in the dark.
@@ -172,7 +179,9 @@ Yes. I work remotely with clients across India and abroad. Calls, shared files a
 **Can I update the website myself?**
 Yes. I'll show you how to edit text and add blog posts, and I'm available for changes when you need them.
 
-### Section 09 — Blog
+### Section 09 — Blog (hidden until the first post is published)
+
+Commented out in site/index.html. When re-enabled, it takes label `08 — Writing` and the Final CTA label becomes `09 — Next step`.
 
 Label: `08 — Writing`
 
@@ -182,11 +191,13 @@ Label: `08 — Writing`
 
 ### Section 10 — Final CTA
 
+Label: `08 — Next step` (`09 — Next step` once the Blog section is back)
+
 **H2: Have a project in mind?**
 
 Tell me about it. I'll reply within a day with honest advice and a clear next step.
 
-Buttons: **Book a free call** · **WhatsApp** · **Email me**
+Buttons: **Start a project** → `/contact/` · **WhatsApp me** · **Email me**
 Small link: Download my resume (PDF)
 
 ---
@@ -238,6 +249,14 @@ I care about purposeful design, smooth interaction and measurable results more t
 
 Whether you need a new website, better rankings, or both, I'd like to hear about it.
 Buttons: **Start a project** · **Download resume**
+
+
+**Added during build (labels, links, share image)**
+- Section labels: `01 — The path` (How I got here) · `02 — The difference` · `03 — Toolkit` (What I work with) · `04 — Principles` (How I work) · `05 — Next step` (Let's work together)
+- "How I got here" timeline: the two paragraphs above are split into three steps, word for word. Step labels: `2023–2026 · Study` · `Along the way` · `2026 · Today`. Under step 1, a small line: "Bachelor of Computer Applications — University of Madras Institute of Distance Education · 2023–2026 · Final results awaited"
+- Skills shown as tags, one per item in the lists above
+- CTA: "Download resume" → `/jibin-johnson-resume.pdf`; extra link: **See my work →** `/work/`
+- Share image (og/about.jpg): label "About" · title "Design, code and search" · subtitle "Handled by one person" · alt "About Jibin Johnson: design, code and search, handled by one person"
 
 ---
 
@@ -371,7 +390,7 @@ A great website also needs people to find it. If you want rankings as well as a 
 **H2: Frequently asked questions**
 
 **How much does website development cost in Kerala?**
-A small business website typically costs between ₹[x] and ₹[y]. Landing pages start at ₹[z]. The price depends on the number of pages, design complexity, animation and content. You'll get a fixed quote after our first call.
+Every project is different — the price depends on the number of pages, design complexity, animation and content. After our first call, you get a clear fixed quote with no hidden costs.
 
 **Do you use WordPress?**
 For most business sites I build with clean, hand-written code or Astro, which is faster and more secure than a typical WordPress setup. If you specifically need WordPress, we can discuss it.
@@ -454,7 +473,7 @@ A clear report from Google Search Console and Analytics: what was done, which ke
 I've led SEO teams on campaigns in healthcare and education, ranking multiple target keywords into top positions through technical, on-page and off-page work.
 
 - **Serene Derma (healthcare):** keyword strategy around treatments and locations, on-page and content optimisation, with rankings achieved for multiple target keywords. → `/work/serene-derma-seo/`
-- **Blackbox Learning (education):** course-focused keyword research, page optimisation and link building that improved organic visibility. → `/work/blackbox-learning-seo/`
+- **BlackBox Learning (education):** course-focused keyword research, page optimisation and link building that improved organic visibility. → `/work/blackbox-learning-seo/`
 
 [Add specific numbers when available, e.g. "from position 28 to 3 for '…' in 4 months".]
 
@@ -473,7 +492,7 @@ If your current website is holding you back, I can rebuild it with SEO built in.
 **H2: Frequently asked questions**
 
 **How much do SEO services cost in Kerala?**
-Monthly SEO starts from ₹[x] per month for local businesses, depending on competition and how much work your site needs. A one-time technical audit starts at ₹[y]. You'll know the cost before we start.
+It depends on your website, your competition and your goals. After a free audit, I'll recommend a plan and give you a clear monthly quote before anything starts.
 
 **How long does SEO take?**
 Technical and on-page fixes can show movement within weeks. Local keywords usually improve within a few months. Competitive, state-wide keywords take longer and need consistent content and links.
@@ -502,6 +521,7 @@ Yes. I can work on WordPress, Shopify, custom-coded and most other websites.
 - **Title:** Web Developer in Trivandrum | Freelance Website Developer
 - **Meta description:** Freelance web developer in Trivandrum (Thiruvananthapuram). Premium, fast websites for local businesses and startups. Meet in person or online.
 - **Schema:** ProfessionalService (areaServed: Thiruvananthapuram), Service, FAQPage, BreadcrumbList
+- **Share image:** label "Thiruvananthapuram" · title "Web developer in Trivandrum" · subtitle "Meet in person or online" · alt "Jibin Johnson, web developer in Trivandrum: meet in person or online"
 
 Breadcrumb: Home › Web developer in Trivandrum
 
@@ -514,11 +534,15 @@ I'm Jibin Johnson, a web developer based in Thiruvananthapuram. I build fast, pr
 
 Buttons: **Meet for a coffee** → `/contact/` · **WhatsApp me**
 
+Label: `01 — Close by`
+
 **H2: A local developer, not a faraway agency**
 
 When your web developer is in the same city, things move faster. We can sit together, look at your competitors, and sketch the site in one meeting. You can see progress on your own phone and call me when something needs to change, instead of waiting days for an email.
 
 I'm based in Trivandrum and know how local customers search: in English, often on mobile, often with "near me" or the area name, and usually wanting to WhatsApp before they call. Your website should be built for exactly that.
+
+Label: `02 — Services`
 
 **H2: Website development services in Trivandrum**
 
@@ -527,6 +551,8 @@ I'm based in Trivandrum and know how local customers search: in English, often o
 - **Website redesigns** for slow, outdated or hard-to-update sites
 - **Startup websites** for teams at Technopark and beyond
 - **SEO-ready builds** so your site can rank for searches in Thiruvananthapuram from launch
+
+Label: `03 — Included`
 
 **H2: What's included in every website**
 
@@ -537,9 +563,16 @@ I'm based in Trivandrum and know how local customers search: in English, often o
 - Google Search Console and Analytics setup
 - Training so you can update content yourself
 
+Label: `04 — Where I work`
+
 **H2: Areas I serve in Thiruvananthapuram**
 
 I work with businesses across the city and district, including Technopark and Kazhakoottam, Pattom, Kowdiar, Vazhuthacaud, Vellayambalam, Sasthamangalam, Kesavadasapuram, Ulloor, Medical College, Thampanoor, East Fort, Kovalam, Neyyattinkara and Attingal. If you're nearby, we can meet at your office or a café.
+
+Large area list (the page's distinctive moment, in this order; list label for screen readers: "Areas in Thiruvananthapuram"):
+Technopark · Kazhakoottam · Pattom · Kowdiar · Vazhuthacaud · Vellayambalam · Sasthamangalam · Kesavadasapuram · Ulloor · Medical College · Thampanoor · East Fort · Kovalam · Neyyattinkara · Attingal
+
+Label: `05 — Local search`
 
 **H2: Built for how Trivandrum searches**
 
@@ -547,12 +580,22 @@ A local website needs local signals. I make sure your site clearly shows your lo
 
 Want to rank higher in local search too? See my **SEO specialist in Trivandrum** service → `/seo-specialist-trivandrum/`.
 
+Label: `06 — Selected work`
+
 **H2: Recent work**
 
-- **AQ Air:** a scroll-driven, responsive product website → `/work/aq-air/`
-- **Serene Derma:** healthcare SEO campaign → `/work/serene-derma-seo/`
+**AQ Air** — Website development · 2026
+A scroll-driven, responsive product website.
+Tags: Frontend · JavaScript · GSAP → `/work/aq-air/`
+
+**Serene Derma** — Healthcare SEO · 2026
+Healthcare SEO campaign.
+Cover: SEO case study · Healthcare (alt: "Serene Derma — healthcare SEO project cover")
+Tags: SEO · Healthcare → `/work/serene-derma-seo/`
 
 For clients elsewhere in the state, see **web development in Kerala** → `/services/web-development/`.
+
+Label: `07 — Questions`
 
 **H2: Questions from Trivandrum businesses**
 
@@ -560,10 +603,10 @@ For clients elsewhere in the state, see **web development in Kerala** → `/serv
 Yes. I'm based in Thiruvananthapuram and happy to meet at your office or a café for the first meeting and key reviews.
 
 **How much does a website cost in Trivandrum?**
-Most local business websites cost between ₹[x] and ₹[y]. You get a fixed quote after our first conversation.
+Every business is different — the price depends on the pages, design and features you need. After our first conversation, you get a clear fixed quote with no hidden costs.
 
 **How quickly can you deliver?**
-A landing page can be ready in [1–2] weeks, and a full business website in [3–6] weeks, depending on content and approvals.
+A landing page can be ready in 1–2 weeks, and a full business website in 3–6 weeks, depending on content and approvals.
 
 **Do you work with Technopark startups?**
 Yes. I build launch websites, product pages and landing pages that look credible to investors and customers. See **websites for startups** → `/web-design-for-startups/`.
@@ -571,7 +614,7 @@ Yes. I build launch websites, product pages and landing pages that look credible
 **Can you help with my Google Business Profile?**
 Yes. I set up or optimise it and connect it to your website. It's one of the biggest factors in appearing on Google Maps.
 
-[Standard CTA block — heading: "Let's meet and plan your website"]
+[Standard CTA block — label `08 — Next step`, heading: "Let's meet and plan your website"]
 
 ---
 
@@ -583,6 +626,7 @@ Yes. I set up or optimise it and connect it to your website. It's one of the big
 - **Title:** SEO Specialist in Trivandrum | Local SEO Services
 - **Meta description:** Local SEO specialist in Trivandrum. Rank on Google Maps and search for the keywords your customers use. Free SEO audit for Trivandrum businesses.
 - **Schema:** ProfessionalService (areaServed: Thiruvananthapuram), Service, FAQPage, BreadcrumbList
+- **Share image:** label "Local SEO · Thiruvananthapuram" · title "SEO specialist in Trivandrum" · subtitle "Rank on Google Maps and local search" · alt "Jibin Johnson, SEO specialist in Trivandrum: rank on Google Maps and local search"
 
 Breadcrumb: Home › SEO specialist in Trivandrum
 
@@ -595,11 +639,15 @@ When someone in Thiruvananthapuram searches for what you offer, your business sh
 
 Buttons: **Get a free local SEO audit** · **WhatsApp me**
 
+Label: `01 — Google Maps`
+
 **H2: The top three map results get most of the calls**
 
 For searches like "skin clinic in Trivandrum" or "PSC coaching near me", Google shows a map with three businesses before any website. Those three get most of the calls, direction requests and visits. If you're not there, most customers never scroll far enough to find you.
 
 Getting into those results depends on your Google Business Profile, your website, your reviews, and how consistently your business appears across the web. I work on all of them.
+
+Label: `02 — Services`
 
 **H2: Local SEO services in Trivandrum**
 
@@ -621,6 +669,8 @@ A simple system to ask happy customers for Google reviews, and guidance on reply
 **H3: Technical and on-page SEO**
 Speed, mobile usability, indexing and content fixes, so your website supports your map ranking instead of holding it back.
 
+Label: `03 — Who I help`
+
 **H2: Who I help in Trivandrum**
 
 - **Clinics and healthcare:** dermatology, dental, physiotherapy, Ayurveda → `/seo-for-healthcare-clinics/`
@@ -629,20 +679,42 @@ Speed, mobile usability, indexing and content fixes, so your website supports yo
 - **Restaurants, cafés and shops** around Pattom, Kowdiar, Vazhuthacaud, Kazhakoottam and the city centre
 - **IT companies and startups** at Technopark that want to be found for their services
 
+Label: `04 — Why local`
+
 **H2: Why a Trivandrum-based SEO specialist**
 
 I know the city's areas, landmarks and how local customers search. I can visit your business to take proper photos for your profile, and meet you to review results. Your SEO is handled by someone who understands your market, not an anonymous team in another state.
 
+Large area list (the page's distinctive moment, in this order; list label for screen readers: "Areas of Thiruvananthapuram"):
+Technopark · Kazhakoottam · Pattom · Kowdiar · Vazhuthacaud · Sasthamangalam · Thampanoor · East Fort · Kovalam
+Next to Vazhuthacaud, a small link: **Serene Derma's main clinic** → `/work/serene-derma-seo/`
+
+Label: `05 — Proof`
+
 **H2: Proven SEO experience**
 
-I've led SEO campaigns for healthcare and education brands, focused on location-based, high-intent keywords, and ranked multiple target keywords into top positions. See the **Serene Derma** case study → `/work/serene-derma-seo/` and **Blackbox Learning** → `/work/blackbox-learning-seo/`.
+I've led SEO campaigns for healthcare and education brands, focused on location-based, high-intent keywords, and ranked multiple target keywords into top positions. See the **Serene Derma** case study → `/work/serene-derma-seo/` and **BlackBox Learning** → `/work/blackbox-learning-seo/`.
+
+Serene Derma's main clinic is in Vazhuthacaud, right here in Thiruvananthapuram, so its campaign was built around the same kind of treatment-and-area searches your customers make.
+
+**Serene Derma** — Healthcare SEO · Vazhuthacaud, Thiruvananthapuram
+A dermatology clinic with locations in Thiruvananthapuram and Kollam: keyword strategy around treatments and locations, prioritising high-intent local searches.
+Cover: SEO case study · Healthcare (alt: "Serene Derma — healthcare SEO project cover")
+Tags: Local SEO · Healthcare · Team lead → `/work/serene-derma-seo/`
+
+**BlackBox Learning** — Education SEO · Thiruvananthapuram
+A Thiruvananthapuram training institute: course keyword research, including location-based queries, and course page optimisation.
+Cover: SEO case study · Education (alt: "BlackBox Learning — education SEO project cover")
+Tags: SEO · Education → `/work/blackbox-learning-seo/`
 
 Serving clients across the state? See **SEO services in Kerala** → `/services/seo/`. Need a faster, better website to support your rankings? See **web developer in Trivandrum** → `/web-developer-trivandrum/`.
+
+Label: `06 — Questions`
 
 **H2: Local SEO questions**
 
 **How much does local SEO cost in Trivandrum?**
-Local SEO plans start from ₹[x] per month. A one-time Google Business Profile setup and audit starts at ₹[y].
+It depends on your business, your area and how competitive your local searches are. After a free local SEO audit, I'll recommend a plan and give you a clear monthly quote before anything starts.
 
 **How long until I appear on Google Maps?**
 A well-optimised profile can start gaining visibility within weeks. Reaching the top three for competitive searches usually takes a few months of consistent work and reviews.
@@ -656,7 +728,7 @@ Not necessarily, but if you're in Trivandrum, a visit for photos and a quick rev
 **Can you remove bad reviews?**
 Genuine reviews can't be removed. Fake or policy-breaking reviews can be reported to Google. The best answer to a bad review is a calm, professional reply and more good reviews from real customers.
 
-[Standard CTA block — heading: "Get a free local SEO audit"]
+[Standard CTA block — label `07 — Next step`, heading: "Get a free local SEO audit"]
 
 ---
 
@@ -678,11 +750,23 @@ Label: `Healthcare SEO`
 Lead:
 Patients search before they book. I help clinics in Kerala appear for the treatments and locations patients search for, with content that builds trust and follows medical advertising standards.
 
-Buttons: **Get a free clinic SEO audit** · **See the Serene Derma case study**
+Buttons: **Get a free clinic SEO audit** → `/contact/` · **See the Serene Derma case study** → `/work/serene-derma-seo/`
+
+Share image: label "Healthcare SEO" · title "SEO for clinics in Kerala" · subtitle "Rank for the treatments patients search" (alt: "Jibin Johnson, SEO for clinics and healthcare in Kerala: rank for the treatments patients search")
+
+Label: `01 — The patient journey`
 
 **H2: How patients choose a clinic now**
 
 Someone with a skin problem in Kochi or Trivandrum doesn't open a directory. They search "acne scar treatment in Kochi" or "best dermatologist near me", compare the top few clinics, read reviews, and book. If your clinic isn't in those results, the patient books elsewhere, however good your doctors are.
+
+Patient journey (the page's distinctive moment: four large steps that light up as the thread passes; list label for screen readers: "How a patient finds and books a clinic"):
+1. **Search** — a treatment and a place
+2. **Compare** — the top few clinics
+3. **Read reviews** — trust comes first
+4. **Book** — with you, or elsewhere
+
+Label: `02 — Included`
 
 **H2: What healthcare SEO includes**
 
@@ -704,16 +788,28 @@ Healthcare content has to be accurate and careful. No exaggerated claims or guar
 **H3: Appointment-focused design**
 Clear booking buttons, WhatsApp enquiries and click-to-call on every treatment page, and tracking so you know which pages bring patients.
 
+Label: `03 — Case study`
+
 **H2: Case study: Serene Derma**
+
+Card: **Serene Derma** — Healthcare SEO · 2026
+Treatment and location keyword strategy for a dermatology clinic in Trivandrum and Kollam.
+Cover: SEO case study · Healthcare (alt: "Serene Derma — healthcare SEO project cover")
+Tags: SEO · Healthcare · Team lead → `/work/serene-derma-seo/`
 
 I led the SEO team for Serene Derma, a dermatology clinic. We planned keyword strategy around treatments and locations, optimised on-page content and ran a structured content workflow through to client approval. The campaign achieved rankings for multiple target keywords. [Add specific keyword movements or traffic growth.]
 Link: Read the full case study → `/work/serene-derma-seo/`
+Link: See all work → `/work/`
+
+Label: `04 — Who I help`
 
 **H2: Clinics I can help**
 
 Dermatology and skin clinics, dental clinics, hair transplant centres, physiotherapy and rehabilitation, Ayurveda centres, diagnostic labs, eye clinics, and multi-speciality hospitals across Kerala.
 
 For general SEO see **SEO services in Kerala** → `/services/seo/`. For clinics in the capital, see **SEO specialist in Trivandrum** → `/seo-specialist-trivandrum/`.
+
+Label: `05 — Questions`
 
 **H2: Questions from clinics**
 
@@ -729,7 +825,7 @@ Local improvements can show within a few months. Competitive treatment keywords 
 **Can you work with our existing website?**
 Yes, or I can rebuild it if speed and structure are holding it back.
 
-[Standard CTA block — heading: "Get a free clinic SEO audit"]
+[Standard CTA block — label `06 — Next step`, heading: "Get a free clinic SEO audit"]
 
 ---
 
@@ -751,11 +847,24 @@ Label: `Education SEO`
 Lead:
 Students compare courses on Google before they ever call. I help training institutes, coaching centres and academies in Kerala rank for the course searches that turn into admissions.
 
-Buttons: **Get a free institute SEO audit** · **See the Blackbox Learning case study**
+Buttons: **Get a free institute SEO audit** → `/contact/` · **See the BlackBox Learning case study** → `/work/blackbox-learning-seo/`
+
+Share image: label "Education SEO" · title "SEO for training institutes" · subtitle "Rank for the course searches students make" (alt: "Jibin Johnson, SEO for training institutes in Kerala: rank for the course searches students make")
+
+Label: `01 — Course searches`
 
 **H2: Admissions start with a search**
 
 "Digital marketing course in Trivandrum." "Python training with placement in Kochi." "Best IELTS coaching near me." Students and parents search, compare three or four institutes, and enquire with the ones that look credible. Ads get expensive during admission season. Organic rankings keep bringing enquiries all year.
+
+Course searches (the page's distinctive moment: a large serif list that lights up row by row as the thread passes; the words around the course are set in italic; list label for screen readers: "Examples of course searches students make"; each row's tags are labelled "What this search tells you"):
+- digital marketing course *in Trivandrum* — Tags: Course · Location
+- python training *with placement in Kochi* — Tags: Course · Placement · Location
+- *best* IELTS coaching *near me* — Tags: Comparing · Course · Near me
+- full stack course *fees and duration* — Tags: Course · Fees · Duration
+- machine learning course *online* — Tags: Course · Online
+
+Label: `02 — Included`
 
 **H2: What education SEO includes**
 
@@ -777,16 +886,28 @@ Career guides, salary insights and "how to become" articles that bring in studen
 **H3: Authority and links**
 Listings on education portals, partnerships and local media, building the trust that competitive course keywords require.
 
-**H2: Case study: Blackbox Learning**
+Label: `03 — Case study`
 
-For Blackbox Learning, a training platform, I ran keyword research and competitor analysis, optimised course pages and SEO content, and built backlinks for education keywords. The work improved organic visibility and achieved rankings for multiple targeted keywords. [Add specific numbers when available.]
+**H2: Case study: BlackBox Learning**
+
+Card: **BlackBox Learning** — Education SEO · 2026
+Course keyword research, page optimisation and link building for a training institute in Thiruvananthapuram.
+Cover: SEO case study · Education (alt: "BlackBox Learning — education SEO project cover")
+Tags: SEO · Education · Link building → `/work/blackbox-learning-seo/`
+
+For BlackBox Learning, a training platform, I ran keyword research and competitor analysis, optimised course pages and SEO content, and built backlinks for education keywords. The work improved organic visibility and achieved rankings for multiple targeted keywords. [Add specific numbers when available.]
 Link: Read the full case study → `/work/blackbox-learning-seo/`
+Link: See all work → `/work/`
+
+Label: `04 — Who I help`
 
 **H2: Who this is for**
 
 IT and software training institutes, digital marketing academies, coaching centres for competitive exams, language and IELTS centres, design schools, and online course creators across Kerala.
 
 See also **SEO services in Kerala** → `/services/seo/` and, if your site needs rebuilding, **web development** → `/services/web-development/`.
+
+Label: `05 — Questions`
 
 **H2: Questions from institutes**
 
@@ -802,7 +923,7 @@ Yes. Online courses can target students across India, so the keyword strategy is
 **Do you also handle Google Business Profile for branches?**
 Yes, for every branch you have.
 
-[Standard CTA block — heading: "Get a free institute SEO audit"]
+[Standard CTA block — label `06 — Next step`, heading: "Get a free institute SEO audit"]
 
 ---
 
@@ -812,7 +933,7 @@ Yes, for every branch you have.
 - **Primary keyword:** website for startups Kerala
 - **Secondary:** startup website development, landing page development, Technopark startup website
 - **Title:** Website Development for Startups in Kerala | Jibin Johnson
-- **Meta description:** Launch-ready websites and landing pages for startups: premium design, smooth animation and SEO foundations, built fast with Astro.
+- **Meta description:** Launch-ready websites and landing pages for startups: premium design, smooth animation and SEO foundations, built fast with clean, modern code.
 - **Schema:** Service (serviceType: Startup website development, areaServed: Kerala, India), FAQPage, BreadcrumbList
 
 Breadcrumb: Home › Services › Websites for startups
@@ -824,7 +945,11 @@ Label: `For startups`
 Lead:
 Your website is often the first thing investors, early customers and new hires see. I build launch-ready startup websites that look premium, explain your product clearly, and are ready to grow with search.
 
-Buttons: **Plan my launch site** · **See AQ Air**
+Buttons: **Plan my launch site** → `/contact/` · **See AQ Air** → `/work/aq-air/`
+
+Share image: label "For startups" · title "Websites for startups" · subtitle "Launch-ready, premium, built to grow" (alt: "Jibin Johnson, websites for startups in Kerala: launch-ready, premium, built to grow")
+
+Label: `01 — What matters`
 
 **H2: What startups need from a website**
 
@@ -833,6 +958,21 @@ Buttons: **Plan my launch site** · **See AQ Air**
 - **Speed to launch:** weeks, not months
 - **Room to grow:** easy to add pages, a blog, case studies and landing pages as you learn
 - **Search foundations:** so organic traffic starts building from day one
+
+Label: `02 — Launch timeline`
+
+**H2: From first call to launch**
+
+(The page's distinctive moment: four stops along a burgundy line drawn on scroll. Timings match the FAQ below.)
+
+1. **First call — Message and plan.** We shape your message from your pitch deck and product notes, and plan the pages you need.
+2. **Weeks 1–2 — Landing page.** A focused page for a waitlist, a campaign or your launch, if you need to go live first.
+3. **Weeks 3–5 — Launch website.** Home, product, about, pricing and contact: everything you need to go live and look credible.
+4. **After launch — Room to grow.** A blog, case studies and new landing pages, added as you learn.
+
+Note under the timeline: "Typical timings. The exact plan depends on how ready your content is."
+
+Label: `03 — What I build`
 
 **H2: What I build for startups**
 
@@ -848,10 +988,20 @@ Focused pages for waitlists, campaigns, ads and investor decks, built to test id
 **H3: SEO foundations**
 Keyword research for your category, clean structure, schema and a blog setup, so content marketing can start whenever you're ready.
 
+Label: `04 — Case study`
+
 **H2: Case study: AQ Air**
+
+Card: **AQ Air** — Website development · 2026
+A scroll-driven product story for an AI-powered air-quality monitor.
+Image alt: "AQ Air website hero: an AI-powered indoor air-quality monitor with scroll-driven product story"
+Tags: Frontend · JavaScript · Lenis · Responsive → `/work/aq-air/`
 
 AQ Air is an AI-powered indoor air-quality monitor. I built a responsive, animation-rich product website using scroll-driven storytelling, smooth scrolling with Lenis, reveal animations, a draggable carousel and an animated live air-quality panel, with dedicated breakpoints and reduced-motion support.
 Link: Read the AQ Air case study → `/work/aq-air/`
+Link: See all work → `/work/`
+
+Label: `05 — How I build`
 
 **H2: Fast, modern and yours**
 
@@ -859,10 +1009,12 @@ I build with Astro or hand-written HTML, CSS and JavaScript, so there's no page 
 
 See also **web development in Kerala** → `/services/web-development/` and **web developer in Trivandrum** → `/web-developer-trivandrum/`.
 
+Label: `06 — Questions`
+
 **H2: Questions from founders**
 
 **How fast can you launch our website?**
-A landing page in about [1–2] weeks; a full launch website in [3–5] weeks, depending on content readiness.
+A landing page in about 1–2 weeks; a full launch website in 3–5 weeks, depending on content readiness.
 
 **We don't have final copy yet. Can you help?**
 Yes. I can help shape your messaging and write clear, search-friendly copy from your pitch deck and product notes.
@@ -873,7 +1025,7 @@ Yes. I set up simple editing for pages and blog posts and show your team how it 
 **Do you sign NDAs?**
 Yes, happily, before you share product details.
 
-[Standard CTA block — heading: "Let's plan your launch site"]
+[Standard CTA block — label `07 — Next step`, heading: "Let's plan your launch site"]
 
 ---
 
@@ -882,7 +1034,7 @@ Yes, happily, before you share product details.
 - **URL:** `/work/`
 - **Primary keyword:** web development and SEO case studies
 - **Title:** Work & Case Studies | Jibin Johnson
-- **Meta description:** Selected web development and SEO case studies: AQ Air, Serene Derma, Blackbox Learning and more. See the problem, the approach and the results.
+- **Meta description:** Selected web development and SEO case studies: AQ Air, Serene Derma, BlackBox Learning and more. See the problem, the approach and the results.
 - **Schema:** CollectionPage, BreadcrumbList
 
 Label: `Work`
@@ -896,11 +1048,11 @@ Cards (image, title, category, one line, tags):
 
 1. **AQ Air** · Website development · 2026
    "A scroll-driven product story for an AI-powered air-quality monitor."
-   Frontend · GSAP · Lenis · Responsive
+   Frontend · JavaScript · Lenis · Responsive
 2. **Serene Derma** · Healthcare SEO · 2026
    "Led the SEO team that ranked a dermatology clinic for its target treatment keywords."
    SEO · Healthcare · Team lead
-3. **Blackbox Learning** · Education SEO · 2026
+3. **BlackBox Learning** · Education SEO · 2026
    "Improved organic visibility for a training institute's course keywords."
    SEO · Education · Link building
 4. **SEO Dashboard** · Personal product · In progress
@@ -909,7 +1061,6 @@ Cards (image, title, category, one line, tags):
 
 Closing line: "Have a project like these? → Start a project"
 
-[Confirm the year for each project.]
 
 ---
 
@@ -918,23 +1069,24 @@ Closing line: "Have a project like these? → Start a project"
 - **URL:** `/work/aq-air/`
 - **Primary keyword:** AQ Air website case study
 - **Title:** AQ Air Website — Frontend Case Study | Jibin Johnson
-- **Meta description:** How I built a responsive, animation-rich product website for AQ Air, an AI indoor air-quality monitor, with GSAP, Lenis and scroll storytelling.
-- **Schema:** Article (author: Person), BreadcrumbList
+- **Meta description:** How I built a responsive, animation-rich product website for AQ Air, an AI indoor air-quality monitor, with vanilla JavaScript and Lenis.
+- **Schema:** Article (author: Person), BreadcrumbList · datePublished / dateModified: 2026-11-11
 
 Breadcrumb: Home › Work › AQ Air
 
 **H1: AQ Air: a scroll-driven product story**
 
-Meta strip: Client: AQ Air · Industry: Smart home / IoT · Role: Frontend developer · Year: [year] · Live site: [URL]
+Meta strip: Client: AQ Air · Industry: Smart home / IoT · Role: Frontend developer · Year: 2026 · Live site: https://aqairmonitor.github.io/AQ/
 
 **H2: Overview**
-AQ Air is an AI-powered indoor air-quality monitor that tracks CO₂, PM2.5, VOCs, gas and temperature, and turns the readings into clear alerts. The website needed to explain a technical product simply and make it feel premium.
+AQ Air is a connected indoor air monitor that reads five sensors (CO₂, PM2.5, VOCs, gas/smoke and temperature/humidity), uses AI to explain air conditions in plain language, and sends alerts to your phone. The website needed to explain a technical product simply and make it feel premium.
 
 **H2: The challenge**
 Air-quality data is invisible and technical. The site had to make it tangible and easy to understand, keep visitors scrolling through the story, and still load fast and work well on every device.
 
 **H2: What I did**
 - Built a scroll-driven storytelling experience in vanilla JavaScript using IntersectionObserver and requestAnimationFrame, without a front-end framework
+- Built page sections for the product overview, use cases (home, vehicles, remote monitoring), “Why AQ Air” benefits, the four-step “How it works” flow (Sense, Analyze, Understand, Act) and the contact form
 - Implemented Lenis smooth scrolling for a seamless browsing experience
 - Created a custom preloader, reveal-on-scroll animations and a draggable carousel
 - Built an animated live air-quality panel that shows how the device reports readings
@@ -942,10 +1094,14 @@ Air-quality data is invisible and technical. The site had to make it tangible an
 - Added reduced-motion handling for accessibility
 
 **H2: Tools**
-HTML5 · CSS3 · JavaScript · Lenis · [GSAP / Astro — confirm what was used] · Responsive design
+HTML5 · CSS3 · Vanilla JavaScript · IntersectionObserver · requestAnimationFrame · Lenis · Responsive design
 
 **H2: Outcome**
-A smooth, responsive product website that turns technical sensor data into a clear, engaging story. [Add Lighthouse score, client feedback or engagement figures if available.]
+A smooth, responsive product website that turns technical sensor data into a clear, engaging story — scoring a perfect 100 for accessibility, best practices and SEO on Google PageSpeed Insights.
+
+Stats (three .stat items): **100** Accessibility · **100** Best Practices · **100** SEO
+Caption: "Google PageSpeed Insights (mobile), November 2026"
+(Verified on mobile, 11 Nov 2026. Do not mention the performance score.)
 
 Image alt examples: "AQ Air website hero section on desktop", "Animated live air-quality panel on the AQ Air website", "AQ Air website on mobile"
 
@@ -960,19 +1116,19 @@ Next project: Serene Derma →
 - **Primary keyword:** dermatology clinic SEO case study
 - **Title:** Serene Derma — Healthcare SEO Case Study | Jibin Johnson
 - **Meta description:** How I led the SEO team for Serene Derma, a dermatology clinic, using keyword strategy, on-page and content optimisation to rank target keywords.
-- **Schema:** Article, BreadcrumbList
+- **Schema:** Article, BreadcrumbList · datePublished / dateModified: 2026-11-11
 
 Breadcrumb: Home › Work › Serene Derma
 
 **H1: Serene Derma: SEO for a dermatology clinic**
 
-Meta strip: Industry: Healthcare · Role: SEO team lead · Year: [year] · Services: keyword research, on-page SEO, technical SEO, content optimisation, competitor analysis
+Meta strip: Client: Serene Derma (Serene Skin & Laser Centre) · Industry: Dermatology / healthcare · Role: SEO team lead · Year: 2026 · Website: https://serenederma.com/ · Locations: Vazhuthacaud, Thiruvananthapuram and Kilikolloor, Kollam · Services: keyword research, on-page SEO, technical SEO, content optimisation, competitor analysis
 
 **H2: Overview**
-Serene Derma is a dermatology clinic that wanted more patients to find it through Google for its treatments and locations.
+Serene Derma (Serene Skin & Laser Centre) is a dermatology clinic offering skin, hair and laser care — including laser treatments, skin tightening, injectables, hair transplant and hair-loss therapy, and medi-facials — across two locations in Kerala. It wanted more patients to find it through Google for its treatments and locations.
 
 **H2: The challenge**
-Healthcare search is competitive and trust-sensitive. Patients search by treatment and location, and Google holds health content to higher quality standards. The clinic needed to appear for high-intent treatment searches with content that was accurate and trustworthy.
+Healthcare search is competitive and trust-sensitive. Patients search by treatment and location, and Google holds health content to higher quality standards. The clinic needed to appear for high-intent treatment searches with content that was accurate and trustworthy. Two locations meant the strategy had to target treatment searches in both Trivandrum and Kollam.
 
 **H2: What I did**
 - Led the SEO team and coordinated optimisation work
@@ -986,29 +1142,29 @@ Healthcare search is competitive and trust-sensitive. Patients search by treatme
 Rankings achieved for multiple target keywords through team-led, collaborative SEO. [Add a table: keyword · position before · position after · time, or a Search Console clicks chart.]
 
 Related: **SEO for clinics** → `/seo-for-healthcare-clinics/` · **SEO services in Kerala** → `/services/seo/`
-Next project: Blackbox Learning →
+Next project: BlackBox Learning →
 
 ---
 
-# PAGE: Case study — Blackbox Learning
+# PAGE: Case study — BlackBox Learning
 
 - **URL:** `/work/blackbox-learning-seo/`
 - **Primary keyword:** education SEO case study
-- **Title:** Blackbox Learning — Education SEO Case Study | Jibin Johnson
-- **Meta description:** How keyword research, course page optimisation and link building improved organic visibility for Blackbox Learning, a training platform.
-- **Schema:** Article, BreadcrumbList
+- **Title:** BlackBox Learning — Education SEO Case Study | Jibin Johnson
+- **Meta description:** How keyword research, course page optimisation and link building improved organic visibility for BlackBox Learning, a training platform.
+- **Schema:** Article, BreadcrumbList · datePublished / dateModified: 2026-11-11
 
-Breadcrumb: Home › Work › Blackbox Learning
+Breadcrumb: Home › Work › BlackBox Learning
 
-**H1: Blackbox Learning: SEO for a training platform**
+**H1: BlackBox Learning: SEO for a training platform**
 
-Meta strip: Industry: Education · Role: SEO lead · Year: [year] · Services: keyword research, on-page and off-page SEO, content optimisation, link building, competitor analysis
+Meta strip: Client: BlackBox Learning · Industry: Education / tech training · Location: Thiruvananthapuram · Role: SEO lead · Credit: Website by Prception Medialab, where I work · Year: 2026 · Website: https://blackboxlearning.in/ · Services: keyword research, on-page and off-page SEO, content optimisation, link building, competitor analysis
 
 **H2: Overview**
-Blackbox Learning is an education and training platform that wanted more students to find its courses through organic search.
+BlackBox Learning is a Thiruvananthapuram training institute offering courses in AI (Generative AI, Agentic AI, Machine Learning), programming and web development (Python, Full Stack, MERN, React), automation, and digital marketing (SEO, Google Ads, Meta Ads). It wanted more students to find its courses through organic search.
 
 **H2: The challenge**
-Course keywords are competitive, with large ed-tech platforms and many local institutes in the results. Students compare several options before enquiring.
+Course keywords are competitive, with large ed-tech platforms and many local institutes in the results. The institute's many course pages were competing with large national ed-tech platforms for the same course keywords. Students compare several options before enquiring.
 
 **H2: What I did**
 - Conducted keyword research and competitor analysis for course-related searches
@@ -1031,13 +1187,13 @@ Next project: SEO Dashboard →
 - **Primary keyword:** SEO dashboard Django project
 - **Title:** SEO Dashboard — Django Project | Jibin Johnson
 - **Meta description:** A custom SEO management dashboard I'm building in Python and Django to centralise rankings, backlinks, campaigns, approvals and reporting.
-- **Schema:** Article (or SoftwareApplication once launched), BreadcrumbList
+- **Schema:** Article (or SoftwareApplication once launched), BreadcrumbList · datePublished / dateModified: 2026-11-11
 
 Breadcrumb: Home › Work › SEO Dashboard
 
 **H1: SEO Dashboard: one place for every SEO project**
 
-Meta strip: Type: Personal product · Stack: Python, Django, PostgreSQL · Status: In development
+Meta strip: Type: Personal product · Stack: Python, Django, PostgreSQL · Year: 2026 · Status: In development
 
 **H2: Why I'm building it**
 Managing SEO for several clients means juggling spreadsheets, Search Console tabs, backlink lists and approval emails. I'm building a single platform that brings it all together, reduces manual work, and makes decisions data-driven.
@@ -1079,17 +1235,17 @@ Web Developer and SEO Specialist building responsive, search-optimised websites 
 **Web Developer & SEO Specialist (Team Lead)** — Prception Medialab, Thiruvananthapuram · Jan 2026 – Present
 - Developed responsive, mobile-friendly websites for clients across healthcare, education, hospitality and maritime real estate
 - Contributed to planning, UI/UX design and front-end development for an international maritime real estate and hospitality company
-- Led the SEO team for Serene Derma (healthcare) and Blackbox Learning (education), ranking multiple target keywords into top positions
+- Led the SEO team for Serene Derma (healthcare) and BlackBox Learning (education), ranking multiple target keywords into top positions
 - Managed keyword research, link building and content workflows from drafting through client approval; reported performance with Google Search Console and Google Analytics
 
 **H2: Projects**
 - **AQ Air:** responsive, animation-rich product website (HTML, CSS, JavaScript, Lenis) → `/work/aq-air/`
-- **Healthcare and education SEO campaigns:** Serene Derma and Blackbox Learning → `/work/`
+- **Healthcare and education SEO campaigns:** Serene Derma and BlackBox Learning → `/work/`
 - **SEO Dashboard:** Python and Django platform, in development → `/work/seo-dashboard/`
 
 **H2: Education**
 - **PG in Artificial Intelligence:** Edure, Thiruvananthapuram · 2024–2025 (certificate Nov 2025)
-- **Bachelor of Computer Applications:** University of Madras Institute of Distance Education · 2023–2026 [write "expected 2026" if not yet complete]
+- **Bachelor of Computer Applications — University of Madras Institute of Distance Education · 2023–2026 · Final results awaited**
 
 **H2: Skills**
 - **SEO:** technical, on-page and off-page SEO, keyword research, competitor analysis, content optimisation, link building, local and international SEO, schema markup, Core Web Vitals, reporting
@@ -1098,13 +1254,22 @@ Web Developer and SEO Specialist building responsive, search-optimised websites 
 - **Tools:** Git, GitHub, Figma, VS Code, Chrome DevTools, Netlify, Google Search Console, GA4, PageSpeed Insights
 - **Soft skills:** team coordination, performance reporting, content workflow management
 
+
+**Added during build (labels, contact line, share image)**
+- Intro label: `Jibin Johnson` (above H1 "Resume")
+- Line under the H1: "Web Developer & SEO Specialist · Thiruvananthapuram, Kerala"
+- Contact row: jibinjohnsoninfo@gmail.com · +91 77362 08172 · jibinjohnson.in · linkedin.com/in/jibinjohnson · github.com/Jibinjohnson11
+- Section labels: `01 — Profile` · `02 — Work history` · `03 — Highlights` · `04 — Study` · `05 — Toolkit`
+- Closing buttons (not printed): **Download PDF** · **Start a project** → `/contact/`
+- Share image (og/resume.jpg): label "Resume" · title "Jibin Johnson" · subtitle "Web Developer & SEO Specialist" · alt "Resume of Jibin Johnson, web developer and SEO specialist in Thiruvananthapuram"
+
 ---
 
 # PAGE: Contact
 
 - **URL:** `/contact/`
-- **Title:** Contact Jibin Johnson | Hire a Web Developer in Kerala
-- **Meta description:** Start a project, book a free call or message me on WhatsApp. Web development and SEO for businesses in Trivandrum, Kerala and worldwide.
+- **Title:** Contact Jibin Johnson | Web Development & SEO Enquiries
+- **Meta description:** Start a project or message me on WhatsApp. Web development and SEO for businesses in Trivandrum, Kerala and worldwide.
 - **Schema:** ContactPage, BreadcrumbList
 
 Label: `Contact`
@@ -1119,16 +1284,23 @@ Tell me about your website, your rankings or your idea. I reply within one worki
 - Email *
 - Phone / WhatsApp
 - What do you need? (select): New website · Website redesign · SEO · Website + SEO · Landing page · Something else
-- Budget (select): Under ₹[x] · ₹[x]–₹[y] · ₹[y]–₹[z] · Above ₹[z] · Not sure yet
+- Project timeline (select): As soon as possible · Within 1 month · 1–3 months · Just exploring
 - Tell me about your project *
 - Button: **Send message**
 - Below the button: "No spam, ever. Your details are only used to reply to you."
 
 **Beside the form**
 - **Prefer WhatsApp?** Message me directly → WhatsApp button
-- **Rather talk?** Book a free 20-minute call → [Cal.com link]
 - **Email:** jibinjohnsoninfo@gmail.com
 - **Location:** Thiruvananthapuram, Kerala, India. Available for in-person meetings in Trivandrum and remote work worldwide.
+
+
+**Added during build (form text, share image)**
+- Empty option in both selects: "Choose one"
+- Required fields: "*" after the label (screen readers hear "required")
+- Error messages: name "Please enter your name." · email empty "Please enter your email address." · email invalid "Please enter a valid email address, like name@example.com." · project "Please tell me a little about your project."
+- WhatsApp button text beside the form: **WhatsApp me**
+- Share image (og/contact.jpg): label "Contact" · title "Let's build something worth finding" · subtitle "I reply within one working day" · alt "Contact Jibin Johnson: let's build something worth finding"
 
 ---
 
@@ -1140,6 +1312,13 @@ Tell me about your website, your rankings or your idea. I reply within one worki
 **H1: Thanks. Your message is on its way.**
 I'll reply within one working day. If it's urgent, message me on WhatsApp.
 Links: Back to home · See my work · Read the blog
+
+
+**Added during build**
+- Meta description: Thanks for getting in touch. Your message is on its way, and I'll reply within one working day.
+- Label: `Message sent`
+- "message me on WhatsApp" is a link to the WhatsApp chat
+- Links: Back to home · See my work · Read the blog (restored now that /blog/ exists)
 
 ---
 
@@ -1163,12 +1342,12 @@ Filters: All · SEO · Web development · Local SEO · Case notes
 - **URL:** `/blog/website-cost-in-kerala/`
 - **Primary keyword:** website cost in Kerala
 - **Title:** How Much Does a Website Cost in Kerala in 2026?
-- **Meta description:** Real website prices in Kerala for 2026: what affects the cost, typical price ranges, hidden costs to watch for, and how to get a fair quote.
+- **Meta description:** What decides the cost of a website in Kerala in 2026: the main cost factors, hidden costs to watch for, and how to get a fair, fixed quote.
 
 **H1: How much does a website cost in Kerala in 2026?**
 
 Outline:
-1. Quick answer: a price table (landing page · small business site · business site with blog · e-commerce) with your real ranges ₹[ ]
+1. Quick answer: why there's no single price, and how the type of site (landing page · small business site · business site with blog · e-commerce) changes the scope. No price figures or ranges.
 2. **H2: What affects the price:** number of pages, custom design vs template, animation, content writing, SEO setup, integrations
 3. **H2: Freelancer vs agency vs DIY builders:** honest pros and cons of each
 4. **H2: Costs people forget:** domain, hosting, email, maintenance, content updates, SEO
@@ -1176,6 +1355,29 @@ Outline:
 6. **H2: How to get an accurate quote:** what to prepare before contacting a developer
 7. **H2: FAQ:** 4–5 questions
 8. CTA → `/services/web-development/`
+
+**Added during build (blog index)**
+- **noindex** until the first post is published; switch to index in the same step.
+- Featured card (first post): meta "Web development · 12 November 2026 · 8 min read" · summary "What really decides the price of a website, the costs people forget, and how to get a fair, fixed quote."
+- Post covers: `.cover--type`, label "Blog", theme word = the category (e.g. "Web development")
+- Filter empty state: "No posts in this topic yet. More are on the way."
+- Note under the posts (delete once there are more posts): "More articles are on the way: local SEO for Trivandrum businesses, Core Web Vitals in plain language, and choosing between WordPress and a hand-coded site."
+- Closing line: "Have a question these posts don't answer? **Ask me →**" `/contact/`
+- Share image (og/blog.jpg): label "Blog" · title "Notes on building and ranking websites" · subtitle "Practical guides from real projects" · cover word "Writing" · alt "Blog by Jibin Johnson: notes on building and ranking websites"
+
+**Added during build (every post, from templates/post.html)**
+- Meta line: "By Jibin Johnson · Published [date] · Updated [date] · [n] min read" (words ÷ 200, rounded up)
+- Table of contents heading: "On this page"
+- Author box: label "Written by" · "Jibin Johnson" · "I'm a web developer and SEO specialist in Thiruvananthapuram, Kerala. I build fast, hand-coded websites with SEO built in, and I write here about what I learn from real projects." · link "More about me →" `/about/`
+- Closing CTA: label "Next step" · buttons **Start a project** → `/contact/` · **WhatsApp me** (prefilled message)
+
+**Added during build (first post: website cost in Kerala)**
+- Status: written and built, **noindex** for review. 1,505 words, 8 min read. Full text lives in `site/blog/website-cost-in-kerala/index.html`.
+- H2s: The quick answer · What affects the price · Freelancer vs agency vs DIY builders · Costs people forget · Cheap websites that cost more later · How to get an accurate quote · FAQ
+- FAQ questions: Why don't you list website prices on your site? · How long does it take to build a business website? · Is WordPress cheaper than a hand-coded website? · Will I have to pay again every year? · Should I choose a fixed quote or an hourly rate?
+- Internal links: "web developer in Trivandrum" → `/web-developer-trivandrum/` · "web developer in Kerala" → `/services/web-development/` · CTA "website development services" → `/services/web-development/`
+- CTA: **H2: Want a clear quote for your website?** "Tell me what you're building. I'll reply within a day with honest advice and a fixed quote that lists exactly what's included. Or read about my website development services first."
+- Share image (og/website-cost-in-kerala.jpg): label "Blog · Web development" · title "How much does a website cost in Kerala?" · subtitle "What decides the price in 2026" · alt "How much does a website cost in Kerala in 2026? A blog post by Jibin Johnson"
 
 ---
 
@@ -1209,6 +1411,10 @@ Questions about this policy? Email jibinjohnsoninfo@gmail.com.
 
 [Have a professional review this if you start collecting more data or work with clients outside India.]
 
+
+**Added during build**
+- Label: `Privacy` · Last updated: 12 November 2026
+
 ---
 
 # PAGE: 404
@@ -1220,13 +1426,28 @@ Questions about this policy? Email jibinjohnsoninfo@gmail.com.
 The page you're looking for doesn't exist or has moved.
 Links: **Home** · **Services** · **Work** · **Contact**
 
+
+**Added during build**
+- Meta description: This page doesn't exist or has moved. Find your way back to Jibin Johnson's work, services or contact page.
+- Label: `Page not found` · a large outlined "404" sits behind the heading (decorative)
+
+---
+
+# PAGE: Style guide (internal)
+
+- **URL:** `/styleguide/` · **noindex, nofollow** · not in the sitemap
+- **Title:** Style guide | Jibin Johnson
+
+**Added during build**
+- Meta description: Internal style guide for jibinjohnson.in: colours, type, spacing and components.
+
 ---
 
 ## Final pre-publish checklist
 
 - [ ] All `[brackets]` filled or removed
 - [ ] Client names spelled correctly, with permission to use them
-- [ ] Prices in the FAQs match on every page
+- [ ] No prices, price ranges or ₹ figures on any page, FAQ or schema
 - [ ] Every title ≤ 60 characters, every description ≤ 155
 - [ ] Each primary keyword used on one page only
 - [ ] Every page links to at least two other relevant pages

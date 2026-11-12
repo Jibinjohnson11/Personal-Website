@@ -1,0 +1,304 @@
+<!doctype html>
+<!--
+  ==========================================================================
+  templates/case-study.html — CASE STUDY TEMPLATE  (/work/<project>/)
+  Built from templates/page.html. Adds Article schema and the case-study
+  structure from docs/website-content.md.
+
+  How to make a new case study:
+  1. Copy this file to site/work/<project>/index.html
+  2. Fill in every TODO (search for "TODO"), copying text exactly from
+     docs/website-content.md. Don't invent results.
+  3. Images: originals in src-images/, then npm run images (AVIF + WebP).
+  4. Run: npm run sync, then npm run prepare-deploy
+
+  Internal linking rule: every case study links back to its service page.
+  Never edit between the PARTIAL markers; edit the files in partials/ instead.
+  ==========================================================================
+-->
+<html lang="en-IN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Swap "no-js" for "js" as early as possible (see page.html) -->
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
+
+  <!-- ===== SEO basics ===== -->
+  <!-- TODO: unique title, max 60 characters -->
+  <title>TODO Project — Case Study | Jibin Johnson</title>
+  <!-- TODO: unique description, max 155 characters -->
+  <meta name="description" content="TODO Meta description.">
+  <link rel="canonical" href="https://jibinjohnson.in/work/TODO/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+
+  <!-- ===== Open Graph ===== -->
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:site_name" content="Jibin Johnson">
+  <meta property="og:title" content="TODO Same as the title, or a shorter version">
+  <meta property="og:description" content="TODO Same as the meta description">
+  <meta property="og:url" content="https://jibinjohnson.in/work/TODO/">
+  <!-- TODO: unique 1200×630 share image for this project -->
+  <meta property="og:image" content="https://jibinjohnson.in/assets/img/og/TODO.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="TODO Describe the share image">
+
+  <!-- ===== Twitter / X card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TODO Same as og:title">
+  <meta name="twitter:description" content="TODO Same as og:description">
+  <meta name="twitter:image" content="https://jibinjohnson.in/assets/img/og/TODO.jpg">
+  <meta name="twitter:image:alt" content="TODO Same as og:image:alt">
+
+  <!-- ===== Browser look, icons and app manifest ===== -->
+  <meta name="theme-color" content="#0E0E0E">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- ===== Hero screenshot preload (only once the page HAS a real screenshot) =====
+       It is the LCP image, so it goes BEFORE the font preloads and gets the
+       bandwidth first. imagesrcset/imagesizes MUST be copied exactly from the
+       AVIF <source> in the hero, or the browser downloads the image twice.
+       TODO: fill in the file names, then delete the two comment lines around it.
+  <link rel="preload" as="image" type="image/avif" fetchpriority="high"
+        imagesrcset="/assets/img/work/TODO-800.avif 800w, /assets/img/work/TODO-1600.avif 1600w"
+        imagesizes="(min-width: 1440px) 1280px, 90vw">
+  ===== end of hero screenshot preload ===== -->
+
+  <!-- ===== Fonts: preload only the two used above the fold ===== -->
+  <link rel="preload" href="/assets/fonts/Boska-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/Switzer-Variable.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- ===== CSS: tokens → base → components → motion → page type ===== -->
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/motion.css">
+  <link rel="stylesheet" href="/assets/css/pages/case-study.css">
+
+  <!-- ===== Structured data (JSON-LD) =====
+       WebSite + Person: same on every page, don't change.
+       TODO: Article (headline = H1, dates as YYYY-MM-DD, image) and BreadcrumbList. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jibinjohnson.in/#website",
+        "url": "https://jibinjohnson.in/",
+        "name": "Jibin Johnson",
+        "inLanguage": "en-IN",
+        "publisher": { "@id": "https://jibinjohnson.in/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jibinjohnson.in/#person",
+        "name": "Jibin Johnson",
+        "jobTitle": "Web Developer & SEO Specialist",
+        "url": "https://jibinjohnson.in/",
+        "image": "https://jibinjohnson.in/assets/img/jibin-johnson-web-developer-trivandrum.jpg",
+        "email": "mailto:jibinjohnsoninfo@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Thiruvananthapuram",
+          "addressRegion": "Kerala",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/jibinjohnson",
+          "https://github.com/Jibinjohnson11",
+          "https://www.instagram.com/jibineyyyy"
+        ],
+        "knowsAbout": [
+          "Web development",
+          "Search engine optimization",
+          "Technical SEO",
+          "Local SEO",
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "GSAP",
+          "UI/UX design",
+          "Core Web Vitals"
+        ],
+        "alumniOf": [
+          { "@type": "EducationalOrganization", "name": "Edure" },
+          { "@type": "CollegeOrUniversity", "name": "University of Madras" }
+        ]
+      },
+      {
+        "@type": "Article",
+        "@id": "https://jibinjohnson.in/work/TODO/#article",
+        "headline": "TODO Same as the H1",
+        "description": "TODO Same as the meta description",
+        "image": "https://jibinjohnson.in/assets/img/og/TODO.jpg",
+        "datePublished": "TODO YYYY-MM-DD",
+        "dateModified": "TODO YYYY-MM-DD",
+        "inLanguage": "en-IN",
+        "mainEntityOfPage": "https://jibinjohnson.in/work/TODO/",
+        "author": { "@id": "https://jibinjohnson.in/#person" },
+        "publisher": { "@id": "https://jibinjohnson.in/#person" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jibinjohnson.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Work", "item": "https://jibinjohnson.in/work/" },
+          { "@type": "ListItem", "position": 3, "name": "TODO Project", "item": "https://jibinjohnson.in/work/TODO/" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- PARTIAL:header --><!-- /PARTIAL:header -->
+
+  <main id="main">
+
+    <!-- Visible breadcrumb: must match the BreadcrumbList above -->
+    <nav class="breadcrumb container" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/work/">Work</a></li>
+        <li><a href="/work/TODO/" aria-current="page">TODO Project</a></li>
+      </ol>
+    </nav>
+
+    <article class="case-study">
+
+      <!-- ========== Header: label → H1 → meta strip → hero image ========== -->
+      <header class="section case-study__header">
+        <div class="container">
+          <div class="section__head">
+            <p class="label">Case study</p>
+            <h1 id="page-title">TODO H1 (e.g. AQ Air: a scroll-driven product story)</h1>
+          </div>
+
+          <!-- Meta strip: <dl> pairs a term with its value -->
+          <dl class="case-study__meta">
+            <div><dt>Client</dt><dd>TODO</dd></div>
+            <div><dt>Industry</dt><dd>TODO</dd></div>
+            <div><dt>Role</dt><dd>TODO</dd></div>
+            <div><dt>Year</dt><dd>TODO</dd></div>
+            <div><dt>Live site</dt><dd><a href="TODO" rel="noopener" target="_blank">TODO domain</a></dd></div>
+          </dl>
+        </div>
+
+        <!-- Hero image: the LCP image, so loading="eager" (NEVER lazy) and
+             fetchpriority="high". The AVIF srcset + sizes must be identical to
+             the preload in the <head> (no double download). Phones pick the
+             800w file: keep it under ~60KB.
+             TODO: file names from npm run images; real width/height; descriptive alt. -->
+        <figure class="case-study__hero container">
+          <picture>
+            <source type="image/avif" srcset="/assets/img/work/TODO-800.avif 800w, /assets/img/work/TODO-1600.avif 1600w" sizes="(min-width: 1440px) 1280px, 90vw">
+            <source type="image/webp" srcset="/assets/img/work/TODO-800.webp 800w, /assets/img/work/TODO-1600.webp 1600w" sizes="(min-width: 1440px) 1280px, 90vw">
+            <img src="/assets/img/work/TODO-1600.webp" width="1600" height="900"
+                 alt="TODO e.g. AQ Air website hero section on desktop"
+                 loading="eager" fetchpriority="high" decoding="async">
+          </picture>
+        </figure>
+      </header>
+
+
+      <!-- ========== Overview ========== -->
+      <section class="section" aria-labelledby="overview-title">
+        <div class="container case-study__body">
+          <p class="label">01 — Overview</p>
+          <h2 id="overview-title">Overview</h2>
+          <p>TODO Overview paragraph.</p>
+        </div>
+      </section>
+
+      <!-- ========== The challenge ========== -->
+      <section class="section" aria-labelledby="challenge-title">
+        <div class="container case-study__body">
+          <p class="label">02 — Challenge</p>
+          <h2 id="challenge-title">The challenge</h2>
+          <p>TODO Challenge paragraph.</p>
+        </div>
+      </section>
+
+      <!-- ========== What I did ========== -->
+      <section class="section" aria-labelledby="did-title">
+        <div class="container case-study__body">
+          <p class="label">03 — Approach</p>
+          <h2 id="did-title">What I did</h2>
+          <ul class="case-study__list">
+            <li>TODO Item</li>
+            <li>TODO Item</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ========== Gallery (images below the fold are lazy) ========== -->
+      <section class="section section--paper" aria-label="Project images">
+        <div class="container case-study__gallery">
+          <figure>
+            <picture>
+              <source srcset="/assets/img/TODO-1.avif" type="image/avif">
+              <source srcset="/assets/img/TODO-1.webp" type="image/webp">
+              <img src="/assets/img/TODO-1.webp" width="1600" height="1000"
+                   alt="TODO Descriptive alt text" loading="lazy" decoding="async">
+            </picture>
+            <figcaption>TODO Optional caption</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ========== Tools ========== -->
+      <section class="section" aria-labelledby="tools-title">
+        <div class="container case-study__body">
+          <p class="label">04 — Tools</p>
+          <h2 id="tools-title">Tools</h2>
+          <ul class="tag-list">
+            <li class="tag">TODO</li>
+            <li class="tag">TODO</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ========== Outcome ========== -->
+      <section class="section" aria-labelledby="outcome-title">
+        <div class="container case-study__body">
+          <p class="label">05 — Outcome</p>
+          <h2 id="outcome-title">Outcome</h2>
+          <p>TODO Outcome. Only real numbers — leave them out if you don't have them.</p>
+        </div>
+      </section>
+
+    </article>
+
+
+    <!-- ========== Related links + next project ========== -->
+    <nav class="section case-study__next" aria-label="More work">
+      <div class="container">
+        <p class="label">Related</p>
+        <ul class="case-study__related">
+          <!-- TODO: always include the matching service page -->
+          <li><a class="link" href="/services/TODO/">TODO Service page anchor text</a></li>
+          <li><a class="link" href="/TODO/">TODO Related page</a></li>
+        </ul>
+        <a class="link case-study__next-link" href="/work/TODO/">Next project: TODO <span aria-hidden="true">→</span></a>
+      </div>
+    </nav>
+
+  </main>
+
+  <!-- PARTIAL:footer --><!-- /PARTIAL:footer -->
+
+  <!-- PARTIAL:whatsapp --><!-- /PARTIAL:whatsapp -->
+
+  <!-- PARTIAL:scripts --><!-- /PARTIAL:scripts -->
+
+</body>
+</html>

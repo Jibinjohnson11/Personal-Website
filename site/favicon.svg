@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- "JJ" monogram: Boska Medium glyphs converted to paths (favicons can't load web fonts).
+       Paper (#F5F5F5) on ink (#0E0E0E), rounded square. Source for every icon: npm run icons -->
+  <rect width="64" height="64" rx="14" fill="#0E0E0E"/>
+  <path fill="#F5F5F5" d="M28.87 41.81V12.35H32.2V12H21.27V12.35H24.59V44.48C24.59 48.24 23.45 50.78 20.61 51.56V52C25.51 50.91 28.87 47.1 28.87 41.81Z M40.07 41.81V12.35H43.39V12H32.46V12.35H35.78V44.48C35.78 48.24 34.64 50.78 31.8 51.56V52C36.7 50.91 40.07 47.1 40.07 41.81Z"/>
+</svg>

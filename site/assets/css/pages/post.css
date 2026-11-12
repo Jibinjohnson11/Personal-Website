@@ -1,0 +1,305 @@
+/* ==========================================================================
+   pages/post.css — Styles used ONLY on blog posts (site/blog/<slug>/)
+
+   Every post is copied from templates/post.html, so they all share this file.
+   The cover, FAQ, buttons and closing CTA are shared components
+   (components.css); this file adds the reading layout around them.
+   Mobile-first: plain rules are for phones, @media blocks add tablet
+   (768px) and desktop (1024px).
+
+   Contents
+   1. Post header (label, H1, meta line, lead, cover)
+   2. Reading layout (table of contents + 68ch column)
+   3. Table of contents (sticky on desktop)
+   4. Article typography (H2, H3, lists, links)
+   5. Author box
+   6. Reduced motion
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. POST HEADER
+   Uses the shared .page-intro (label → H1 → lead). The H1 is the LCP
+   element, so it only slides up a little in CSS and is never hidden.
+   -------------------------------------------------------------------------- */
+
+/* Less space under the header than a full section: the article follows */
+.post-intro {
+  padding-bottom: var(--space-96);
+}
+
+/* A post title is a sentence, so it uses the H1 size, not the hero size */
+.post-intro__title {
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  text-wrap: balance;
+}
+
+/* "By Jibin Johnson · Published … · Updated … · 7 min read" */
+.post-intro__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-24);
+  margin-top: var(--space-32);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.post-intro__meta a {
+  color: var(--text);
+}
+
+/* The cover (or a real <picture>) under the intro text */
+.post-intro__visual {
+  margin-top: var(--space-64);
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.post-intro__visual img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+  .post-intro__meta,
+  .post-intro__lead {
+    grid-column: 1 / span 8;
+  }
+
+  /* Wider, shorter cover on desktop so the article starts sooner */
+  .post-intro__visual .cover,
+  .post-intro__visual img {
+    aspect-ratio: 21 / 9;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   2. READING LAYOUT
+   Phones/tablets: table of contents first, then the article.
+   Desktop: 12-column grid — contents in columns 1–3 (sticky),
+   article in columns 5–12, capped at 68ch for comfortable reading.
+   -------------------------------------------------------------------------- */
+
+/* .section gives the bottom padding and lifts it above the thread;
+   the header above already provides the top space */
+.post-main {
+  padding-top: 0;
+}
+
+.post-layout {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  row-gap: var(--space-64);
+}
+
+.post-layout > * {
+  grid-column: 1 / -1;
+}
+
+.post-body {
+  max-width: var(--measure);   /* 68ch */
+  min-width: 0;
+}
+
+@media (min-width: 1024px) {
+  .post-layout__toc  { grid-column: 1 / span 3; }
+  .post-layout__body { grid-column: 5 / -1; }
+}
+
+
+/* --------------------------------------------------------------------------
+   3. TABLE OF CONTENTS
+   Plain links to each H2 (written in the HTML, not built by JS).
+   post.js only adds .is-active to the section you are reading.
+   -------------------------------------------------------------------------- */
+
+.toc {
+  padding: var(--space-24);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.toc__list {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: var(--space-16);
+  counter-reset: toc;
+}
+
+/* Small numbers before each item: 01, 02… */
+.toc__item {
+  counter-increment: toc;
+}
+
+.toc__link {
+  display: flex;
+  gap: var(--space-16);
+  min-height: 44px;              /* comfortable tap target */
+  align-items: center;
+  font-size: var(--fs-small);
+  line-height: var(--lh-h3);
+  color: var(--text-mute);
+  text-decoration: none;
+  transition: color var(--dur-micro) var(--ease-out);
+}
+
+.toc__link::before {
+  content: counter(toc, decimal-leading-zero);
+  flex-shrink: 0;
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-label);
+}
+
+.toc__link:hover,
+.toc__link.is-active {
+  color: var(--text-strong);
+}
+
+/* The current section gets the thin accent line (like .label) */
+.toc__link.is-active::before {
+  color: var(--accent-text);
+}
+
+@media (min-width: 1024px) {
+  /* No box on desktop: a quiet column that stays in view while you read */
+  .toc {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-32));
+    padding: 0;
+    border: 0;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   4. ARTICLE TYPOGRAPHY
+   Short paragraphs, clear H2/H3 steps, generous space before each H2.
+   -------------------------------------------------------------------------- */
+
+.post-body > * + * {
+  margin-top: var(--space-24);
+}
+
+.post-body h2 {
+  margin-top: var(--space-96);
+  font-size: var(--fs-display-text);
+  line-height: var(--lh-display-text);
+  text-wrap: balance;
+}
+
+.post-body > h2:first-child {
+  margin-top: 0;
+}
+
+.post-body h3 {
+  margin-top: var(--space-48);
+  font-family: var(--font-body);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h3);
+  letter-spacing: normal;
+}
+
+/* Heading right under a heading: less space */
+.post-body h2 + h3 {
+  margin-top: var(--space-32);
+}
+
+/* Anchor jumps stop below the fixed header */
+.post-body :is(h2, h3) {
+  scroll-margin-top: calc(var(--header-h) + var(--space-32));
+}
+
+.post-body ul,
+.post-body ol {
+  display: grid;
+  gap: var(--space-16);
+  padding-left: var(--space-24);
+}
+
+.post-body ul {
+  list-style: disc;
+}
+
+.post-body ol {
+  list-style: decimal;
+}
+
+.post-body li::marker {
+  color: var(--text-mute);
+}
+
+/* The FAQ sits inside the article: no extra top space on the first item */
+.post-body .faq {
+  margin-top: var(--space-32);
+}
+
+
+/* --------------------------------------------------------------------------
+   5. AUTHOR BOX
+   Portrait + short bio + link to /about/, after the article.
+   -------------------------------------------------------------------------- */
+
+.author {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--space-24);
+  align-items: start;
+  margin-top: var(--space-96);
+  padding-top: var(--space-48);
+  border-top: var(--border-w) solid var(--border);
+}
+
+.author__photo {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 50%;
+}
+
+.author__name {
+  margin-top: var(--space-8);
+  font-size: var(--fs-h3);
+}
+
+.author__bio {
+  margin-top: var(--space-16);
+  color: var(--text-mute);
+}
+
+.author__link {
+  display: inline-block;
+  margin-top: var(--space-16);
+}
+
+@media (min-width: 768px) {
+  .author {
+    grid-template-columns: 112px 1fr;
+    gap: var(--space-32);
+  }
+
+  .author__photo {
+    width: 112px;
+    height: 112px;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   6. REDUCED MOTION
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .toc__link {
+    transition: none;
+  }
+}

@@ -1,0 +1,343 @@
+<!doctype html>
+<!--
+  ==========================================================================
+  templates/post.html — BLOG POST TEMPLATE  (/blog/<slug>/)
+  Built from templates/page.html. Adds BlogPosting schema and an
+  article layout.
+
+  Full step-by-step guide: docs/new-post-checklist.md
+  Short version:
+  1. Copy this file to site/blog/<slug>/index.html
+  2. Fill in every TODO (search for "TODO").
+  3. The post starts as a DRAFT (robots "noindex"). When it is finished,
+     change robots to "index, follow, max-image-preview:large".
+  4. Add its card to site/blog/index.html and its share image to
+     tools/og-pages.json (npm run og).
+  5. Run: npm run sync, then npm run prepare-deploy
+
+  Page styles: /assets/css/pages/post.css
+  Page script: /assets/js/pages/post.js (highlights the current section
+  in the table of contents; the contents list itself is plain HTML)
+
+  Internal linking rule: every post links to ONE service page, using its
+  keyword as anchor text where it reads naturally.
+  Never edit between the PARTIAL markers; edit the files in partials/ instead.
+  ==========================================================================
+-->
+<html lang="en-IN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Swap "no-js" for "js" as early as possible (see page.html) -->
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
+
+  <!-- ===== SEO basics ===== -->
+  <!-- TODO: unique title, max 60 characters, long-tail keyword first -->
+  <title>TODO Post title</title>
+  <!-- TODO: unique description, max 155 characters -->
+  <meta name="description" content="TODO Meta description.">
+  <link rel="canonical" href="https://jibinjohnson.in/blog/TODO/">
+  <!-- DRAFT: noindex. TODO when finished: "index, follow, max-image-preview:large" -->
+  <meta name="robots" content="noindex, follow">
+
+  <!-- ===== Open Graph ===== -->
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:site_name" content="Jibin Johnson">
+  <meta property="og:title" content="TODO Same as the title">
+  <meta property="og:description" content="TODO Same as the meta description">
+  <meta property="og:url" content="https://jibinjohnson.in/blog/TODO/">
+  <!-- TODO: unique 1200×630 share image for this post -->
+  <meta property="og:image" content="https://jibinjohnson.in/assets/img/og/TODO.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="TODO Describe the share image">
+  <meta property="article:published_time" content="TODO YYYY-MM-DD">
+  <meta property="article:modified_time" content="TODO YYYY-MM-DD">
+  <meta property="article:author" content="https://jibinjohnson.in/about/">
+
+  <!-- ===== Twitter / X card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TODO Same as og:title">
+  <meta name="twitter:description" content="TODO Same as og:description">
+  <meta name="twitter:image" content="https://jibinjohnson.in/assets/img/og/TODO.jpg">
+  <meta name="twitter:image:alt" content="TODO Same as og:image:alt">
+
+  <!-- ===== Browser look, icons and app manifest ===== -->
+  <meta name="theme-color" content="#0E0E0E">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- ===== Fonts: preload only the two used above the fold ===== -->
+  <link rel="preload" href="/assets/fonts/Boska-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/Switzer-Variable.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- ===== CSS: tokens → base → components → motion → page type ===== -->
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/motion.css">
+  <link rel="stylesheet" href="/assets/css/pages/post.css">
+
+  <!-- ===== Structured data (JSON-LD) =====
+       WebSite + Person: same on every page, don't change.
+       TODO: BlogPosting (headline = H1, dates YYYY-MM-DD, image = the share image,
+       wordCount = words in the article body) and BreadcrumbList.
+       FAQPage: only if the post has a visible FAQ; every question and answer
+       must match the visible text EXACTLY. Delete the block if there is no FAQ. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jibinjohnson.in/#website",
+        "url": "https://jibinjohnson.in/",
+        "name": "Jibin Johnson",
+        "inLanguage": "en-IN",
+        "publisher": { "@id": "https://jibinjohnson.in/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jibinjohnson.in/#person",
+        "name": "Jibin Johnson",
+        "jobTitle": "Web Developer & SEO Specialist",
+        "url": "https://jibinjohnson.in/",
+        "image": "https://jibinjohnson.in/assets/img/jibin-johnson-web-developer-trivandrum.jpg",
+        "email": "mailto:jibinjohnsoninfo@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Thiruvananthapuram",
+          "addressRegion": "Kerala",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/jibinjohnson",
+          "https://github.com/Jibinjohnson11",
+          "https://www.instagram.com/jibineyyyy"
+        ],
+        "knowsAbout": [
+          "Web development",
+          "Search engine optimization",
+          "Technical SEO",
+          "Local SEO",
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "GSAP",
+          "UI/UX design",
+          "Core Web Vitals"
+        ],
+        "alumniOf": [
+          { "@type": "EducationalOrganization", "name": "Edure" },
+          { "@type": "CollegeOrUniversity", "name": "University of Madras" }
+        ]
+      },
+      {
+        "@type": "BlogPosting",
+        "@id": "https://jibinjohnson.in/blog/TODO/#post",
+        "headline": "TODO Same as the H1",
+        "description": "TODO Same as the meta description",
+        "image": "https://jibinjohnson.in/assets/img/og/TODO.jpg",
+        "datePublished": "TODO YYYY-MM-DD",
+        "dateModified": "TODO YYYY-MM-DD",
+        "inLanguage": "en-IN",
+        "articleSection": "TODO Category",
+        "wordCount": 0,
+        "mainEntityOfPage": "https://jibinjohnson.in/blog/TODO/",
+        "isPartOf": { "@id": "https://jibinjohnson.in/#website" },
+        "author": { "@id": "https://jibinjohnson.in/#person" },
+        "publisher": { "@id": "https://jibinjohnson.in/#person" }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jibinjohnson.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://jibinjohnson.in/blog/" },
+          { "@type": "ListItem", "position": 3, "name": "TODO Post title", "item": "https://jibinjohnson.in/blog/TODO/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://jibinjohnson.in/blog/TODO/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "TODO Question (exactly as on the page)",
+            "acceptedAnswer": { "@type": "Answer", "text": "TODO Answer (exactly as on the page)" }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- PARTIAL:header --><!-- /PARTIAL:header -->
+
+  <main id="main">
+
+    <!-- Visible breadcrumb: must match the BreadcrumbList above -->
+    <nav class="breadcrumb container" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/blog/">Blog</a></li>
+        <li><a href="/blog/TODO/" aria-current="page">TODO Post title</a></li>
+      </ol>
+    </nav>
+
+    <article class="post" aria-labelledby="page-title">
+
+      <!-- ==================================================================
+           POST HEADER — label → H1 → meta line → lead → cover.
+           Shared .page-intro: the H1 is the LCP element and is never
+           hidden (it only slides up a little in CSS from the first paint).
+           ================================================================== -->
+      <header class="page-intro post-intro">
+        <div class="container page-intro__inner">
+          <!-- Category: SEO · Web development · Local SEO · Case notes -->
+          <p class="label">Blog · TODO Category</p>
+          <h1 class="page-intro__title post-intro__title" id="page-title">TODO H1 (the question the post answers)</h1>
+
+          <!-- <time datetime> gives machines the exact date; the text is for people.
+               Reading time = words in the article ÷ 200, rounded up. -->
+          <p class="post-intro__meta">
+            <span>By <a href="/about/">Jibin Johnson</a></span>
+            <span>Published <time datetime="TODO YYYY-MM-DD">TODO 1 January 2026</time></span>
+            <span>Updated <time datetime="TODO YYYY-MM-DD">TODO 1 January 2026</time></span>
+            <span>TODO 7 min read</span>
+          </p>
+
+          <p class="lead page-intro__lead post-intro__lead">TODO Intro: answer the question in the first ~100 words, with the primary keyword.</p>
+
+          <!-- Cover. Default: a typographic cover with the category as the
+               theme word (same as the card on /blog/). It is in the first
+               screen, so never lazy and never hidden by an animation.
+               To use a real image instead, replace the div with:
+               <picture>
+                 <source srcset="/assets/img/blog/TODO.avif" type="image/avif">
+                 <source srcset="/assets/img/blog/TODO.webp" type="image/webp">
+                 <img src="/assets/img/blog/TODO.webp" width="1600" height="900"
+                      alt="TODO Descriptive alt text" fetchpriority="high" decoding="async">
+               </picture>
+               (and add a <link rel="preload" as="image"> for it in the head) -->
+          <div class="post-intro__visual">
+            <div class="cover cover--type cover--wine" role="img" aria-label="TODO Post title — blog post cover">
+              <p class="cover__label">Blog</p>
+              <p class="cover__word">TODO Category</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+
+      <!-- ==================================================================
+           READING LAYOUT — table of contents + the article (max 68ch).
+           Desktop: contents in columns 1–3 (sticky), article in 5–12.
+           ================================================================== -->
+      <div class="section post-main">
+        <div class="container post-layout">
+
+          <!-- Table of contents: one link per H2, written by hand (same
+               wording as the H2, same id). post.js highlights the current one. -->
+          <nav class="toc post-layout__toc" aria-labelledby="toc-title" data-toc>
+            <p class="label" id="toc-title">On this page</p>
+            <ol class="toc__list">
+              <li class="toc__item"><a class="toc__link" href="#section-1">TODO First H2</a></li>
+              <li class="toc__item"><a class="toc__link" href="#section-2">TODO Second H2</a></li>
+              <li class="toc__item"><a class="toc__link" href="#faq">FAQ</a></li>
+            </ol>
+          </nav>
+
+          <div class="post-layout__body">
+            <div class="post-body">
+
+              <h2 id="section-1">TODO First H2</h2>
+              <p>TODO Short paragraphs: two to four sentences each.</p>
+
+              <h2 id="section-2">TODO Second H2</h2>
+              <p>TODO Paragraph with one link to a service page:
+                <a href="/services/TODO/">TODO service keyword anchor text</a>.</p>
+
+              <!-- Images inside the post are lazy -->
+              <figure>
+                <picture>
+                  <source srcset="/assets/img/blog/TODO-1.avif" type="image/avif">
+                  <source srcset="/assets/img/blog/TODO-1.webp" type="image/webp">
+                  <img src="/assets/img/blog/TODO-1.webp" width="1200" height="800"
+                       alt="TODO Descriptive alt text" loading="lazy" decoding="async">
+                </picture>
+                <figcaption>TODO Optional caption</figcaption>
+              </figure>
+
+              <!-- Optional FAQ: the FAQPage JSON-LD above must match it word for word -->
+              <h2 id="faq">FAQ</h2>
+              <div class="faq">
+                <details class="faq__item">
+                  <summary class="faq__summary">
+                    <h3 class="faq__question">TODO Question</h3>
+                    <span class="faq__icon" aria-hidden="true"></span>
+                  </summary>
+                  <div class="faq__answer">
+                    <p>TODO Answer</p>
+                  </div>
+                </details>
+              </div>
+
+              <!-- Author box: same on every post -->
+              <aside class="author" aria-label="About the author">
+                <picture>
+                  <source type="image/avif" srcset="/assets/img/jibin-johnson-web-developer-trivandrum-480.avif">
+                  <source type="image/webp" srcset="/assets/img/jibin-johnson-web-developer-trivandrum-480.webp">
+                  <img class="author__photo" src="/assets/img/jibin-johnson-web-developer-trivandrum-480.webp" width="480" height="600" alt="Portrait of Jibin Johnson" loading="lazy" decoding="async">
+                </picture>
+                <div>
+                  <p class="label">Written by</p>
+                  <p class="author__name">Jibin Johnson</p>
+                  <p class="author__bio">I'm a web developer and SEO specialist in Thiruvananthapuram, Kerala. I build fast, hand-coded websites with SEO built in, and I write here about what I learn from real projects.</p>
+                  <a class="link author__link" href="/about/">More about me <span aria-hidden="true">→</span></a>
+                </div>
+              </aside>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </article>
+
+
+    <!-- ====================================================================
+         RELATED SERVICE CTA — wine background (.cta swaps the theme colours).
+         TODO: point the text link at the service page this post relates to.
+         ==================================================================== -->
+    <section class="section cta" aria-labelledby="cta-title" data-whatsapp-hide>
+      <div class="container">
+        <p class="label" data-reveal>Next step</p>
+        <h2 class="cta__title" id="cta-title" data-reveal="lines">TODO Short question that leads to the service</h2>
+        <p class="lead cta__lead" data-reveal>TODO One or two sentences, with a link to <a href="/services/TODO/">the related service</a>.</p>
+        <div class="btn-group cta__actions" data-reveal>
+          <a class="btn btn--primary" href="/contact/" data-magnetic>Start a project</a>
+          <a class="btn btn--ghost" href="https://wa.me/917736208172?text=Hi%20Jibin%2C%20I%20found%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20project." data-magnetic>WhatsApp me</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PARTIAL:footer --><!-- /PARTIAL:footer -->
+
+  <!-- PARTIAL:whatsapp --><!-- /PARTIAL:whatsapp -->
+
+  <!-- PARTIAL:scripts --><!-- /PARTIAL:scripts -->
+  <script src="/assets/js/pages/post.js" defer></script>
+
+</body>
+</html>

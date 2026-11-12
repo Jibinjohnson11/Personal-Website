@@ -1,0 +1,221 @@
+/* ==========================================================================
+   pages/styleguide.css — Styles used ONLY on /styleguide/
+
+   Just enough layout to display the tokens and components.
+   Nothing here is used by real pages. (A few demo widths like 880px are
+   written directly because they exist only on this page.)
+   ========================================================================== */
+
+
+/* --- Page header ---------------------------------------------------------- */
+
+.sg-header {
+  padding-top: var(--space-96);
+}
+
+.sg-header .lead {
+  margin-top: var(--space-24);
+  color: var(--text-mute);
+}
+
+/* Small heading above each group of examples */
+.sg-subhead {
+  margin-bottom: var(--space-24);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+/* Vertical stack of example blocks */
+.sg-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-64);
+}
+
+/* Small gap between the button row and the text link under it */
+.btn-group + p {
+  margin-top: var(--space-16);
+}
+
+
+/* --- Colour swatches ------------------------------------------------------ */
+
+.sg-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-24);
+}
+
+/* Each swatch sets --swatch inline, e.g. style="--swatch: var(--wine)" */
+.sg-swatch__chip {
+  aspect-ratio: 4 / 3;
+  margin-bottom: var(--space-16);
+  background-color: var(--swatch);
+  border: var(--border-w) solid var(--border); /* so ink is visible on ink */
+  border-radius: var(--radius-sm);
+}
+
+.sg-swatch__name {
+  font-weight: var(--fw-medium);
+  color: var(--text-strong);
+}
+
+.sg-swatch__token,
+.sg-swatch__hex {
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.sg-swatch__use {
+  margin-top: var(--space-8);
+  font-size: var(--fs-label);
+  color: var(--text-mute);
+}
+
+
+/* --- Type scale ----------------------------------------------------------- */
+
+.sg-type {
+  display: flex;
+  flex-direction: column;
+}
+
+/* One row per size: the token name on top, the sample below */
+.sg-type__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding-block: var(--space-32);
+  border-top: var(--border-w) solid var(--border);
+}
+
+.sg-type__meta {
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+/* Sample classes mirroring each token (real pages use real h1/h2 instead) */
+.sg-fs-hero {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--ls-hero);
+  font-weight: var(--fw-medium);
+  color: var(--text-strong);
+}
+
+.sg-fs-h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
+  font-weight: var(--fw-medium);
+  color: var(--text-strong);
+}
+
+.sg-fs-h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+  font-weight: var(--fw-medium);
+  color: var(--text-strong);
+}
+
+.sg-fs-h3 {
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  font-weight: var(--fw-medium);
+  color: var(--text-strong);
+}
+
+.sg-fs-label {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+}
+
+
+/* --- Card, tags, form, FAQ layout ----------------------------------------- */
+
+/* Cards side by side on wider screens */
+.sg-cards {
+  display: grid;
+  gap: var(--space-24);
+}
+
+@media (min-width: 768px) {
+  .sg-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 880px;
+  }
+}
+
+/* Grey block standing in for a real project image */
+.sg-placeholder {
+  aspect-ratio: 16 / 10;
+  background-color: var(--border);
+}
+
+.sg-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-32);
+  max-width: 560px;
+}
+
+.sg-faq {
+  max-width: 880px;
+}
+
+
+/* --- Spacing scale -------------------------------------------------------- */
+
+.sg-space {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+/* One row per step: name, then a wine bar as wide as the space.
+   Stacked on phones (192px bar + name would not fit side by side at 360px). */
+.sg-space__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  font-size: var(--fs-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.sg-space__bar {
+  width: var(--size);
+  height: var(--space-16);
+  background-color: var(--wine);
+}
+
+
+/* --- 12-column grid demo -------------------------------------------------- */
+
+.sg-grid-demo {
+  row-gap: var(--space-8);
+}
+
+.sg-grid-demo > div {
+  grid-column: span 1;
+  padding-block: var(--space-16);
+  background-color: var(--surface);
+  border: var(--border-w) solid var(--border);
+  font-size: var(--fs-label);
+  text-align: center;
+  color: var(--text-mute);
+}

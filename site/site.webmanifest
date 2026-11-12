@@ -1,0 +1,16 @@
+{
+  "name": "Jibin Johnson",
+  "short_name": "Jibin",
+  "description": "Web developer and SEO specialist in Thiruvananthapuram, Kerala.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "lang": "en-IN",
+  "theme_color": "#0E0E0E",
+  "background_color": "#0E0E0E",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

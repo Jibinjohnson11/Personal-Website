@@ -1,0 +1,7 @@
+# Netlify redirects (https://docs.netlify.com/routing/redirects/)
+# www → non-www, keeping the rest of the path. The "!" forces the redirect
+# even though a file exists at that path. http → https is automatic on
+# Netlify once HTTPS is enabled for the domain.
+
+https://www.jibinjohnson.in/*  https://jibinjohnson.in/:splat  301!
+http://www.jibinjohnson.in/*   https://jibinjohnson.in/:splat  301!

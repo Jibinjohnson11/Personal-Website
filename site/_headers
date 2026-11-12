@@ -1,0 +1,32 @@
+# Netlify headers (https://docs.netlify.com/routing/headers/)
+# When several rules match a URL, Netlify sends all their headers, and the
+# same header from two rules is JOINED (comma-separated). So Cache-Control is
+# set only in the asset rules below, never in /*.
+#
+# HTML: no rule needed. Netlify's default for pages is
+# "public, max-age=0, must-revalidate" (no-cache: the browser re-checks the
+# page on every visit and gets a fresh copy right after each deploy).
+
+# --- Security headers on every response ---------------------------------------
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-Frame-Options: SAMEORIGIN
+
+# --- 1 year, immutable: every file under /assets/ -----------------------------------
+# "immutable" means browsers never re-check these files. That is safe because
+# every link to them carries a content fingerprint (?v=3f9a2c71) added by
+# tools/cache-bust.mjs: change a file → its link changes → browsers fetch it.
+# Before every deploy: run npm run prepare-deploy.
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/img/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/css/*
+  Cache-Control: public, max-age=31536000, immutable
+/assets/js/*
+  Cache-Control: public, max-age=31536000, immutable

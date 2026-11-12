@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Internal page: keep it out of Google and out of the sitemap -->
+  <title>Style guide | Jibin Johnson</title>
+  <meta name="description" content="Internal style guide for jibinjohnson.in: colours, type, spacing and components.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0E0E0E">
+
+  <!-- Tells CSS that JavaScript is running (hidden "before animation" states use html.js) -->
+  <script>document.documentElement.classList.add("js");</script>
+
+  <!-- Preload only the two fonts used above the fold -->
+  <link rel="preload" href="/assets/fonts/Boska-Medium.woff2?v=a9e390c3" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/Switzer-Variable.woff2?v=d1bf801f" as="font" type="font/woff2" crossorigin>
+
+  <link rel="stylesheet" href="/assets/css/tokens.css?v=325c6fdf">
+  <link rel="stylesheet" href="/assets/css/base.css?v=02e39957">
+  <link rel="stylesheet" href="/assets/css/components.css?v=f150552e">
+  <link rel="stylesheet" href="/assets/css/pages/styleguide.css?v=2c359c57">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <main id="main">
+
+    <!-- ============ Intro ============ -->
+    <header class="sg-header container">
+      <p class="label">Internal — not indexed</p>
+      <h1>Style guide</h1>
+      <p class="lead">Every colour, type size and component of jibinjohnson.in in one place. Press Tab to see the skip link and focus rings.</p>
+    </header>
+
+
+    <!-- ============ 01 Colours ============ -->
+    <section class="section" aria-labelledby="colours-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">01 — Colours</p>
+          <h2 id="colours-title">Colour tokens</h2>
+        </div>
+
+        <ul class="sg-swatches">
+          <li style="--swatch: var(--ink)">
+            <div class="sg-swatch__chip"></div>
+            <p class="sg-swatch__name">Charcoal</p>
+            <p class="sg-swatch__token">--ink</p>
+            <p class="sg-swatch__hex">#0E0E0E</p>
+            <p class="sg-swatch__use">Main page background</p>
+          </li>
+          <li style="--swatch: var(--ink-2)">
+            <div class="sg-swatch__chip"></div>
+            <p class="sg-swatch__name">Graphite</p>
+            <p class="sg-swatch__token">--ink-2</p>
+            <p class="sg-swatch__hex">#1A1A1A</p>
+            <p class="sg-swatch__use">Cards, raised surfaces</p>
+          </li>
+          <li style="--swatch: var(--line)">
+            <div class="sg-swatch__chip"></div>
+            <p class="sg-swatch__name">Slate</p>
+            <p class="sg-swatch__token">--line</p>
+            <p class="sg-swatch__hex">#2D2D2D</p>
+            <p class="sg-swatch__use">Borders, dividers</p>
+          </li>
+          <li style="--swatch: var(--paper)">
+            <div class="sg-swatch__chip"></div>
+            <p class="sg-swatch__name">Ivory</p>
+            <p class="sg-swatch__token">--paper</p>
+            <p class="sg-swatch__hex">#F5F5F5</p>
+            <p class="sg-swatch__use">Light sections; text on dark</p>
+          </li>
+          <li style="--swatch: var(--white)">
+            <div class="sg-swatch__chip"></div>
+            <p class="sg-swatch__name">White</p>
+            <p class="sg-swatch__token">--white</p>
+            <p class="sg-swatch__hex">#FFFFFF</p>
+            <p class="sg-swatch__use">Headlines on dark</p>
+          </li>
+          <li style="--swatch: var(--mute)">
+            <div class="sg-swatch__chip"></div>
+            <p class="sg-swatch__name">Mute</p>
+            <p class="sg-swatch__token">--mute</p>
+            <p class="sg-swatch__hex">#A1A1A1</p>
+            <p class="sg-swatch__use">Secondary text on dark</p>
+          </li>
+          <li style="--swatch: var(--silver)">
+            <div class="sg-swatch__chip"></div>
+            <p class="sg-swatch__name">Silver</p>
+            <p class="sg-swatch__token">--silver</p>
+            <p class="sg-swatch__hex">#D9D9D9</p>
+            <p class="sg-swatch__use">Light-section surfaces</p>
+          </li>
+          <li style="--swatch: var(--wine)">
+            <div class="sg-swatch__chip"></div>
+            <p class="sg-swatch__name">Burgundy</p>
+            <p class="sg-swatch__token">--wine</p>
+            <p class="sg-swatch__hex">#6D001A</p>
+            <p class="sg-swatch__use">Accent, buttons, the thread</p>
+          </li>
+          <li style="--swatch: var(--wine-2)">
+            <div class="sg-swatch__chip"></div>
+            <p class="sg-swatch__name">Deep Rose</p>
+            <p class="sg-swatch__token">--wine-2</p>
+            <p class="sg-swatch__hex">#8F1D33</p>
+            <p class="sg-swatch__use">Hover state of wine</p>
+          </li>
+          <li style="--swatch: var(--rose)">
+            <div class="sg-swatch__chip"></div>
+            <p class="sg-swatch__name">Rose Ash</p>
+            <p class="sg-swatch__token">--rose</p>
+            <p class="sg-swatch__hex">#B76A79</p>
+            <p class="sg-swatch__use">Small accent text, focus ring</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ============ 02 Typography ============ -->
+    <section class="section" aria-labelledby="type-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">02 — Typography</p>
+          <h2 id="type-title">Type scale</h2>
+        </div>
+
+        <div class="sg-type">
+          <div class="sg-type__row">
+            <p class="sg-type__meta">--fs-hero · Boska 500 · 0.9 / -0.03em</p>
+            <p class="sg-fs-hero">Jibin Johnson</p>
+          </div>
+          <div class="sg-type__row">
+            <p class="sg-type__meta">--fs-h1 · Boska 500 · 0.95 / -0.02em</p>
+            <p class="sg-fs-h1">Web Developer &amp; SEO Specialist in <em>Kerala</em></p>
+          </div>
+          <div class="sg-type__row">
+            <p class="sg-type__meta">--fs-h2 · Boska 500 · 1.0 / -0.015em</p>
+            <p class="sg-fs-h2">One person from design to <em>ranking</em></p>
+          </div>
+          <div class="sg-type__row">
+            <p class="sg-type__meta">Big numbers · Boska 700 + symbol in Switzer 300 at 0.5em (.stat)</p>
+            <div class="stat">
+              <p class="stat__value">95<span class="stat__unit">+</span></p>
+            </div>
+          </div>
+          <div class="sg-type__row">
+            <p class="sg-type__meta">--fs-h3 · Switzer 500 · 1.2</p>
+            <p class="sg-fs-h3">Web development</p>
+          </div>
+          <div class="sg-type__row">
+            <p class="sg-type__meta">--fs-lead · Switzer 300 · 1.45</p>
+            <p class="lead">I design and build fast, cinematic websites, and make sure the right people find them on Google.</p>
+          </div>
+          <div class="sg-type__row">
+            <p class="sg-type__meta">--fs-body · Switzer 400 · 1.65 · max 68ch</p>
+            <p>Custom websites and landing pages built with clean, semantic code. Responsive, accessible, and fast enough to pass Core Web Vitals on a phone. Here is <a href="/styleguide/">an inline link</a>, <strong>strong text</strong> and <em>italic text</em>.</p>
+            <p class="text-mute">Secondary text in --mute: Based in Thiruvananthapuram, Kerala — working with clients worldwide.</p>
+          </div>
+          <div class="sg-type__row">
+            <p class="sg-type__meta">--fs-label · Switzer 500 · uppercase · 0.18em</p>
+            <p class="sg-fs-label">Web developer &amp; SEO specialist — Thiruvananthapuram</p>
+            <p class="label">03 — Selected work (section label)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ 03 Components ============ -->
+    <section class="section" aria-labelledby="components-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">03 — Components</p>
+          <h2 id="components-title">Components on dark</h2>
+        </div>
+
+        <div class="sg-stack">
+
+          <div>
+            <h3 class="sg-subhead">Stats</h3>
+            <div class="stat-group">
+              <div class="stat">
+                <p class="stat__value">95<span class="stat__unit">+</span></p>
+                <p class="stat__label">Lighthouse score target</p>
+              </div>
+              <div class="stat">
+                <p class="stat__value">100<span class="stat__unit">%</span></p>
+                <p class="stat__label">Hand-coded, no page builders</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="sg-subhead">Buttons and links</h3>
+            <div class="btn-group">
+              <a class="btn btn--primary" href="/styleguide/">Start a project</a>
+              <a class="btn btn--ghost" href="/styleguide/">WhatsApp me</a>
+              <button class="btn btn--primary" type="button">Button element</button>
+            </div>
+            <p><a class="link" href="/styleguide/">See all work <span aria-hidden="true">→</span></a></p>
+          </div>
+
+          <div>
+            <h3 class="sg-subhead">Card and tags</h3>
+            <div class="sg-cards">
+              <article class="card">
+                <div class="card__media"><div class="sg-placeholder"></div></div>
+                <div class="card__body">
+                  <p class="card__meta">Website development</p>
+                  <h4 class="card__title"><a class="card__link" href="/styleguide/">AQ Air</a></h4>
+                  <p class="card__text">A scroll-driven product story for an AI-powered indoor air-quality monitor.</p>
+                  <ul class="tag-list">
+                    <li class="tag">Frontend</li>
+                    <li class="tag">GSAP</li>
+                    <li class="tag">Lenis</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="sg-subhead">Form fields</h3>
+            <form class="sg-form" action="#" onsubmit="return false">
+              <div class="field">
+                <label class="field__label" for="dark-name">Your name</label>
+                <input class="field__input" id="dark-name" name="name" type="text" autocomplete="name" placeholder="Jane Doe">
+              </div>
+              <div class="field">
+                <label class="field__label" for="dark-email">Email</label>
+                <input class="field__input" id="dark-email" name="email" type="email" autocomplete="email" value="not-an-email" aria-invalid="true" aria-describedby="dark-email-error">
+                <p class="field__error" id="dark-email-error">Error: please enter a valid email address, like name@example.com.</p>
+              </div>
+              <div class="field">
+                <label class="field__label" for="dark-message">Message</label>
+                <textarea class="field__input" id="dark-message" name="message" rows="5" aria-describedby="dark-message-hint"></textarea>
+                <p class="field__hint" id="dark-message-hint">What are you building, or what isn't working?</p>
+              </div>
+            </form>
+          </div>
+
+          <div>
+            <h3 class="sg-subhead">FAQ</h3>
+            <div class="faq sg-faq">
+              <details class="faq__item">
+                <summary class="faq__summary">
+                  <h4 class="faq__question">How long does SEO take to show results?</h4>
+                  <span class="faq__icon" aria-hidden="true"></span>
+                </summary>
+                <div class="faq__answer">
+                  <p>Local searches, such as those in Trivandrum, often start moving within a few months. Competitive, state-wide keywords take longer. I report every month, so you can see the progress instead of waiting in the dark.</p>
+                </div>
+              </details>
+              <details class="faq__item">
+                <summary class="faq__summary">
+                  <h4 class="faq__question">Do you work with clients outside Kerala?</h4>
+                  <span class="faq__icon" aria-hidden="true"></span>
+                </summary>
+                <div class="faq__answer">
+                  <p>Yes. I work remotely with clients across India and abroad. Calls, shared files and progress links keep everything clear wherever you are.</p>
+                </div>
+              </details>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ 04 Light section ============ -->
+    <section class="section section--paper" aria-labelledby="paper-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">04 — Light section</p>
+          <h2 id="paper-title">Components on <em>ivory</em></h2>
+          <p class="lead">The same components inside <code>.section--paper</code>. Text becomes ink, links and errors become wine. Here is <a href="/styleguide/">an inline link</a>.</p>
+        </div>
+
+        <div class="sg-stack">
+
+          <div>
+            <h3 class="sg-subhead">Stats</h3>
+            <div class="stat-group">
+              <div class="stat">
+                <p class="stat__value">95<span class="stat__unit">+</span></p>
+                <p class="stat__label">Lighthouse score target</p>
+              </div>
+              <div class="stat">
+                <p class="stat__value">100<span class="stat__unit">%</span></p>
+                <p class="stat__label">Hand-coded, no page builders</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="sg-subhead">Buttons and links</h3>
+            <div class="btn-group">
+              <a class="btn btn--primary" href="/styleguide/">Start a project</a>
+              <a class="btn btn--ghost" href="/styleguide/">WhatsApp me</a>
+            </div>
+            <p><a class="link" href="/styleguide/">See all work <span aria-hidden="true">→</span></a></p>
+          </div>
+
+          <div>
+            <h3 class="sg-subhead">Card and tags</h3>
+            <div class="sg-cards">
+              <article class="card">
+                <div class="card__media"><div class="sg-placeholder"></div></div>
+                <div class="card__body">
+                  <p class="card__meta">Healthcare SEO</p>
+                  <h4 class="card__title"><a class="card__link" href="/styleguide/">Serene Derma</a></h4>
+                  <p class="card__text">Led the SEO team that ranked a dermatology clinic for its target treatment keywords.</p>
+                  <ul class="tag-list">
+                    <li class="tag">SEO</li>
+                    <li class="tag">Healthcare</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="sg-subhead">Form fields</h3>
+            <form class="sg-form" action="#" onsubmit="return false">
+              <div class="field">
+                <label class="field__label" for="light-name">Your name</label>
+                <input class="field__input" id="light-name" name="name" type="text" autocomplete="name" placeholder="Jane Doe">
+              </div>
+              <div class="field">
+                <label class="field__label" for="light-email">Email</label>
+                <input class="field__input" id="light-email" name="email" type="email" autocomplete="email" value="not-an-email" aria-invalid="true" aria-describedby="light-email-error">
+                <p class="field__error" id="light-email-error">Error: please enter a valid email address, like name@example.com.</p>
+              </div>
+            </form>
+          </div>
+
+          <div>
+            <h3 class="sg-subhead">FAQ</h3>
+            <div class="faq sg-faq">
+              <details class="faq__item" open>
+                <summary class="faq__summary">
+                  <h4 class="faq__question">Can I update the website myself?</h4>
+                  <span class="faq__icon" aria-hidden="true"></span>
+                </summary>
+                <div class="faq__answer">
+                  <p>Yes. I'll show you how to edit text and add blog posts, and I'm available for changes when you need them.</p>
+                </div>
+              </details>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ 05 Spacing and grid ============ -->
+    <section class="section" aria-labelledby="space-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">05 — Space</p>
+          <h2 id="space-title">Spacing scale and grid</h2>
+        </div>
+
+        <div class="sg-stack">
+          <div>
+            <h3 class="sg-subhead">8px spacing scale</h3>
+            <div class="sg-space">
+              <div class="sg-space__row"><span>--space-4 · 4px</span><span class="sg-space__bar" style="--size: var(--space-4)"></span></div>
+              <div class="sg-space__row"><span>--space-8 · 8px</span><span class="sg-space__bar" style="--size: var(--space-8)"></span></div>
+              <div class="sg-space__row"><span>--space-16 · 16px</span><span class="sg-space__bar" style="--size: var(--space-16)"></span></div>
+              <div class="sg-space__row"><span>--space-24 · 24px</span><span class="sg-space__bar" style="--size: var(--space-24)"></span></div>
+              <div class="sg-space__row"><span>--space-32 · 32px</span><span class="sg-space__bar" style="--size: var(--space-32)"></span></div>
+              <div class="sg-space__row"><span>--space-48 · 48px</span><span class="sg-space__bar" style="--size: var(--space-48)"></span></div>
+              <div class="sg-space__row"><span>--space-64 · 64px</span><span class="sg-space__bar" style="--size: var(--space-64)"></span></div>
+              <div class="sg-space__row"><span>--space-96 · 96px</span><span class="sg-space__bar" style="--size: var(--space-96)"></span></div>
+              <div class="sg-space__row"><span>--space-128 · 128px</span><span class="sg-space__bar" style="--size: var(--space-128)"></span></div>
+              <div class="sg-space__row"><span>--space-192 · 192px</span><span class="sg-space__bar" style="--size: var(--space-192)"></span></div>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="sg-subhead">12-column grid (.container + .grid)</h3>
+            <div class="grid sg-grid-demo" aria-hidden="true">
+              <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+              <div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>

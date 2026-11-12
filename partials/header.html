@@ -1,0 +1,72 @@
+<!-- Site header: wordmark, main navigation, "Start a project" button and the
+     mobile menu toggle. Behaviour (hide on scroll, mobile menu) is in menu.js.
+     The current page's nav link gets aria-current from tools/sync-partials.mjs. -->
+<header class="site-header" data-header>
+  <div class="site-header__inner container">
+    <a class="site-header__wordmark" href="/">Jibin Johnson</a>
+
+    <!-- Desktop navigation (on phones it moves into the full-screen menu below) -->
+    <nav class="site-header__nav" aria-label="Main">
+      <ul class="site-header__list">
+        <li><a class="site-header__link" href="/work/">Work</a></li>
+        <li><a class="site-header__link" href="/services/">Services</a></li>
+        <li><a class="site-header__link" href="/about/">About</a></li>
+        <li><a class="site-header__link" href="/blog/">Blog</a></li>
+        <li><a class="site-header__link" href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+
+    <a class="btn btn--primary btn--sm site-header__cta" href="/contact/">Start a project</a>
+
+    <!-- Mobile menu button. Both visible words are in the HTML; CSS shows
+         "Menu" or "Close" based on aria-expanded. menu.js switches
+         aria-label between "Open menu" and "Close menu" (that is what
+         screen readers announce, so the visible words are aria-hidden). -->
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu" data-menu-toggle>
+      <span class="menu-toggle__text menu-toggle__text--open" aria-hidden="true">Menu</span>
+      <span class="menu-toggle__text menu-toggle__text--close" aria-hidden="true">Close</span>
+      <span class="menu-toggle__icon" aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+
+<!-- Full-screen mobile menu. Kept OUTSIDE the <header> because the header
+     slides up with a transform, and a transformed parent would break this
+     overlay's position: fixed. --i sets each link's stagger delay.
+     The 01–05 numbers are decorative (aria-hidden): screen readers read only the link name. -->
+<div class="menu" id="site-menu" data-menu>
+  <nav class="menu__nav container" aria-label="Main">
+    <ul class="menu__list">
+      <li class="menu__item" style="--i: 0">
+        <span class="menu__num" aria-hidden="true">01</span>
+        <a class="menu__link" href="/work/">Work</a>
+      </li>
+      <li class="menu__item" style="--i: 1">
+        <span class="menu__num" aria-hidden="true">02</span>
+        <a class="menu__link" href="/services/">Services</a>
+      </li>
+      <li class="menu__item" style="--i: 2">
+        <span class="menu__num" aria-hidden="true">03</span>
+        <a class="menu__link" href="/about/">About</a>
+      </li>
+      <li class="menu__item" style="--i: 3">
+        <span class="menu__num" aria-hidden="true">04</span>
+        <a class="menu__link" href="/blog/">Blog</a>
+      </li>
+      <li class="menu__item" style="--i: 4">
+        <span class="menu__num" aria-hidden="true">05</span>
+        <a class="menu__link" href="/contact/">Contact</a>
+      </li>
+    </ul>
+    <div class="menu__item menu__footer" style="--i: 5">
+      <a class="btn btn--primary" href="/contact/">Start a project</a>
+      <a class="link" href="mailto:jibinjohnsoninfo@gmail.com">jibinjohnsoninfo@gmail.com</a>
+      <a class="link" href="https://wa.me/917736208172">WhatsApp: +91 77362 08172</a>
+      <ul class="menu__social">
+        <li><a class="menu__social-link" href="https://www.linkedin.com/in/jibinjohnson" rel="me">LinkedIn</a></li>
+        <li><a class="menu__social-link" href="https://github.com/Jibinjohnson11" rel="me">GitHub</a></li>
+        <li><a class="menu__social-link" href="https://www.instagram.com/jibineyyyy" rel="me">Instagram</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>

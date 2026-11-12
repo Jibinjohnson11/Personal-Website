@@ -1,13 +1,283 @@
 /* ==========================================================================
    tokens.css — Design tokens (the single source of truth for raw values)
 
-   Will contain CSS custom properties on :root for:
-   - Colours: --ink, --ink-2, --line, --paper, --white, --mute, --silver,
-     --wine, --wine-2, --rose (see docs/design-system.md, section 1)
-   - Fonts: Boska (display serif) + Switzer (body/UI), and the type scale
-     (--fs-hero, --fs-h1, --fs-h2, --fs-h3, --fs-lead, --fs-body, --fs-label)
-   - Spacing scale (8px base), section padding, grid width and gutters
-   - Motion: easing curves and durations (--ease-out, --ease-in-out, ...)
+   Every colour, font, size, space and timing used on the site is defined
+   here ONCE as a CSS custom property ("variable"). Other CSS files use
+   var(--name) and never write a hex code or pixel value directly.
+   Change a value here → it changes everywhere.
 
-   Every other CSS file uses these variables — never raw hex values or sizes.
+   Contents
+   1. Fonts (@font-face): Boska, Switzer, and size-matched fallbacks
+   2. Colour palette
+   3. Theme colours (what text/background/border mean on dark vs light)
+   4. Font families
+   5. Type scale (sizes, line heights, letter spacing)
+   6. Spacing scale
+   7. Layout and grid
+   8. Shape (radius, borders, touch size)
+   9. Motion (easing and durations)
+   10. Header, layers and floating UI
    ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. FONTS
+   --------------------------------------------------------------------------
+   Self-hosted .woff2 files in /assets/fonts/.
+   font-display: swap → the text shows immediately in a fallback font, then
+   switches to the real font when it has loaded.
+
+   Only Boska-Medium and Switzer-Variable are preloaded in each page's <head>
+   (they are used above the fold). The others load only when a page uses them.
+   -------------------------------------------------------------------------- */
+
+/* Boska — display serif for the hero, H1, H2 and big numbers */
+@font-face {
+  font-family: "Boska";
+  src: url("/assets/fonts/Boska-Medium.woff2?v=a9e390c3") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Boska";
+  src: url("/assets/fonts/Boska-MediumItalic.woff2?v=da18b5d3") format("woff2");
+  font-weight: 500;
+  font-style: italic; /* the accent voice: "built to <em>rank</em>" */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Boska";
+  src: url("/assets/fonts/Boska-Bold.woff2?v=62fa056c") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Switzer — body text, UI, labels and buttons.
+   One "variable" file holds every weight, so we declare a weight range. */
+@font-face {
+  font-family: "Switzer";
+  src: url("/assets/fonts/Switzer-Variable.woff2?v=d1bf801f") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* The italic file is downloaded only if a page actually uses italic body text
+   (e.g. <em> in a paragraph). Without it the browser would fake a slanted style. */
+@font-face {
+  font-family: "Switzer";
+  src: url("/assets/fonts/Switzer-VariableItalic.woff2?v=bf66eb64") format("woff2");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* --- Metric-matched fallback fonts ----------------------------------------
+   While Boska/Switzer load, the browser shows a system font. If that font is
+   wider or taller, text jumps when the real font arrives (layout shift → CLS).
+
+   These "fake" font faces reuse a system font (local) but stretch it to match
+   the real font's size:
+   - size-adjust      scales the fallback so its average letter width matches
+   - ascent-override  space above the baseline (matches the real font)
+   - descent-override space below the baseline
+   - line-gap-override extra space between lines
+
+   The numbers were calculated from the actual font files
+   (Boska: 1000 units/em, ascent 960, descent 250, line gap 90, avg width 412;
+    Switzer: ascent 980, descent 250, line gap 90, avg width 443)
+   compared with Times New Roman and Arial:
+     size-adjust = real avg width ÷ fallback avg width
+     ascent      = real ascent ÷ size-adjust   (same for descent and gap)
+   -------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Boska Fallback";
+  src: local("Times New Roman"), local("TimesNewRomanPSMT");
+  size-adjust: 103.03%;
+  ascent-override: 93.18%;
+  descent-override: 24.27%;
+  line-gap-override: 8.74%;
+}
+
+@font-face {
+  font-family: "Switzer Fallback";
+  src: local("Arial"), local("ArialMT");
+  size-adjust: 100.43%;
+  ascent-override: 97.58%;
+  descent-override: 24.89%;
+  line-gap-override: 8.96%;
+}
+
+
+:root {
+  /* ------------------------------------------------------------------------
+     2. COLOUR PALETTE  (contrast-checked: docs/design-system.md section 1)
+     Rules: 60% ink / 30% paper / 10% wine.
+            NEVER wine text on dark backgrounds (1.5:1, unreadable).
+            NEVER #6B6B6B for text.
+     ------------------------------------------------------------------------ */
+  --ink:    #0E0E0E; /* Charcoal: main page background */
+  --ink-2:  #1A1A1A; /* Graphite: cards, raised surfaces */
+  --line:   #2D2D2D; /* Slate: borders and dividers (decorative only) */
+  --paper:  #F5F5F5; /* Ivory: light sections; main text on dark (17.7:1) */
+  --white:  #FFFFFF; /* Headlines on dark (19.3:1) */
+  --mute:   #A1A1A1; /* Secondary text on dark (~7.4:1) */
+  --silver: #D9D9D9; /* Surfaces and borders in light sections */
+  --wine:   #6D001A; /* Burgundy: buttons, the thread, text on LIGHT only */
+  --wine-2: #8F1D33; /* Deep Rose: hover state of wine */
+  --rose:   #B76A79; /* Rose Ash: small accent text/links on dark, focus ring (4.9:1) */
+
+  /* ------------------------------------------------------------------------
+     3. THEME COLOURS
+     Components use these "meaning" names instead of the palette directly.
+     They are set for dark sections here and swapped for light sections in
+     base.css (.section--paper). So one button or card works on both.
+     ------------------------------------------------------------------------ */
+  --bg:          var(--ink);   /* section background */
+  --surface:     var(--ink-2); /* card background */
+  --text:        var(--paper); /* normal text */
+  --text-strong: var(--white); /* headings */
+  --text-mute:   var(--mute);  /* secondary text */
+  --accent-text: var(--rose);  /* links and small accent text */
+  --border:      var(--line);  /* decorative borders/dividers */
+  --focus:       var(--rose);  /* keyboard focus ring */
+
+  /* Decorative burgundy LINES (not text, not button fills).
+     Plain --wine on ink is only 1.5:1 and almost disappears, so dark
+     sections use the brighter --wine-2; .section--paper switches it to --wine.
+     Used by: the .label line (base.css).
+     IMPORTANT for Step 5: the scroll "thread" SVG must also use
+     stroke: var(--accent-line). On dark it may add an optional subtle glow,
+     e.g. filter: drop-shadow(0 0 6px var(--wine-2)) — keep it faint.
+     Buttons keep using --wine / --wine-2 directly; this token does not affect them. */
+  --accent-line: var(--wine-2);
+
+  /* ------------------------------------------------------------------------
+     4. FONT FAMILIES
+     Real font first, then the size-matched fallback, then generic fonts.
+     ------------------------------------------------------------------------ */
+  --font-display: "Boska", "Boska Fallback", "Times New Roman", serif;
+  --font-body:    "Switzer", "Switzer Fallback", Arial, sans-serif;
+
+  /* ------------------------------------------------------------------------
+     5. TYPE SCALE
+     clamp(smallest, preferred, largest): the size grows smoothly with the
+     screen width between 360px and 1440px, without breakpoints.
+     ------------------------------------------------------------------------ */
+  --fs-hero:  clamp(3.5rem, 12vw, 11rem);       /* hero name, Boska 500 */
+  --fs-h1:    clamp(2.75rem, 7vw, 6rem);        /* page H1s, Boska 500 */
+  --fs-h2:    clamp(2rem, 4.5vw, 4rem);         /* section titles, Boska 500 */
+  --fs-h3:    clamp(1.375rem, 2vw, 1.75rem);    /* card titles, Switzer 500 */
+  --fs-lead:  clamp(1.125rem, 1.6vw, 1.5rem);   /* intro paragraphs, Switzer 300 */
+  --fs-body:  1.0625rem;                        /* 17px body copy, Switzer 400 */
+  --fs-small: 0.875rem;                         /* 14px compact UI, e.g. .btn--sm */
+  --fs-label: 0.75rem;                          /* eyebrows, tags, meta */
+
+  /* Multi-line display paragraphs (.display-text, e.g. the manifesto):
+     a bit smaller than H2 on phones, roomier line height than headings */
+  --fs-display-text: clamp(1.75rem, 6.5vw, 3.5rem);
+
+  /* Line heights (unitless = multiplied by the font size) */
+  --lh-hero:  0.9;
+  --lh-h1:    0.95;
+  --lh-h2:    1;
+  --lh-h3:    1.2;
+  --lh-lead:  1.45;
+  --lh-body:  1.65;
+  --lh-label: 1.4;
+  --lh-display-text:    1.2;   /* .display-text on phones/tablets */
+  --lh-display-text-lg: 1.15;  /* .display-text on desktop */
+
+  /* Letter spacing: big serif headings are pulled tighter, labels spread wider */
+  --ls-hero:  -0.03em;
+  --ls-h1:    -0.02em;
+  --ls-h2:    -0.015em;
+  --ls-label: 0.18em;
+
+  /* Font weights */
+  --fw-light:   300;
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-bold:    700;
+
+  /* Comfortable reading width for body text */
+  --measure: 68ch;
+  --measure-display:    22ch;  /* .display-text on phones/tablets */
+  --measure-display-lg: 28ch;  /* .display-text on desktop */
+
+  /* ------------------------------------------------------------------------
+     6. SPACING SCALE (8px base)
+     Named by their pixel value so they are easy to read: var(--space-24) = 24px.
+     ------------------------------------------------------------------------ */
+  --space-4:   4px;
+  --space-8:   8px;
+  --space-16:  16px;
+  --space-24:  24px;
+  --space-32:  32px;
+  --space-48:  48px;
+  --space-64:  64px;
+  --space-96:  96px;
+  --space-128: 128px;
+  --space-192: 192px;
+
+  /* Top and bottom padding of every section: generous emptiness = premium */
+  --section-pad: clamp(96px, 14vw, 192px);
+
+  /* ------------------------------------------------------------------------
+     7. LAYOUT AND GRID
+     ------------------------------------------------------------------------ */
+  --container-max: 1440px;                 /* widest the content gets */
+  --gutter:        clamp(20px, 5vw, 80px); /* space at the left/right screen edges */
+  --grid-columns:  12;
+  --col-gap:       clamp(16px, 2vw, 32px); /* space between grid columns */
+
+  /* ------------------------------------------------------------------------
+     8. SHAPE
+     ------------------------------------------------------------------------ */
+  --radius-sm:   4px;     /* cards, inputs */
+  --radius-pill: 999px;   /* buttons and tags (fully rounded ends) */
+  --border-w:    1px;     /* thin lines everywhere */
+  --focus-w:     2px;     /* keyboard focus ring thickness */
+  --tap-min:     44px;    /* minimum touch target size (accessibility) */
+  --btn-pad-y:   16px;    /* button padding top/bottom (design spec) */
+  --btn-pad-x:   28px;    /* button padding left/right (design spec) */
+  --btn-sm-pad-y: 10px;   /* compact button (.btn--sm), e.g. in the header */
+  --btn-sm-pad-x: 20px;
+  --label-line:  32px;    /* length of the thin wine line before a .label */
+
+  /* ------------------------------------------------------------------------
+     9. MOTION
+     Use these for every transition and GSAP tween so motion feels consistent.
+     ------------------------------------------------------------------------ */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);   /* fast start, soft stop (expo-like) */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);  /* smooth both ends */
+  --dur-micro:   0.3s;  /* hovers, small UI changes */
+  --dur-reveal:  0.6s;  /* elements appearing on scroll */
+  --dur-hero:    0.9s;  /* the hero name reveal */
+  --stagger:     0.06s; /* delay between items that appear one after another */
+
+  /* "Not lit yet" state of text that brightens as the thread passes
+     (about timeline, areas list, course searches). 0.62 on ink looks like
+     --mute, so large text still passes WCAG AA. Never go lower for text.
+     motion.js uses the same 0.62 for [data-words]. */
+  --opacity-dim: 0.62;
+
+  /* ------------------------------------------------------------------------
+     10. HEADER, LAYERS AND FLOATING UI
+     ------------------------------------------------------------------------ */
+  --header-h:    72px;  /* height of the fixed site header */
+  --header-glass: color-mix(in srgb, var(--ink) 78%, transparent); /* see-through ink */
+  --header-glass-light: color-mix(in srgb, var(--paper) 82%, transparent); /* see-through paper (header over ivory sections) */
+  --blur:        16px;  /* backdrop blur behind the scrolled header */
+  --fab-size:    56px;  /* floating WhatsApp button */
+
+  /* Stacking order (higher = on top) */
+  --z-float:  50;   /* floating WhatsApp button */
+  --z-menu:   90;   /* mobile menu overlay */
+  --z-header: 100;  /* header stays above the menu so the toggle can close it */
+}

@@ -1,0 +1,39 @@
+# Jibin Johnson
+
+> Jibin Johnson is a freelance web developer and SEO specialist based in Thiruvananthapuram (Trivandrum), Kerala, India. He builds fast, hand-coded websites with technical SEO built in, and runs SEO for businesses that want more enquiries from search. He works in person in Thiruvananthapuram and remotely with clients across India and abroad.
+
+- Location: Thiruvananthapuram, Kerala, India
+- Languages: English
+- Contact: jibinjohnsoninfo@gmail.com · WhatsApp +91 77362 08172
+- Profiles: https://www.linkedin.com/in/jibinjohnson · https://github.com/Jibinjohnson11 · https://www.instagram.com/jibineyyyy
+- Pricing: no public prices; every project gets a fixed quote after a short call
+
+## Services
+
+- [Web development and SEO services](https://jibinjohnson.in/services/): overview of both services and how they work together
+- [Web developer in Kerala](https://jibinjohnson.in/services/web-development/): custom, fast, SEO-ready websites for businesses across Kerala
+- [SEO specialist in Kerala](https://jibinjohnson.in/services/seo/): technical SEO, content and local SEO focused on enquiries, not just rankings
+- [Web developer in Trivandrum](https://jibinjohnson.in/web-developer-trivandrum/): website development with in-person meetings in Thiruvananthapuram
+- [SEO specialist in Trivandrum](https://jibinjohnson.in/seo-specialist-trivandrum/): local SEO and Google Business Profile work for Thiruvananthapuram businesses
+- [SEO for clinics in Kerala](https://jibinjohnson.in/seo-for-healthcare-clinics/): SEO for dermatology and healthcare clinics
+- [SEO for training institutes in Kerala](https://jibinjohnson.in/seo-for-education-institutes/): SEO for course and education websites
+- [Websites for startups in Kerala](https://jibinjohnson.in/web-design-for-startups/): launch-ready websites and landing pages for startups
+
+## Work
+
+- [Work and case studies](https://jibinjohnson.in/work/): selected projects with the problem, approach and result
+- [AQ Air](https://jibinjohnson.in/work/aq-air/): scroll-driven product website for an AI-powered air-quality monitor
+- [Serene Derma](https://jibinjohnson.in/work/serene-derma-seo/): SEO for a dermatology clinic
+- [BlackBox Learning](https://jibinjohnson.in/work/blackbox-learning-seo/): SEO for a training institute's course keywords
+- [SEO Dashboard](https://jibinjohnson.in/work/seo-dashboard/): a Django platform for SEO data, rankings and reports (in progress)
+
+## About
+
+- [About](https://jibinjohnson.in/about/): background, education (University of Madras, Edure) and how Jibin works
+- [Resume](https://jibinjohnson.in/resume/): HTML resume with a PDF download
+- [Contact](https://jibinjohnson.in/contact/): contact form, email and WhatsApp
+
+## Optional
+
+- [Privacy policy](https://jibinjohnson.in/privacy/): how the site handles personal data
+- [Sitemap](https://jibinjohnson.in/sitemap.xml): every indexable page

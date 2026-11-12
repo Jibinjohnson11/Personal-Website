@@ -1,0 +1,180 @@
+[
+  {
+    "file": "og/home.jpg",
+    "label": "jibinjohnson.in",
+    "title": "Jibin Johnson",
+    "subtitle": "Web Developer & SEO Specialist in Kerala",
+    "photo": true,
+    "alt": "Jibin Johnson, web developer and SEO specialist in Kerala"
+  },
+  {
+    "file": "og/services.jpg",
+    "label": "Services",
+    "title": "Web development and SEO services",
+    "subtitle": "Two services that work best together",
+    "photo": true,
+    "alt": "Web development and SEO services by Jibin Johnson"
+  },
+  {
+    "file": "og/web-development.jpg",
+    "label": "Services",
+    "title": "Web developer in Kerala",
+    "subtitle": "Fast, premium, SEO-ready websites",
+    "photo": true,
+    "alt": "Jibin Johnson, web developer in Kerala: fast, premium, SEO-ready websites"
+  },
+  {
+    "file": "og/seo.jpg",
+    "label": "Services",
+    "title": "SEO specialist in Kerala",
+    "subtitle": "Rankings that bring enquiries",
+    "photo": true,
+    "alt": "Jibin Johnson, SEO specialist in Kerala: rankings that bring enquiries"
+  },
+  {
+    "file": "og/web-developer-trivandrum.jpg",
+    "label": "Thiruvananthapuram",
+    "title": "Web developer in Trivandrum",
+    "subtitle": "Meet in person or online",
+    "photo": true,
+    "alt": "Jibin Johnson, web developer in Trivandrum: meet in person or online"
+  },
+  {
+    "file": "og/seo-specialist-trivandrum.jpg",
+    "label": "Local SEO · Thiruvananthapuram",
+    "title": "SEO specialist in Trivandrum",
+    "subtitle": "Rank on Google Maps and local search",
+    "photo": true,
+    "alt": "Jibin Johnson, SEO specialist in Trivandrum: rank on Google Maps and local search"
+  },
+  {
+    "file": "og/seo-for-healthcare-clinics.jpg",
+    "label": "Healthcare SEO",
+    "title": "SEO for clinics in Kerala",
+    "subtitle": "Rank for the treatments patients search",
+    "photo": true,
+    "alt": "Jibin Johnson, SEO for clinics and healthcare in Kerala: rank for the treatments patients search"
+  },
+  {
+    "file": "og/seo-for-education-institutes.jpg",
+    "label": "Education SEO",
+    "title": "SEO for training institutes",
+    "subtitle": "Rank for the course searches students make",
+    "photo": true,
+    "alt": "Jibin Johnson, SEO for training institutes in Kerala: rank for the course searches students make"
+  },
+  {
+    "file": "og/web-design-for-startups.jpg",
+    "label": "For startups",
+    "title": "Websites for startups",
+    "subtitle": "Launch-ready, premium, built to grow",
+    "photo": true,
+    "alt": "Jibin Johnson, websites for startups in Kerala: launch-ready, premium, built to grow"
+  },
+  {
+    "file": "og/work.jpg",
+    "label": "Work",
+    "title": "Selected work",
+    "subtitle": "Web development and SEO case studies",
+    "photo": false,
+    "alt": "Selected work: web development and SEO case studies by Jibin Johnson"
+  },
+  {
+    "file": "og/aq-air.jpg",
+    "label": "Case study · Website development",
+    "title": "AQ Air",
+    "subtitle": "A scroll-driven product story",
+    "photo": false,
+    "image": "work/aq-air-website-1600.webp",
+    "alt": "AQ Air case study: the AQ Air website hero section on desktop"
+  },
+  {
+    "file": "og/serene-derma-seo.jpg",
+    "label": "Case study · Healthcare SEO",
+    "title": "Serene Derma",
+    "subtitle": "SEO for a dermatology clinic",
+    "photo": false,
+    "cover": {
+      "label": "SEO case study",
+      "word": "Healthcare",
+      "tone": "ink"
+    },
+    "alt": "Serene Derma: healthcare SEO case study by Jibin Johnson"
+  },
+  {
+    "file": "og/blackbox-learning-seo.jpg",
+    "label": "Case study · Education SEO",
+    "title": "BlackBox Learning",
+    "subtitle": "SEO for a training platform",
+    "photo": false,
+    "cover": {
+      "label": "SEO case study",
+      "word": "Education",
+      "tone": "wine"
+    },
+    "alt": "BlackBox Learning: education SEO case study by Jibin Johnson"
+  },
+  {
+    "file": "og/seo-dashboard.jpg",
+    "label": "Product · In progress",
+    "title": "SEO Dashboard",
+    "subtitle": "One place for every SEO project",
+    "photo": false,
+    "cover": {
+      "label": "Product · In progress",
+      "word": "Analytics",
+      "tone": "ink"
+    },
+    "alt": "SEO Dashboard: a Django project by Jibin Johnson, in progress"
+  },
+  {
+    "file": "og/about.jpg",
+    "label": "About",
+    "title": "Design, code and search",
+    "subtitle": "Handled by one person",
+    "photo": true,
+    "alt": "About Jibin Johnson: design, code and search, handled by one person"
+  },
+  {
+    "file": "og/resume.jpg",
+    "label": "Resume",
+    "title": "Jibin Johnson",
+    "subtitle": "Web Developer & SEO Specialist",
+    "photo": true,
+    "alt": "Resume of Jibin Johnson, web developer and SEO specialist in Thiruvananthapuram"
+  },
+  {
+    "file": "og/contact.jpg",
+    "label": "Contact",
+    "title": "Let's build something worth finding",
+    "subtitle": "I reply within one working day",
+    "photo": true,
+    "alt": "Contact Jibin Johnson: let's build something worth finding"
+  },
+  {
+    "file": "og/blog.jpg",
+    "label": "Blog",
+    "title": "Notes on building and ranking websites",
+    "subtitle": "Practical guides from real projects",
+    "photo": false,
+    "cover": {
+      "label": "Blog",
+      "word": "Writing",
+      "tone": "ink"
+    },
+    "alt": "Blog by Jibin Johnson: notes on building and ranking websites"
+  },
+  {
+    "file": "og/website-cost-in-kerala.jpg",
+    "label": "Blog · Web development",
+    "title": "How much does a website cost in Kerala?",
+    "subtitle": "What decides the price in 2026",
+    "photo": false,
+    "cover": {
+      "label": "Blog",
+      "word": "Web development",
+      "tone": "wine"
+    },
+    "alt": "How much does a website cost in Kerala in 2026? A blog post by Jibin Johnson"
+  }
+]

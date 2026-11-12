@@ -1,10 +1,356 @@
 /* ==========================================================================
    motion.css — CSS side of animation
 
-   Will contain:
-   - "Before reveal" hidden states, ONLY under html.js (so with no JavaScript
-     everything stays visible)
-   - Styles for the burgundy scroll "thread" SVG and the custom cursor
-   - Hover transitions (transform/opacity only — never width, top, margin)
-   - @media (prefers-reduced-motion: reduce) overrides that switch motion off
+   1. Page transitions (burgundy fade between pages)
+   2. Lenis smooth-scroll helpers
+   3. Hidden starting states (ONLY under html.js)
+   4. Split-text line masks
+   5. Parallax frames
+   6. Background crossfade layer ([data-bg])
+   7. The burgundy thread (thread.js)
+   8. Custom cursor (cursor.js)
+   9. Reduced motion
+
+   Rules followed everywhere in this file:
+   - Hidden states exist only under html.js, so with no JavaScript every
+     element is visible. If GSAP fails to load, motion.js adds .no-motion
+     to <html> and the hidden states switch off too.
+   - Only transform and opacity are animated.
    ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. PAGE TRANSITIONS
+   Cross-document View Transitions: when you click a link to another page,
+   the old page fades out to burgundy, then the new page fades in.
+   Browsers without support simply load the next page normally.
+   -------------------------------------------------------------------------- */
+
+@view-transition {
+  navigation: auto;
+}
+
+/* The layer behind the old and new page snapshots: burgundy.
+   While the old page has faded out and the new one hasn't faded in yet,
+   this is what you see. */
+::view-transition {
+  background-color: var(--wine);
+}
+
+/* Old page: fades out in the first half */
+::view-transition-old(root) {
+  animation: vt-fade-out var(--dur-micro) var(--ease-in-out) both;
+}
+
+/* New page: waits for the old one, then fades in */
+::view-transition-new(root) {
+  animation: vt-fade-in var(--dur-micro) var(--ease-out) var(--dur-micro) both;
+}
+
+@keyframes vt-fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes vt-fade-in {
+  from { opacity: 0; }
+}
+
+
+/* --------------------------------------------------------------------------
+   2. LENIS SMOOTH SCROLL
+   The small set of rules Lenis needs (from its own lenis.css).
+   motion.js adds the "lenis" classes to <html> when smooth scroll runs.
+   -------------------------------------------------------------------------- */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+/* Lenis does the smoothing, so the browser's own smooth scroll must be off */
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+/* Elements with data-lenis-prevent scroll on their own (e.g. a code block) */
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+/* lenis.stop() (used while the mobile menu is open) freezes the page */
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. HIDDEN STARTING STATES
+   Only under html.js (set by the inline script in <head>) and only while
+   motion is working (no .no-motion). motion.js fades them in.
+   -------------------------------------------------------------------------- */
+
+/* [data-reveal] and [data-reveal="lines"] start invisible.
+   (The "move up" offset is set by motion.js, so it can be skipped
+   for people who prefer reduced motion.) */
+html.js:not(.no-motion) [data-reveal] {
+  opacity: 0;
+}
+
+
+/* --------------------------------------------------------------------------
+   4. SPLIT-TEXT LINE MASKS  ([data-reveal="lines"])
+   SplitText wraps each line in .split-line, and each line in a mask
+   (.split-line-mask) with overflow: clip. The line slides up from below
+   the mask. A little bottom padding stops descenders (g, j, y) being cut
+   off by the tight heading line-height; the negative margin cancels it,
+   so the heading keeps exactly the same height.
+   -------------------------------------------------------------------------- */
+
+.split-line-mask {
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. PARALLAX FRAMES  ([data-parallax])
+   The frame clips; its first child (image or placeholder) moves inside it.
+   motion.js scales the child up a little so its edges never show.
+   -------------------------------------------------------------------------- */
+
+[data-parallax] {
+  overflow: hidden;
+}
+
+[data-parallax] > * {
+  will-change: transform;
+}
+
+
+/* --------------------------------------------------------------------------
+   6. BACKGROUND CROSSFADE  ([data-bg="paper"] / [data-bg="ink"])
+   motion.js adds one fixed, full-screen paper layer (.bg-fade) behind the
+   page and fades its opacity in or out as sections enter.
+   For the layer to show through, [data-bg] sections become transparent —
+   but only once motion.js has made the layer and put .bg-ink or .bg-paper
+   on <html>. Before that (first paint) and without JS, each section keeps
+   its own background (.section--paper stays ivory).
+
+   Text must always match what is BEHIND it. One fixed layer can only be
+   one colour, so near a boundary the section that hasn't reached the
+   middle of the screen yet would have ink text on ink (or paper on paper).
+   So while the layer runs, every [data-bg] section takes its colour theme
+   from the layer (.bg-ink / .bg-paper on <html>), not from its own class.
+   The two variable sets below are copies of :root (tokens.css) and
+   .section--paper (base.css): keep them in sync.
+   -------------------------------------------------------------------------- */
+
+.bg-fade {
+  position: fixed;
+  inset: 0;
+  z-index: -1;          /* behind all page content */
+  background-color: var(--paper);
+  opacity: 0;
+  pointer-events: none;
+}
+
+html.js:not(.no-motion):is(.bg-ink, .bg-paper) [data-bg] {
+  background-color: transparent;
+}
+
+/* Layer is ink: every [data-bg] section uses the dark theme */
+html.js:not(.no-motion).bg-ink [data-bg] {
+  color-scheme: dark;
+  --bg:          var(--ink);
+  --surface:     var(--ink-2);
+  --text:        var(--paper);
+  --text-strong: var(--white);
+  --text-mute:   var(--mute);
+  --accent-text: var(--rose);
+  --border:      var(--line);
+  --accent-line: var(--wine-2);
+}
+
+/* Layer is paper: every [data-bg] section uses the light theme */
+html.js:not(.no-motion).bg-paper [data-bg] {
+  color-scheme: light;
+  --bg:          var(--paper);
+  --surface:     var(--white);
+  --text:        var(--ink);
+  --text-strong: var(--ink);
+  --text-mute:   var(--line);
+  --accent-text: var(--wine);
+  --border:      var(--silver);
+  --accent-line: var(--wine);
+}
+
+
+/* --------------------------------------------------------------------------
+   7. THE BURGUNDY THREAD  (thread.js)
+   One SVG the height of the page, sitting above section backgrounds but
+   BELOW section content (the containers get z-index 1), so text always
+   sits on top of the line.
+   -------------------------------------------------------------------------- */
+
+.thread {
+  display: none;            /* phones: hidden (it would cross the text) */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.thread__path {
+  fill: none;
+  stroke: var(--accent-line);
+  stroke-width: var(--border-w);
+  stroke-linecap: round;
+  /* Faint glow (the tokens.css suggestion). Delete this line to remove it. */
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--wine-2) 60%, transparent));
+}
+
+@media (min-width: 768px) {
+  .thread {
+    display: block;
+  }
+
+  /* Lift section content above the thread */
+  html.js .section > .container {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   8. CUSTOM CURSOR  (cursor.js — mouse/trackpad, window ≥ 1024px)
+   Two fixed circles that follow the pointer:
+   - .cursor       small paper dot. mix-blend-mode: difference inverts it,
+                   so it shows on ink AND on ivory sections.
+   - .cursor-view  burgundy disc with "View", shown over [data-cursor="view"].
+   States are classes on <html>: .cursor-link (over links/buttons) and
+   .cursor-view-on (over "view" elements). Only transform/opacity change.
+   -------------------------------------------------------------------------- */
+
+/* Outside the media query below (touch screens, small windows) the cursor
+   parts are never shown, even if they somehow exist. */
+.cursor,
+.cursor-view {
+  display: none;
+}
+
+/* Everything else only applies with a mouse/trackpad on a window ≥ 1024px —
+   the same test cursor.js uses. So on a phone the normal cursor can never
+   be hidden, whatever classes are on <html>. */
+@media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+  .cursor,
+  .cursor-view {
+    display: block;
+  }
+
+  /* Hide the normal arrow on pages where the custom cursor runs.
+     Form fields keep their normal text cursor. */
+  html.has-cursor,
+  html.has-cursor * {
+    cursor: none;
+  }
+
+  html.has-cursor :is(input, textarea, select) {
+    cursor: auto;
+  }
+
+  /* Shared: fixed at the top-left; cursor.js moves it with transform */
+  .cursor,
+  .cursor-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 0;               /* shown after the first mouse move */
+  }
+
+  html.cursor-visible .cursor {
+    opacity: 1;
+  }
+
+  /* The dot: 8px, centred on the pointer by the negative margins */
+  .cursor {
+    mix-blend-mode: difference;
+  }
+
+  .cursor__dot {
+    display: block;
+    width: var(--space-8);
+    height: var(--space-8);
+    margin: calc(var(--space-8) / -2) 0 0 calc(var(--space-8) / -2);
+    border-radius: 50%;
+    background-color: var(--paper);
+    transition: transform var(--dur-micro) var(--ease-out),
+                opacity var(--dur-micro) var(--ease-out);
+  }
+
+  /* Over links and buttons: grows to 48px (8px × 6) */
+  html.cursor-link .cursor__dot {
+    transform: scale(6);
+  }
+
+  /* Over [data-cursor="view"]: the dot disappears, the "View" disc appears */
+  html.cursor-view-on .cursor__dot {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  .cursor-view__disc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--space-96);
+    height: var(--space-96);
+    margin: calc(var(--space-96) / -2) 0 0 calc(var(--space-96) / -2);
+    border-radius: 50%;
+    background-color: var(--wine);
+    color: var(--white);
+    font-size: var(--fs-label);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    transform: scale(0);
+    transition: transform var(--dur-micro) var(--ease-out);
+  }
+
+  /* The word is decorative (the link itself has its real name), so it lives
+     in CSS instead of the HTML and is never read by screen readers. */
+  .cursor-view__disc::after {
+    content: "View";
+  }
+
+  html.cursor-visible.cursor-view-on .cursor-view {
+    opacity: 1;
+  }
+
+  html.cursor-view-on .cursor-view__disc {
+    transform: scale(1);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   9. REDUCED MOTION
+   No page fade, no cursor growth animation. (Lenis, pins and scrubs are
+   switched off in motion.js; reveals become plain fades.)
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  @view-transition {
+    navigation: none;
+  }
+
+  .cursor__dot,
+  .cursor-view__disc {
+    transition: none;
+  }
+}

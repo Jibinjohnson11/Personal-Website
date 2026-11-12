@@ -1,0 +1,753 @@
+/* ==========================================================================
+   pages/home.css — Styles used ONLY on the Home page (site/index.html)
+
+   Mobile-first: the plain rules are for phones, then @media blocks add
+   the tablet (768px) and desktop (1024px) layouts.
+   Desktop layouts sit on the 12-column grid (--grid-columns), but break
+   it on purpose: the portrait bleeds off the edge, columns are offset,
+   the process steps descend like a staircase.
+
+   Contents
+   1. Hero (name reveal, portrait, intro)
+   2. Manifesto
+   3. Services (stacked sticky cards on desktop)
+   4. Selected work (grid, or pinned horizontal gallery via home.js)
+   5. Process
+   6. Why me
+   7. Clients
+   8. FAQ
+   9. Blog
+   10. Final CTA (wine section)
+   11. Reduced motion
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. HERO
+   -------------------------------------------------------------------------- */
+
+/* The hero + the header fill at least one screen (min-height, so it can
+   still grow). The header is position: sticky, so it already takes its own
+   space above the hero: no --header-h in the padding here.
+   No bottom padding: the gap to the next section is that section's own
+   --section-pad, like everywhere else. */
+.hero {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - var(--header-h));
+  padding-top: var(--space-48);
+  overflow-x: clip;          /* the portrait bleeds right; never scroll sideways */
+}
+
+.hero__inner {
+  flex-grow: 1;              /* the grid fills the hero's full height */
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+}
+
+.hero__inner > * {
+  grid-column: 1 / -1;       /* phones: everything full width, in HTML order */
+}
+
+/* The H1 sits above the portrait where they overlap */
+.hero__title {
+  position: relative;
+  z-index: 2;
+  color: var(--text-strong);
+}
+
+/* Each line is its own mask (overflow: clip). The bottom padding keeps
+   descenders (J, g) from being cut; the negative margin cancels it. */
+.hero__line {
+  display: block;
+  overflow: clip;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+.hero__line-inner {
+  display: block;
+}
+
+/* "Johnson" steps in to the right: the first break from the grid */
+.hero__line--indent {
+  padding-left: 1.2em;
+}
+
+/* The role line: same H1, smaller italic serif, kept narrow so it
+   doesn't run across the portrait's face */
+.hero__line--role {
+  max-width: 12em;
+  margin-top: var(--space-24);
+  font-size: var(--fs-h2);
+  font-style: italic;
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+  color: var(--text);
+}
+
+/* Line-by-line reveal, in CSS so it starts at first paint (no waiting for
+   JavaScript). Expo-like easing: mostly in place after ~0.3s.
+   LCP rules for the H1 (it is the page's LCP element):
+   - transform + the line mask (overflow: clip) only — NEVER opacity, so
+     the text is painted in the very first frame
+   - each line starts only 40% down its mask, so ~60% of every line is
+     already visible on that first frame. (Starting fully below the mask
+     would paint nothing, and the browser could skip the H1 as LCP.)
+   Starting state only under html.js, as everywhere on the site. */
+@keyframes hero-line-up {
+  from { transform: translateY(40%); }
+  to   { transform: none; }
+}
+
+html.js .hero__line-inner {
+  animation: hero-line-up var(--dur-hero) var(--ease-out) both;
+  animation-delay: calc(var(--i) * var(--stagger) * 2);
+}
+
+.hero__intro {
+  margin-top: var(--space-32);
+}
+
+.hero__lead {
+  color: var(--text-mute);
+}
+
+.hero__actions {
+  margin-top: var(--space-24);
+}
+
+/* "Available for freelance projects" with a small, softly pulsing rose dot */
+.hero__status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  margin-top: var(--space-24);
+  font-size: var(--fs-small);
+  color: var(--text-mute);
+}
+
+.hero__status-dot {
+  flex-shrink: 0;
+  width: var(--space-8);
+  height: var(--space-8);
+  border-radius: var(--radius-pill);
+  background-color: var(--rose);
+  animation: status-pulse 2.4s var(--ease-in-out) infinite;
+}
+
+/* Subtle: dims a little and shrinks slightly, then back (opacity + transform only) */
+@keyframes status-pulse {
+  50% { opacity: 0.45; transform: scale(0.8); }
+}
+
+/* Portrait: phones — pushed to the right, bleeding off the screen edge */
+.hero__portrait {
+  position: relative;        /* for the edge fade below */
+  width: 80%;
+  margin-top: var(--space-64);
+  margin-left: auto;
+  margin-right: calc(var(--gutter) * -1);
+  aspect-ratio: 4 / 5;
+}
+
+.hero__portrait picture,
+.hero__portrait img {
+  width: 100%;
+  height: 100%;
+}
+
+.hero__portrait img {
+  object-fit: cover;
+  object-position: 60% top;  /* keep the face in frame when cropped */
+}
+
+/* Edge fade. The photo's black backdrop is a touch darker than --ink, so
+   gradients from the page colour (--bg) to transparent hide the rectangle's
+   top, left and bottom edges. A plain overlay, NOT mask-image: Safari can
+   paint nothing when an element masks a moving (parallax) child. */
+.hero__portrait::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, var(--bg), transparent 25%),
+    linear-gradient(to bottom, var(--bg), transparent 20%),
+    linear-gradient(to top, var(--bg), transparent 15%);
+  pointer-events: none;
+}
+
+/* Tablet and up: the portrait fills the right ~40% from the label down to
+   the bottom of the hero, bleeding off the right edge. "Johnson" is pushed
+   right (30% of the H1's width) so it overlaps the portrait slightly. */
+@media (min-width: 768px) {
+  .hero__inner {
+    grid-template-rows: auto auto 1fr;
+  }
+
+  .hero__label {
+    grid-column: 1 / 8;
+    grid-row: 1;
+  }
+
+  .hero__title {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .hero__line--indent {
+    padding-left: 30%;
+  }
+
+  .hero__intro {
+    grid-column: 1 / 8;
+    grid-row: 3;
+  }
+
+  /* contain: size = the portrait doesn't make the hero taller; it simply
+     stretches over rows 1–3 and the photo is cropped (object-fit) to fit.
+     margin-left MUST be reset: the phone rule's "auto" margin stops a grid
+     item from stretching, and its width would then depend on the image
+     (0 before a lazy image loads = an empty right side). */
+  .hero__portrait {
+    grid-column: 8 / -1;
+    grid-row: 1 / 4;
+    width: auto;
+    margin-top: 0;
+    margin-left: 0;
+    aspect-ratio: auto;
+    contain: size;
+  }
+}
+
+/* Desktop: the label stays on one line */
+@media (min-width: 1024px) {
+  .hero__label {
+    white-space: nowrap;
+  }
+}
+
+/* Short screens (laptops like 1440×800 or 1280×720): shrink the name and
+   role a little so the H1, lead and both buttons fit without scrolling.
+   min() keeps the normal size whenever it is already smaller. */
+@media (min-width: 768px) and (max-height: 900px) {
+  .hero {
+    padding-top: var(--space-32);
+  }
+
+  .hero__title {
+    font-size: min(var(--fs-hero), 17svh);
+  }
+
+  .hero__line--role {
+    font-size: min(var(--fs-h2), 6svh);
+    margin-top: var(--space-16);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   2. MANIFESTO
+   Desktop: the serif paragraph steps in two columns from the label.
+   -------------------------------------------------------------------------- */
+
+.manifesto__text {
+  margin-top: var(--space-48);
+}
+
+@media (min-width: 1024px) {
+  .manifesto__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--col-gap);
+  }
+
+  .manifesto__inner > .label {
+    grid-column: 1 / -1;
+  }
+
+  .manifesto__text {
+    grid-column: 3 / -1;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   3. SERVICES
+   Phones/tablets: simple stack. Desktop: heading on the left, cards on
+   the right that stick one on top of the other (see section 11 for the
+   reduced-motion version, which doesn't stick).
+   -------------------------------------------------------------------------- */
+
+.services__local {
+  color: var(--text-mute);
+}
+
+.services__local a {
+  color: var(--text);
+}
+
+.services__list {
+  display: grid;
+  gap: var(--space-24);
+}
+
+.service-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  padding: var(--space-32) var(--space-24);
+  background-color: var(--surface);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+/* Big hanging serif number */
+.service-card__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: 1;
+  color: var(--text-mute);
+}
+
+.service-card__text {
+  color: var(--text-mute);
+}
+
+.service-card__link {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+@media (min-width: 768px) {
+  .service-card {
+    padding: var(--space-48);
+  }
+}
+
+@media (min-width: 1024px) {
+  .services__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    align-items: start;
+  }
+
+  .services__head {
+    grid-column: 1 / 6;
+    margin-bottom: 0;
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-48));
+  }
+
+  .services__list {
+    grid-column: 7 / -1;
+    gap: var(--space-64);
+  }
+
+  /* Stacked cards: each one sticks a little lower than the one before
+     (--i is set in the HTML), so their numbers stay visible like tabs.
+     No min-height: the card is as tall as its content. The stacking comes
+     from the sticky offsets, not from the card size. */
+  .service-card {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-48) + var(--i) * var(--space-24));
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   4. SELECTED WORK
+   Default (phones, tablets, reduced motion, no JS): a grid.
+   .work--horizontal is added by home.js on desktop: the section's
+   container is pinned and the track moves sideways.
+   -------------------------------------------------------------------------- */
+
+.work {
+  overflow-x: clip;   /* the horizontal track runs past the screen edge */
+}
+
+.work__track {
+  display: grid;
+  gap: var(--space-48);
+}
+
+.work-card__media img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* "See all work" — a big serif link at the end of the list */
+.work__more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-16);
+  min-height: var(--tap-min);
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.work__more:hover {
+  color: var(--accent-text);   /* wine on ivory: allowed */
+}
+
+/* Tablet up: two columns, the right one dropped lower (staggered) */
+@media (min-width: 768px) {
+  .work__track {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    row-gap: var(--space-64);
+  }
+
+  .work__item:nth-child(even) {
+    margin-top: var(--space-128);
+  }
+
+  .work__item--more {
+    grid-column: 1 / -1;
+    justify-self: end;
+  }
+}
+
+/* Gallery hint (counter + progress line): only in the pinned gallery */
+.work__progress {
+  display: none;
+}
+
+/* Desktop, pinned. home.js pins the .container (not the section), so the
+   pinned scroll distance is added INSIDE the section and the section's own
+   top/bottom still cover it (the ivory background and header theme rely
+   on that). The container fills the screen.
+   The heading sits in a left column (columns 1–3) and the cards scroll
+   sideways in columns 4–12, clipped at that column's LEFT edge only
+   (clip-path inset with a huge negative right value), so they slide under
+   the heading and still run off the right of the screen. Heading beside,
+   not above, keeps it all within a 720px-tall laptop screen. */
+.work--horizontal {
+  padding-block: 0;
+}
+
+.work--horizontal .container {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  align-items: start;
+  align-content: center;       /* centre the rows in the screen-tall box */
+  min-height: 100svh;
+  /* Top: room for the header, which slides back in when scrolling up */
+  padding-block: calc(var(--header-h) + var(--space-24)) var(--space-24);
+}
+
+.work--horizontal .work__head {
+  grid-column: 1 / 4;
+  margin-bottom: 0;
+}
+
+.work--horizontal .work__viewport {
+  grid-column: 4 / -1;
+  clip-path: inset(0 -100vw 0 0);
+}
+
+.work--horizontal .work__track {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-48);
+  width: max-content;
+  will-change: transform;
+}
+
+/* Card width follows the screen height too, so the card always fits */
+.work--horizontal .work__item {
+  width: min(32vw, 48svh);
+  flex-shrink: 0;
+}
+
+.work--horizontal .work__item:nth-child(even) {
+  margin-top: 0;               /* undo the tablet stagger */
+}
+
+.work--horizontal .work__item--more {
+  width: auto;
+  align-self: center;
+  padding-right: var(--space-48);
+}
+
+/* "01 / 04" + a thin line that fills as the gallery moves (home.js) */
+.work--horizontal .work__progress {
+  grid-column: 4 / -1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
+  margin-top: var(--space-32);
+}
+
+.work__count {
+  flex-shrink: 0;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  font-variant-numeric: tabular-nums;   /* digits don't jiggle as they change */
+  color: var(--text-mute);
+}
+
+.work__bar {
+  flex-grow: 1;
+  height: var(--border-w);
+  background-color: var(--border);
+}
+
+.work__bar-fill {
+  display: block;
+  height: 100%;
+  background-color: var(--accent-line);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. PROCESS
+   Phones/tablets: a vertical line with a dot at each step.
+   Desktop: four columns, each step lower than the last; each has its own
+   top line and dot, so together they read as one descending thread.
+   -------------------------------------------------------------------------- */
+
+.process__list {
+  display: grid;
+  gap: var(--space-64);
+  border-left: var(--border-w) solid var(--border);
+}
+
+.process__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding-left: var(--space-32);
+}
+
+/* The dot on the line */
+.process__step::before {
+  content: "";
+  position: absolute;
+  top: var(--space-16);
+  left: calc(var(--space-4) * -1 - var(--border-w) / 2);
+  width: var(--space-8);
+  height: var(--space-8);
+  border-radius: var(--radius-pill);
+  background-color: var(--accent-line);
+}
+
+.process__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: 1;
+  color: var(--text-mute);
+}
+
+.process__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-text);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h2);
+  color: var(--text-strong);
+}
+
+.process__text {
+  color: var(--text-mute);
+}
+
+@media (min-width: 1024px) {
+  .process__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    border-left: 0;
+  }
+
+  .process__step {
+    margin-top: calc(var(--i) * var(--space-96));
+    padding-top: var(--space-32);
+    padding-left: 0;
+    border-top: var(--border-w) solid var(--border);
+  }
+
+  .process__step::before {
+    top: calc(var(--space-4) * -1 - var(--border-w) / 2);
+    left: 0;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   6. WHY ME
+   Each point: a big serif statement, the explanation beside it.
+   Desktop: statements on the left, details in a fixed right column.
+   -------------------------------------------------------------------------- */
+
+.why__item {
+  display: grid;
+  gap: var(--space-24);
+  padding-block: var(--space-48);
+  border-top: var(--border-w) solid var(--border);
+}
+
+.why__item:last-child {
+  border-bottom: var(--border-w) solid var(--border);
+}
+
+.why__statement {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-text);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+  color: var(--text-strong);
+}
+
+.why__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  color: var(--text-mute);
+}
+
+@media (min-width: 1024px) {
+  .why__item {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    align-items: start;
+  }
+
+  /* Every statement starts at column 1, every detail at column 9 */
+  .why__statement {
+    grid-column: 1 / 8;
+  }
+
+  .why__body {
+    grid-column: 9 / -1;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   7. CLIENTS
+   Oversized serif names with a short line between them.
+   -------------------------------------------------------------------------- */
+
+.clients__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-16) var(--space-32);
+  margin-top: var(--space-48);
+}
+
+.clients__name {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-32);
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
+  color: var(--text-strong);
+}
+
+/* Separator: the same thin line as the section labels */
+.clients__name:not(:last-child)::after {
+  content: "";
+  width: var(--label-line);
+  height: var(--border-w);
+  background-color: var(--accent-line);
+}
+
+
+/* --------------------------------------------------------------------------
+   8. FAQ
+   Desktop: heading on the left (stays in view), questions on the right.
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .faq-section__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    align-items: start;
+  }
+
+  .faq-section__head {
+    grid-column: 1 / 6;
+    margin-bottom: 0;
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-48));
+  }
+
+  .faq-section__inner > .faq {
+    grid-column: 6 / -1;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   9. BLOG
+   Tablet up: three columns, the middle card dropped lower.
+   -------------------------------------------------------------------------- */
+
+.blog__list {
+  display: grid;
+  gap: var(--col-gap);
+}
+
+.post-card {
+  height: 100%;
+}
+
+.post-card .card__body {
+  flex-grow: 1;
+  min-height: var(--space-192);
+}
+
+/* "Coming soon" sits at the bottom of each card */
+.post-card .card__text {
+  margin-top: auto;
+}
+
+@media (min-width: 768px) {
+  .blog__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .blog__item:nth-child(2) {
+    margin-top: var(--space-96);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   10. FINAL CTA — wine section
+   The .cta styles are shared with the service pages, so they now live in
+   components.css (section 11d). Nothing home-specific is left here.
+   -------------------------------------------------------------------------- */
+
+
+/* --------------------------------------------------------------------------
+   11. REDUCED MOTION
+   No line slide, no pulsing dot, no sticky stacking (cards just scroll).
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .hero__line-inner,
+  .hero__status-dot {          /* the dot stays, just without the pulse */
+    animation: none;
+  }
+
+  .services__head,
+  .service-card {
+    position: static;
+  }
+
+}

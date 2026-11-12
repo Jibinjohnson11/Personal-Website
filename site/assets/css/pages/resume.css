@@ -1,0 +1,413 @@
+/* ==========================================================================
+   pages/resume.css — Styles used ONLY on the Resume page (site/resume/index.html)
+
+   Mobile-first: plain rules are for phones, @media blocks add tablet
+   (768px) and desktop (1024px). The last block is the PRINT stylesheet:
+   a clean black-on-white A4 page with no header, footer, thread or buttons.
+
+   Contents
+   1. Intro (name/contact line)
+   2. Resume blocks (head left, body right)
+   3. Entries (job / study)
+   4. Projects list and skills
+   5. Print (A4)
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. INTRO
+   -------------------------------------------------------------------------- */
+
+.resume-intro__meta {
+  margin-top: var(--space-32);
+}
+
+.resume-intro__role {
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-lead);
+  color: var(--text);
+}
+
+/* Contact details in one wrapping row, separated by a thin dot */
+.resume-intro__contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-24);
+  margin-top: var(--space-16);
+  font-size: var(--fs-small);
+}
+
+.resume-intro__contact a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+}
+
+
+/* --------------------------------------------------------------------------
+   2. RESUME BLOCKS
+   A thin line above each block. Desktop: label + H2 in columns 1–4,
+   content in columns 5–12.
+   -------------------------------------------------------------------------- */
+
+.resume {
+  padding-top: 0;     /* the intro already gives the space above */
+}
+
+.resume__block {
+  display: grid;
+  gap: var(--space-32);
+  padding-block: var(--space-64);
+  border-top: var(--border-w) solid var(--border);
+}
+
+.resume__block:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+/* H2s here are smaller than section titles: five of them stack up */
+.resume__title {
+  font-size: var(--fs-display-text);
+}
+
+.resume__body {
+  display: grid;
+  gap: var(--space-48);
+  max-width: var(--measure);
+}
+
+.resume__summary {
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-lead);
+}
+
+@media (min-width: 1024px) {
+  .resume__block {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    padding-block: var(--space-96);
+  }
+
+  .resume__head {
+    grid-column: 1 / span 4;
+  }
+
+  .resume__body {
+    grid-column: 5 / -1;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   3. ENTRIES (a job or a qualification)
+   Title + date on one line from tablets up; organisation below; bullets.
+   -------------------------------------------------------------------------- */
+
+.resume__entry {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.resume__entry-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-8) var(--space-24);
+}
+
+.resume__entry-title {
+  font-size: var(--fs-h3);
+}
+
+/* Dates in label style */
+.resume__date {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+  white-space: nowrap;
+}
+
+.resume__org {
+  color: var(--text-mute);
+}
+
+/* Bullet points: a short wine dash instead of a dot */
+.resume__points {
+  display: grid;
+  gap: var(--space-16);
+  margin-top: var(--space-16);
+}
+
+.resume__points li {
+  position: relative;
+  padding-left: var(--space-32);
+}
+
+.resume__points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: var(--space-16);
+  height: var(--border-w);
+  background-color: var(--accent-line);
+}
+
+
+/* --------------------------------------------------------------------------
+   4. PROJECTS LIST AND SKILLS
+   -------------------------------------------------------------------------- */
+
+.resume__items {
+  display: grid;
+  gap: var(--space-24);
+}
+
+/* Project name: serif, like project names elsewhere on the site */
+.resume__item-name {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  color: var(--text-strong);
+}
+
+.resume__skills {
+  display: grid;
+  gap: var(--space-24);
+}
+
+.resume__skill-row {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.resume__skill-row dt {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+@media (min-width: 768px) {
+  .resume__skill-row {
+    grid-template-columns: 9rem 1fr;
+    gap: var(--space-24);
+  }
+}
+
+.resume__actions {
+  padding-top: var(--space-64);
+  border-top: var(--border-w) solid var(--border);
+}
+
+
+/* --------------------------------------------------------------------------
+   5. PRINT (A4)
+   - hides everything that isn't the resume (header, footer, thread,
+     WhatsApp button, cursor, breadcrumb, buttons)
+   - black text on white, smaller type, tighter spacing
+   - shows every element even if its scroll animation hasn't run yet
+   - keeps a job, a qualification or a block heading from splitting
+     across pages where possible
+   -------------------------------------------------------------------------- */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm 16mm 18mm;
+  }
+
+  /* Black on white: switch the theme colours once, everything follows */
+  :root,
+  .section,
+  .page-intro {
+    --bg:          #FFFFFF;
+    --surface:     #FFFFFF;
+    --text:        #000000;
+    --text-strong: #000000;
+    --text-mute:   #333333;
+    --accent-text: #000000;
+    --accent-line: #000000;
+    --border:      #BBBBBB;
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    background: #FFFFFF !important;
+    color: #000000;
+    font-size: 9.5pt;
+    line-height: 1.45;
+  }
+
+  /* Not part of the resume */
+  .skip-link,
+  .site-header,
+  .menu,
+  .site-footer,
+  .whatsapp-float,
+  .thread,
+  .cursor,
+  .cursor-view,
+  .bg-fade,
+  .breadcrumb,
+  .resume-intro__actions,
+  .resume__actions,
+  .resume__head .label {
+    display: none !important;
+  }
+
+  /* The intro label is the name ("Jibin Johnson"): keep it, without the line */
+  .resume-intro .label {
+    font-size: 10pt;
+    color: #000000;
+  }
+
+  .resume-intro .label::before {
+    display: none;
+  }
+
+  /* Show everything at rest, whatever the scroll animations were doing
+     (GSAP writes inline opacity/transform, hence !important) */
+  * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+    filter: none !important;
+  }
+
+  .container {
+    max-width: none;
+    padding-inline: 0;
+  }
+
+  .page-intro,
+  .section {
+    padding: 0;
+  }
+
+  .page-intro__title {
+    font-size: 26pt;
+    line-height: 1.1;
+  }
+
+  .resume-intro__meta {
+    margin-top: 4pt;
+  }
+
+  .resume-intro__role {
+    font-size: 11pt;
+  }
+
+  .resume-intro__contact {
+    gap: 2pt 12pt;
+    margin-top: 2pt;
+    font-size: 9pt;
+  }
+
+  .resume-intro__contact a {
+    min-height: 0;
+  }
+
+  /* Links print as plain black text */
+  a {
+    color: #000000;
+    text-decoration: none;
+  }
+
+  /* Blocks: heading on the left, content on the right, compact */
+  .resume__block,
+  .resume__block:first-child {
+    display: grid;
+    grid-template-columns: 30mm 1fr;
+    gap: 6mm;
+    padding-block: 3.5mm;
+    border-top: 0.5pt solid #BBBBBB;
+  }
+
+  .resume__block:first-child {
+    margin-top: 6mm;
+  }
+
+  .resume__head,
+  .resume__body {
+    grid-column: auto;
+  }
+
+  .resume__title {
+    font-size: 13pt;
+    line-height: 1.2;
+  }
+
+  .resume__body {
+    max-width: none;
+    gap: 4mm;
+  }
+
+  .resume__summary {
+    font-size: 9.5pt;
+    line-height: 1.45;
+  }
+
+  .resume__entry-title,
+  .resume__item-name {
+    font-size: 11pt;
+  }
+
+  .resume__date {
+    font-size: 8pt;
+  }
+
+  .resume__points {
+    gap: 2pt;
+    margin-top: 2pt;
+  }
+
+  .resume__points li {
+    padding-left: 12pt;
+  }
+
+  /* Browsers skip backgrounds when printing; this keeps the dash */
+  .resume__points li::before {
+    width: 6pt;
+    top: 0.75em;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .resume__items {
+    gap: 3pt;
+  }
+
+  .resume__skills {
+    gap: 3pt;
+  }
+
+  .resume__skill-row {
+    grid-template-columns: 22mm 1fr;
+    gap: 4mm;
+  }
+
+  .resume__skill-row dt {
+    font-size: 8pt;
+  }
+
+  /* Keep small things together across page breaks. (Not whole blocks:
+     Chrome then pushes everything after the intro to page 2.) */
+  .resume__entry,
+  .resume__skill-row {
+    break-inside: avoid;
+  }
+
+  .resume__title {
+    break-after: avoid;
+  }
+}

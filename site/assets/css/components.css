@@ -1,12 +1,1610 @@
 /* ==========================================================================
    components.css — Reusable building blocks used on many pages
 
-   Will contain (BEM-like names, e.g. .work-card__title):
-   - Header + navigation, mobile menu, footer
-   - Buttons (primary wine pill, ghost), text links with underline draw
-   - Section label ("02 — Selected work"), cards, tags
-   - FAQ (<details>/<summary>), breadcrumbs, form fields
-   - CTA block and the floating WhatsApp button
+   Every component uses the THEME colours (--bg, --text, --border, ...) from
+   tokens.css, so it looks right on dark sections AND inside .section--paper
+   without extra code.
 
-   Styles that belong to only one page go in css/pages/<page>.css instead.
+   Class names are BEM-like:
+     .card          the block
+     .card__title   a part of the block   (two underscores)
+     .btn--ghost    a variation           (two dashes)
+
+   Contents
+   1. Buttons (.btn, .btn--primary, .btn--ghost)
+   2. Text link with underline draw (.link)
+   3. Card (.card, .card__title--display)
+   3b. Typographic cover (.cover--type)
+   4. Tags (.tag, .tag-list)
+   5. Form fields (.field)
+   6. FAQ accordion (.faq)
+   7. Stat / big number (.stat)
+   8. Site header (.site-header)
+   9. Mobile menu overlay (.menu)
+   10. Site footer (.site-footer)
+   11. Floating WhatsApp button (.whatsapp-float)
+   11b. Breadcrumb (.breadcrumb)
+   11c. TODO highlight (.todo)
+   11d. Wine CTA section (.cta)
+   11e. Page intro (.page-intro)
+   12. Reduced motion
    ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. BUTTONS
+   Use on <a> (goes to a page) or <button> (does an action).
+   <a class="btn btn--primary" href="/contact/">Start a project</a>
+   -------------------------------------------------------------------------- */
+
+/* Shared button shape */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  min-height: var(--tap-min);              /* big enough to tap */
+  padding: var(--btn-pad-y) var(--btn-pad-x);
+  border: var(--border-w) solid transparent;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-medium);
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-micro) var(--ease-out),
+    border-color var(--dur-micro) var(--ease-out),
+    color var(--dur-micro) var(--ease-out);
+}
+
+/* Primary: wine pill with white text (12.6:1). Hover: deeper rose.
+   The "magnetic pull" on hover is added later by motion.js. */
+.btn--primary {
+  background-color: var(--wine);
+  color: var(--white);
+}
+
+.btn--primary:hover {
+  background-color: var(--wine-2);
+  color: var(--white);
+}
+
+/* Ghost: thin outline in the text colour. Hover: fills with the text colour,
+   and the label switches to the background colour (paper fill + ink text on dark). */
+.btn--ghost {
+  background-color: transparent;
+  border-color: var(--text);
+  color: var(--text);
+}
+
+.btn--ghost:hover {
+  background-color: var(--text);
+  color: var(--bg);
+}
+
+/* Small: compact button for tight spots like the header (not for page
+   content). Still at least 44px tall thanks to min-height on .btn. */
+.btn--sm {
+  padding: var(--btn-sm-pad-y) var(--btn-sm-pad-x);
+  font-size: var(--fs-small);
+}
+
+/* Row of buttons that wraps on small screens */
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+}
+
+
+/* --------------------------------------------------------------------------
+   2. TEXT LINK WITH UNDERLINE DRAW
+   For standalone links like "See all work →".
+   No underline at rest; on hover a line draws in from the left.
+   It uses transform (scaleX) only, which is cheap for the browser.
+   -------------------------------------------------------------------------- */
+
+.link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  min-height: var(--tap-min);
+  color: var(--text);
+  font-weight: var(--fw-medium);
+  text-decoration: none;
+}
+
+/* The underline: a 1px bar under the text, squashed to zero width */
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--space-8);
+  height: var(--border-w);
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;    /* when leaving, it shrinks towards the right */
+  transition: transform var(--dur-micro) var(--ease-out);
+}
+
+.link:hover {
+  color: var(--text);
+}
+
+/* On hover or keyboard focus it grows from the left to full width */
+.link:hover::after,
+.link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. CARD
+   Raised surface, thin border, no heavy shadows.
+   The whole card is clickable: the link sits on the title, and its ::after
+   stretches over the full card (one link for screen readers, big click area).
+
+   <article class="card">
+     <div class="card__media"><img ...></div>
+     <div class="card__body">
+       <p class="card__meta">Website development</p>
+       <h3 class="card__title"><a class="card__link" href="...">AQ Air</a></h3>
+       <p class="card__text">...</p>
+       <ul class="tag-list">...</ul>
+     </div>
+   </article>
+   -------------------------------------------------------------------------- */
+
+.card {
+  position: relative;             /* the stretched link is placed inside this */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;               /* keeps the zoomed image inside the corners */
+  background-color: var(--surface);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+/* Image area: the image zooms slightly when the card is hovered */
+.card__media {
+  overflow: hidden;
+}
+
+.card__media img {
+  width: 100%;
+  transition: transform var(--dur-reveal) var(--ease-out);
+}
+
+.card:hover .card__media img {
+  transform: scale(1.04);
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding: var(--space-24);
+}
+
+/* Small uppercase line above the title (e.g. the service) */
+.card__meta {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.card__title {
+  font-size: var(--fs-h3);
+}
+
+/* Title link: looks like the title, covers the whole card */
+.card__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.card__text {
+  color: var(--text-mute);
+}
+
+/* Keyboard focus outlines the whole card instead of only the title */
+.card:has(.card__link:focus-visible) {
+  outline: var(--focus-w) solid var(--focus);
+  outline-offset: var(--space-4);
+}
+
+.card__link:focus-visible {
+  outline: none;
+}
+
+/* Display title: the serif voice for project and service names.
+   Use it on any card title that names a project, client or service, so
+   they all match site-wide (descriptions, meta and tags stay Switzer).
+   <h3 class="card__title card__title--display">AQ Air</h3> */
+.card__title--display {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-text);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+  color: var(--text-strong);
+}
+
+
+/* --------------------------------------------------------------------------
+   3b. TYPOGRAPHIC COVER (.cover--type)
+   A designed stand-in for a project image when there is no screenshot
+   (e.g. SEO work): a small label + the industry/theme word in large italic
+   Boska on a deep ink or wine field, with a thin accent line and a soft
+   grain/gradient. It does NOT repeat the project name (the card title
+   right below already shows it).
+   No fake data or charts. 16:9 like the screenshots, so cards line up.
+   It is one image to screen readers (role="img" + aria-label); the text
+   inside is decorative. To use a real screenshot later, replace the whole
+   div with a <picture> in the same slot (.card__media).
+
+   <div class="cover cover--type cover--ink" role="img"
+        aria-label="Serene Derma — healthcare SEO project cover">
+     <p class="cover__label">SEO case study</p>
+     <p class="cover__word">Healthcare</p>
+   </div>
+
+   Colour variants: .cover--ink (#1A1A1A) or .cover--wine (#6D001A).
+   Each sets its own theme colours, so it looks the same on ink or ivory.
+   -------------------------------------------------------------------------- */
+
+.cover {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  container-type: inline-size;   /* lets the title size follow the cover width */
+  transition: transform var(--dur-reveal) var(--ease-out);
+}
+
+.cover--type {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-16);
+  padding: var(--space-24);
+  /* Soft light in the top-right corner over the flat colour */
+  background:
+    radial-gradient(circle at 85% 15%, color-mix(in srgb, var(--white) 9%, transparent), transparent 60%),
+    var(--cover-bg);
+  color: var(--white);
+}
+
+.cover--ink {
+  --cover-bg:    var(--ink-2);
+  --cover-mute:  var(--mute);      /* 7:1 on #1A1A1A */
+  --accent-line: var(--wine-2);
+}
+
+.cover--wine {
+  --cover-bg:    var(--wine);
+  --cover-mute:  var(--silver);    /* well above AA on wine */
+  --accent-line: var(--rose);      /* wine-2 would vanish on wine */
+}
+
+/* Grain: SVG fractal noise, very faint, over the whole cover */
+.cover--type::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Category label with the thin accent line before it (like .label) */
+.cover__label {
+  position: relative;            /* above the grain */
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--cover-mute);
+}
+
+.cover__label::before {
+  content: "";
+  flex-shrink: 0;
+  width: var(--label-line);
+  height: var(--border-w);
+  background-color: var(--accent-line);
+}
+
+/* Industry/theme word in italic Boska: scales with the cover's width
+   (cqi = 1% of it), never smaller than an H3 or bigger than an H2 */
+.cover__word {
+  position: relative;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(var(--fs-h3), 11cqi, var(--fs-h2));
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+  text-wrap: balance;
+}
+
+@media (min-width: 768px) {
+  .cover--type {
+    padding: var(--space-32);
+  }
+}
+
+/* Inside a card, the cover zooms on hover like a screenshot does */
+.card:hover .card__media > .cover {
+  transform: scale(1.04);
+}
+
+
+/* --------------------------------------------------------------------------
+   4. TAGS
+   Small pill labels, e.g. "Frontend", "GSAP". Not clickable.
+   <ul class="tag-list"><li class="tag">SEO</li> ...</ul>
+   -------------------------------------------------------------------------- */
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-4) var(--space-16);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+
+/* --------------------------------------------------------------------------
+   5. FORM FIELDS
+   Label above, bottom border only, rose line on focus, clear error text.
+
+   <div class="field">
+     <label class="field__label" for="name">Your name</label>
+     <input class="field__input" id="name" name="name" type="text">
+     <p class="field__error" id="name-error">Error: please enter your name.</p>
+   </div>
+
+   For an error, add aria-invalid="true" and aria-describedby="name-error"
+   to the input. The error text is only shown when the input is invalid.
+   -------------------------------------------------------------------------- */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.field__label {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+/* The input itself: transparent, with only a bottom line.
+   The line uses --text-mute (not --border) so it meets the 3:1 contrast
+   that form controls need to be visible. */
+.field__input {
+  width: 100%;
+  min-height: var(--tap-min);
+  padding: var(--space-8) 0;
+  background-color: transparent;
+  border: 0;
+  border-bottom: var(--border-w) solid var(--text-mute);
+  border-radius: 0;
+  color: var(--text);
+  font-size: var(--fs-body);
+  transition: border-color var(--dur-micro) var(--ease-out),
+              box-shadow var(--dur-micro) var(--ease-out);
+}
+
+textarea.field__input {
+  min-height: var(--space-128);
+  resize: vertical;
+}
+
+.field__input::placeholder {
+  color: var(--text-mute);
+  opacity: 1; /* Firefox makes placeholders faint by default */
+}
+
+/* Focus: the bottom line turns rose and becomes thicker.
+   (A box-shadow adds the extra thickness without moving the layout.) */
+.field__input:focus {
+  outline: none;
+  border-bottom-color: var(--focus);
+  box-shadow: 0 var(--border-w) 0 0 var(--focus);
+}
+
+/* Help text under a field */
+.field__hint {
+  font-size: var(--fs-label);
+  color: var(--text-mute);
+}
+
+/* Error text: hidden until the field is marked invalid */
+.field__error {
+  display: none;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  color: var(--accent-text);  /* rose on dark, wine on light — both readable */
+}
+
+.field:has([aria-invalid="true"]) .field__error {
+  display: block;
+}
+
+.field__input[aria-invalid="true"] {
+  border-bottom-color: var(--accent-text);
+  box-shadow: 0 var(--border-w) 0 0 var(--accent-text);
+}
+
+/* The "*" after a required field's label. The word "required" is read by
+   screen readers from a visually-hidden span next to it.
+   <label ...>Your name <span class="field__req" aria-hidden="true">*</span>
+     <span class="visually-hidden">(required)</span></label> */
+.field__req {
+  color: var(--accent-text);
+}
+
+/* Select (drop-down): same bottom-line look as the text inputs.
+   The browser's own arrow is removed and a small chevron is drawn with two
+   gradients in the text colour on the right. */
+select.field__input {
+  appearance: none;
+  padding-right: var(--space-32);
+  cursor: pointer;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--text-mute) 50%),
+    linear-gradient(135deg, var(--text-mute) 50%, transparent 50%);
+  background-position:
+    calc(100% - 13px) 50%,
+    calc(100% - 8px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* The open list of options: dark surface so the text stays readable */
+select.field__input option {
+  background-color: var(--surface);
+  color: var(--text);
+}
+
+
+/* --------------------------------------------------------------------------
+   6. FAQ ACCORDION
+   Built on <details>/<summary>: works with keyboard and without JavaScript.
+   The question is a real heading (good for SEO); the + turns into × when open.
+
+   <div class="faq">
+     <details class="faq__item">
+       <summary class="faq__summary">
+         <h3 class="faq__question">Question?</h3>
+         <span class="faq__icon" aria-hidden="true"></span>
+       </summary>
+       <div class="faq__answer"><p>Answer.</p></div>
+     </details>
+   </div>
+   -------------------------------------------------------------------------- */
+
+.faq {
+  border-top: var(--border-w) solid var(--border);
+}
+
+.faq__item {
+  border-bottom: var(--border-w) solid var(--border);
+}
+
+/* The clickable question row */
+.faq__summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-24);
+  min-height: var(--tap-min);
+  padding-block: var(--space-24);
+  cursor: pointer;
+  list-style: none;  /* removes the default ▸ triangle */
+}
+
+/* Safari needs this to remove its triangle */
+.faq__summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Serif question */
+.faq__question {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h3);
+}
+
+/* The + icon: two thin bars drawn with ::before (horizontal) and ::after (vertical) */
+.faq__icon {
+  position: relative;
+  flex-shrink: 0;
+  width: var(--space-24);
+  height: var(--space-24);
+  color: var(--text);
+  transition: transform var(--dur-micro) var(--ease-out);
+}
+
+.faq__icon::before,
+.faq__icon::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: var(--border-w);
+  background-color: currentColor;
+}
+
+.faq__icon::after {
+  transform: rotate(90deg);
+}
+
+/* Open: turning the + by 45° makes it an × */
+.faq__item[open] .faq__icon {
+  transform: rotate(45deg);
+}
+
+.faq__answer {
+  padding-bottom: var(--space-24);
+  color: var(--text-mute);
+}
+
+
+/* --------------------------------------------------------------------------
+   7. STAT / BIG NUMBER
+   A large serif number with a small symbol (+, %, ×, k) raised to the top,
+   and a short label underneath.
+
+   <div class="stat">
+     <p class="stat__value">95<span class="stat__unit">+</span></p>
+     <p class="stat__label">Lighthouse score target</p>
+   </div>
+
+   Put several in <div class="stat-group"> to show them in a row.
+   -------------------------------------------------------------------------- */
+
+.stat-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-48) var(--space-64);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* The number: Boska Bold, H2 size, tight line height.
+   inline-flex + flex-start puts the symbol at the top instead of the baseline. */
+.stat__value {
+  display: inline-flex;
+  align-items: flex-start;
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  letter-spacing: var(--ls-h2);
+  color: var(--text-strong);
+}
+
+/* The symbol: light Switzer at half the number's size, in the accent colour
+   (rose on dark, wine on ivory — both pass contrast at this size).
+   The small top margin lines the symbol up with the top of the digits. */
+.stat__unit {
+  margin-top: 0.15em;
+  margin-left: 0.05em;
+  font-family: var(--font-body);
+  font-size: 0.5em;
+  font-weight: var(--fw-light);
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--accent-text);
+}
+
+/* Short description under the number, in label style */
+.stat__label {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+
+/* --------------------------------------------------------------------------
+   8. SITE HEADER
+   Sticky bar at the top: wordmark · nav · "Start a project" · menu toggle.
+   menu.js adds two classes while scrolling:
+     .site-header--solid   after 80px: blurred see-through ink background
+     .site-header--hidden  scrolling down: slides up out of view
+   Sticky (not fixed) keeps the header in the page flow, so content never
+   hides underneath it and no extra top padding is needed.
+   -------------------------------------------------------------------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  color: var(--text);
+  transition: transform var(--dur-reveal) var(--ease-out);
+}
+
+/* Two glass backgrounds live on pseudo-elements so they can fade in and out
+   with opacity (cheaper than animating background-color or the blur):
+     ::before  translucent INK glass   (over dark sections)
+     ::after   translucent PAPER glass (over ivory sections)
+   Both are invisible at the very top of the page (before 80px). */
+.site-header::before,
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  -webkit-backdrop-filter: blur(var(--blur));
+  backdrop-filter: blur(var(--blur));
+  opacity: 0;
+  transition: opacity var(--dur-micro) var(--ease-out);
+}
+
+.site-header::before {
+  background-color: var(--header-glass);
+  border-bottom: var(--border-w) solid var(--line);
+}
+
+.site-header::after {
+  background-color: var(--header-glass-light);
+  border-bottom: var(--border-w) solid var(--silver);
+}
+
+/* Scrolled past 80px: show the glass that matches what's underneath */
+.site-header--solid::before {
+  opacity: 1;
+}
+
+.site-header--solid.site-header--light::before {
+  opacity: 0;
+}
+
+.site-header--solid.site-header--light::after {
+  opacity: 1;
+}
+
+/* Light header theme: added by motion.js while an ivory section
+   ([data-bg="paper"] or .section--paper) is behind the header.
+   Same idea as .section--paper: swap the theme colours and every part of
+   the header (wordmark, nav, toggle) follows. The "Start a project" pill
+   uses --wine directly, so it stays burgundy in both themes.
+   Never while the mobile menu is open: the menu overlay is always ink. */
+html:not(.is-menu-open) .site-header--light {
+  --text:        var(--ink);
+  --text-strong: var(--ink);
+  --text-mute:   var(--line);
+  --accent-line: var(--wine);
+  --focus:       var(--wine);
+}
+
+/* Smooth ~300ms colour change when the theme switches */
+.site-header__wordmark,
+.menu-toggle {
+  transition: color var(--dur-micro) var(--ease-out);
+}
+
+.site-header--hidden {
+  transform: translateY(-100%);
+}
+
+.site-header__inner {
+  display: flex;
+  flex-wrap: wrap;          /* only matters without JS on phones (nav wraps below) */
+  align-items: center;
+  gap: 0 var(--space-24);
+  min-height: var(--header-h);
+}
+
+/* Wordmark: the name in Boska, pushes everything else to the right */
+.site-header__wordmark {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  margin-right: auto;
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-h2);
+  color: var(--text-strong);
+  text-decoration: none;
+}
+
+.site-header__wordmark:hover {
+  color: var(--text-strong);
+}
+
+/* Navigation. Without JS it is always shown (on phones it wraps onto its own
+   row). With JS, phones and tablets use the full-screen menu instead. */
+.site-header__nav {
+  flex-basis: 100%;
+}
+
+html.js .site-header__nav {
+  display: none;
+}
+
+.site-header__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-32);
+}
+
+/* Nav links in label style: small uppercase, muted until hovered or active */
+.site-header__link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+  text-decoration: none;
+  transition: color var(--dur-micro) var(--ease-out);
+}
+
+/* Thin burgundy underline, hidden (scaleX 0) until hover or active */
+.site-header__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: var(--space-8);
+  width: 100%;
+  height: var(--border-w);
+  background-color: var(--accent-line);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur-micro) var(--ease-out);
+}
+
+.site-header__link:hover {
+  color: var(--text);
+}
+
+.site-header__link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Active states (set by tools/sync-partials.mjs):
+   aria-current="page"  → this exact page
+   aria-current="true"  → a page inside this section (e.g. a case study → Work) */
+.site-header__link[aria-current] {
+  color: var(--text);
+}
+
+.site-header__link[aria-current]::after {
+  transform: scaleX(1);
+}
+
+/* "Start a project" pill: hidden on small phones (it is inside the menu) */
+.site-header__cta {
+  display: none;
+}
+
+/* Menu toggle: only exists with JS (without JS the nav is shown instead) */
+.menu-toggle {
+  display: none;
+  align-items: center;
+  gap: var(--space-16);
+  min-width: var(--tap-min);
+  min-height: var(--tap-min);
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+html.js .menu-toggle {
+  display: inline-flex;
+}
+
+/* "Menu" when closed, "Close" when open — both words are in the HTML,
+   aria-expanded (set by menu.js) decides which one is shown */
+.menu-toggle__text--close,
+.menu-toggle[aria-expanded="true"] .menu-toggle__text--open {
+  display: none;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__text--close {
+  display: inline;
+}
+
+/* Two thin bars that turn into an × when the menu is open */
+.menu-toggle__icon {
+  position: relative;
+  width: var(--space-24);
+  height: var(--space-8);
+}
+
+.menu-toggle__icon::before,
+.menu-toggle__icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: var(--border-w);
+  background-color: currentColor;
+  transition: transform var(--dur-micro) var(--ease-out),
+              background-color var(--dur-micro) var(--ease-out); /* header theme change */
+}
+
+.menu-toggle__icon::before { top: 0; }
+.menu-toggle__icon::after  { bottom: 0; }
+
+/* Move both bars to the middle (half the gap between them), then rotate */
+.menu-toggle[aria-expanded="true"] .menu-toggle__icon::before {
+  transform: translateY(calc((var(--space-8) - var(--border-w)) / 2)) rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__icon::after {
+  transform: translateY(calc((var(--space-8) - var(--border-w)) / -2)) rotate(-45deg);
+}
+
+@media (min-width: 768px) {
+  .site-header__cta {
+    display: inline-flex;
+  }
+}
+
+/* Desktop: nav sits in the bar, the toggle and overlay are not used */
+@media (min-width: 1024px) {
+  .site-header__nav,
+  html.js .site-header__nav {
+    display: block;
+    flex-basis: auto;
+  }
+
+  html.js .menu-toggle {
+    display: none;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   9. MOBILE MENU (full-screen overlay, below 1024px, JS only)
+   Closed: invisible and unreachable (visibility: hidden).
+   Open (.is-open, set by menu.js): fades in, then the links rise in one
+   after another — each waits var(--i) × var(--stagger).
+   -------------------------------------------------------------------------- */
+
+.menu {
+  display: none;
+}
+
+html.js .menu {
+  display: block;
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+  overflow-y: auto;
+  padding-top: var(--header-h);   /* room for the header, which stays on top */
+  background-color: var(--bg);
+  opacity: 0;
+  visibility: hidden;
+  /* visibility switches off only AFTER the fade-out has finished */
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    visibility 0s linear var(--dur-reveal);
+}
+
+html.js .menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    visibility 0s;
+}
+
+.menu__nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-48);
+  min-height: 100%;
+  padding-block: var(--space-48);
+}
+
+.menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);   /* roomy enough to tap one link without hitting the next */
+}
+
+/* Each row: small number, then the big link. flex-start lines the number
+   up with the top of the serif word. */
+.menu__list .menu__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-16);
+}
+
+/* "01", "02"… in label style (decorative, aria-hidden in the HTML).
+   min-width keeps all links starting at the same x position. */
+.menu__num {
+  min-width: 2ch;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+/* Each item starts a little lower and transparent... */
+.menu__item {
+  opacity: 0;
+  transform: translateY(var(--space-24));
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out);
+}
+
+/* ...and rises into place when the menu opens, one after another */
+.menu.is-open .menu__item {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc((var(--i) + 1) * var(--stagger));
+}
+
+/* Large serif links */
+.menu__link {
+  position: relative;
+  display: inline-flex;
+  min-height: var(--tap-min);
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
+  color: var(--text-strong);
+  text-decoration: none;
+}
+
+.menu__link:hover {
+  color: var(--text-strong);
+}
+
+/* Active page/section: italic serif + the same thin burgundy underline */
+.menu__link[aria-current] {
+  font-style: italic;
+}
+
+.menu__link[aria-current]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: var(--label-line);
+  height: var(--border-w);
+  background-color: var(--accent-line);
+}
+
+.menu__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-8);
+}
+
+.menu__footer .btn {
+  margin-bottom: var(--space-16);
+}
+
+/* LinkedIn · GitHub · Instagram in a muted row */
+.menu__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-24);
+}
+
+.menu__social-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  color: var(--mute);
+  text-decoration: none;
+  transition: color var(--dur-micro) var(--ease-out);
+}
+
+.menu__social-link:hover {
+  color: var(--paper);
+}
+
+/* Lock page scroll while the menu is open (class set by menu.js).
+   Only on <html>, NOT on <body>: if body also gets overflow: hidden it
+   becomes its own scroll box, and the sticky header then sticks to the top
+   of the body (far above the screen when scrolled) instead of the window —
+   so the header and the Close button would disappear. */
+html.is-menu-open {
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  html.js .menu {
+    display: none;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   10. SITE FOOTER
+   Giant "Let's talk" → short text → contact + socials → link columns →
+   bottom line. Columns sit side by side from 768px.
+   -------------------------------------------------------------------------- */
+
+/* Bottom padding = the floating WhatsApp button's full height and offset
+   plus some air, so the button never covers the bottom line when scrolled
+   to the very end. env(safe-area-inset-bottom) adds the iPhone home-bar
+   area (0 elsewhere). */
+.site-footer {
+  padding-top: var(--section-pad);
+  padding-bottom: calc(var(--fab-size) + var(--space-24) + var(--space-48) + env(safe-area-inset-bottom, 0px));
+  border-top: var(--border-w) solid var(--border);
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* Uses the 12-column grid; on phones every block spans all columns */
+.site-footer__inner {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  row-gap: var(--space-64);
+}
+
+.site-footer__inner > * {
+  grid-column: 1 / -1;
+}
+
+/* The giant line. inline-block + position: relative so the underline
+   (::after) can be placed under it. */
+.site-footer__cta-link {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--ls-hero);
+  color: var(--text-strong);
+  text-decoration: none;
+}
+
+.site-footer__cta-link:hover {
+  color: var(--text-strong);
+}
+
+/* Keeps "talk" and the arrow together on one line */
+.site-footer__nowrap {
+  white-space: nowrap;
+}
+
+/* Arrow: smaller, light Switzer, right after the text and centred on it.
+   width: 1em gives it a fixed size, so the underline can stop before it. */
+.site-footer__arrow {
+  display: inline-block;
+  width: 1em;
+  margin-left: var(--space-16);
+  font-family: var(--font-body);
+  font-size: 0.4em;
+  font-weight: var(--fw-light);
+  line-height: 1;
+  vertical-align: middle;
+  color: var(--accent-text);   /* rose on dark */
+  transition:
+    transform var(--dur-micro) var(--ease-out),
+    color var(--dur-micro) var(--ease-out);
+}
+
+/* Thin burgundy underline under the TEXT only: it ends before the arrow
+   (arrow margin + arrow width, which is 1em × 0.4 = 0.4em of the big text).
+   Hidden (scaleX 0) until hover/focus, then draws in from the left. */
+.site-footer__cta-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: calc(var(--space-16) + 0.4em);
+  bottom: 0;
+  height: var(--border-w);
+  background-color: var(--accent-line);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-reveal) var(--ease-out);
+}
+
+.site-footer__cta-link:hover::after,
+.site-footer__cta-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* Hover/focus: arrow slides ~12px right and turns paper */
+.site-footer__cta-link:hover .site-footer__arrow,
+.site-footer__cta-link:focus-visible .site-footer__arrow {
+  color: var(--paper);
+  transform: translateX(calc(var(--space-8) + var(--space-4)));
+}
+
+/* From tablet up the whole line never wraps */
+@media (min-width: 768px) {
+  .site-footer__cta-link {
+    white-space: nowrap;
+  }
+}
+
+.site-footer__text {
+  max-width: var(--measure);
+  margin-top: var(--space-32);
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-lead);
+  color: var(--text-mute);
+}
+
+/* Contact block: email + WhatsApp, then socials */
+.site-footer__contact-block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.site-footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-24);
+}
+
+/* Column heading in label style (not an <h2>, so the page outline stays clean) */
+.site-footer__heading {
+  margin-bottom: var(--space-16);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.site-footer__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* Muted links that brighten on hover */
+.site-footer__link {
+  display: inline-block;
+  padding-block: var(--space-4);
+  color: var(--text-mute);
+  text-decoration: none;
+  transition: color var(--dur-micro) var(--ease-out);
+}
+
+.site-footer__link:hover {
+  color: var(--text);
+}
+
+/* Bottom line: location + copyright */
+.site-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-8) var(--space-24);
+  padding-top: var(--space-24);
+  border-top: var(--border-w) solid var(--border);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+@media (min-width: 768px) {
+  .site-footer__col--services { grid-column: 1 / span 6; }
+  .site-footer__col--more     { grid-column: 7 / -1; }
+}
+
+@media (min-width: 1024px) {
+  .site-footer__contact-block { grid-column: 1 / span 5; }
+  .site-footer__col--services { grid-column: 7 / span 3; }
+  .site-footer__col--more     { grid-column: 10 / -1; }
+}
+
+
+/* --------------------------------------------------------------------------
+   11. FLOATING WHATSAPP BUTTON
+   Wine circle, bottom-right. With JS it starts hidden and main.js adds
+   .is-visible once the hero has scrolled away. Without JS: always visible.
+   -------------------------------------------------------------------------- */
+
+.whatsapp-float {
+  position: fixed;
+  right: var(--space-24);
+  bottom: calc(var(--space-24) + env(safe-area-inset-bottom, 0px)); /* clear of the iPhone home bar */
+  z-index: var(--z-float);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--fab-size);
+  height: var(--fab-size);
+  border-radius: var(--radius-pill);
+  background-color: var(--wine);
+  color: var(--white);
+  transition: background-color var(--dur-micro) var(--ease-out);
+}
+
+.whatsapp-float:hover {
+  background-color: var(--wine-2);
+  color: var(--white);
+}
+
+/* Tooltip "Chat on WhatsApp": a small graphite pill to the LEFT of the
+   button. Not shown on touch screens (there is no hover there). */
+.whatsapp-float__tip {
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .whatsapp-float__tip {
+    display: block;
+    position: absolute;
+    right: calc(100% + var(--space-16));   /* sits left of the circle */
+    top: 50%;
+    padding: var(--space-8) var(--space-16);
+    border: var(--border-w) solid var(--border);
+    border-radius: var(--radius-pill);
+    background-color: var(--surface);
+    color: var(--text);
+    font-size: var(--fs-label);
+    font-weight: var(--fw-medium);
+    line-height: var(--lh-label);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    white-space: nowrap;
+    pointer-events: none;                  /* hovering the tip itself does nothing */
+    opacity: 0;
+    transform: translate(var(--space-8), -50%);
+    transition:
+      opacity var(--dur-micro) var(--ease-out),
+      transform var(--dur-micro) var(--ease-out);
+  }
+
+  /* Slides in from the button on hover or keyboard focus */
+  .whatsapp-float:hover .whatsapp-float__tip,
+  .whatsapp-float:focus-visible .whatsapp-float__tip {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+}
+
+html.js .whatsapp-float {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(var(--space-16));
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out),
+    visibility 0s linear var(--dur-reveal),
+    background-color var(--dur-micro) var(--ease-out);
+}
+
+html.js .whatsapp-float.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity var(--dur-reveal) var(--ease-out),
+    transform var(--dur-reveal) var(--ease-out),
+    visibility 0s,
+    background-color var(--dur-micro) var(--ease-out);
+}
+
+
+/* --------------------------------------------------------------------------
+   11b. BREADCRUMB
+   Visible trail on every page below Home. It must match the page's
+   BreadcrumbList JSON-LD exactly (same names, same order, same URLs).
+   The "›" separators are drawn by CSS, so screen readers only read the links.
+
+   <nav class="breadcrumb container" aria-label="Breadcrumb">
+     <ol class="breadcrumb__list">
+       <li><a href="/">Home</a></li>
+       <li><a href="/work/">Work</a></li>
+       <li><a href="/work/aq-air/" aria-current="page">AQ Air</a></li>
+     </ol>
+   </nav>
+   -------------------------------------------------------------------------- */
+
+.breadcrumb {
+  padding-top: var(--space-24);
+}
+
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: var(--space-8);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.breadcrumb__list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+/* Separator before every item except the first */
+.breadcrumb__list li + li::before {
+  content: "›";
+  color: var(--text-mute);
+}
+
+/* Links are mute until hovered; the 44px min-height keeps them easy to tap */
+.breadcrumb__list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  color: var(--text-mute);
+  text-decoration: none;
+}
+
+.breadcrumb__list a:hover {
+  color: var(--text-strong);
+}
+
+/* The current page reads as plain text, a little brighter */
+.breadcrumb__list a[aria-current="page"] {
+  color: var(--text);
+}
+
+
+/* --------------------------------------------------------------------------
+   11c. TODO HIGHLIGHT
+   Marks a [placeholder] from docs/website-content.md that still needs a
+   real fact (year, URL, numbers). Deliberately loud so it can't be missed.
+   Search the HTML for class="todo" and remove each one once it is filled.
+   Dashed rose outline: no colour-only meaning, readable on ink and ivory.
+   <span class="todo">[year]</span>
+   -------------------------------------------------------------------------- */
+
+.todo {
+  padding-inline: var(--space-4);
+  outline: var(--border-w) dashed var(--rose);
+  outline-offset: var(--space-4);
+  border-radius: var(--radius-sm);
+  background-color: color-mix(in srgb, var(--rose) 18%, transparent);
+}
+
+
+/* --------------------------------------------------------------------------
+   11d. WINE CTA SECTION (.cta)
+   The closing "next step" block on the home page and every service page.
+   Swaps the theme colours, like .section--paper does, so every component
+   inside adapts. White and silver on wine are both well above AA.
+   -------------------------------------------------------------------------- */
+
+.cta {
+  --bg:          var(--wine);
+  --text:        var(--white);
+  --text-strong: var(--white);
+  --text-mute:   var(--silver);
+  --accent-text: var(--white);
+  --accent-line: var(--rose);    /* the label line stays visible on wine */
+  --border:      var(--rose);
+  --focus:       var(--white);
+}
+
+.cta__title {
+  font-size: var(--fs-hero);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--ls-hero);
+  text-wrap: balance;   /* "Have a project / in mind?" instead of a lone last word */
+}
+
+.cta__lead {
+  margin-top: var(--space-48);
+  color: var(--text-mute);
+}
+
+.cta__actions {
+  margin-top: var(--space-48);
+}
+
+/* The primary button is wine by default — invisible on wine, so here it
+   turns white with ink text */
+.cta .btn--primary {
+  background-color: var(--white);
+  color: var(--ink);
+}
+
+.cta .btn--primary:hover {
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+.cta__resume {
+  margin-top: var(--space-32);
+}
+
+@media (min-width: 1024px) {
+  .cta__lead,
+  .cta__actions,
+  .cta__resume {
+    margin-left: calc(100% / var(--grid-columns) * 5);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   11e. PAGE INTRO (.page-intro)
+   The opening of simple inner pages (About, Resume, Contact, Privacy,
+   Thank you, 404): label → big H1 → lead, on the 12-column grid.
+   Like .work-intro, the H1 is the LCP element, so it is never hidden:
+   it only slides up a little in CSS from the first paint.
+
+   <section class="page-intro" aria-labelledby="page-title">
+     <div class="container page-intro__inner">
+       <p class="label">About</p>
+       <h1 class="page-intro__title" id="page-title">…</h1>
+       <p class="lead page-intro__lead">…</p>
+     </div>
+   </section>
+
+   Page CSS places extra children (a portrait, buttons) on the grid.
+   -------------------------------------------------------------------------- */
+
+.page-intro {
+  padding-block: var(--space-48) var(--section-pad);
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: clip;
+}
+
+/* Above the burgundy thread (it isn't a .section) */
+.page-intro > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.page-intro__inner {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  align-content: start;
+}
+
+.page-intro__inner > * {
+  grid-column: 1 / -1;
+}
+
+/* .label is inline-flex: keep it from stretching across the grid cell */
+.page-intro__inner > .label {
+  justify-self: start;
+}
+
+/* Slide up from 30% lower, in CSS so it starts at first paint */
+@keyframes page-intro-up {
+  from { transform: translateY(30%); }
+  to   { transform: none; }
+}
+
+html.js .page-intro__title {
+  animation: page-intro-up var(--dur-hero) var(--ease-out) both;
+}
+
+.page-intro__lead {
+  max-width: var(--measure);
+  margin-top: var(--space-32);
+  color: var(--text-mute);
+}
+
+/* Buttons or links under the lead */
+.page-intro__actions {
+  margin-top: var(--space-48);
+}
+
+@media (min-width: 1024px) {
+  .page-intro {
+    padding-top: var(--space-64);
+  }
+
+  .page-intro__title {
+    grid-column: 1 / span 10;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   12. REDUCED MOTION
+   For people who ask their device for less motion: no zooms, spins,
+   slides or staggered entrances — things simply appear.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .card__media img,
+  .cover,
+  .faq__icon,
+  .link::after,
+  .site-header,
+  .site-header__link::after,
+  .menu-toggle__icon::before,
+  .menu-toggle__icon::after,
+  .menu__item,
+  .site-footer__arrow,
+  .site-footer__cta-link::after,
+  .whatsapp-float__tip,
+  html.js .whatsapp-float,
+  html.js .whatsapp-float.is-visible {
+    transition: none;
+  }
+
+  .menu__item,
+  html.js .whatsapp-float {
+    transform: none;
+  }
+
+  html.js .page-intro__title {
+    animation: none;
+  }
+
+  .card:hover .card__media img,
+  .card:hover .card__media > .cover {
+    transform: none;
+  }
+}

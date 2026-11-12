@@ -1,0 +1,24 @@
+#!/bin/sh
+# ==========================================================================
+# pre-commit — runs before every `git commit`
+#
+# 1. npm run prepare-deploy  (cache-bust → sync partials → sitemap → SEO check)
+# 2. re-stages everything in site/ that step 1 changed (git add site/)
+# 3. blocks the commit if the SEO check found ERRORS (warnings are fine)
+#
+# Turned on once with:      npm run setup-hooks
+# Skip in an emergency:     git commit --no-verify
+# ==========================================================================
+
+npm run prepare-deploy
+status=$?
+
+# Stage the files the tools updated, even if the check failed,
+# so the next attempt starts from the fixed-up files.
+git add site/ partials/
+
+if [ $status -ne 0 ]; then
+  echo ""
+  echo "✘  Commit blocked: fix the SEO errors above (or use git commit --no-verify)."
+  exit 1
+fi

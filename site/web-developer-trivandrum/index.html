@@ -1,0 +1,744 @@
+<!doctype html>
+<!--
+  ==========================================================================
+  /web-developer-trivandrum/ — Web developer in Trivandrum (location page)
+  Built from templates/service.html. Copy: docs/website-content.md,
+  "PAGE: Web developer in Trivandrum (location)".
+  Primary keyword: web developer in Trivandrum (this page only).
+
+  Distinctive moment: section 04, the "Areas I serve" list — the area
+  names of Thiruvananthapuram in large serif, each lit up as the burgundy
+  thread passes it (pages/service.css section 14, pages/service.js 5).
+
+  Never edit between the PARTIAL markers; edit the files in partials/ and
+  run npm run sync.
+  ==========================================================================
+-->
+<html lang="en-IN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Swap "no-js" for "js" as early as possible (see page.html) -->
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
+
+  <!-- ===== SEO basics ===== -->
+  <title>Web Developer in Trivandrum | Freelance Website Developer</title>
+  <meta name="description" content="Freelance web developer in Trivandrum (Thiruvananthapuram). Premium, fast websites for local businesses and startups. Meet in person or online.">
+  <link rel="canonical" href="https://jibinjohnson.in/web-developer-trivandrum/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+
+  <!-- ===== Open Graph ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:site_name" content="Jibin Johnson">
+  <meta property="og:title" content="Web Developer in Trivandrum | Freelance Website Developer">
+  <meta property="og:description" content="Freelance web developer in Trivandrum (Thiruvananthapuram). Premium, fast websites for local businesses and startups. Meet in person or online.">
+  <meta property="og:url" content="https://jibinjohnson.in/web-developer-trivandrum/">
+  <!-- Share image (1200×630): made by npm run og from tools/og-pages.json -->
+  <meta property="og:image" content="https://jibinjohnson.in/assets/img/og/web-developer-trivandrum.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Jibin Johnson, web developer in Trivandrum: meet in person or online">
+
+  <!-- ===== Twitter / X card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Web Developer in Trivandrum | Freelance Website Developer">
+  <meta name="twitter:description" content="Freelance web developer in Trivandrum (Thiruvananthapuram). Premium, fast websites for local businesses and startups. Meet in person or online.">
+  <meta name="twitter:image" content="https://jibinjohnson.in/assets/img/og/web-developer-trivandrum.jpg">
+  <meta name="twitter:image:alt" content="Jibin Johnson, web developer in Trivandrum: meet in person or online">
+
+  <!-- ===== Browser look, icons and app manifest ===== -->
+  <meta name="theme-color" content="#0E0E0E">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- ===== Fonts: preload only the two used above the fold ===== -->
+  <link rel="preload" href="/assets/fonts/Boska-Medium.woff2?v=a9e390c3" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/Switzer-Variable.woff2?v=d1bf801f" as="font" type="font/woff2" crossorigin>
+
+  <!-- ===== CSS: tokens → base → components → motion → page type ===== -->
+  <link rel="stylesheet" href="/assets/css/tokens.css?v=325c6fdf">
+  <link rel="stylesheet" href="/assets/css/base.css?v=02e39957">
+  <link rel="stylesheet" href="/assets/css/components.css?v=f150552e">
+  <link rel="stylesheet" href="/assets/css/motion.css?v=06b1ed8f">
+  <link rel="stylesheet" href="/assets/css/pages/service.css?v=79313112">
+
+  <!-- ===== Structured data (JSON-LD) =====
+       WebSite + Person: same on every page.
+       ProfessionalService: the local business (no priceRange: no prices).
+       Service: website development in Trivandrum.
+       FAQPage: copied word for word from the visible FAQ below.
+       BreadcrumbList: Home › Web developer in Trivandrum. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jibinjohnson.in/#website",
+        "url": "https://jibinjohnson.in/",
+        "name": "Jibin Johnson",
+        "inLanguage": "en-IN",
+        "publisher": { "@id": "https://jibinjohnson.in/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jibinjohnson.in/#person",
+        "name": "Jibin Johnson",
+        "jobTitle": "Web Developer & SEO Specialist",
+        "url": "https://jibinjohnson.in/",
+        "image": "https://jibinjohnson.in/assets/img/jibin-johnson-web-developer-trivandrum.jpg",
+        "email": "mailto:jibinjohnsoninfo@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Thiruvananthapuram",
+          "addressRegion": "Kerala",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/jibinjohnson",
+          "https://github.com/Jibinjohnson11",
+          "https://www.instagram.com/jibineyyyy"
+        ],
+        "knowsAbout": [
+          "Web development",
+          "Search engine optimization",
+          "Technical SEO",
+          "Local SEO",
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "GSAP",
+          "UI/UX design",
+          "Core Web Vitals"
+        ],
+        "alumniOf": [
+          { "@type": "EducationalOrganization", "name": "Edure" },
+          { "@type": "CollegeOrUniversity", "name": "University of Madras" }
+        ]
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://jibinjohnson.in/web-developer-trivandrum/#business",
+        "name": "Jibin Johnson — Web Developer in Trivandrum",
+        "description": "Freelance web developer in Trivandrum (Thiruvananthapuram). Premium, fast websites for local businesses and startups. Meet in person or online.",
+        "url": "https://jibinjohnson.in/web-developer-trivandrum/",
+        "image": "https://jibinjohnson.in/assets/img/jibin-johnson-web-developer-trivandrum.jpg",
+        "email": "mailto:jibinjohnsoninfo@gmail.com",
+        "telephone": "+91 77362 08172",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Thiruvananthapuram",
+          "addressRegion": "Kerala",
+          "addressCountry": "IN"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "Thiruvananthapuram",
+          "containedInPlace": {
+            "@type": "State",
+            "name": "Kerala",
+            "containedInPlace": { "@type": "Country", "name": "India", "identifier": "IN" }
+          }
+        },
+        "founder": { "@id": "https://jibinjohnson.in/#person" },
+        "employee": { "@id": "https://jibinjohnson.in/#person" }
+      },
+      {
+        "@type": "Service",
+        "@id": "https://jibinjohnson.in/web-developer-trivandrum/#service",
+        "name": "Website development services in Trivandrum",
+        "serviceType": "Website development",
+        "description": "Freelance web developer in Trivandrum (Thiruvananthapuram). Premium, fast websites for local businesses and startups. Meet in person or online.",
+        "url": "https://jibinjohnson.in/web-developer-trivandrum/",
+        "provider": { "@id": "https://jibinjohnson.in/#person" },
+        "areaServed": {
+          "@type": "City",
+          "name": "Thiruvananthapuram",
+          "containedInPlace": { "@type": "State", "name": "Kerala" }
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://jibinjohnson.in/web-developer-trivandrum/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Can we meet in person?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. I'm based in Thiruvananthapuram and happy to meet at your office or a café for the first meeting and key reviews." }
+          },
+          {
+            "@type": "Question",
+            "name": "How much does a website cost in Trivandrum?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Every business is different — the price depends on the pages, design and features you need. After our first conversation, you get a clear fixed quote with no hidden costs." }
+          },
+          {
+            "@type": "Question",
+            "name": "How quickly can you deliver?",
+            "acceptedAnswer": { "@type": "Answer", "text": "A landing page can be ready in 1–2 weeks, and a full business website in 3–6 weeks, depending on content and approvals." }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you work with Technopark startups?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. I build launch websites, product pages and landing pages that look credible to investors and customers. See websites for startups." }
+          },
+          {
+            "@type": "Question",
+            "name": "Can you help with my Google Business Profile?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. I set up or optimise it and connect it to your website. It's one of the biggest factors in appearing on Google Maps." }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jibinjohnson.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Web developer in Trivandrum", "item": "https://jibinjohnson.in/web-developer-trivandrum/" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- PARTIAL:header -->
+<!-- Site header: wordmark, main navigation, "Start a project" button and the
+     mobile menu toggle. Behaviour (hide on scroll, mobile menu) is in menu.js.
+     The current page's nav link gets aria-current from tools/sync-partials.mjs. -->
+<header class="site-header" data-header>
+  <div class="site-header__inner container">
+    <a class="site-header__wordmark" href="/">Jibin Johnson</a>
+
+    <!-- Desktop navigation (on phones it moves into the full-screen menu below) -->
+    <nav class="site-header__nav" aria-label="Main">
+      <ul class="site-header__list">
+        <li><a class="site-header__link" href="/work/">Work</a></li>
+        <li><a class="site-header__link" href="/services/">Services</a></li>
+        <li><a class="site-header__link" href="/about/">About</a></li>
+        <li><a class="site-header__link" href="/blog/">Blog</a></li>
+        <li><a class="site-header__link" href="/contact/">Contact</a></li>
+      </ul>
+    </nav>
+
+    <a class="btn btn--primary btn--sm site-header__cta" href="/contact/">Start a project</a>
+
+    <!-- Mobile menu button. Both visible words are in the HTML; CSS shows
+         "Menu" or "Close" based on aria-expanded. menu.js switches
+         aria-label between "Open menu" and "Close menu" (that is what
+         screen readers announce, so the visible words are aria-hidden). -->
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu" data-menu-toggle>
+      <span class="menu-toggle__text menu-toggle__text--open" aria-hidden="true">Menu</span>
+      <span class="menu-toggle__text menu-toggle__text--close" aria-hidden="true">Close</span>
+      <span class="menu-toggle__icon" aria-hidden="true"></span>
+    </button>
+  </div>
+</header>
+
+<!-- Full-screen mobile menu. Kept OUTSIDE the <header> because the header
+     slides up with a transform, and a transformed parent would break this
+     overlay's position: fixed. --i sets each link's stagger delay.
+     The 01–05 numbers are decorative (aria-hidden): screen readers read only the link name. -->
+<div class="menu" id="site-menu" data-menu>
+  <nav class="menu__nav container" aria-label="Main">
+    <ul class="menu__list">
+      <li class="menu__item" style="--i: 0">
+        <span class="menu__num" aria-hidden="true">01</span>
+        <a class="menu__link" href="/work/">Work</a>
+      </li>
+      <li class="menu__item" style="--i: 1">
+        <span class="menu__num" aria-hidden="true">02</span>
+        <a class="menu__link" href="/services/">Services</a>
+      </li>
+      <li class="menu__item" style="--i: 2">
+        <span class="menu__num" aria-hidden="true">03</span>
+        <a class="menu__link" href="/about/">About</a>
+      </li>
+      <li class="menu__item" style="--i: 3">
+        <span class="menu__num" aria-hidden="true">04</span>
+        <a class="menu__link" href="/blog/">Blog</a>
+      </li>
+      <li class="menu__item" style="--i: 4">
+        <span class="menu__num" aria-hidden="true">05</span>
+        <a class="menu__link" href="/contact/">Contact</a>
+      </li>
+    </ul>
+    <div class="menu__item menu__footer" style="--i: 5">
+      <a class="btn btn--primary" href="/contact/">Start a project</a>
+      <a class="link" href="mailto:jibinjohnsoninfo@gmail.com">jibinjohnsoninfo@gmail.com</a>
+      <a class="link" href="https://wa.me/917736208172">WhatsApp: +91 77362 08172</a>
+      <ul class="menu__social">
+        <li><a class="menu__social-link" href="https://www.linkedin.com/in/jibinjohnson" rel="me">LinkedIn</a></li>
+        <li><a class="menu__social-link" href="https://github.com/Jibinjohnson11" rel="me">GitHub</a></li>
+        <li><a class="menu__social-link" href="https://www.instagram.com/jibineyyyy" rel="me">Instagram</a></li>
+      </ul>
+    </div>
+  </nav>
+</div>
+<!-- /PARTIAL:header -->
+
+  <main id="main">
+
+    <!-- Visible breadcrumb: must match the BreadcrumbList above.
+         Location page: no "Services" step. -->
+    <nav class="breadcrumb container" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/web-developer-trivandrum/" aria-current="page">Web developer in Trivandrum</a></li>
+      </ol>
+    </nav>
+
+
+    <!-- ====================================================================
+         HERO — label → H1 → lead → buttons.
+         The H1 is the LCP element: it slides up in CSS (service.css),
+         never hidden with opacity.
+         ==================================================================== -->
+    <section class="service-hero" aria-labelledby="page-title">
+      <div class="container service-hero__inner">
+        <p class="label">Thiruvananthapuram</p>
+        <h1 id="page-title">
+          <span class="service-hero__line" style="--i: 0"><span class="service-hero__line-inner">Freelance web developer in Trivandrum</span></span>
+        </h1>
+        <div class="service-hero__intro">
+          <p class="lead service-hero__lead">I'm Jibin Johnson, a web developer based in Thiruvananthapuram. I build fast, premium websites for local businesses, clinics, institutes and startups, and I'm happy to meet you in person to plan yours.</p>
+          <div class="btn-group service-hero__actions">
+            <a class="btn btn--primary" href="/contact/" data-magnetic>Meet for a coffee</a>
+            <a class="btn btn--ghost" href="https://wa.me/917736208172?text=Hi%20Jibin%2C%20I%20found%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20project." data-magnetic>WhatsApp me</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         01 LOCAL — heading on the left, text in columns 7–12
+         ==================================================================== -->
+    <section class="section" aria-labelledby="local-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label" data-reveal>01 — Close by</p>
+          <h2 id="local-title" data-reveal="lines">A local developer, not a faraway agency</h2>
+        </div>
+        <div class="service-prose">
+          <p class="lead" data-reveal>When your web developer is in the same city, things move faster. We can sit together, look at your competitors, and sketch the site in one meeting. You can see progress on your own phone and call me when something needs to change, instead of waiting days for an email.</p>
+          <p data-reveal>I'm based in Trivandrum and know how local customers search: in English, often on mobile, often with "near me" or the area name, and usually wanting to WhatsApp before they call. Your website should be built for exactly that.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         02 SERVICES — list with terms (serif term, description beside it)
+         ==================================================================== -->
+    <section class="section" aria-labelledby="services-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label" data-reveal>02 — Services</p>
+          <h2 id="services-title" data-reveal="lines">Website development services in Trivandrum</h2>
+        </div>
+        <ul class="service-list">
+          <li class="service-list__item" data-reveal>
+            <strong class="service-list__term">New business websites</strong>
+            <span class="service-list__desc">clinics, coaching centres, restaurants, real estate, shops and professional services</span>
+          </li>
+          <li class="service-list__item" data-reveal>
+            <strong class="service-list__term">Landing pages</strong>
+            <span class="service-list__desc">for ads, admissions season, offers and launches</span>
+          </li>
+          <li class="service-list__item" data-reveal>
+            <strong class="service-list__term">Website redesigns</strong>
+            <span class="service-list__desc">for slow, outdated or hard-to-update sites</span>
+          </li>
+          <li class="service-list__item" data-reveal>
+            <strong class="service-list__term">Startup websites</strong>
+            <span class="service-list__desc">for teams at Technopark and beyond</span>
+          </li>
+          <li class="service-list__item" data-reveal>
+            <strong class="service-list__term">SEO-ready builds</strong>
+            <span class="service-list__desc">so your site can rank for searches in Thiruvananthapuram from launch</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         03 INCLUDED — six short items with a burgundy dash. Ivory section.
+         ==================================================================== -->
+    <section class="section section--paper" data-bg="paper" aria-labelledby="included-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label" data-reveal>03 — Included</p>
+          <h2 id="included-title" data-reveal="lines">What's included in every website</h2>
+        </div>
+        <ul class="service-checks">
+          <li class="service-checks__item" data-reveal>Custom design that matches your brand, not a recycled template</li>
+          <li class="service-checks__item" data-reveal>Mobile-first layouts that load fast on 4G</li>
+          <li class="service-checks__item" data-reveal>On-page SEO, schema markup and a sitemap from day one</li>
+          <li class="service-checks__item" data-reveal>A WhatsApp button, a contact form and click-to-call</li>
+          <li class="service-checks__item" data-reveal>Google Search Console and Analytics setup</li>
+          <li class="service-checks__item" data-reveal>Training so you can update content yourself</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         04 AREAS — the page's distinctive moment.
+         The paragraph from the content doc, then the same places as a large
+         serif list. Each name starts at its own column (--col, 2–7; long
+         names get small values so they fit) and has a burgundy "reach" line
+         from the thread's rail in the left gutter. service.js lights each
+         name as the thread's tip passes it (service.css section 14).
+         [data-bg="ink"] fades the ivory background back out.
+         ==================================================================== -->
+    <section class="section" data-bg="ink" aria-labelledby="areas-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label" data-reveal>04 — Where I work</p>
+          <h2 id="areas-title" data-reveal="lines">Areas I serve in Thiruvananthapuram</h2>
+        </div>
+        <div class="service-prose">
+          <p class="lead" data-reveal>I work with businesses across the city and district, including Technopark and Kazhakoottam, Pattom, Kowdiar, Vazhuthacaud, Vellayambalam, Sasthamangalam, Kesavadasapuram, Ulloor, Medical College, Thampanoor, East Fort, Kovalam, Neyyattinkara and Attingal. If you're nearby, we can meet at your office or a café.</p>
+        </div>
+        <ul class="areas" data-areas aria-label="Areas in Thiruvananthapuram">
+          <li class="areas__item" style="--col: 2"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Technopark</span></span></li>
+          <li class="areas__item" style="--col: 4"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Kazhakoottam</span></span></li>
+          <li class="areas__item" style="--col: 7"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Pattom</span></span></li>
+          <li class="areas__item" style="--col: 5"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Kowdiar</span></span></li>
+          <li class="areas__item" style="--col: 3"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Vazhuthacaud</span></span></li>
+          <li class="areas__item" style="--col: 5"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Vellayambalam</span></span></li>
+          <li class="areas__item" style="--col: 2"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Sasthamangalam</span></span></li>
+          <li class="areas__item" style="--col: 4"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Kesavadasapuram</span></span></li>
+          <li class="areas__item" style="--col: 7"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Ulloor</span></span></li>
+          <li class="areas__item" style="--col: 3"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Medical College</span></span></li>
+          <li class="areas__item" style="--col: 6"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Thampanoor</span></span></li>
+          <li class="areas__item" style="--col: 4"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">East Fort</span></span></li>
+          <li class="areas__item" style="--col: 7"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Kovalam</span></span></li>
+          <li class="areas__item" style="--col: 3"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Neyyattinkara</span></span></li>
+          <li class="areas__item" style="--col: 5"><span class="areas__reach" aria-hidden="true"></span><span class="areas__place"><span class="areas__name">Attingal</span></span></li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         05 LOCAL SEARCH — the two spellings shown as search pills, and the
+         link to the SEO Trivandrum page (keyword anchor text)
+         ==================================================================== -->
+    <section class="section" aria-labelledby="search-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label" data-reveal>05 — Local search</p>
+          <h2 id="search-title" data-reveal="lines">Built for how Trivandrum searches</h2>
+        </div>
+        <div class="service-prose">
+          <p class="lead" data-reveal>A local website needs local signals. I make sure your site clearly shows your location, service areas, opening hours and contact details, connects to your Google Business Profile, and uses the words your customers type, such as <span class="service-query">"Trivandrum"</span> and <span class="service-query">"Thiruvananthapuram"</span>. That's how you start appearing in local results instead of only for your business name.</p>
+          <p data-reveal>Want to rank higher in local search too? See my <a href="/seo-specialist-trivandrum/">SEO specialist in Trivandrum</a> service.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         06 RECENT WORK — AQ Air (real screenshot, lazy: far below the fold)
+         and Serene Derma (typographic cover), then the Kerala hub link.
+         Ivory section.
+         ==================================================================== -->
+    <section class="section section--paper" data-bg="paper" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label" data-reveal>06 — Selected work</p>
+          <h2 id="work-title" data-reveal="lines">Recent work</h2>
+        </div>
+        <div class="service-work">
+          <article class="card" data-cursor="view" data-reveal>
+            <div class="card__media">
+              <picture>
+                <source type="image/avif" srcset="/assets/img/work/aq-air-website-800.avif?v=5eb6471d 800w, /assets/img/work/aq-air-website-1600.avif?v=0ba4df84 1600w" sizes="(min-width: 768px) 45vw, 90vw">
+                <source type="image/webp" srcset="/assets/img/work/aq-air-website-800.webp?v=cdfd5d62 800w, /assets/img/work/aq-air-website-1600.webp?v=4d135293 1600w" sizes="(min-width: 768px) 45vw, 90vw">
+                <img src="/assets/img/work/aq-air-website-800.webp?v=cdfd5d62" width="800" height="450" alt="AQ Air website hero: an AI-powered indoor air-quality monitor with scroll-driven product story" loading="lazy" decoding="async">
+              </picture>
+            </div>
+            <div class="card__body">
+              <p class="card__meta">Website development · 2026</p>
+              <h3 class="card__title card__title--display"><a class="card__link" href="/work/aq-air/">AQ Air</a></h3>
+              <p class="card__text">A scroll-driven, responsive product website.</p>
+              <ul class="tag-list" aria-label="Tags">
+                <li class="tag">Frontend</li>
+                <li class="tag">JavaScript</li>
+                <li class="tag">GSAP</li>
+              </ul>
+            </div>
+          </article>
+          <article class="card" data-cursor="view" data-reveal>
+            <div class="card__media">
+              <div class="cover cover--type cover--ink" role="img" aria-label="Serene Derma — healthcare SEO project cover">
+                <p class="cover__label">SEO case study</p>
+                <p class="cover__word">Healthcare</p>
+              </div>
+            </div>
+            <div class="card__body">
+              <p class="card__meta">Healthcare SEO · 2026</p>
+              <h3 class="card__title card__title--display"><a class="card__link" href="/work/serene-derma-seo/">Serene Derma</a></h3>
+              <p class="card__text">Healthcare SEO campaign.</p>
+              <ul class="tag-list" aria-label="Tags">
+                <li class="tag">SEO</li>
+                <li class="tag">Healthcare</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+        <div class="service-prose">
+          <p data-reveal>For clients elsewhere in the state, see <a href="/services/web-development/">web development in Kerala</a>.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         07 FAQ — must match the FAQPage JSON-LD exactly.
+         Desktop: heading on the left (sticky), questions on the right.
+         [data-bg="ink"] fades the ivory background back out.
+         ==================================================================== -->
+    <section class="section" data-bg="ink" aria-labelledby="faq-title">
+      <div class="container service-faq__inner">
+        <div class="section__head service-faq__head">
+          <p class="label" data-reveal>07 — Questions</p>
+          <h2 id="faq-title" data-reveal="lines">Questions from Trivandrum businesses</h2>
+        </div>
+        <div class="faq" data-reveal>
+          <details class="faq__item">
+            <summary class="faq__summary">
+              <h3 class="faq__question">Can we meet in person?</h3>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer"><p>Yes. I'm based in Thiruvananthapuram and happy to meet at your office or a café for the first meeting and key reviews.</p></div>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__summary">
+              <h3 class="faq__question">How much does a website cost in Trivandrum?</h3>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer"><p>Every business is different — the price depends on the pages, design and features you need. After our first conversation, you get a clear fixed quote with no hidden costs.</p></div>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__summary">
+              <h3 class="faq__question">How quickly can you deliver?</h3>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer"><p>A landing page can be ready in 1–2 weeks, and a full business website in 3–6 weeks, depending on content and approvals.</p></div>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__summary">
+              <h3 class="faq__question">Do you work with Technopark startups?</h3>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer"><p>Yes. I build launch websites, product pages and landing pages that look credible to investors and customers. See <a href="/web-design-for-startups/">websites for startups</a>.</p></div>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__summary">
+              <h3 class="faq__question">Can you help with my Google Business Profile?</h3>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer"><p>Yes. I set up or optimise it and connect it to your website. It's one of the biggest factors in appearing on Google Maps.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ====================================================================
+         08 STANDARD CTA BLOCK — heading: "Let's meet and plan your website"
+         Wine section (.cta, components.css).
+         ==================================================================== -->
+    <section class="section cta" aria-labelledby="cta-title" data-whatsapp-hide>
+      <div class="container">
+        <p class="label" data-reveal>08 — Next step</p>
+        <h2 class="cta__title" id="cta-title" data-reveal="lines">Let's meet and plan your website</h2>
+        <p class="lead cta__lead" data-reveal>Tell me what you're building or what isn't working. I'll reply with honest advice and a clear next step, even if that step isn't hiring me.</p>
+        <div class="btn-group cta__actions" data-reveal>
+          <a class="btn btn--primary" href="/contact/" data-magnetic>Start a project</a>
+          <a class="btn btn--ghost" href="https://wa.me/917736208172?text=Hi%20Jibin%2C%20I%20found%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20project." data-magnetic>WhatsApp me</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PARTIAL:footer -->
+<!-- Site footer. Text comes from "Global elements → Footer" in docs/website-content.md.
+     The year is written here and refreshed by main.js each January. -->
+<footer class="site-footer" data-whatsapp-hide>
+  <div class="site-footer__inner container">
+
+    <!-- Big call to action (full width) -->
+    <div class="site-footer__intro">
+      <p class="site-footer__cta">
+        <!-- "talk" and the arrow share a no-wrap span (no space between them),
+             so on phones the arrow can never drop onto a line of its own -->
+        <a class="site-footer__cta-link" href="/contact/">Let's <span class="site-footer__nowrap">talk<span class="site-footer__arrow" aria-hidden="true">→</span></span></a>
+      </p>
+      <p class="site-footer__text">Have a website to build or a ranking to fix? Send me a message. I usually reply within a day.</p>
+    </div>
+
+    <!-- Contact details and social profiles -->
+    <div class="site-footer__contact-block">
+      <ul class="site-footer__contact">
+        <li><a class="link" href="mailto:jibinjohnsoninfo@gmail.com">jibinjohnsoninfo@gmail.com</a></li>
+        <li><a class="link" href="https://wa.me/917736208172">WhatsApp: +91 77362 08172</a></li>
+      </ul>
+
+      <!-- rel="me" tells search engines these profiles belong to the same person -->
+      <ul class="site-footer__social">
+        <li><a class="site-footer__link" href="https://www.linkedin.com/in/jibinjohnson" rel="me">LinkedIn</a></li>
+        <li><a class="site-footer__link" href="https://github.com/Jibinjohnson11" rel="me">GitHub</a></li>
+        <li><a class="site-footer__link" href="https://www.instagram.com/jibineyyyy" rel="me">Instagram</a></li>
+      </ul>
+    </div>
+
+    <!-- Link columns -->
+    <nav class="site-footer__col site-footer__col--services" aria-labelledby="footer-services">
+      <p class="site-footer__heading" id="footer-services">Services</p>
+      <ul class="site-footer__list">
+        <li><a class="site-footer__link" href="/services/web-development/">Web development in Kerala</a></li>
+        <li><a class="site-footer__link" href="/services/seo/">SEO services in Kerala</a></li>
+        <li><a class="site-footer__link" href="/web-developer-trivandrum/">Web developer in Trivandrum</a></li>
+        <li><a class="site-footer__link" href="/seo-specialist-trivandrum/">SEO specialist in Trivandrum</a></li>
+      </ul>
+    </nav>
+
+    <nav class="site-footer__col site-footer__col--more" aria-labelledby="footer-more">
+      <p class="site-footer__heading" id="footer-more">More</p>
+      <ul class="site-footer__list">
+        <li><a class="site-footer__link" href="/work/">Work</a></li>
+        <li><a class="site-footer__link" href="/about/">About</a></li>
+        <li><a class="site-footer__link" href="/blog/">Blog</a></li>
+        <li><a class="site-footer__link" href="/resume/">Resume</a></li>
+        <li><a class="site-footer__link" href="/privacy/">Privacy</a></li>
+      </ul>
+    </nav>
+
+    <!-- Bottom line -->
+    <div class="site-footer__bottom">
+      <p>Based in Thiruvananthapuram, Kerala — working with clients worldwide.</p>
+      <p>© <span data-year>2026</span> Jibin Johnson</p>
+    </div>
+
+  </div>
+</footer>
+<!-- /PARTIAL:footer -->
+
+  <!-- PARTIAL:whatsapp -->
+<!-- Floating WhatsApp button (bottom-right). With JavaScript it fades in once
+     you scroll past the hero (main.js); without JavaScript it is always visible. -->
+<a class="whatsapp-float" href="https://wa.me/917736208172?text=Hi%20Jibin%2C%20I%20found%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20project." aria-label="Chat with Jibin on WhatsApp" data-whatsapp-float>
+  <!-- Official WhatsApp glyph (Simple Icons, CC0), drawn in the text colour (white) -->
+  <svg class="whatsapp-float__icon" width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+  <!-- Visual tooltip on hover/focus (desktop only). aria-hidden because the
+       aria-label above already gives the button its accessible name. -->
+  <span class="whatsapp-float__tip" aria-hidden="true">Chat on WhatsApp</span>
+</a>
+<!-- /PARTIAL:whatsapp -->
+
+  <!-- PARTIAL:scripts -->
+<!-- Scripts: all "defer", so they download in parallel and run in THIS order
+     after the HTML is parsed. Libraries first, then our own files. -->
+<script src="/assets/vendor/gsap.min.js?v=3d1bea37" defer></script>
+<script src="/assets/vendor/ScrollTrigger.min.js?v=b5bb3606" defer></script>
+<script src="/assets/vendor/SplitText.min.js?v=7b299a6b" defer></script>
+<script src="/assets/vendor/lenis.min.js?v=80f53e77" defer></script>
+<script src="/assets/js/main.js?v=9e34a500" defer></script>
+<script src="/assets/js/menu.js?v=8932906f" defer></script>
+<script src="/assets/js/motion.js?v=6e69cba4" defer></script>
+<script src="/assets/js/thread.js?v=bf143689" defer></script>
+<script src="/assets/js/cursor.js?v=003f6d8d" defer></script>
+
+<!-- ==========================================================================
+     GA4 (Google Analytics) — READY BUT SWITCHED OFF.
+     To turn it on:
+       1. Replace G-XXXXXXX (twice) with your Measurement ID from GA4
+          (Admin → Data streams → your site).
+       2. Delete the "GA4 START" and "GA4 END" comment lines.
+       3. npm run sync   (copies it into every page)
+       4. Mention Google Analytics in /privacy/ if it isn't there yet.
+
+     How it works:
+     - gtag.js (~100KB) is NOT loaded with the page. It loads on the visitor's
+       first interaction (scroll, click, tap or key press), so it never slows
+       down the first paint or LCP.
+     - gtag() calls made before it loads are queued in dataLayer and sent
+       once it arrives, so no events are lost.
+     - Conversion events (mark them as "key events" in GA4):
+         whatsapp_click   any link to wa.me
+         resume_download  any link to a .pdf
+         form_submit      the contact form ([data-contact-form]) is sent
+     ==========================================================================
+GA4 START
+<script>
+  (function () {
+    "use strict";
+
+    var GA_ID = "G-XXXXXXX";
+
+    // Queue for gtag() calls until the real library has loaded
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag("js", new Date());
+    gtag("config", GA_ID);
+
+    // Load gtag.js once, on the first sign of a real visitor
+    var loaded = false;
+    var triggers = ["scroll", "pointerdown", "keydown", "touchstart"];
+
+    function loadGA() {
+      if (loaded) return;
+      loaded = true;
+      triggers.forEach(function (type) { window.removeEventListener(type, loadGA); });
+      var script = document.createElement("script");
+      script.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+      script.async = true;
+      document.head.appendChild(script);
+    }
+
+    triggers.forEach(function (type) {
+      window.addEventListener(type, loadGA, { once: true, passive: true });
+    });
+
+    // Conversion events. One listener on the page catches every link.
+    // transport_type "beacon" lets the event finish even as the page changes.
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest("a[href]");
+      if (!link) return;
+      if (link.href.indexOf("wa.me/") !== -1) {
+        gtag("event", "whatsapp_click", { link_url: link.href, transport_type: "beacon" });
+      } else if (/\.pdf($|\?)/i.test(link.href)) {
+        gtag("event", "resume_download", { file_name: link.pathname, transport_type: "beacon" });
+      }
+    });
+
+    // Contact form: contact.js cancels invalid submits (defaultPrevented),
+    // so only real submissions are counted
+    document.addEventListener("submit", function (event) {
+      if (event.target.matches("[data-contact-form]") && !event.defaultPrevented) {
+        gtag("event", "form_submit", { form_name: "contact", transport_type: "beacon" });
+      }
+    });
+  })();
+</script>
+GA4 END -->
+<!-- /PARTIAL:scripts -->
+
+  <!-- Service pages: the page's distinctive moment (runs after the shared scripts) -->
+  <script src="/assets/js/pages/service.js?v=2c5cdcaa" defer></script>
+
+</body>
+</html>

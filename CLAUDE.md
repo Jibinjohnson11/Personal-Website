@@ -50,11 +50,13 @@ Page transitions: CSS @view-transition { navigation: auto; } (progressive enhanc
   with trailing slash), robots, OG + Twitter tags, theme-color, JSON-LD. Copy the <head> from templates/.
 - One H1, logical H2/H3, semantic landmarks, descriptive alt, width/height on every image,
   <picture> with AVIF + WebP, loading="lazy" except the LCP image (fetchpriority="high").
+- Never lazy-load images visible in the first viewport; preload the hero image.
 - Person entity @id https://jibinjohnson.in/#person in all schema. No fake reviews or ratings.
 - FAQ JSON-LD must match the visible FAQ text exactly.
 - One primary keyword per page (listed in docs/website-content.md); never target it on another page.
 - After adding/removing pages: run `npm run prepare-deploy`.
-- Targets: Lighthouse ≥ 95 mobile in all categories, LCP < 2s, CLS < 0.05, INP < 200ms, WCAG AA.
+- Targets: Lighthouse ≥ 95 mobile in all categories, LCP < 2.5s (Core Web Vitals 'good');
+  hero content must paint on the first frame without JS, CLS < 0.05, INP < 200ms, WCAG AA.
 
 ## Code style
 Mobile-first CSS. BEM-like class names (.work-card__title). Comment each section of CSS/JS.

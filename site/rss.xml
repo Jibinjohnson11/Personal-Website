@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jibin Johnson — Blog</title>
+    <link>https://jibinjohnson.in/blog/</link>
+    <description>Practical articles on SEO, web performance and website development for businesses in Kerala, written from real client projects.</description>
+    <language>en-IN</language>
+    <atom:link href="https://jibinjohnson.in/rss.xml" rel="self" type="application/rss+xml"/>
+
+  </channel>
+</rss>

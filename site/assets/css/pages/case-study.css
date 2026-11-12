@@ -1,0 +1,445 @@
+/* ==========================================================================
+   pages/case-study.css — Styles used ONLY on case studies (/work/<project>/)
+
+   Shared by all four case-study pages. Builds on components.css (card,
+   cover, tags, link, breadcrumb, todo) and uses tokens only.
+   Mobile-first: plain rules are for phones, @media blocks add tablet
+   (768px) and desktop (1024px).
+
+   Contents
+   1. Hero (label, big project name, tagline, full-width visual)
+   2. Body layout (content + sticky meta sidebar)
+   3. Meta (the <dl> of project facts)
+   4. Content sections (text, "What I did" list, tags, outcome)
+   5. Related links + "Next project"
+   6. Reduced motion
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. HERO
+   -------------------------------------------------------------------------- */
+
+.case-hero {
+  padding-top: var(--space-48);
+  overflow-x: clip;              /* nothing may cause a sideways scroll */
+}
+
+/* Lift hero and body content above the burgundy thread (motion.css lifts
+   only ".section > .container", and these aren't .section) */
+.case-hero > .container,
+.case-study__layout {
+  position: relative;
+  z-index: 1;
+}
+
+.case-hero__title {
+  color: var(--text-strong);
+}
+
+/* Each line is its own mask (overflow: clip). The bottom padding keeps
+   descenders from being cut; the negative margin cancels it. */
+.case-hero__line {
+  display: block;
+  overflow: clip;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+.case-hero__line-inner {
+  display: block;
+}
+
+/* The project name: the biggest type on the page */
+.case-hero__name {
+  font-size: var(--fs-hero);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--ls-hero);
+}
+
+/* The rest of the H1: smaller italic serif, like the home hero's role line */
+.case-hero__tagline {
+  max-width: 16em;
+  margin-top: var(--space-16);
+  font-size: var(--fs-h2);
+  font-style: italic;
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+  color: var(--text);
+}
+
+/* Line-by-line reveal in CSS (starts at first paint, no waiting for JS).
+   transform only, never opacity, and each line starts 40% down its mask,
+   so the H1 is readable straight away (same rule as the home hero). */
+@keyframes case-line-up {
+  from { transform: translateY(40%); }
+  to   { transform: none; }
+}
+
+html.js .case-hero__line-inner {
+  animation: case-line-up var(--dur-hero) var(--ease-out) both;
+  animation-delay: calc(var(--i) * var(--stagger) * 2);
+}
+
+/* Full-width visual (screenshot or large typographic cover) */
+.case-hero__media {
+  margin-top: var(--space-48);
+}
+
+.case-hero__frame {
+  overflow: hidden;
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.case-hero__frame img {
+  width: 100%;
+}
+
+/* The cover from the home cards, shown much larger: a wider shape on
+   bigger screens and a word that can grow up to hero size */
+.case-hero__frame .cover {
+  aspect-ratio: 4 / 3;
+}
+
+.case-hero__frame .cover__word {
+  font-size: clamp(var(--fs-h2), 14cqi, var(--fs-hero));
+  line-height: var(--lh-hero);
+}
+
+@media (min-width: 768px) {
+  .case-hero__frame .cover {
+    aspect-ratio: 16 / 9;
+  }
+
+  .case-hero__frame .cover--type {
+    padding: var(--space-48);
+  }
+}
+
+@media (min-width: 1024px) {
+  .case-hero {
+    padding-top: var(--space-64);
+  }
+
+  /* The tagline steps right: a deliberate break from the left edge */
+  .case-hero__tagline {
+    margin-left: calc(100% / var(--grid-columns) * 4);
+  }
+
+  .case-hero__media {
+    margin-top: var(--space-96);
+  }
+
+  .case-hero__frame .cover {
+    aspect-ratio: 21 / 9;
+  }
+
+  .case-hero__frame .cover--type {
+    padding: var(--space-64);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   2. BODY LAYOUT
+   Phones/tablets: meta strip, then the content, one after the other.
+   Desktop: content in columns 1–8 (labels on the left edge, where the
+   thread meets them), meta sticky in columns 10–12.
+   -------------------------------------------------------------------------- */
+
+.case-study__layout {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  row-gap: var(--section-pad);
+  padding-block: var(--space-64) var(--section-pad);
+}
+
+.case-study__layout > * {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 1024px) {
+  .case-study__layout {
+    padding-top: var(--section-pad);
+  }
+
+  .case-study__content {
+    grid-column: 1 / 9;
+    grid-row: 1;
+  }
+
+  .case-study__aside {
+    grid-column: 10 / -1;
+    grid-row: 1;
+  }
+
+  /* The aside is as tall as the content (grid stretch), so the <dl>
+     inside can stick while the content scrolls past */
+  .case-meta {
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-32));
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   3. META  (<dl class="case-meta">)
+   Each fact: a small mute label (dt) above its value (dd), with a thin
+   line on top. Two columns on phones, five across on tablets, one stacked
+   column in the desktop sidebar.
+   -------------------------------------------------------------------------- */
+
+.case-meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-24) var(--col-gap);
+}
+
+.case-meta__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-top: var(--space-16);
+  border-top: var(--border-w) solid var(--border);
+}
+
+/* Long values (the list of services) take the full row */
+.case-meta__item--wide {
+  grid-column: 1 / -1;
+}
+
+.case-meta dt {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+.case-meta dd {
+  margin: 0;
+  color: var(--text-strong);
+}
+
+@media (min-width: 768px) {
+  .case-meta {
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .case-meta {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   4. CONTENT SECTIONS
+   Each one: label → serif H2 → content (the site-wide section rhythm).
+   On desktop the text is indented two of the eight columns, so the H2
+   hangs to its left like an editorial page.
+   -------------------------------------------------------------------------- */
+
+.case-section + .case-section {
+  margin-top: var(--space-96);
+}
+
+.case-section__text,
+.case-list,
+.case-section__tags {
+  margin-top: var(--space-32);
+}
+
+.case-section__text {
+  color: var(--text);
+}
+
+/* Outcome / status: set in the larger lead size */
+.case-section__text--outcome .lead {
+  color: var(--text-strong);
+}
+
+/* Outcome scores: a row of .stat numbers (components.css) with a thin
+   rule above and a small source caption below */
+.case-stats {
+  margin-top: var(--space-48);
+  padding-top: var(--space-32);
+  border-top: var(--border-w) solid var(--border);
+}
+
+.case-stats__caption {
+  margin-top: var(--space-24);
+  font-size: var(--fs-small);
+  color: var(--text-mute);
+}
+
+/* "What I did": a numbered editorial list with thin rules between items.
+   The numbers come from a CSS counter and are decorative. */
+.case-list {
+  counter-reset: case-list;
+  max-width: var(--measure);
+}
+
+.case-list__item {
+  counter-increment: case-list;
+  display: grid;
+  grid-template-columns: var(--space-48) minmax(0, 1fr);
+  gap: var(--space-16);
+  padding-block: var(--space-24);
+  border-top: var(--border-w) solid var(--border);
+}
+
+.case-list__item:last-child {
+  border-bottom: var(--border-w) solid var(--border);
+}
+
+.case-list__item::before {
+  content: counter(case-list, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+  color: var(--text-mute);
+}
+
+@media (min-width: 1024px) {
+  .case-section + .case-section {
+    margin-top: var(--space-128);
+  }
+
+  .case-section__text,
+  .case-list,
+  .case-section__tags {
+    margin-top: var(--space-48);
+    margin-left: calc(100% / 8 * 2);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   5. RELATED LINKS + NEXT PROJECT
+   The "Next project" link is one big block: a small eyebrow and the
+   project name in hero-size Boska. On hover a wine panel rises from the
+   bottom (transform only) and the arrow slides right.
+   -------------------------------------------------------------------------- */
+
+.case-next {
+  border-top: var(--border-w) solid var(--border);
+}
+
+.case-next__related {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-16) var(--space-48);
+  margin-top: var(--space-24);
+}
+
+/* Keep each related link at least 44px tall for touch */
+.case-next__related .link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+}
+
+.case-next__link {
+  position: relative;
+  isolation: isolate;            /* keeps the wine panel behind the text */
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  margin-top: var(--space-96);
+  padding: var(--space-48) var(--space-24);
+  overflow: hidden;
+  border-top: var(--border-w) solid var(--border);
+  border-bottom: var(--border-w) solid var(--border);
+  color: var(--text-strong);
+  text-decoration: none;
+}
+
+/* The wine panel, folded down to nothing until hover/focus */
+.case-next__link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--wine);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform var(--dur-reveal) var(--ease-out);
+}
+
+.case-next__link:hover,
+.case-next__link:focus-visible {
+  color: var(--white);           /* white on wine: 12.6:1 */
+}
+
+.case-next__link:hover::before,
+.case-next__link:focus-visible::before {
+  transform: scaleY(1);
+}
+
+.case-next__eyebrow {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+  transition: color var(--dur-micro) var(--ease-out);
+}
+
+.case-next__link:hover .case-next__eyebrow,
+.case-next__link:focus-visible .case-next__eyebrow {
+  color: var(--silver);          /* silver on wine passes AA */
+}
+
+.case-next__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--ls-hero);
+  text-wrap: balance;
+}
+
+.case-next__arrow {
+  display: inline-block;
+  transition: transform var(--dur-reveal) var(--ease-out);
+}
+
+.case-next__link:hover .case-next__arrow,
+.case-next__link:focus-visible .case-next__arrow {
+  transform: translateX(var(--space-24));
+}
+
+@media (min-width: 1024px) {
+  .case-next__link {
+    margin-top: var(--space-128);
+    padding: var(--space-96) var(--space-48);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   6. REDUCED MOTION
+   No line slide, no rising panel or sliding arrow (the colours still change).
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .case-hero__line-inner {
+    animation: none;
+  }
+
+  .case-next__link::before,
+  .case-next__arrow {
+    transition: none;
+  }
+
+  .case-next__link:hover .case-next__arrow,
+  .case-next__link:focus-visible .case-next__arrow {
+    transform: none;
+  }
+}

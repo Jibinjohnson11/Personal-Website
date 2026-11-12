@@ -1,0 +1,137 @@
+/* ==========================================================================
+   pages/simple.css — Small text pages: Thank you, Privacy policy and 404
+   (site/thank-you/, site/privacy/, site/404.html)
+
+   The intro is the shared .page-intro (components.css).
+
+   Contents
+   1. Shared bits (link list, "last updated")
+   2. Privacy text (.prose)
+   3. 404
+   4. Reduced motion
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. SHARED BITS
+   -------------------------------------------------------------------------- */
+
+/* Thank-you and 404 are short: let the intro fill most of the screen */
+.simple-page {
+  min-height: 70vh;
+  min-height: 70svh;
+}
+
+/* Row of "→" links under the lead */
+.simple-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-32);
+  margin-top: var(--space-48);
+}
+
+.simple-page__updated {
+  margin-top: var(--space-32);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+/* Privacy: the intro is short, so it doesn't need the full height */
+.simple-page:has(.simple-page__updated) {
+  min-height: 0;
+  padding-bottom: var(--space-64);
+}
+
+
+/* --------------------------------------------------------------------------
+   2. PRIVACY TEXT (.prose)
+   Plain running text with small serif H2s. Desktop: columns 5–12.
+   -------------------------------------------------------------------------- */
+
+.prose-page {
+  padding-top: 0;
+}
+
+.prose {
+  max-width: var(--measure);
+}
+
+.prose h2 {
+  margin-top: var(--space-64);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+}
+
+.prose h2:first-child {
+  margin-top: 0;
+}
+
+.prose p {
+  margin-top: var(--space-16);
+  color: var(--text-mute);
+}
+
+@media (min-width: 1024px) {
+  .prose {
+    margin-left: calc(100% / var(--grid-columns) * 4);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   3. 404
+   A huge outlined "404" sits behind the message (decorative, aria-hidden).
+   It uses a thin wine-2 outline, never wine text on dark.
+   -------------------------------------------------------------------------- */
+
+.not-found .page-intro__inner {
+  position: relative;
+}
+
+.not-found__code {
+  position: absolute;
+  top: 0;
+  right: var(--gutter);
+  z-index: -1;
+  font-family: var(--font-display);
+  font-size: clamp(8rem, 32vw, 26rem);
+  font-weight: var(--fw-medium);
+  line-height: 0.8;
+  letter-spacing: var(--ls-hero);
+  color: transparent;
+  -webkit-text-stroke: var(--border-w) var(--accent-line);
+  pointer-events: none;
+  user-select: none;
+}
+
+.not-found__title {
+  font-size: var(--fs-hero);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--ls-hero);
+  margin-top: var(--space-24);
+}
+
+.not-found__title em {
+  font-style: italic;
+}
+
+/* Phones/tablets: push the message below the big 404 (its height is
+   about 26% of the screen width). Desktop: it overlaps, behind the text. */
+.not-found .label {
+  margin-top: 26vw;
+}
+
+@media (min-width: 1024px) {
+  .not-found .label {
+    margin-top: var(--space-96);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   4. REDUCED MOTION
+   Nothing animates here beyond .page-intro, handled in components.css.
+   -------------------------------------------------------------------------- */

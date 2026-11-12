@@ -211,7 +211,7 @@ Use one `Person` entity with `@id: https://jibinjohnson.in/#person` and referenc
 | Page type | Schema |
 | --- | --- |
 | All pages | `WebSite` + `Person` (name, jobTitle, image, url, email, address locality Thiruvananthapuram, region Kerala, country IN, `sameAs` LinkedIn/GitHub/Instagram, `knowsAbout`, `alumniOf` Edure + University of Madras) + `BreadcrumbList` |
-| Home, Trivandrum pages | `ProfessionalService` (provider = #person, `areaServed`: Thiruvananthapuram, Kerala, India; `telephone`; `priceRange`) |
+| Home, Trivandrum pages | `ProfessionalService` (provider = #person, `areaServed`: Thiruvananthapuram, Kerala, India; `telephone`; no `priceRange`: the site shows no prices) |
 | Service and niche pages | `Service` (provider = #person, `serviceType`, `areaServed`) + `FAQPage` |
 | Work index | `CollectionPage` |
 | Case studies | `Article` (author = #person) |
@@ -238,9 +238,9 @@ Use one `Person` entity with `@id: https://jibinjohnson.in/#person` and referenc
 - [ ] Accessibility: skip link, visible focus states, 44px touch targets, `aria-label` on icon buttons, contrast as in section 1
 - [ ] Header, footer and navigation in real HTML on every page (never injected with JavaScript)
 - [ ] Custom 404 linking to Home, Services, Work and Contact
-- [ ] Netlify `_headers`: 1-year cache on fonts and vendor files, security headers (HSTS, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
+- [ ] Netlify `_headers`: 1-year immutable cache on everything in /assets/ (safe because `npm run prepare-deploy` adds a content hash `?v=` to every asset link), security headers (HSTS, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
 - [ ] Favicon set + `site.webmanifest`; theme-color #0E0E0E
-- [ ] GA4 loaded after the first user interaction, so it doesn't hurt performance; conversion events: form_submit, whatsapp_click, call_booked, resume_download
+- [ ] GA4 loaded after the first user interaction, so it doesn't hurt performance; conversion events: form_submit, whatsapp_click, resume_download
 - [ ] `llms.txt` with a plain summary of who you are and your services, for AI search tools
 - [ ] `npm run prepare-deploy` shows 0 errors before every push
 

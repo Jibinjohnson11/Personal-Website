@@ -1,12 +1,382 @@
 /* ==========================================================================
    base.css — Foundations for every page
 
-   Will contain:
-   - @font-face rules for the self-hosted Boska and Switzer .woff2 files
-     (font-display: swap + metric-matched fallbacks so there is no layout shift)
-   - A small, modern CSS reset
-   - Default styles for html, body, headings, paragraphs, links, images
-   - The 12-column layout grid and the standard section spacing
-   - Accessibility helpers: skip link, visible focus ring, .visually-hidden
-   - @view-transition { navigation: auto; } for smooth page changes
+   Loaded after tokens.css. Uses only var(--tokens), never raw values.
+
+   Contents
+   1. Reset
+   2. Page (html, body)
+   3. Typography (headings, paragraphs, links, selection)
+   4. Focus ring
+   5. Layout: .container, .grid, .section, .section--paper
+   6. Section label (.label)
+   7. Accessibility helpers: .visually-hidden, .skip-link
+   8. Page transitions
    ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. RESET
+   A small modern reset: removes browser default margins and makes sizing
+   predictable. Mobile-first, so these defaults suit phones.
+   -------------------------------------------------------------------------- */
+
+/* Width/height include padding and border (much easier to reason about) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default outer spacing; we add spacing on purpose with tokens */
+* {
+  margin: 0;
+}
+
+/* Images and media never overflow their container */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Images keep their proportions when only the width changes */
+img,
+picture {
+  height: auto;
+}
+
+/* Form elements use the page font instead of the browser's default */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Long words or URLs wrap instead of breaking the layout */
+p,
+h1,
+h2,
+h3,
+h4 {
+  overflow-wrap: break-word;
+}
+
+/* Lists styled with a class have no bullets (e.g. navigation, tag lists) */
+ul[class],
+ol[class] {
+  list-style: none;
+  padding: 0;
+}
+
+
+/* --------------------------------------------------------------------------
+   2. PAGE
+   -------------------------------------------------------------------------- */
+
+html {
+  color-scheme: dark;            /* dark scrollbars and form controls */
+  -webkit-text-size-adjust: 100%; /* stops iOS enlarging text in landscape */
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg);   /* ink */
+  color: var(--text);            /* paper */
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;  /* thinner, crisper text on Mac */
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. TYPOGRAPHY
+   H1 and H2 use Boska (serif). H3 and smaller use Switzer, as in the
+   design-system type scale ("card titles: Switzer 500").
+   -------------------------------------------------------------------------- */
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text-strong);
+  font-weight: var(--fw-medium);
+  text-wrap: balance;   /* evens out line lengths in multi-line headings */
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
+}
+
+h2 {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+}
+
+h3 {
+  font-family: var(--font-body);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+}
+
+h4 {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-h3);
+}
+
+/* Italic inside a serif heading uses Boska Medium Italic (the accent voice) */
+h1 em,
+h2 em {
+  font-style: italic;
+}
+
+/* The big hero name on the home page */
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--ls-hero);
+}
+
+/* Paragraphs stay a comfortable reading width */
+p {
+  max-width: var(--measure);
+  text-wrap: pretty;   /* avoids a single word alone on the last line */
+}
+
+/* Intro paragraph under a heading */
+.lead {
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-lead);
+}
+
+/* Large serif paragraph that runs over several lines (e.g. the manifesto).
+   Headings use a very tight line height, which is too cramped once a
+   paragraph wraps to 4+ lines — so this gets more space between lines
+   and a short measure (characters per line) for comfortable reading. */
+.display-text {
+  max-width: var(--measure-display);
+  font-family: var(--font-display);
+  font-size: var(--fs-display-text);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-display-text);
+  letter-spacing: var(--ls-h2);
+  color: var(--text-strong);
+}
+
+@media (min-width: 1024px) {
+  .display-text {
+    max-width: var(--measure-display-lg);
+    line-height: var(--lh-display-text-lg);
+  }
+}
+
+/* Secondary text */
+.text-mute {
+  color: var(--text-mute);
+}
+
+strong {
+  font-weight: var(--fw-medium);
+}
+
+/* Links inside running text: rose on dark, wine on light (via --accent-text).
+   They stay underlined so they are recognisable without relying on colour. */
+a {
+  color: var(--accent-text);
+  text-decoration-line: underline;
+  text-decoration-thickness: var(--border-w);
+  text-underline-offset: 0.2em;
+  transition: color var(--dur-micro) var(--ease-out);
+}
+
+a:hover {
+  color: var(--text-strong);
+}
+
+/* Highlighted (selected) text: wine background, white text */
+::selection {
+  background-color: var(--wine);
+  color: var(--white);
+}
+
+
+/* --------------------------------------------------------------------------
+   4. FOCUS RING
+   Shown only when using the keyboard (:focus-visible), not on mouse click.
+   Rose passes the 3:1 contrast needed for focus indicators on both
+   ink and ivory backgrounds.
+   -------------------------------------------------------------------------- */
+
+:focus-visible {
+  outline: var(--focus-w) solid var(--focus);
+  outline-offset: var(--space-4);
+}
+
+
+/* --------------------------------------------------------------------------
+   5. LAYOUT
+   -------------------------------------------------------------------------- */
+
+/* Centers content, caps it at 1440px, and keeps gutters at the screen edges */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* 12-column grid.
+   By default every child spans all 12 columns (so phones get one column).
+   Page CSS then places children on larger screens, for example:
+     .about__text { grid-column: 7 / -1; }   → columns 7 to 12 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+  row-gap: var(--space-48);
+}
+
+.grid > * {
+  grid-column: 1 / -1;
+}
+
+/* Every section has the same generous top/bottom padding */
+.section {
+  padding-block: var(--section-pad);
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* Standard section opening: label → H2 → content.
+   Plain block layout (no flex gap), so the label → heading space comes only
+   from the .label rule in section 6 and is identical everywhere. */
+.section__head {
+  margin-bottom: var(--space-64);
+}
+
+/* Space between the heading and an intro paragraph under it */
+.section__head > * + * {
+  margin-top: var(--space-24);
+}
+
+/* Light (ivory) section.
+   It only swaps the theme colours, so every component inside
+   (buttons, cards, links, forms) adapts automatically. */
+.section--paper {
+  color-scheme: light;
+  --bg:          var(--paper);
+  --surface:     var(--white);
+  --text:        var(--ink);
+  --text-strong: var(--ink);
+  --text-mute:   var(--line);   /* #2D2D2D on ivory: 12.9:1 */
+  --accent-text: var(--wine);   /* wine text is allowed on light backgrounds */
+  --border:      var(--silver);
+  --accent-line: var(--wine);   /* full burgundy reads well on ivory */
+}
+
+
+/* --------------------------------------------------------------------------
+   6. SECTION LABEL ("02 — Selected work")
+   Small uppercase eyebrow above each H2, with a thin wine line before it.
+   -------------------------------------------------------------------------- */
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-16);
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+/* Gap between a label and the heading right after it — the ONE place this
+   space is set for the whole site (hero, sections, any page).
+   Change the token here to adjust every label at once. */
+.label + :is(h1, h2, h3, .hero-title) {
+  margin-top: var(--space-24);
+}
+
+/* The thin burgundy line. Uses --accent-line so it stays visible on dark
+   (wine-2) and becomes full wine on ivory sections. */
+.label::before {
+  content: "";
+  flex-shrink: 0;
+  width: var(--label-line);
+  height: var(--border-w);
+  background-color: var(--accent-line);
+}
+
+
+/* --------------------------------------------------------------------------
+   7. ACCESSIBILITY HELPERS
+   -------------------------------------------------------------------------- */
+
+/* Hidden on screen but still read by screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* "Skip to content" link: the first thing a keyboard user reaches.
+   It stays off-screen until it receives focus, then slides into view. */
+.skip-link {
+  position: fixed;
+  top: var(--space-16);
+  left: var(--space-16);
+  z-index: 1000;
+  padding: var(--space-16) var(--space-24);
+  border-radius: var(--radius-pill);
+  background-color: var(--wine);
+  color: var(--white);
+  font-weight: var(--fw-medium);
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform var(--dur-micro) var(--ease-out);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  color: var(--white);
+}
+
+
+/* --------------------------------------------------------------------------
+   8. PAGE TRANSITIONS
+   Moved to motion.css (section 1), with the rest of the animation code.
+   -------------------------------------------------------------------------- */

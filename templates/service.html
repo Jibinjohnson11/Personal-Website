@@ -1,0 +1,398 @@
+<!doctype html>
+<!--
+  ==========================================================================
+  templates/service.html — SERVICE / LOCATION / NICHE PAGE TEMPLATE
+  Built from templates/page.html. Adds Service + FAQPage schema and the
+  service-page structure from docs/website-content.md.
+
+  Use for: /services/web-development/, /services/seo/, the Trivandrum pages
+  and the niche landing pages. Delete sections the page doesn't have.
+
+  How to make a new page:
+  1. Copy this file to site/<page-name>/index.html
+  2. Fill in every TODO (search for "TODO"), copying text exactly from
+     docs/website-content.md.
+  3. The FAQ answers in the JSON-LD must match the visible FAQ word for word.
+  4. Run: npm run sync, then npm run prepare-deploy
+
+  Internal linking rules for this page type:
+  - Link to 2 related case studies
+  - Link to the matching location page or hub page
+  Never edit between the PARTIAL markers; edit the files in partials/ instead.
+  ==========================================================================
+-->
+<html lang="en-IN" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Swap "no-js" for "js" as early as possible (see page.html) -->
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
+
+  <!-- ===== SEO basics ===== -->
+  <!-- TODO: unique title, max 60 characters, primary keyword first -->
+  <title>TODO Page title | Jibin Johnson</title>
+  <!-- TODO: unique description, max 155 characters -->
+  <meta name="description" content="TODO Meta description.">
+  <!-- TODO: absolute URL of THIS page, https, with trailing slash -->
+  <link rel="canonical" href="https://jibinjohnson.in/TODO/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+
+  <!-- ===== Open Graph ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:site_name" content="Jibin Johnson">
+  <meta property="og:title" content="TODO Same as the title, or a shorter version">
+  <meta property="og:description" content="TODO Same as the meta description">
+  <meta property="og:url" content="https://jibinjohnson.in/TODO/">
+  <!-- TODO: unique 1200×630 share image for this page -->
+  <meta property="og:image" content="https://jibinjohnson.in/assets/img/og/TODO.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="TODO Describe the share image">
+
+  <!-- ===== Twitter / X card ===== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TODO Same as og:title">
+  <meta name="twitter:description" content="TODO Same as og:description">
+  <meta name="twitter:image" content="https://jibinjohnson.in/assets/img/og/TODO.jpg">
+  <meta name="twitter:image:alt" content="TODO Same as og:image:alt">
+
+  <!-- ===== Browser look, icons and app manifest ===== -->
+  <meta name="theme-color" content="#0E0E0E">
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- ===== Fonts: preload only the two used above the fold ===== -->
+  <link rel="preload" href="/assets/fonts/Boska-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/Switzer-Variable.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- ===== CSS: tokens → base → components → motion → page type ===== -->
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/motion.css">
+  <link rel="stylesheet" href="/assets/css/pages/service.css">
+
+  <!-- ===== Structured data (JSON-LD) =====
+       WebSite + Person: same on every page, don't change.
+       TODO: Service (name, serviceType, description, areaServed),
+             FAQPage (copy each visible question and answer EXACTLY),
+             BreadcrumbList. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://jibinjohnson.in/#website",
+        "url": "https://jibinjohnson.in/",
+        "name": "Jibin Johnson",
+        "inLanguage": "en-IN",
+        "publisher": { "@id": "https://jibinjohnson.in/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://jibinjohnson.in/#person",
+        "name": "Jibin Johnson",
+        "jobTitle": "Web Developer & SEO Specialist",
+        "url": "https://jibinjohnson.in/",
+        "image": "https://jibinjohnson.in/assets/img/jibin-johnson-web-developer-trivandrum.jpg",
+        "email": "mailto:jibinjohnsoninfo@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Thiruvananthapuram",
+          "addressRegion": "Kerala",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://www.linkedin.com/in/jibinjohnson",
+          "https://github.com/Jibinjohnson11",
+          "https://www.instagram.com/jibineyyyy"
+        ],
+        "knowsAbout": [
+          "Web development",
+          "Search engine optimization",
+          "Technical SEO",
+          "Local SEO",
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "GSAP",
+          "UI/UX design",
+          "Core Web Vitals"
+        ],
+        "alumniOf": [
+          { "@type": "EducationalOrganization", "name": "Edure" },
+          { "@type": "CollegeOrUniversity", "name": "University of Madras" }
+        ]
+      },
+      {
+        "@type": "Service",
+        "@id": "https://jibinjohnson.in/TODO/#service",
+        "name": "TODO e.g. Website development in Kerala",
+        "serviceType": "TODO e.g. Website development",
+        "description": "TODO One sentence, can reuse the meta description",
+        "url": "https://jibinjohnson.in/TODO/",
+        "provider": { "@id": "https://jibinjohnson.in/#person" },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "TODO e.g. Kerala" },
+          { "@type": "Country", "name": "India" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "TODO Question 1, exactly as on the page",
+            "acceptedAnswer": { "@type": "Answer", "text": "TODO Answer 1, exactly as on the page" }
+          },
+          {
+            "@type": "Question",
+            "name": "TODO Question 2, exactly as on the page",
+            "acceptedAnswer": { "@type": "Answer", "text": "TODO Answer 2, exactly as on the page" }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://jibinjohnson.in/" },
+          { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://jibinjohnson.in/services/" },
+          { "@type": "ListItem", "position": 3, "name": "TODO Page name", "item": "https://jibinjohnson.in/TODO/" }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- PARTIAL:header --><!-- /PARTIAL:header -->
+
+  <main id="main">
+
+    <!-- Visible breadcrumb: must match the BreadcrumbList above.
+         TODO: location/niche pages have no "Services" step: Home › Page -->
+    <nav class="breadcrumb container" aria-label="Breadcrumb">
+      <ol class="breadcrumb__list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/TODO/" aria-current="page">TODO Page name</a></li>
+      </ol>
+    </nav>
+
+
+    <!-- ====================================================================
+         01 HERO — label → H1 → lead → buttons.
+         The whole hero reveals in CSS (service.css, section 1), so it is
+         painted on the first frame and never waits for JavaScript (LCP):
+         - the H1's two parts slide up inside their masks (transform only)
+         - the lead and buttons rise in after them (transform + clip-path)
+         Do NOT add data-reveal to anything in the hero: that hides it with
+         opacity until GSAP loads, which delays LCP.
+         Part one of the H1 = the primary keyword; part two = the rest of the
+         same sentence (smaller italic). One-part H1? Delete the second span.
+         ==================================================================== -->
+    <section class="service-hero" aria-labelledby="page-title">
+      <div class="container service-hero__inner">
+        <p class="label">TODO Label (e.g. Web development)</p>
+        <h1 id="page-title">
+          <span class="service-hero__line" style="--i: 0"><span class="service-hero__line-inner">TODO Primary keyword</span></span>
+          <span class="service-hero__line service-hero__line--rest" style="--i: 1"><span class="service-hero__line-inner">TODO rest of the H1</span></span>
+        </h1>
+        <div class="service-hero__intro">
+          <p class="lead service-hero__lead">TODO Lead (primary keyword within the first ~100 words).</p>
+          <div class="btn-group service-hero__actions">
+            <a class="btn btn--primary" href="/contact/" data-magnetic>TODO Get a free quote</a>
+            <a class="btn btn--ghost" href="/work/" data-magnetic>TODO See my work</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== 02 The problem ========== -->
+    <section class="section" aria-labelledby="problem-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">02 — TODO The problem</p>
+          <h2 id="problem-title">TODO e.g. Why most business websites don't work</h2>
+        </div>
+        <div class="service-prose">
+          <p>TODO Paragraph.</p>
+          <p>TODO Paragraph.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== 03 What you get: one card per benefit (H3s) ========== -->
+    <section class="section section--paper" aria-labelledby="benefits-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">03 — TODO What you get</p>
+          <h2 id="benefits-title">TODO What you get</h2>
+        </div>
+        <ul class="service-benefits">
+          <li class="service-benefit">
+            <h3>TODO Benefit title</h3>
+            <p>TODO Benefit text.</p>
+          </li>
+          <li class="service-benefit">
+            <h3>TODO Benefit title</h3>
+            <p>TODO Benefit text.</p>
+          </li>
+          <!-- TODO: one <li> per H3 in the content doc -->
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ========== 04 What I build / offer: simple list ========== -->
+    <section class="section" aria-labelledby="offer-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">04 — TODO</p>
+          <h2 id="offer-title">TODO e.g. Websites I build</h2>
+        </div>
+        <ul class="service-list">
+          <li><strong>TODO Item.</strong> TODO description</li>
+          <li><strong>TODO Item.</strong> TODO description</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ========== 05 Process: numbered steps ========== -->
+    <section class="section" aria-labelledby="process-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">05 — Process</p>
+          <h2 id="process-title">TODO e.g. How I work with you</h2>
+        </div>
+        <ol class="service-steps">
+          <li><strong>TODO Step.</strong> TODO description</li>
+          <li><strong>TODO Step.</strong> TODO description</li>
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ========== 06 Tools / approach (optional) ========== -->
+    <section class="section" aria-labelledby="tools-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">06 — TODO</p>
+          <h2 id="tools-title">TODO e.g. Built with modern, reliable tools</h2>
+        </div>
+        <div class="service-prose">
+          <p>TODO Paragraph.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== 07 Related work: link 2 case studies ========== -->
+    <section class="section section--paper" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">07 — Selected work</p>
+          <h2 id="work-title">TODO e.g. Recent web development work</h2>
+        </div>
+        <div class="service-work">
+          <article class="card">
+            <div class="card__body">
+              <p class="card__meta">TODO Service</p>
+              <h3 class="card__title"><a class="card__link" href="/work/TODO/">TODO Project</a></h3>
+              <p class="card__text">TODO One-line summary.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="card__body">
+              <p class="card__meta">TODO Service</p>
+              <h3 class="card__title"><a class="card__link" href="/work/TODO/">TODO Project</a></h3>
+              <p class="card__text">TODO One-line summary.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== 08 Area served + links to the matching hub/location page ========== -->
+    <section class="section" aria-labelledby="area-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">08 — TODO</p>
+          <h2 id="area-title">TODO e.g. Working with businesses across Kerala</h2>
+        </div>
+        <div class="service-prose">
+          <p>TODO Paragraph with a link to the <a href="/TODO/">TODO keyword anchor text</a>.</p>
+          <p>TODO Paragraph with a link to the <a href="/TODO/">TODO other service keyword</a>.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== 09 FAQ: must match the FAQPage JSON-LD exactly ========== -->
+    <section class="section" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">09 — Questions</p>
+          <h2 id="faq-title">Frequently asked questions</h2>
+        </div>
+        <div class="faq">
+          <details class="faq__item">
+            <summary class="faq__summary">
+              <h3 class="faq__question">TODO Question 1, exactly as on the page</h3>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer">
+              <p>TODO Answer 1, exactly as on the page</p>
+            </div>
+          </details>
+          <details class="faq__item">
+            <summary class="faq__summary">
+              <h3 class="faq__question">TODO Question 2, exactly as on the page</h3>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer">
+              <p>TODO Answer 2, exactly as on the page</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ========== 10 Standard CTA block (same text on every service page) ========== -->
+    <section class="section cta" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="section__head">
+          <p class="label">10 — Next step</p>
+          <h2 id="cta-title">Ready to start?</h2>
+          <p class="lead">Tell me what you're building or what isn't working. I'll reply with honest advice and a clear next step, even if that step isn't hiring me.</p>
+        </div>
+        <div class="btn-group">
+          <a class="btn btn--primary" href="/contact/">Start a project</a>
+          <a class="btn btn--ghost" href="https://wa.me/917736208172?text=Hi%20Jibin%2C%20I%20found%20your%20website%20and%20I%27d%20like%20to%20talk%20about%20a%20project." rel="noopener" target="_blank">WhatsApp me</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PARTIAL:footer --><!-- /PARTIAL:footer -->
+
+  <!-- PARTIAL:whatsapp --><!-- /PARTIAL:whatsapp -->
+
+  <!-- PARTIAL:scripts --><!-- /PARTIAL:scripts -->
+
+</body>
+</html>

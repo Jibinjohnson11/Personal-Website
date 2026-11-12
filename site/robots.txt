@@ -1,0 +1,10 @@
+# robots.txt — https://jibinjohnson.in/robots.txt
+# All search engines and AI crawlers may read the site, except the
+# styleguide (internal) and the thank-you page (only shown after the form).
+
+User-agent: *
+Allow: /
+Disallow: /styleguide/
+Disallow: /thank-you/
+
+Sitemap: https://jibinjohnson.in/sitemap.xml

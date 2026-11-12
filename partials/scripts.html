@@ -1,0 +1,85 @@
+<!-- Scripts: all "defer", so they download in parallel and run in THIS order
+     after the HTML is parsed. Libraries first, then our own files. -->
+<script src="/assets/vendor/gsap.min.js?v=3d1bea37" defer></script>
+<script src="/assets/vendor/ScrollTrigger.min.js?v=b5bb3606" defer></script>
+<script src="/assets/vendor/SplitText.min.js?v=7b299a6b" defer></script>
+<script src="/assets/vendor/lenis.min.js?v=80f53e77" defer></script>
+<script src="/assets/js/main.js?v=9e34a500" defer></script>
+<script src="/assets/js/menu.js?v=8932906f" defer></script>
+<script src="/assets/js/motion.js?v=6e69cba4" defer></script>
+<script src="/assets/js/thread.js?v=bf143689" defer></script>
+<script src="/assets/js/cursor.js?v=003f6d8d" defer></script>
+
+<!-- ==========================================================================
+     GA4 (Google Analytics) — READY BUT SWITCHED OFF.
+     To turn it on:
+       1. Replace G-XXXXXXX (twice) with your Measurement ID from GA4
+          (Admin → Data streams → your site).
+       2. Delete the "GA4 START" and "GA4 END" comment lines.
+       3. npm run sync   (copies it into every page)
+       4. Mention Google Analytics in /privacy/ if it isn't there yet.
+
+     How it works:
+     - gtag.js (~100KB) is NOT loaded with the page. It loads on the visitor's
+       first interaction (scroll, click, tap or key press), so it never slows
+       down the first paint or LCP.
+     - gtag() calls made before it loads are queued in dataLayer and sent
+       once it arrives, so no events are lost.
+     - Conversion events (mark them as "key events" in GA4):
+         whatsapp_click   any link to wa.me
+         resume_download  any link to a .pdf
+         form_submit      the contact form ([data-contact-form]) is sent
+     ==========================================================================
+GA4 START
+<script>
+  (function () {
+    "use strict";
+
+    var GA_ID = "G-XXXXXXX";
+
+    // Queue for gtag() calls until the real library has loaded
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag("js", new Date());
+    gtag("config", GA_ID);
+
+    // Load gtag.js once, on the first sign of a real visitor
+    var loaded = false;
+    var triggers = ["scroll", "pointerdown", "keydown", "touchstart"];
+
+    function loadGA() {
+      if (loaded) return;
+      loaded = true;
+      triggers.forEach(function (type) { window.removeEventListener(type, loadGA); });
+      var script = document.createElement("script");
+      script.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+      script.async = true;
+      document.head.appendChild(script);
+    }
+
+    triggers.forEach(function (type) {
+      window.addEventListener(type, loadGA, { once: true, passive: true });
+    });
+
+    // Conversion events. One listener on the page catches every link.
+    // transport_type "beacon" lets the event finish even as the page changes.
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest("a[href]");
+      if (!link) return;
+      if (link.href.indexOf("wa.me/") !== -1) {
+        gtag("event", "whatsapp_click", { link_url: link.href, transport_type: "beacon" });
+      } else if (/\.pdf($|\?)/i.test(link.href)) {
+        gtag("event", "resume_download", { file_name: link.pathname, transport_type: "beacon" });
+      }
+    });
+
+    // Contact form: contact.js cancels invalid submits (defaultPrevented),
+    // so only real submissions are counted
+    document.addEventListener("submit", function (event) {
+      if (event.target.matches("[data-contact-form]") && !event.defaultPrevented) {
+        gtag("event", "form_submit", { form_name: "contact", transport_type: "beacon" });
+      }
+    });
+  })();
+</script>
+GA4 END -->

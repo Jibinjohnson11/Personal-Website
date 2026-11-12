@@ -1,0 +1,201 @@
+/* ==========================================================================
+   pages/blog.css — Styles used ONLY on the blog index (site/blog/index.html)
+
+   The post cards are the shared .card / .card__title--display /
+   .cover--type components (components.css), like the Work page.
+   This file adds the filter bar, the featured post and the post grid.
+   Mobile-first: plain rules are for phones, @media blocks add tablet
+   (768px) and desktop (1024px).
+
+   Contents
+   1. Intro width
+   2. Tag filter (only with JavaScript)
+   3. Featured post
+   4. Post grid
+   5. Empty state and "more coming" note
+   6. Closing line
+   7. Reduced motion
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. INTRO
+   Shared .page-intro; on desktop the lead sits in columns 7–12.
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .blog-intro .page-intro__lead {
+    grid-column: 7 / -1;
+    margin-top: var(--space-64);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   2. TAG FILTER
+   Without JavaScript the buttons would do nothing, so the bar is hidden
+   and every post is shown. blog.js toggles aria-pressed and hides posts.
+   -------------------------------------------------------------------------- */
+
+.blog-filter {
+  display: none;
+}
+
+html.js .blog-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin-bottom: var(--space-64);
+}
+
+/* Pill buttons in label style, like .tag, but clickable (44px tall) */
+.blog-filter__btn {
+  min-height: 44px;
+  padding: var(--space-8) var(--space-24);
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius-pill);
+  background-color: transparent;
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+  cursor: pointer;
+  transition: background-color var(--dur-micro) var(--ease-out),
+              color var(--dur-micro) var(--ease-out);
+}
+
+.blog-filter__btn:hover {
+  color: var(--text-strong);
+  border-color: var(--text-strong);
+}
+
+/* The selected filter fills with the text colour (ink on ivory) */
+.blog-filter__btn[aria-pressed="true"] {
+  background-color: var(--text-strong);
+  border-color: var(--text-strong);
+  color: var(--bg);
+}
+
+/* Posts hidden by the filter (the [hidden] attribute beats .card's flex) */
+[data-post][hidden] {
+  display: none;
+}
+
+
+/* --------------------------------------------------------------------------
+   3. FEATURED POST
+   One wide card. Desktop: cover on the left (7 columns), text on the right.
+   -------------------------------------------------------------------------- */
+
+.post-card--featured .card__body {
+  gap: var(--space-24);
+}
+
+@media (min-width: 1024px) {
+  .post-card--featured {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+  }
+
+  .post-card--featured .card__media {
+    height: 100%;
+  }
+
+  .post-card--featured .cover {
+    height: 100%;
+  }
+
+  .post-card--featured .card__body {
+    justify-content: center;
+    padding: var(--space-48);
+  }
+}
+
+/* The title picks up the accent colour on hover (wine on ivory: allowed) */
+.post-card .card__title {
+  transition: color var(--dur-micro) var(--ease-out);
+}
+
+.post-card:hover .card__title {
+  color: var(--accent-text);
+}
+
+
+/* --------------------------------------------------------------------------
+   4. POST GRID
+   One column on phones, two on tablets, three on desktop.
+   -------------------------------------------------------------------------- */
+
+.post-grid {
+  display: grid;
+  gap: var(--space-48) var(--col-gap);
+  margin-top: var(--space-96);
+}
+
+@media (min-width: 768px) {
+  .post-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .post-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   5. EMPTY STATE AND "MORE COMING" NOTE
+   -------------------------------------------------------------------------- */
+
+.blog-index__empty,
+.blog-index__note {
+  margin-top: var(--space-64);
+  color: var(--text-mute);
+}
+
+
+/* --------------------------------------------------------------------------
+   6. CLOSING LINE
+   "Have a question these posts don't answer? Ask me →" (same look as the
+   Work page's closing line).
+   -------------------------------------------------------------------------- */
+
+.blog-closing__link {
+  color: var(--accent-text);     /* rose on ink: 4.9:1, fine at this size */
+  text-decoration-thickness: var(--border-w);
+  text-underline-offset: 0.15em;
+  white-space: nowrap;           /* keeps the arrow with its words */
+}
+
+.blog-closing__link:hover {
+  color: var(--text-strong);
+}
+
+.blog-closing__arrow {
+  display: inline-block;
+  transition: transform var(--dur-reveal) var(--ease-out);
+}
+
+.blog-closing__link:hover .blog-closing__arrow {
+  transform: translateX(var(--space-16));
+}
+
+
+/* --------------------------------------------------------------------------
+   7. REDUCED MOTION
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-filter__btn,
+  .post-card .card__title,
+  .blog-closing__arrow {
+    transition: none;
+  }
+
+  .blog-closing__link:hover .blog-closing__arrow {
+    transform: none;
+  }
+}

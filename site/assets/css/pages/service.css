@@ -1,0 +1,1546 @@
+/* ==========================================================================
+   pages/service.css — Styles shared by every SERVICE page
+   (/services/, /services/web-development/, /services/seo/, and later the
+   Trivandrum and niche pages built from templates/service.html)
+
+   Builds on components.css (buttons, card, cover, tags, FAQ, breadcrumb,
+   .cta) and uses tokens only. Mobile-first: plain rules are for phones,
+   @media blocks add tablet (768px) and desktop (1024px).
+
+   Each page has ONE distinctive moment; their styles are here too, and
+   pages/service.js animates them:
+     /services/                  → 4. Split panels that meet at an "&"
+     /services/web-development/  → 7. Pinned "What you get" index
+     /services/seo/              → 9. Process line drawn from the label
+     /web-developer-trivandrum/  → 14. Areas list (big area names that
+     /seo-specialist-trivandrum/       light up as the thread passes)
+     /seo-for-healthcare-clinics/   → 17. Patient journey (the areas list,
+                                          set as four calm steps)
+     /seo-for-education-institutes/ → 18. Course searches (large type)
+     /web-design-for-startups/      → 19. Launch timeline
+
+   Contents
+   1. Hero (label, two-part H1, lead, buttons)
+   2. Prose (body text in columns 7–12, closing statement)
+   3. Search phrases (little pills inside a paragraph)
+   4. Split panels (/services/)
+   5. Link index (big serif link rows)
+   6. Benefits grid (static: phones, tablets, reduced motion, no JS)
+   7. Benefits, pinned index (desktop + motion, set by service.js)
+   8. List with terms ("Websites I build")
+   9. Process line (SEO page)
+   10. Simple steps ("How I work with you")
+   11. Related work cards
+   12. FAQ layout
+   13. Reduced motion
+   14. Areas list (Trivandrum pages)
+   15. Check list ("What's included in every website")
+   16. Single case study (niche pages: one card + text beside it)
+   17. Patient journey (healthcare page)
+   18. Course searches (education page)
+   19. Launch timeline (startups page)
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   1. HERO
+   Not a .section: it sits right under the breadcrumb with less top space.
+   The H1 has two parts: the primary keyword large, the rest a smaller
+   italic serif line (the same voice as the case-study tagline).
+   -------------------------------------------------------------------------- */
+
+.service-hero {
+  padding-block: var(--space-48) var(--section-pad);
+  overflow-x: clip;               /* nothing may cause a sideways scroll */
+}
+
+/* Lift the hero above the burgundy thread (motion.css lifts only
+   ".section > .container", and this isn't a .section) */
+.service-hero > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.service-hero__inner {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  column-gap: var(--col-gap);
+}
+
+.service-hero__inner > * {
+  grid-column: 1 / -1;
+}
+
+/* .label is inline-flex: keep it from stretching across the grid cell */
+.service-hero__inner > .label {
+  justify-self: start;
+}
+
+/* Each part of the H1 is its own mask (overflow: clip). The bottom padding
+   keeps descenders (g, p, y) from being cut; the negative margin cancels it. */
+.service-hero__line {
+  display: block;
+  overflow: clip;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+
+.service-hero__line-inner {
+  display: block;
+}
+
+/* Second part: smaller italic serif, kept narrow so it breaks nicely */
+.service-hero__line--rest {
+  max-width: 18em;
+  margin-top: var(--space-16);
+  font-size: var(--fs-h2);
+  font-style: italic;
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+  color: var(--text);
+}
+
+/* Line reveal in CSS so it starts at first paint (the H1 is the LCP
+   element). transform only, never opacity, and only 40% down the mask,
+   so the heading is readable straight away. --i staggers the two parts. */
+@keyframes service-line-up {
+  from { transform: translateY(40%); }
+  to   { transform: none; }
+}
+
+html.js .service-hero__line-inner {
+  animation: service-line-up var(--dur-hero) var(--ease-out) both;
+  animation-delay: calc(var(--i) * var(--stagger) * 2);
+}
+
+.service-hero__intro {
+  margin-top: var(--space-48);
+}
+
+.service-hero__lead {
+  color: var(--text-mute);
+}
+
+.service-hero__actions {
+  margin-top: var(--space-32);
+}
+
+/* Lead + buttons: also CSS-only, so they don't wait for GSAP either (the
+   lead is often the page's LCP element). Same rules as the H1:
+   - never opacity: the text is painted in the very first frame
+   - the lead rises a little while a clip-path "mask" opens from 40%
+     clipped at the bottom, so ~60% of it shows on that first frame
+   - the buttons only rise (transform). No clipping on them: it would cut
+     off the focus ring and the magnetic hover movement.
+   They follow the H1 lines in the stagger (--i 2 and 3). */
+@keyframes service-intro-up {
+  from {
+    transform: translateY(var(--space-16));
+    clip-path: inset(0 0 40% 0);
+  }
+  to {
+    transform: none;
+    clip-path: inset(0);
+  }
+}
+
+@keyframes service-actions-up {
+  from { transform: translateY(var(--space-16)); }
+  to   { transform: none; }
+}
+
+html.js .service-hero__lead {
+  animation: service-intro-up var(--dur-hero) var(--ease-out) both;
+  animation-delay: calc(2 * var(--stagger) * 2);
+}
+
+html.js .service-hero__actions {
+  animation: service-actions-up var(--dur-hero) var(--ease-out) both;
+  animation-delay: calc(3 * var(--stagger) * 2);
+}
+
+@media (min-width: 1024px) {
+  .service-hero {
+    padding-top: var(--space-64);
+  }
+
+  /* Lead + buttons in columns 7–12, under the H1 (the grid broken on purpose) */
+  .service-hero__intro {
+    grid-column: 7 / -1;
+    margin-top: var(--space-64);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   2. PROSE
+   Body text sits in columns 7–12 on desktop, the heading starts at
+   column 1. .service-prose__statement is a closing line in large serif.
+   -------------------------------------------------------------------------- */
+
+.service-prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.service-prose p {
+  color: var(--text-mute);
+}
+
+/* Links inside running text: the normal text colour with an underline */
+.service-prose a {
+  color: var(--text);
+  text-decoration-thickness: var(--border-w);
+  text-underline-offset: 0.2em;
+}
+
+.service-prose a:hover {
+  color: var(--text-strong);
+}
+
+/* Larger first paragraph */
+.service-prose .lead {
+  color: var(--text);
+}
+
+/* The closing statement ("I build websites where all three...") */
+.service-prose .service-prose__statement {
+  margin-top: var(--space-24);
+  color: var(--text-strong);
+}
+
+@media (min-width: 1024px) {
+  .service-prose {
+    margin-left: calc(100% / var(--grid-columns) * 6);
+  }
+
+  /* The statement steps back out to the left: wider than the text column */
+  .service-prose .service-prose__statement {
+    margin-left: calc(100% / -6 * 4);   /* 4 of the 6 columns back */
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   3. SEARCH PHRASES
+   Real searches quoted in the copy, shown as small outlined pills (like a
+   search box), so they stand out from the sentence around them.
+   -------------------------------------------------------------------------- */
+
+.service-query {
+  display: inline;
+  padding: 0.05em 0.5em;
+  border: var(--border-w) solid var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--text);
+  white-space: nowrap;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+
+/* --------------------------------------------------------------------------
+   4. SPLIT PANELS  (/services/ — the page's distinctive moment)
+   Two services, two panels: Web development on graphite, SEO on ivory.
+   Phones/tablets: stacked, with the "&" disc on the seam between them.
+   Desktop: side by side; service.js slides them in from opposite sides
+   until they meet at the burgundy seam (transform only).
+   -------------------------------------------------------------------------- */
+
+.service-split {
+  overflow-x: clip;               /* the panels start off to the sides */
+}
+
+.service-split__grid {
+  position: relative;
+  display: grid;
+}
+
+.service-split__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  padding: var(--space-48) var(--space-24);
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* Dark panel: graphite, a step up from the page */
+.service-split__panel--ink {
+  --bg: var(--ink-2);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+}
+
+/* Light panel: the same theme swap as .section--paper, but on a panel
+   (not .section--paper itself, so the header doesn't switch to light) */
+.service-split__panel--paper {
+  color-scheme: light;
+  --bg:          var(--paper);
+  --surface:     var(--white);
+  --text:        var(--ink);
+  --text-strong: var(--ink);
+  --text-mute:   var(--line);
+  --accent-text: var(--wine);
+  --border:      var(--silver);
+  --accent-line: var(--wine);
+  --focus:       var(--wine);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+/* "label + h2" spacing comes from base.css; the H2 sits a little lower */
+.service-split__panel h2 {
+  margin-top: var(--space-24);
+}
+
+.service-split__text {
+  color: var(--text-mute);
+}
+
+/* Bullet list: a short accent line before each item instead of a dot */
+.service-split__list {
+  display: flex;
+  flex-direction: column;
+  border-top: var(--border-w) solid var(--border);
+}
+
+.service-split__list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  padding-block: var(--space-16);
+  border-bottom: var(--border-w) solid var(--border);
+}
+
+.service-split__list li::before {
+  content: "";
+  flex-shrink: 0;
+  width: var(--space-16);
+  height: var(--border-w);
+  background-color: var(--accent-line);
+}
+
+.service-split__link {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+/* The "&": a wine disc on the seam. Decorative (aria-hidden).
+   Phones/tablets: it sits in the stack between the two panels, and the
+   negative margins pull it half over each one. */
+.service-split__amp {
+  z-index: 1;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-96);
+  height: var(--space-96);
+  margin-block: calc(var(--space-96) / -2);
+  border-radius: var(--radius-pill);
+  background-color: var(--wine);
+  color: var(--white);
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-style: italic;
+  line-height: 1;
+  box-shadow: 0 0 var(--space-32) color-mix(in srgb, var(--wine-2) 60%, transparent);
+}
+
+/* Extra room next to the disc, so it never covers panel text */
+.service-split__panel--ink   { padding-bottom: var(--space-96); }
+.service-split__panel--paper { padding-top: var(--space-96); }
+
+@media (min-width: 768px) {
+  .service-split__panel {
+    padding-inline: var(--space-48);
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-split__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .service-split__panel,
+  .service-split__panel--ink,
+  .service-split__panel--paper {
+    padding: var(--space-96) var(--space-64);
+  }
+
+  .service-split__panel--ink {
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  }
+
+  .service-split__panel--paper {
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  }
+
+  /* The burgundy seam between the panels (scaled in by service.js) */
+  .service-split__grid::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: var(--border-w);
+    background-color: var(--wine-2);
+    transform-origin: top;
+  }
+
+  /* Desktop: the disc is centred on the seam, over both panels */
+  .service-split__amp {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--space-128);
+    height: var(--space-128);
+    margin: calc(var(--space-128) / -2) 0 0 calc(var(--space-128) / -2);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   5. LINK INDEX
+   Big serif link rows with an arrow, e.g. "Web developer in Trivandrum →".
+   The whole row is the link (44px+ tall). Hover: the arrow slides right.
+   -------------------------------------------------------------------------- */
+
+.service-index {
+  border-top: var(--border-w) solid var(--border);
+}
+
+.service-index__item {
+  border-bottom: var(--border-w) solid var(--border);
+}
+
+.service-index__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-24);
+  min-height: var(--tap-min);
+  padding-block: var(--space-24);
+  font-family: var(--font-display);
+  font-size: var(--fs-display-text);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+  color: var(--text-strong);
+  text-decoration: none;
+}
+
+.service-index__arrow {
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-weight: var(--fw-light);
+  color: var(--accent-text);
+  transition: transform var(--dur-reveal) var(--ease-out);
+}
+
+.service-index__link:hover .service-index__arrow,
+.service-index__link:focus-visible .service-index__arrow {
+  transform: translateX(var(--space-16));
+}
+
+.service-index__intro {
+  color: var(--text-mute);
+}
+
+@media (min-width: 1024px) {
+  /* Heading on the left, rows on the right */
+  .service-index-section__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    align-items: start;
+  }
+
+  .service-index-section__inner > .section__head {
+    grid-column: 1 / 6;
+    margin-bottom: 0;
+  }
+
+  .service-index-section__inner > .service-index {
+    grid-column: 6 / -1;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   6. BENEFITS GRID (static)
+   One cell per benefit (H3 + text), with a small number and a top line.
+   This is the layout on phones, tablets, with reduced motion and without
+   JavaScript. On desktop the web development page turns it into the
+   pinned index (section 7).
+   -------------------------------------------------------------------------- */
+
+.service-benefits {
+  display: grid;
+  gap: var(--space-48) var(--col-gap);
+}
+
+.service-benefit {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding-top: var(--space-24);
+  border-top: var(--border-w) solid var(--border);
+}
+
+/* "01", "02"…: decorative (aria-hidden), the list is already numbered by order */
+.service-benefit__num {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  color: var(--text-mute);
+}
+
+.service-benefit__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-h3);
+}
+
+.service-benefit__text {
+  color: var(--text-mute);
+}
+
+/* The progress line under the pinned index (section 7): hidden here */
+.service-benefits-progress {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .service-benefits {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-benefits {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: var(--space-64);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   7. BENEFITS, PINNED INDEX  (/services/web-development/ — distinctive moment)
+   service.js adds .service-benefits--pinned on desktop with motion, then
+   pins the section while you scroll through the six benefits:
+   - left: the six titles as a big serif index; the active one is full
+     strength with a burgundy line drawn in front of it, the others faded
+   - right: the active benefit's text (the others are stacked in the same
+     spot, faded out)
+   service.js only switches .is-active; CSS does the rest (opacity and
+   transform only). The list keeps its normal HTML order for screen readers.
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .service-benefits--pinned {
+    position: relative;
+    display: block;
+    width: calc(100% / var(--grid-columns) * 7);   /* titles in columns 1–7 */
+  }
+
+  .service-benefits--pinned .service-benefit {
+    position: static;           /* the text is placed against the whole list */
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--space-24);
+    padding-block: var(--space-16);
+    border-top: 0;
+  }
+
+  .service-benefits--pinned .service-benefit__num {
+    width: var(--space-32);
+    flex-shrink: 0;
+    opacity: 0.5;
+    transition: opacity var(--dur-reveal) var(--ease-out);
+  }
+
+  /* The title: large serif; faded until active. At 0.5 opacity it is still
+     ~3.6:1 on ivory, enough for text this large. */
+  .service-benefits--pinned .service-benefit__title {
+    position: relative;
+    font-size: var(--fs-display-text);
+    line-height: var(--lh-h2);
+    letter-spacing: var(--ls-h2);
+    opacity: 0.5;
+    transform: translateX(0);
+    transition:
+      opacity var(--dur-reveal) var(--ease-out),
+      transform var(--dur-reveal) var(--ease-out);
+  }
+
+  /* The burgundy line in front of the active title (like a section label) */
+  .service-benefits--pinned .service-benefit__title::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: calc(100% + var(--space-16));
+    width: var(--label-line);
+    height: var(--border-w);
+    background-color: var(--accent-line);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--dur-reveal) var(--ease-out);
+  }
+
+  /* The text: every benefit's text sits in the same spot, in columns 9–12,
+     faded out and slightly lower until its benefit is active */
+  .service-benefits--pinned .service-benefit__text {
+    position: absolute;
+    top: 50%;
+    left: calc(100% / 7 * 8);          /* column 9 of 12, measured from the list */
+    width: calc(100% / 7 * 4);         /* 4 columns wide */
+    font-size: var(--fs-lead);
+    font-weight: var(--fw-light);
+    line-height: var(--lh-lead);
+    color: var(--text);
+    opacity: 0;
+    transform: translateY(calc(-50% + var(--space-24)));
+    transition:
+      opacity var(--dur-reveal) var(--ease-out),
+      transform var(--dur-reveal) var(--ease-out);
+  }
+
+  /* Active benefit */
+  .service-benefits--pinned .is-active .service-benefit__num,
+  .service-benefits--pinned .is-active .service-benefit__title {
+    opacity: 1;
+  }
+
+  .service-benefits--pinned .is-active .service-benefit__title {
+    transform: translateX(var(--space-48));
+  }
+
+  .service-benefits--pinned .is-active .service-benefit__title::before {
+    transform: scaleX(1);
+  }
+
+  .service-benefits--pinned .is-active .service-benefit__text {
+    opacity: 1;
+    transform: translateY(-50%);
+  }
+
+  /* Progress under the index: a thin line that fills as you scroll
+     (decorative; service.js scales it). Only shown while pinned. */
+  .service-benefits-section--pinned .service-benefits-progress {
+    display: block;
+    width: calc(100% / var(--grid-columns) * 7);
+    height: var(--border-w);
+    margin-top: var(--space-32);
+    background-color: var(--border);
+  }
+
+  .service-benefits-progress__fill {
+    display: block;
+    height: 100%;
+    background-color: var(--accent-line);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  /* While pinned, the head needs less space under it so everything fits */
+  .service-benefits-section--pinned .section__head {
+    margin-bottom: var(--space-48);
+  }
+}
+
+
+
+/* --------------------------------------------------------------------------
+   8. LIST WITH TERMS  ("Websites I build")
+   Each row: the term in serif, the description beside it on desktop.
+   -------------------------------------------------------------------------- */
+
+.service-list {
+  border-top: var(--border-w) solid var(--border);
+}
+
+.service-list__item {
+  display: grid;
+  gap: var(--space-8);
+  padding-block: var(--space-24);
+  border-bottom: var(--border-w) solid var(--border);
+  color: var(--text-mute);
+}
+
+.service-list__term {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h3);
+  color: var(--text-strong);
+}
+
+@media (min-width: 1024px) {
+  .service-list__item {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    align-items: baseline;
+    padding-block: var(--space-32);
+  }
+
+  .service-list__term {
+    grid-column: 1 / 6;
+    font-size: var(--fs-display-text);
+    line-height: var(--lh-h2);
+  }
+
+  .service-list__desc {
+    grid-column: 7 / -1;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   9. PROCESS LINE  (/services/seo/ — distinctive moment)
+   The section label's own wine line turns the corner and runs straight
+   down through the five steps, like the thread branching into the page.
+   - the track (grey) and the line (burgundy) start at the label's centre,
+     at its left edge: exactly where the thread hooks in
+   - service.js scales the line down as you scroll (scrubbed, transform
+     only) and marks each step .is-reached as the line passes it
+   - without JS, or with reduced motion, the line is simply fully drawn
+   The heading and steps are indented so the line never crosses text.
+   -------------------------------------------------------------------------- */
+
+.process-line {
+  position: relative;
+  --process-indent: var(--space-32);
+}
+
+/* The label's centre, measured from the top of the block */
+.process-line__track,
+.process-line__fill {
+  position: absolute;
+  top: calc(var(--fs-label) * var(--lh-label) / 2);
+  bottom: 0;
+  left: 0;
+  width: var(--border-w);
+}
+
+.process-line__track {
+  background-color: var(--border);
+}
+
+.process-line__fill {
+  background-color: var(--accent-line);
+  box-shadow: 0 0 var(--space-8) color-mix(in srgb, var(--wine-2) 60%, transparent);
+  transform-origin: top;
+}
+
+/* A dot where the line ends */
+.process-line__fill::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: var(--space-8);
+  height: var(--space-8);
+  margin: 0 0 calc(var(--space-8) / -2) calc(var(--space-8) / -2);
+  border-radius: var(--radius-pill);
+  background-color: var(--accent-line);
+}
+
+/* Everything except the label moves right of the line.
+   (".process-line >" raises the specificity above base.css's
+   "ol[class] { padding: 0 }" reset, which would otherwise win.) */
+.process-line > .section__head > :not(.label),
+.process-line > .process-line__steps {
+  padding-left: var(--process-indent);
+}
+
+.process-line__step {
+  position: relative;
+  display: grid;
+  gap: var(--space-16);
+  padding-block: var(--space-48);
+}
+
+/* The marker on the line: a ring that fills with wine when reached */
+.process-line__step::before,
+.process-line__step::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--space-48) + var(--space-24));
+  left: calc(var(--process-indent) * -1 - var(--space-8) + var(--border-w) / 2);
+  width: var(--space-16);
+  height: var(--space-16);
+  border-radius: var(--radius-pill);
+}
+
+.process-line__step::before {
+  border: var(--border-w) solid var(--accent-line);
+  background-color: var(--bg);
+}
+
+.process-line__step::after {
+  background-color: var(--accent-line);
+  transform: scale(1);                     /* reached by default (no JS) */
+  transition: transform var(--dur-reveal) var(--ease-out);
+}
+
+/* Big hanging serif number: faded until the line reaches it */
+.process-line__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  line-height: 1;
+  color: var(--text-mute);
+  transition: opacity var(--dur-reveal) var(--ease-out);
+}
+
+.process-line__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-text);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+}
+
+.process-line__text {
+  color: var(--text-mute);
+}
+
+/* Starting state while motion runs: line empty, markers and numbers dim.
+   Only under html.js (and not if GSAP failed: .no-motion). */
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.no-motion) .process-line__fill {
+    transform: scaleY(0);
+  }
+
+  html.js:not(.no-motion) .process-line__step::after {
+    transform: scale(0);
+  }
+
+  html.js:not(.no-motion) .process-line__num {
+    opacity: 0.4;
+  }
+
+  html.js:not(.no-motion) .process-line__step.is-reached::after {
+    transform: scale(1);
+  }
+
+  html.js:not(.no-motion) .process-line__step.is-reached .process-line__num {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .process-line {
+    --process-indent: var(--space-64);
+  }
+}
+
+@media (min-width: 1024px) {
+  .process-line {
+    --process-indent: var(--space-96);
+  }
+
+  /* One wide editorial row per step: number · title · text */
+  .process-line__step {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    align-items: baseline;
+    padding-block: var(--space-64);
+  }
+
+  .process-line__step::before,
+  .process-line__step::after {
+    top: calc(var(--space-64) + var(--space-32));
+  }
+
+  .process-line__num   { grid-column: 1 / 3; }
+  .process-line__title { grid-column: 3 / 7; }
+  .process-line__text  { grid-column: 7 / -1; }
+}
+
+
+/* --------------------------------------------------------------------------
+   10. SIMPLE STEPS  ("How I work with you")
+   Phones: a stack. Desktop: five columns, each with a top line and number.
+   -------------------------------------------------------------------------- */
+
+.service-steps {
+  display: grid;
+  gap: var(--space-48);
+}
+
+.service-step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  padding-top: var(--space-24);
+  border-top: var(--border-w) solid var(--border);
+}
+
+.service-step__num {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  line-height: 1;
+  color: var(--text-mute);
+}
+
+.service-step__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+}
+
+.service-step__text {
+  color: var(--text-mute);
+}
+
+@media (min-width: 768px) {
+  .service-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-steps {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  /* Each step a little lower than the last: a gentle descending line */
+  .service-step {
+    margin-top: calc(var(--i) * var(--space-48));
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   11. RELATED WORK CARDS
+   The same .card / .card__title--display / .cover--type as the Work page.
+   Two columns from tablet up, the second one dropped lower.
+   -------------------------------------------------------------------------- */
+
+.service-work {
+  display: grid;
+  gap: var(--space-64);
+}
+
+.service-work .card__media img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .service-work {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+  }
+
+  .service-work > :nth-child(2) {
+    margin-top: var(--space-128);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   12. FAQ LAYOUT
+   Desktop: heading on the left (stays in view), questions on the right.
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 1024px) {
+  .service-faq__inner {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    align-items: start;
+  }
+
+  .service-faq__head {
+    grid-column: 1 / 6;
+    margin-bottom: 0;
+    position: sticky;
+    top: calc(var(--header-h) + var(--space-48));
+  }
+
+  .service-faq__inner > .faq {
+    grid-column: 6 / -1;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   13. REDUCED MOTION
+   No line slide, no sticky heading, no arrow slide. The pinned index and
+   the split slide never start (service.js checks the same setting), and
+   the process line is fully drawn (section 9 only hides it with motion).
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .service-hero__line-inner,
+  html.js .service-hero__lead,
+  html.js .service-hero__actions {
+    animation: none;
+  }
+
+  .service-faq__head {
+    position: static;
+  }
+
+  .service-index__arrow,
+  .process-line__step::after,
+  .process-line__num {
+    transition: none;
+  }
+
+  .service-index__link:hover .service-index__arrow,
+  .service-index__link:focus-visible .service-index__arrow {
+    transform: none;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   14. AREAS LIST  (Trivandrum pages — the distinctive moment)
+   Thiruvananthapuram area names as a large serif list, each name set at a
+   different column so the list wanders down the page like a route.
+   - .areas__reach: a thin burgundy line from the thread's rail (the middle
+     of the left gutter, see thread.js) to the start of the name, as if the
+     thread branches out to each place. Tablet/desktop only: the thread is
+     hidden on phones, so the line is too.
+   - --col (set inline on each <li>, 2–7) is the column the name starts at.
+     Long names get small values so they always fit on one line.
+   - Every second name is italic, for rhythm.
+   - Motion: names are dim until the thread's tip (60% down the screen)
+     reaches them; service.js then adds .is-lit and CSS fades the name up
+     and draws its line. Without JS, with reduced motion, or if GSAP failed
+     (.no-motion), every name is simply lit.
+   The list is real text in the HTML; the lines are decorative (aria-hidden).
+   -------------------------------------------------------------------------- */
+
+.areas {
+  margin-top: var(--space-64);
+  border-top: var(--border-w) solid var(--border);
+}
+
+.areas__item {
+  padding-block: var(--space-8);
+  border-bottom: var(--border-w) solid var(--border);
+}
+
+/* Phones: a small indent per column, so the list still wanders a little */
+.areas__place {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-8) var(--space-24);
+  padding-left: calc((var(--col) - 1) * var(--space-8));
+}
+
+.areas__name {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);          /* phones: H2 size, so long names fit */
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
+  color: var(--text-strong);
+  /* the bottom padding keeps descenders clear of the row border */
+  padding-bottom: 0.08em;
+}
+
+.areas__item:nth-child(even) .areas__name {
+  font-style: italic;
+}
+
+/* Small note next to a name, e.g. "Serene Derma's main clinic" (a link) */
+.areas__note {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--accent-text);
+  text-underline-offset: 0.3em;
+}
+
+.areas__note:hover {
+  color: var(--text-strong);
+}
+
+/* The reach line: hidden on phones */
+.areas__reach {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  /* Each row is the 12-column grid: line in columns 1…col, name after it */
+  .areas__item {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    align-items: center;
+  }
+
+  .areas__place {
+    grid-column: var(--col) / -1;
+    padding-left: 0;
+  }
+
+  .areas__name {
+    font-size: var(--fs-h1);
+  }
+
+  /* Starts half a gutter left of the content: exactly on the thread's
+     rail. Ends a little before the name, with a dot. */
+  .areas__reach {
+    display: block;
+    position: relative;
+    grid-column: 1 / var(--col);
+    height: var(--border-w);
+    margin-left: calc(var(--gutter) / -2);
+    background-color: var(--accent-line);
+    transform-origin: left;
+    transition: transform var(--dur-hero) var(--ease-out);
+  }
+
+  .areas__reach::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: var(--space-8);
+    height: var(--space-8);
+    margin-top: calc(var(--space-8) / -2);
+    border-radius: var(--radius-pill);
+    background-color: var(--accent-line);
+  }
+}
+
+/* Starting state while motion runs: names dim and a little to the left,
+   lines not drawn yet. .is-lit (service.js) brings each one in.
+   Only the big serif NAME dims, and only to --opacity-dim, so it still
+   passes WCAG AA contrast before it lights up. The small step label and
+   the rose note stay at full strength (dimmed, they would fail AA). */
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.no-motion) .areas__place {
+    transition: transform var(--dur-reveal) var(--ease-out);
+  }
+
+  html.js:not(.no-motion) .areas__name {
+    opacity: var(--opacity-dim);
+    transition: opacity var(--dur-reveal) var(--ease-out);
+  }
+
+  html.js:not(.no-motion) .is-lit .areas__name {
+    opacity: 1;
+  }
+
+  html.js:not(.no-motion) .areas__reach {
+    transform: scaleX(0);
+  }
+
+  /* Tablet/desktop: the name also starts a little to the left and slides
+     in along its reach line (phones: fade only, so nothing pokes out of
+     the narrow side margin) */
+  @media (min-width: 768px) {
+    html.js:not(.no-motion) .areas__place {
+      transform: translateX(calc(var(--space-24) * -1));
+    }
+  }
+
+  html.js:not(.no-motion) .is-lit .areas__place {
+    transform: none;
+  }
+
+  html.js:not(.no-motion) .is-lit .areas__reach {
+    transform: scaleX(1);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   15. CHECK LIST  ("What's included in every website")
+   Short single-sentence items, each with a burgundy dash in front.
+   Phones: one column. Tablet up: two columns.
+   -------------------------------------------------------------------------- */
+
+.service-checks {
+  display: grid;
+  column-gap: var(--col-gap);
+  border-top: var(--border-w) solid var(--border);
+}
+
+.service-checks__item {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-16);
+  padding-block: var(--space-24);
+  border-bottom: var(--border-w) solid var(--border);
+  font-size: var(--fs-lead);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-lead);
+  color: var(--text);
+}
+
+.service-checks__item::before {
+  content: "";
+  flex-shrink: 0;
+  width: var(--space-24);
+  height: var(--border-w);
+  background-color: var(--accent-line);
+  transform: translateY(-0.3em);   /* sit on the middle of the first line */
+}
+
+@media (min-width: 768px) {
+  .service-checks {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Links inside a list term ("Who I help"): the term's colour, underlined */
+.service-list__term a {
+  color: inherit;
+  text-decoration-thickness: var(--border-w);
+  text-underline-offset: 0.15em;
+}
+
+/* Links under the work cards ("For clients elsewhere in the state…") */
+.service-work + .service-prose {
+  margin-top: var(--space-96);
+}
+
+
+/* --------------------------------------------------------------------------
+   16. SINGLE CASE STUDY  (niche pages)
+   One real work card (same markup as the Work page) with the case-study
+   paragraph and link beside it. Phones/tablets: stacked. Desktop: card in
+   columns 1–6, text in columns 8–12.
+   -------------------------------------------------------------------------- */
+
+.service-case {
+  display: grid;
+  gap: var(--space-48);
+}
+
+.service-case .card__media img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+@media (min-width: 1024px) {
+  .service-case {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    align-items: center;
+  }
+
+  .service-case > .card {
+    grid-column: 1 / 7;
+  }
+
+  /* Cancel the usual columns 7–12 offset of .service-prose (section 2):
+     here the grid places it */
+  .service-case > .service-prose {
+    grid-column: 8 / -1;
+    margin-left: 0;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   17. PATIENT JOURNEY  (/seo-for-healthcare-clinics/ — distinctive moment)
+   The four steps from "How patients choose a clinic now" (search, compare,
+   read reviews, book), built from the areas list (section 14): same
+   reach lines from the thread's rail, same light-up from service.js.
+   Differences:
+   - an <ol> with a small step number before each word
+   - --col climbs one way (2 → 3 → 5 → 7), so the steps read as one calm
+     path down and across the page, ending at "Book"
+   - a slower fade than the areas list: this page should feel quiet
+   -------------------------------------------------------------------------- */
+
+.areas__step {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--text-mute);
+  align-self: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.no-motion) .areas--journey .areas__place {
+    transition-duration: var(--dur-hero);
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   18. COURSE SEARCHES  (/seo-for-education-institutes/ — distinctive moment)
+   Real course searches set as a large serif list, one search per row.
+   The course itself is upright; the words around it ("with placement",
+   "in Kochi", "near me") are italic and quieter, and tags underneath name
+   what each part tells you (course, intent, location).
+   Motion: rows are dim until the thread's tip (60% down the screen)
+   reaches them; service.js adds .is-lit (same code as the areas list).
+   Without JS, with reduced motion or if GSAP failed, every row is lit.
+   -------------------------------------------------------------------------- */
+
+.searches {
+  margin-top: var(--space-64);
+  border-top: var(--border-w) solid var(--border);
+}
+
+.searches__item {
+  display: grid;
+  gap: var(--space-16);
+  padding-block: var(--space-24);
+  border-bottom: var(--border-w) solid var(--border);
+}
+
+.searches__query {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
+  color: var(--text-strong);
+  padding-bottom: 0.08em;          /* keeps descenders off the row border */
+}
+
+/* The words around the course: italic, a step quieter */
+.searches__query em {
+  color: var(--text-mute);
+}
+
+@media (min-width: 1024px) {
+  .searches__item {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+    column-gap: var(--col-gap);
+    align-items: center;
+    padding-block: var(--space-32);
+  }
+
+  .searches__query {
+    grid-column: 1 / 10;
+  }
+
+  .searches__item .tag-list {
+    grid-column: 10 / -1;
+    justify-content: flex-end;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Dim, not faint: --opacity-dim keeps the (large) search text above
+     WCAG AA contrast before it lights up */
+  html.js:not(.no-motion) .searches__item > * {
+    opacity: var(--opacity-dim);
+    transform: translateY(var(--space-8));
+    transition:
+      opacity var(--dur-reveal) var(--ease-out),
+      transform var(--dur-reveal) var(--ease-out);
+  }
+
+  /* The tags follow the search a moment later */
+  html.js:not(.no-motion) .searches__item > .tag-list {
+    opacity: 0;
+    transition-delay: calc(var(--stagger) * 2);
+  }
+
+  html.js:not(.no-motion) .searches__item.is-lit > * {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
+/* --------------------------------------------------------------------------
+   19. LAUNCH TIMELINE  (/web-design-for-startups/ — distinctive moment)
+   Four stops from first call to after launch.
+   - Phones/tablets: a vertical line on the left, like the process line
+     (section 9). Desktop: four columns with the line running across the
+     top, and on past the last stop (the site keeps growing after launch).
+   - service.js scrubs the burgundy fill along the line (scaleY on small
+     screens, scaleX on desktop: transform only) and marks each stop
+     .is-reached as the fill passes it.
+   - Without JS, with reduced motion or if GSAP failed: fully drawn.
+   -------------------------------------------------------------------------- */
+
+.launch-line {
+  position: relative;
+  margin-top: var(--space-64);
+  --launch-indent: var(--space-32);
+  padding-left: var(--launch-indent);
+}
+
+/* The stops: one under the other (a 4-column row on desktop, below) */
+.launch-line__stops {
+  display: grid;
+  gap: var(--space-48);
+}
+
+/* The grey track and the burgundy fill: start level with the first marker */
+.launch-line__track,
+.launch-line__fill {
+  position: absolute;
+  top: calc(var(--fs-label) * var(--lh-label) / 2);
+  bottom: 0;
+  left: 0;
+  width: var(--border-w);
+}
+
+.launch-line__track {
+  background-color: var(--border);
+}
+
+.launch-line__fill {
+  background-color: var(--accent-line);
+  transform-origin: top;
+}
+
+/* A dot where the line ends */
+.launch-line__fill::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: var(--space-8);
+  height: var(--space-8);
+  margin: 0 0 calc(var(--space-8) / -2) calc(var(--space-8) / -2);
+  border-radius: var(--radius-pill);
+  background-color: var(--accent-line);
+}
+
+.launch-line__stop {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+/* The marker: a ring on the line that fills with wine when reached.
+   Centred on the "when" label's first line. */
+.launch-line__stop::before,
+.launch-line__stop::after {
+  content: "";
+  position: absolute;
+  top: calc(var(--fs-label) * var(--lh-label) / 2 - var(--space-8));
+  left: calc(var(--launch-indent) * -1 - var(--space-8) + var(--border-w) / 2);
+  width: var(--space-16);
+  height: var(--space-16);
+  border-radius: var(--radius-pill);
+}
+
+.launch-line__stop::before {
+  border: var(--border-w) solid var(--accent-line);
+  background-color: var(--bg);
+}
+
+.launch-line__stop::after {
+  background-color: var(--accent-line);
+  transform: scale(1);                     /* reached by default (no JS) */
+  transition: transform var(--dur-reveal) var(--ease-out);
+}
+
+/* "Weeks 1–2": small label, rose (small accent text on dark is allowed) */
+.launch-line__when {
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.launch-line__title {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-text);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+}
+
+.launch-line__text {
+  color: var(--text-mute);
+}
+
+/* The note under the timeline ("Typical timings…") */
+.launch-note {
+  margin-top: var(--space-48);
+  color: var(--text-mute);
+}
+
+@media (min-width: 768px) {
+  .launch-line {
+    --launch-indent: var(--space-64);
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Four columns; the line runs across the top */
+  .launch-line {
+    padding-left: 0;
+    padding-top: var(--space-48);
+  }
+
+  .launch-line__stops {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: var(--col-gap);
+  }
+
+  .launch-line__track,
+  .launch-line__fill {
+    top: 0;
+    right: 0;
+    bottom: auto;
+    width: auto;
+    height: var(--border-w);
+  }
+
+  .launch-line__fill {
+    transform-origin: left;
+  }
+
+  /* The end dot moves to the right end of the line */
+  .launch-line__fill::after {
+    top: 50%;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    margin: calc(var(--space-8) / -2) calc(var(--space-8) / -2) 0 0;
+  }
+
+  /* Markers sit on the line, at the left edge of each column */
+  .launch-line__stop::before,
+  .launch-line__stop::after {
+    top: calc(var(--space-48) * -1 - var(--space-8) + var(--border-w) / 2);
+    left: 0;
+  }
+
+  .launch-line__stop {
+    padding-right: var(--space-16);
+  }
+}
+
+/* Starting state while motion runs: line empty, markers empty */
+@media (prefers-reduced-motion: no-preference) {
+  html.js:not(.no-motion) .launch-line__fill {
+    transform: scaleY(0);
+  }
+
+  html.js:not(.no-motion) .launch-line__stop::after {
+    transform: scale(0);
+  }
+
+  html.js:not(.no-motion) .launch-line__stop.is-reached::after {
+    transform: scale(1);
+  }
+
+  @media (min-width: 1024px) {
+    html.js:not(.no-motion) .launch-line__fill {
+      transform: scaleX(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .launch-line__stop::after {
+    transition: none;
+  }
+}
